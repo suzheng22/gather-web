@@ -35,8 +35,7 @@ $(function(){
                         <div class="ipt"><input name="userName" type="text" id="user_name" class="zhmm" placeholder="请输入用户名"/></div>
                         <div class="ipt"><input name="pwd" type="password" id="user_pass" class="zhmm" placeholder="请输入密码"/></div>{{$msg}}
                     </div>
-					<input type="submit" value="33333" />
-                    <a href="#" class="btn" id="btn" title="立即登录">登录</a>
+					<input type="submit" value="登录" class="btn" id="btn"/>
                  </form>
 			</div>
     </div>
