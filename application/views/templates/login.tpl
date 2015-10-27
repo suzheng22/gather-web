@@ -36,6 +36,7 @@ $(function(){
                         <div class="ipt"><input name="pwd" type="password" id="user_pass" class="zhmm" placeholder="请输入密码"/></div>{{$msg}}
                     </div>
 					<input type="submit" value="登录" class="btn" id="btn"/>
+                   
                  </form>
 			</div>
     </div>
