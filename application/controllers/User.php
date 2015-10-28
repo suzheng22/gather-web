@@ -6,12 +6,7 @@ class User extends My_Controller {
 		public function __construct() 
         {
             parent::__construct();
-            
-
 			$this->load->model('user/user_model');
-			$this->ci_smarty->assign('resource_url', 'http://121.40.241.156:8009/collect_web/');
-			
-			
         }
                 
         
@@ -33,7 +28,7 @@ class User extends My_Controller {
                 $user['lastLoginTime']=$arr['lastLoginTime'];
                 $user_str=serialize($user);
                 set_cookie("user",$user_str,3600*24);
-                echo '登录成功';exit;
+                header("Location: ".site_url('index/index')); 
             }
             
         }
@@ -41,5 +36,20 @@ class User extends My_Controller {
         public function login(){
             $this->ci_smarty->assign('msg','');
             $this->ci_smarty->display('login.tpl');
+        }
+        
+        public function index(){
+            /*分页
+            $this->load->library('pagination');
+
+            $config['base_url'] = 'http://example.com/index.php/test/page/';
+            $config['total_rows'] = 200;
+            $config['per_page'] = 20;
+            
+            $this->pagination->initialize($config);
+            
+            echo $this->pagination->create_links();exit;
+            */
+            echo 'ok';exit;
         }
 }

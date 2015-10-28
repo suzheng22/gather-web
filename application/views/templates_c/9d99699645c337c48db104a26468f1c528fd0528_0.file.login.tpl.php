@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-10-27 09:17:20
+<?php /* Smarty version 3.1.27, created on 2015-10-28 09:37:50
          compiled from "D:\wamp\www\collect_web\application\views\templates\login.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:28401562f33109a8d46_51273245%%*/
+/*%%SmartyHeaderCode:304175630895e7a23d9_46594245%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '9d99699645c337c48db104a26468f1c528fd0528' => 
     array (
       0 => 'D:\\wamp\\www\\collect_web\\application\\views\\templates\\login.tpl',
-      1 => 1445933834,
+      1 => 1445992788,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '28401562f33109a8d46_51273245',
+  'nocache_hash' => '304175630895e7a23d9_46594245',
   'variables' => 
   array (
     'resource_url' => 0,
@@ -22,13 +22,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_562f33109e7558_55134532',
+  'unifunc' => 'content_5630895e7e4a63_49837735',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_562f33109e7558_55134532')) {
-function content_562f33109e7558_55134532 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_5630895e7e4a63_49837735')) {
+function content_5630895e7e4a63_49837735 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '28401562f33109a8d46_51273245';
+$_smarty_tpl->properties['nocache_hash'] = '304175630895e7a23d9_46594245';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -81,8 +81,8 @@ user/doLogin" method="POST" accept-charset="utf-8">
                         <div class="ipt"><input name="pwd" type="password" id="user_pass" class="zhmm" placeholder="请输入密码"/></div><?php echo $_smarty_tpl->tpl_vars['msg']->value;?>
 
                     </div>
-					<input type="submit" value="33333" />
-                    <a href="#" class="btn" id="btn" title="立即登录">登录</a>
+					<input type="submit" value="登录" class="btn" id="btn"/>
+                   
                  </form>
 			</div>
     </div>
