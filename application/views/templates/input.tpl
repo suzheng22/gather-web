@@ -184,11 +184,51 @@
                 <a href="javascript:;" onclick="save_basic('extend');">保存</a>
             </ul>
             <ul style="display:none;">
-            	<li class="clearfix">
-                	<label>44：</label>
-					<input type="text" />
-                </li>
-                <a href="javascript:;">保存</a>
+            	<li class="clearfix cf">
+                	<div  class="nutrition_inform">
+                        <div id="nutrition_contain">
+                            <h3 class="clearfix">
+                                <span>项目</span>
+                                <span>含量</span>
+                                <span>NVR%</span>
+                                <span>操作</span>
+                            </h3>
+                            <P class="clearfix">
+                                <span>能量:</span>
+                                <input type="text"/>
+                                <input type="text"/>
+                                <span>&nbsp;</span>
+                            </P>
+                            <P class="clearfix">
+                                <span>蛋白质:</span>
+                                <input type="text"/>
+                                <input type="text"/>
+                                <span>&nbsp;</span>
+                            </P>
+                            <P class="clearfix">
+                                <span>脂肪:</span>
+                                <input type="text"/>
+                                <input type="text"/>
+                                <span>&nbsp;</span>
+                            </P>
+                            <P class="clearfix">
+                                <span>碳水化合物:</span>
+                                <input type="text"/>
+                                <input type="text"/>
+                                <span>&nbsp;</span>
+                            </P>
+                             <P class="clearfix last">
+                                <span>钠:</span>
+                                <input type="text"/>
+                                <input type="text"/>
+                                <span>&nbsp;</span>
+                            </P>
+                        </div>
+                        <div class="save_box">
+                           <a href="javascript:;" id="add_param">添加参数</a> <a href="javascript:;">保存</a>
+                        </div>
+                   </div>
+                  </li>
             </ul>
 		</div>
 		<a href="javascript:;" id="record_confirm">提交</a>	
@@ -211,7 +251,22 @@
 		
 		$("#nav_info").fiexd({top:"-2px"}); 
 	}); 
-	
+	//营养成分增加参数
+	$("#add_param").click(function(){
+		  var ul = $("#nutrition_contain");    
+		  var temp =  '<P class="clearfix add_field">'+
+					  '<input type="text"/  placeholder="新添加">'+
+					  '<input type="text"/>'+
+					  '<input type="text"/>'+
+					  '<span class="del" style="display:block;cursor:pointer">删除</span>'+
+					  '</p>'  
+					 ul.append(temp);
+					 $("#nutrition_contain p .del").each(function(){
+						 $(this).click(function(){
+							 $(this).parent().remove();
+						 });
+					 })	 
+		});
 	function save_base_info(){
 		var name=$("#name").val();
 		var brand=$("#brand").val();
