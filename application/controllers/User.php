@@ -28,7 +28,7 @@ class User extends My_Controller {
                 $user['lastLoginTime']=$arr['lastLoginTime'];
                 $user_str=serialize($user);
                 set_cookie("user",$user_str,3600*24);
-                header("Location: ".site_url('index/index')); 
+                header("Location: ".site_url('input/index')); 
             }
             
         }

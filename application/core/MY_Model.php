@@ -6,6 +6,7 @@ class MY_Model extends CI_Model
         parent::__construct();
          $this->load->library('Curl');
 	     $this->user_api_url="http://192.168.8.29:8080";
+	     $this->tmore_api_url="http://test.tmore.net:81/api.php";
     }
 }
 ?>

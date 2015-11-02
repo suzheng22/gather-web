@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-10-28 10:01:17
+<?php /* Smarty version 3.1.27, created on 2015-10-29 03:39:35
          compiled from "D:\wamp\www\collect_web\application\views\templates\index.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:434256308edd2cdbf2_30041505%%*/
+/*%%SmartyHeaderCode:23627563186e7524c35_40984424%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,24 +9,24 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '8b0612920b5752385dcba6e218e23af9be0bbcbb' => 
     array (
       0 => 'D:\\wamp\\www\\collect_web\\application\\views\\templates\\index.tpl',
-      1 => 1446022847,
+      1 => 1446022966,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '434256308edd2cdbf2_30041505',
+  'nocache_hash' => '23627563186e7524c35_40984424',
   'variables' => 
   array (
     'resource_url' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_56308edd300880_74863989',
+  'unifunc' => 'content_563186e75578c6_70090115',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_56308edd300880_74863989')) {
-function content_56308edd300880_74863989 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_563186e75578c6_70090115')) {
+function content_563186e75578c6_70090115 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '434256308edd2cdbf2_30041505';
+$_smarty_tpl->properties['nocache_hash'] = '23627563186e7524c35_40984424';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -68,35 +68,6 @@ style/iconfont.css"/>
     
 </div>
 
-<?php echo '<script'; ?>
- type="text/javascript">
-	function autoHeight(){
-	
-	if (window.innerHeight){//FF
-		nowHeight = window.innerHeight;
-	}else{
-		nowHeight = document.documentElement.clientHeight;
-	}
-	var jianHeight =42;//
-	if(nowHeight > jianHeight){
-		document.getElementById('warp_box').style.height = nowHeight - jianHeight + 'px';
-	}else{
-		document.getElementById('warp_box').style.height = jianHeight + 'px';
-	}
-}
-autoHeight();
-window.onresize = autoHeight;	
-	
-
-
-<?php echo '</script'; ?>
->	
-<?php echo '<script'; ?>
- type="text/javascript"  src="js/jquery-1.9.1.min.js"><?php echo '</script'; ?>
->
-<?php echo '<script'; ?>
- type="text/javascript" src="js/defined.js"><?php echo '</script'; ?>
->
 </body>
 </html>
 <?php }

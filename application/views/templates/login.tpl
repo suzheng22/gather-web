@@ -29,7 +29,7 @@ $(function(){
     </div> 
 	<div class="login_box">
 			<div class="login_main">
-                <form action="{{$root_path}}user/doLogin" method="POST" accept-charset="utf-8">
+                <form action="{{$root_path}}user/doLogin" method="post" accept-charset="utf-8">
                     <div class="login_tit">用户登录</div>
                     <div class="login_form_box">
                         <div class="ipt"><input name="userName" type="text" id="user_name" class="zhmm" placeholder="请输入用户名"/></div>

@@ -36,7 +36,7 @@ class Curl {
 	}
 
 	/**
-	 * ¿ì½İµÄcURLÇëÇó
+	 * å¿«æ·çš„cURLè¯·æ±‚
 	 *
 	 * @param string $method
 	 * @param string $url
@@ -47,7 +47,7 @@ class Curl {
 	{
 		if ($method === 'get')
 		{
-			//Èç¹ûÊÇÒ»¸öÒÑ¾­´æÔÚµÄURL£¬ÔòĞÂ½¨Ò»¸ö»á»°
+			//å¦‚æœæ˜¯ä¸€ä¸ªå·²ç»å­˜åœ¨çš„URLï¼Œåˆ™æ–°å»ºä¸€ä¸ªä¼šè¯
 			$this->create($url.($params ? '?'.http_build_query($params) : ''));
 		}
 
@@ -57,14 +57,14 @@ class Curl {
 
 			$this->{$method}($params);
 		}
-		//Ìí¼Ó×Ô¶¨ÒåÊôĞÔ
+		//æ·»åŠ è‡ªå®šä¹‰å±æ€§
 		$this->options($options);
 
 		return $this->execute();
 	}
 
 	/**
-	 * ¿ìËÙµÄFTP
+	 * å¿«é€Ÿçš„FTP
 	 *
 	 * @param string $url
 	 * @param string $file_path
@@ -73,13 +73,13 @@ class Curl {
 	 */
 	public function simple_ftp_get($url, $file_path, $username = '', $password = '')
 	{
-		//Èç¹ûURLÃ»ÓĞÒÔftp»òÕßsftp¿ªÍ·Ôò×Ô¶¯Ìí¼Ó¸Ã¿ªÍ·
+		//å¦‚æœURLæ²¡æœ‰ä»¥ftpæˆ–è€…sftpå¼€å¤´åˆ™è‡ªåŠ¨æ·»åŠ è¯¥å¼€å¤´
 		if ( ! preg_match('!^(ftp|sftp)://! i', $url))
 		{
 			$url = 'ftp://' . $url;
 		}
 
-		//µÇÂ½
+		//ç™»é™†
 		if ($username != '')
 		{
 			$auth_string = $username;
@@ -89,11 +89,11 @@ class Curl {
 				$auth_string .= ':' . $password;
 			}
 
-			//Æ´½Ó´øÓĞÓÃ»§ÈÏÖ¤ĞÅÏ¢µÄURL´®
+			//æ‹¼æ¥å¸¦æœ‰ç”¨æˆ·è®¤è¯ä¿¡æ¯çš„URLä¸²
 			$url = str_replace('://', '://' . $auth_string . '@', $url);
 		}
 
-		//Æ´½ÓÎÄ¼şÂ·¾¶
+		//æ‹¼æ¥æ–‡ä»¶è·¯å¾„
 		$url .= $file_path;
 
 		$this->option(CURLOPT_BINARYTRANSFER, TRUE);
@@ -105,18 +105,18 @@ class Curl {
 	/**
 	 * POST
 	 *
-	 * @param mixed $params	²ÎÊı
-	 * @param mixed $options ÊôĞÔ
+	 * @param mixed $params	å‚æ•°
+	 * @param mixed $options å±æ€§
 	 */
 	public function post($params = array(), $options = array())
 	{
-		//Æ´½ÓÇëÇó×Ö·û´®
+		//æ‹¼æ¥è¯·æ±‚å­—ç¬¦ä¸²
 		if (is_array($params))
 		{
 			$params = http_build_query($params, NULL, '&');
 		}
 
-		//Ìí¼Ó×Ô¶¨ÒåÊôĞÔ
+		//æ·»åŠ è‡ªå®šä¹‰å±æ€§
 		$this->options($options);
 
 		$this->http_method('post');
@@ -167,7 +167,7 @@ class Curl {
 	}
 
 	/**
-	 * ÉèÖÃCookies
+	 * è®¾ç½®Cookies
 	 *
 	 * @param mixed $params
 	 */
@@ -194,7 +194,7 @@ class Curl {
 	}
 
 	/**
-	 * ÉèÖÃmethod
+	 * è®¾ç½®method
 	 *
 	 * @param string $method
 	 */
@@ -219,7 +219,7 @@ class Curl {
 	}
 
 	/**
-	 * ´úÀí
+	 * ä»£ç†
 	 *
 	 * @param string $url
 	 * @param int $port
@@ -232,7 +232,7 @@ class Curl {
 	}
 
 	/**
-	 * ´úÀíµÇÂ½
+	 * ä»£ç†ç™»é™†
 	 *
 	 * @param string $username
 	 * @param string $password
@@ -283,7 +283,7 @@ class Curl {
 	}
 
 	/**
-	 * Ìí¼ÓÒ»¸öoption
+	 * æ·»åŠ ä¸€ä¸ªoption
 	 *
 	 * @param int $code
 	 * @param mixed $value
@@ -300,7 +300,7 @@ class Curl {
 	}
 
 	/**
-	 * ¿ªÊ¼Ò»¸ö»á»°
+	 * å¼€å§‹ä¸€ä¸ªä¼šè¯
 	 *
 	 * @param unknown_type $url
 	 */
@@ -319,7 +319,7 @@ class Curl {
 	}
 
 	/**
-	 * Ö´ĞĞ»á»°
+	 * æ‰§è¡Œä¼šè¯
 	 */
 	public function execute()
 	{
