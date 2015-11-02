@@ -45,6 +45,13 @@ class Input extends My_Controller {
         echo $ret;exit;
     }
     
+    function save(){
+        $data['gtin']=$this->input->post('gtin');
+        $data['uid']=$this->user_info['userId'];
+        $ret= $this->input_model->save($data);
+        echo $ret;exit;
+    }
+    
     function saveBasicInfo(){
         $str=$this->input->post('str');
         $data['gtin']=$this->input->post('gtin');

@@ -191,7 +191,7 @@
                 <a href="javascript:;">保存</a>
             </ul>
 		</div>
-		<a href="javascript:;" id="record_confirm">提交</a>	
+		<a href="javascript:;" id="record_confirm" onclick="save()">提交</a>	
   	</div>
   	
 </div>    	
@@ -265,6 +265,17 @@ var str=str.substring(0,(str.length-1));
 			//$('#msg').html(data);
 		  },
 		  "text");              
+	}
+	
+	function save(){
+	var gtin=$("#gtin").val();
+		$.post("{{$root_path}}input/save",{"gtin":gtin},
+		  function(data){
+			//$('#msg').html("please enter the email!");
+			alert(data);
+			//$('#msg').html(data);
+		  },
+		  "text");
 	}	
 </script> 
 </body>

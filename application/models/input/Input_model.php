@@ -92,6 +92,12 @@ class Input_model extends MY_Model {
         return $return;
     }
     
+    function save($data){
+        $url=$this->tmore_api_url."/enter/SaveGtinStatus";
+        $return=$this->curl->_simple_call('post',$url,$data);
+        return $return;
+    }
+    
     //录入条码分类信息
     function getSkuType($data){
          $url=$this->tmore_api_url."/type/getwordkey";
