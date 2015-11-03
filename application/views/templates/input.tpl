@@ -167,10 +167,12 @@
             </ul>
             <ul style="display:none;">
 			{{foreach from =$skuInfo.type.basic_info item=val name=name}}
+			{{if $val.type!=2}}
             	<li {{if $smarty.foreach.name.first}}class="active"{{/if}}>
                 	<label>{{$val.name}}：</label>
 					<input type="text" id="{{$val.field}}" class="basic" value="{{$skuInfo.goods.typeBasicInfo.{{$val.field}}}}" />
                 </li>
+			{{/if}}
 			{{/foreach}}
                 <a href="javascript:;" onclick="save_basic('basic');">保存</a>
             </ul>
@@ -193,39 +195,56 @@
                                 <span>NVR%</span>
                                 <span>操作</span>
                             </h3>
+							{{if !$skuInfo.Nutrient}}
                             <P class="clearfix">
                                 <span>能量:</span>
+								<input type="hidden" class="key" value="能量" />
                                 <input type="text"/>
                                 <input type="text"/>
                                 <span>&nbsp;</span>
                             </P>
                             <P class="clearfix">
                                 <span>蛋白质:</span>
+								<input type="hidden" class="key" value="蛋白质" />
                                 <input type="text"/>
                                 <input type="text"/>
                                 <span>&nbsp;</span>
                             </P>
                             <P class="clearfix">
                                 <span>脂肪:</span>
+								<input type="hidden" class="key" value="脂肪" />
                                 <input type="text"/>
                                 <input type="text"/>
                                 <span>&nbsp;</span>
                             </P>
                             <P class="clearfix">
                                 <span>碳水化合物:</span>
-                                <input type="text"/>
+								<input type="hidden" class="key" value="碳水化合物" />
+                                <input type="text" />
                                 <input type="text"/>
                                 <span>&nbsp;</span>
                             </P>
                              <P class="clearfix last">
                                 <span>钠:</span>
+								<input type="hidden" class="key" value="钠" />
                                 <input type="text"/>
                                 <input type="text"/>
                                 <span>&nbsp;</span>
                             </P>
+							{{else}}
+								{{foreach from = $skuInfo.Nutrient item=list name=name}}
+								<P {{if $smarty.foreach.name.last}}class="clearfix last"{{else}}class="clearfix"{{/if}}>
+                                <span>能量:</span>
+								<input type="hidden" class="key" value="{{$list.key}}" />
+                                <input type="text" value="{{$list.value}}"/>
+                                <input type="text" value="{{$list.nrv}}"/>
+                                <span>&nbsp;</span>
+								{{/foreach}}
+                            </P>
+							{{/if}}
                         </div>
                         <div class="save_box">
-                           <a href="javascript:;" id="add_param">添加参数</a> <a href="javascript:;">保存</a>
+                           <a href="javascript:;" id="add_param">添加参数</a> <a href="javascript:;" onclick="saveNutrient()">保存</a>
                         </div>
                    </div>
                   </li>
@@ -241,7 +260,6 @@
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script> 
 <script type="text/javascript" src="{{$resource_url}}js/record.js"></script> 
 <script src="{{$resource_url}}js/img_zoom/e-smart-zoom-jquery.min.js"></script> 
-<script type="text/javascript" src="{{$resource_url}}js/json2.js"></script>
 <!--图片延时加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript">  
@@ -255,7 +273,8 @@
 	$("#add_param").click(function(){
 		  var ul = $("#nutrition_contain");    
 		  var temp =  '<P class="clearfix add_field">'+
-					  '<input type="text"/  placeholder="新添加">'+
+					  '<input type="text"/ onblur="add(this)"  placeholder="新添加">'+
+					  '<input type="hidden" class="key"  />'+
 					  '<input type="text"/>'+
 					  '<input type="text"/>'+
 					  '<span class="del" style="display:block;cursor:pointer">删除</span>'+
@@ -267,6 +286,13 @@
 						 });
 					 })	 
 		});
+		
+
+		
+		
+		function add(obj){
+			$(obj).next().val($(obj).val());
+		}
 	function save_base_info(){
 		var name=$("#name").val();
 		var brand=$("#brand").val();
@@ -277,9 +303,7 @@
 		var gtin=$("#gtin").val();
 		$.post("{{$root_path}}input/saveBaseInfo",{"name":name,"brand":brand,"good_class":good_class,"mfrs":mfrs,"produce_no":produce_no,"sell_point":sell_point,"gtin":gtin},
 		  function(data){
-			//$('#msg').html("please enter the email!");
 			alert(data);
-			//$('#msg').html(data);
 		  },
 		  "text");
 	}
@@ -331,6 +355,28 @@ var str=str.substring(0,(str.length-1));
 			//$('#msg').html(data);
 		  },
 		  "text");
+	}
+	
+	function saveNutrient(){	
+		var gtin=$("#gtin").val();
+		var str=parst();
+		$.post("{{$root_path}}input/saveNutrient",{"str":str,"gtin":gtin},
+		  	function(data){
+				alert(data);
+		  	},"text");
+	}
+	function parst(){
+				var str="";
+		$(".key").each(function(index){
+			var key=$(this).val();
+			var value=$(this).next().val();
+			var nrv=$(this).next().next().val();
+				if(key&&value&&nrv){
+					str+=key+"="+value+"="+nrv+"&";
+				}
+            });
+			str=str.substring(0,(str.length-1));
+			return str;
 	}	
 </script> 
 </body>

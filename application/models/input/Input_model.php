@@ -106,6 +106,13 @@ class Input_model extends MY_Model {
         return $return;  
     }
     
+    //
+    function SaveNutrient($data){
+        $url=$this->tmore_api_url."/enter/SaveNutrient";
+        $return=$this->curl->_simple_call('post',$url,$data);
+        return $return;
+    }
+    
     function test(){
        //$data['prefix']='44543';
       

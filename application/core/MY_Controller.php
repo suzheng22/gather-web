@@ -23,10 +23,17 @@ class MY_Controller extends CI_Controller
                 $this->ci_smarty->assign('userInfo', $this->user_info);
             }
         }
+        //本地
+        $root_path='http://192.168.8.29:8082/';
+        //线上
+        //$root_path='http://192.168.8.29:8082/';
         
-        
-        $this->ci_smarty->assign('root_path', 'http://192.168.8.29:8082/');
-        $this->ci_smarty->assign('resource_url', 'http://121.40.241.156:8009/collect_web/');
+        //本地
+        $resource_url='http://192.168.8.29:8083/collect_web/';
+        //线上
+        //$resource_url='http://121.40.241.156:8009/collect_web/';
+        $this->ci_smarty->assign('root_path', $root_path);
+        $this->ci_smarty->assign('resource_url', $resource_url);
     }
 
 
