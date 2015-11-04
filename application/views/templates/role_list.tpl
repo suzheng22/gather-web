@@ -34,168 +34,20 @@
                         
                         
                       </tr>
-					 
+					 {{foreach from=$roleList item=list}}
                       <tr>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
+                        <td>{{$list.roleName}}</td>
+                        <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
                         <td>
                         	<a href="javascript;">删除</a>
                         	<a href="javascript;">修改</a>
                         </td>
                       </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>dasda</td>
-                        <td>dasda</td>
-                        <td>dassa</td>
-                        <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
-                        </td>
-                      </tr>
-                      
+					  {{/foreach}} 
                     </table>
                 </div>
-                	<div class="page_nav" id="page_nav">
-                	<a href="javascript:;" class="pageNum">上一页</a>
-                    <a href="javascript:;" class="pageNum">1</a>
-                    <a href="javascript:;" class="pageNum">2</a>
-                    <a href="javascript:;" class="pageNum">3</a>
-                    <a href="javascript:;" class="pageNum">4</a>
-                    <a href="javascript:;" class="pageNum">5</a>
-                    <a href="javascript:;" class="pageNum">6</a>
-                    <a href="javascript:;" class="pageNum">7</a>
-                    <a href="javascript:;" class="pageNum">8</a>
-                    <a href="javascript:;" class="pageNum">9</a>
-                    <a href="javascript:;" class="pageNum">下一页</a>
-                    <span>共<em>100</em>页,</span>
-                    <span>共<em>66</em>条记录,</span>
-                    <span>跳转到第<input type="text"/>页</span>
-                    <a href="javascript:;" class="pageNum">确定</a>
-                </div>
-                	<div class="notes">
-                    <P>注意事项：</P>
-                    <P>新增时，角色编码和角色名称不可重复；</P>
-                    <P>修改时，角色编码不可修改，角色编码不可重复</P>
-                    <P>删除时，已用在用户组和用户信息的角色不可删除；</P>
-               </div>
+                	{{$pages}}
+  
                 </div>
             </div>
         </div>

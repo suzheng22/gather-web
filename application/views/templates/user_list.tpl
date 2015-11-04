@@ -41,7 +41,7 @@
 																				<option value="2" {{if $status==2}}selected="selected"{{/if}}>禁用</option>
 																			</select></p> 
                         <p class="cc_top_two clearfix">
-                            <a href="javascript:;" id="new_user">新增</a>
+                            
                             <input type="submit" value="查询" />
                             <a href="javascript:;">清空</a>
                         </p>
@@ -83,18 +83,6 @@
                     </table>
                 </div>
 				{{$pages}}
-                
-				
-               <div class="notes">
-                    <P>注意事项：</P>
-                    <P>新增时，账户名不可重复，密码为123456，密码状</P>
-                    <P>态为初始密码，进入系统弹出修改密码页面；</P>
-                    <P>修改时，账户名不可修改</P>
-                    <P>冻结：状态为为冻结状态，用户不可登陆系统；</P>
-                    <P>正常：状态变为正常，用户可正常使用系统；</P>
-                    <P>重置密码：密码为123456，密码状态为初始密码，</P>
-                    <P>进入系统弹出修改密码页面。</P>
-               </div>
             </div>
         
         </div>
