@@ -303,7 +303,10 @@
 		var gtin=$("#gtin").val();
 		$.post("{{$root_path}}input/saveBaseInfo",{"name":name,"brand":brand,"good_class":good_class,"mfrs":mfrs,"produce_no":produce_no,"sell_point":sell_point,"gtin":gtin},
 		  function(data){
-			alert(data);
+			var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('添加成功');
+				}
 		  },
 		  "text");
 	}
@@ -318,9 +321,10 @@
 		var gtin=$("#gtin").val();
 		$.post("{{$root_path}}input/saveFactoryInfo",{"mName":mName,"number1":number1,"number2":number2,"phone":phone,"address":address,"type":type,"gtin":gtin,"fid":id},
 		  function(data){
-			//$('#msg').html("please enter the email!");
-			alert(data);
-			//$('#msg').html(data);
+			var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('添加成功');
+				}
 		  },
 		  "text");
 	}
@@ -339,9 +343,10 @@
 var str=str.substring(0,(str.length-1));
 		$.post("{{$root_path}}input/saveBasicInfo",{"str":str,"gtin":gtin},
 		  function(data){
-			//$('#msg').html("please enter the email!");
-			alert(data);
-			//$('#msg').html(data);
+			var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('添加成功');
+				}
 		  },
 		  "text");              
 	}
@@ -351,7 +356,11 @@ var str=str.substring(0,(str.length-1));
 		$.post("{{$root_path}}input/save",{"gtin":gtin},
 		  function(data){
 			//$('#msg').html("please enter the email!");
-			alert(data);
+			var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('录入成功');
+					window.location.reload();
+				}
 			//$('#msg').html(data);
 		  },
 		  "text");
@@ -362,7 +371,10 @@ var str=str.substring(0,(str.length-1));
 		var str=parst();
 		$.post("{{$root_path}}input/saveNutrient",{"str":str,"gtin":gtin},
 		  	function(data){
-				alert(data);
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('添加成功');
+				}
 		  	},"text");
 	}
 	function parst(){

@@ -17,7 +17,7 @@
             	<h3>角色管理</h3>
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}role/index" method="get">
-                	<div class="cc_top_one"><label>角色名称:</label><input type="text" name="roleName"/></div>
+                	<div class="cc_top_one"><label>角色名称:</label><input type="text" name="roleName" value="{{$roleName}}"/></div>
                     <div class="cc_top_two">
                         <a href="javascript:;" id="new_user">新增</a>
                         <input type="submit" value="查询" />

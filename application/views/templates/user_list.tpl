@@ -43,6 +43,7 @@
                         <p class="cc_top_two clearfix">
                             
                             <input type="submit" value="查询" />
+							<a href="javascript:;" id="new_user">新增</a>
                             <a href="javascript:;">清空</a>
                         </p>
 						</form>
@@ -71,7 +72,7 @@
                         <td>{{$list.groupName}}</td>
                         <td>...</td>
                         <td>{{if $list.status==1}}正常{{else}}禁用{{/if}}</td>
-                        <td>{{$list.creatTime|date_format}}</td>
+                        <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
                         <td>xx</td>
                         <td>
                         	<a href="javascript;">冻结</a>
@@ -94,18 +95,65 @@
 	<div class="content">
 		<div class="login_main">
 			<div class="login_form">
-				<div class="clearfix one"><label for="user_name">账号名:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">用户名:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">角色名称:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">用户组名称:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">描述:</label><textarea></textarea></div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
+				<div class="clearfix one"><label for="user_name">账号名:</label><input type="text" id="userName" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">用户名:</label><input type="text" id="trueName" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">角色名称:</label><select id="roleId" onchange="select_group(this.value)">
+																					<option value="">请选择</option>
+																					{{foreach from =$role_list item=list}}
+																						<option value="{{$list.roleId}}" >{{$list.roleName}}</option>
+																					{{/foreach}}
+																			  </select></div>
+                <div class="clearfix one"><label for="user_name">用户组名称:</label><select id="groupId">
+																					<option value="">请选择</option>
+																					
+																					</select></div>
+                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="addUser()">确认</a>
             </div>
 	   </div>
     </div>
 </div>
 {{include file='public/js.tpl'}}
+<script>
+	function addUser(){
+		var userName=$("#userName").val();
+		var trueName=$("#trueName").val();
+		var roleId=$("#roleId").val();
+		var groupId=$("#groupId").val();
+		var desc=$("#desc").val();
+		$.post("{{$root_path}}user/addUser",{"userName":userName,"trueName":trueName,"roleId":roleId,"groupId":groupId,"desc":desc},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('添加成功');
+					window.location.reload();
+				}
+		  	},"text");
+	}
+    function select_group(roleId){
+		$("#groupId").empty();
+		$("#groupId").append('<option value="">请选择</option>');
+		$.post("{{$root_path}}user/getUserGroupListAjax",{"roleId":roleId},
+		  function(data){
 
+			var dataObj=eval("("+data+")");
+			if(dataObj.length>0){
+				var html="";			
+				for(var i=0;i<dataObj.length;i++){
+					html+="<option value='"+dataObj[i].groupId+"'>"+dataObj[i].groupName+"</option>";
+					 
+				}
+				$("#groupId").append(html);
+			}
+			else{
+				alert('没有这个角色的用户组请先添加该角色的用户组');
+			}
+
+		  },
+		  "text");
+	}	
+	
+</script>
 
 </body>
 </html>

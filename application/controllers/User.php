@@ -83,7 +83,7 @@ class User extends My_Controller {
            
               $str=$this->user_model->getGroupList($data);
               $group_list=json_decode($str,true);
-              $this->ci_smarty->assign('group_list',$group_list);
+              $this->ci_smarty->assign('group_list',$group_list['list']);
               
               
               $str=$this->user_model->getUserList($data);
@@ -95,5 +95,57 @@ class User extends My_Controller {
 
               $this->ci_smarty->assign('pages',$showpage['show']);
              $this->ci_smarty->display('user_list.tpl');
+        }
+        
+        function userGroupList(){
+            $page_url=$this->root_path.'user/userGroupList/?';
+            $data['groupName']=$this->input->get('groupName');
+            $data['roleId']=$this->input->get('roleId');
+            $data['currentPage']=$this->input->get('currentPage');
+            $data['pageSize']=10;
+            if($data['groupName']!=''){
+                $page_url.='groupName='.$data['groupName']."&";
+                $this->ci_smarty->assign('groupName',$data['groupName']);
+            }
+            if($data['roleId']!=''){
+                $page_url.='roleId='.$data['roleId']."&";
+                $this->ci_smarty->assign('roleId',$data['roleId']);
+            }
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            
+            $str=$this->user_model->getuserRoleList($data);
+            $role_list=json_decode($str,true);
+            $this->ci_smarty->assign('role_list',$role_list['list']);
+            
+            $str=$this->user_model->getGroupList($data);
+            $group_list=json_decode($str,true);
+            $this->ci_smarty->assign('group_list',$group_list['list']);
+            
+            $showpage= parent::page($page_url,$data['pageSize'],$group_list['nums']);
+            $this->ci_smarty->assign('pages',$showpage['show']);
+            $this->ci_smarty->display('user_group_list.tpl');
+        }
+        
+        function getUserGroupListAjax(){
+            $data['roleId']=$this->input->post('roleId');
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $str=$this->user_model->getGroupList($data);
+            $group_list=json_decode($str,true);
+            echo json_encode($group_list['list']);
+            exit;
+        }
+        
+        
+        function addUser(){
+            $data['userName']=$this->input->post('userName');
+            $data['trueName']=$this->input->post('trueName');
+            $data['roleId']=$this->input->post('roleId');
+            $data['groupId']=$this->input->post('groupId');
+            $data['desc']=$this->input->post('desc');
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+           echo  $this->user_model->addUser($data);
         }
 }

@@ -39,5 +39,12 @@ class User_model extends MY_Model {
         $return=$this->curl->_simple_call('post',$url,$data);
         return $return;
     }
+    
+    
+    function addUser($data){
+        $url=$this->user_api_url."/user/addUser";
+        $return=$this->curl->_simple_call('post',$url,$data);
+        return $return;
+    }
 }
 ?>
