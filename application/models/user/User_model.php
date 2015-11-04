@@ -22,5 +22,22 @@ class User_model extends MY_Model {
     }   
     
     
+    function getuserRoleList($data){
+        $url=$this->user_api_url."/user/getUserRoleList";
+        $return=$this->curl->_simple_call('post',$url,$data);
+        return $return;
+    }
+    
+    function getGroupList($data){
+        $url=$this->user_api_url."/user/getUserGroupList";
+        $return=$this->curl->_simple_call('post',$url,$data);
+        return $return;
+    }
+    
+    function getUserList($data){
+        $url=$this->user_api_url."/user/getUserList";
+        $return=$this->curl->_simple_call('post',$url,$data);
+        return $return;
+    }
 }
 ?>
