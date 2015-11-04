@@ -1,6 +1,6 @@
 <div class="aside_nav">
 	<div class="aside_menu">
-		<div class="slimScrollDiv">
+		<div class="slimScrollDiv leftsidebar_box">
 			<!--<ul>
 				<li class="brand "><a href="javascript:;" title="用户管理"><i class="icon iconfont">&#xf0226;</i>用户管理</a>
 					<div class="sub">
