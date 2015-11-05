@@ -11,38 +11,85 @@ class User_model extends MY_Model {
     //登录
     function checkLogin($data){
         $url=$this->user_api_url."/user/login";	
-		$return=$this->curl->_simple_call('post',$url,$data);
+		$return=$this->curl($url,$data);
         return $return;
     }
     
     function getUserListByGroup($data){
         $url=$this->user_api_url."/user/userGroupList";
-        $return=$this->curl->_simple_call('post',$url,$data);
+        $return=$this->curl($url,$data);
         return $return;
     }   
     
     
     function getuserRoleList($data){
         $url=$this->user_api_url."/user/getUserRoleList";
-        $return=$this->curl->_simple_call('post',$url,$data);
+        $return=$this->curl($url,$data);
         return $return;
     }
     
     function getGroupList($data){
         $url=$this->user_api_url."/user/getUserGroupList";
-        $return=$this->curl->_simple_call('post',$url,$data);
+        $return=$this->curl($url,$data);
         return $return;
     }
     
     function getUserList($data){
         $url=$this->user_api_url."/user/getUserList";
-        $return=$this->curl->_simple_call('post',$url,$data);
+        $return=$this->curl($url,$data);
         return $return;
     }
     
     
     function addUser($data){
         $url=$this->user_api_url."/user/addUser";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function rePwd($data){
+        $url=$this->user_api_url."/user/rePwd";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function freeze($data){
+        $url=$this->user_api_url."/user/freeze";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function getInfo($data){
+        $url=$this->user_api_url."/user/info";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function editUser($data){
+        $url=$this->user_api_url."/user/editUser";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function editGroup($data){
+        $url=$this->user_api_url."/user/editGroup";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function addGroup($data){
+        $url=$this->user_api_url."/user/addGroup";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function getGroupInfo($data){
+        $url=$this->user_api_url."/user/groupInfo";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    
+    function curl($url,$data){
         $return=$this->curl->_simple_call('post',$url,$data);
         return $return;
     }

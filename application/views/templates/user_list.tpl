@@ -70,14 +70,14 @@
                         <td>{{$list.trueName}}</td>
                         <td>{{$list.roleName}}</td>
                         <td>{{$list.groupName}}</td>
-                        <td>...</td>
+                        <td>{{$list.desc}}</td>
                         <td>{{if $list.status==1}}正常{{else}}禁用{{/if}}</td>
                         <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
-                        <td>xx</td>
+                        <td>{{$list.creatUser}}</td>
                         <td>
-                        	<a href="javascript;">冻结</a>
-                        	<a href="javascript;">修改</a>
-                            <a href="javascript;">重置密码</a>
+                        	<a href="##" onclick="freeze({{$list.userId}})">冻结</a>
+                        	<a href="##" class="revamp" onclick="get_info({{$list.userId}})">修改</a>
+                            <a href="##" onclick="re_pwd({{$list.userId}})">重置密码</a>
                         </td>
                       </tr>
 					  {{/foreach}}
@@ -113,6 +113,31 @@
 	   </div>
     </div>
 </div>
+
+<!-- 修改用户弹出层 开始-->
+<div class="newuser_pop" id="newuser_pop_revamp">
+	<div class="tit clearfix"><h4>修改用户</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+	<div class="content">
+		<div class="login_main">
+			<div class="login_form"><input type="hidden" id="ed_userId" />
+				<div class="clearfix one"><label for="user_name">账号名:</label><input type="text" id="up_userName" class="zhmm" readonly=""></div>
+                <div class="clearfix one"><label for="user_name">用户名:</label><input type="text" id="up_trueName" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">角色名称:</label><select id="up_roleId" onchange="select_group_up(this.value)">
+																					<option value="">请选择</option>
+																					{{foreach from =$role_list item=list}}
+																						<option value="{{$list.roleId}}" >{{$list.roleName}}</option>
+																					{{/foreach}}
+																			  </select></div>
+                <div class="clearfix one"><label for="user_name">用户组名称:</label><select id="up_groupId">
+																					<option value="">请选择</option>
+																					
+																					</select></div>
+                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="up_desc"></textarea></div>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="edit_info()">确认</a>
+            </div>
+	   </div>
+    </div>
+</div>
 {{include file='public/js.tpl'}}
 <script>
 	function addUser(){
@@ -128,9 +153,32 @@
 					alert('添加成功');
 					window.location.reload();
 				}
+				else{
+					alert(dataObj.msg);
+				}
 		  	},"text");
 	}
-    function select_group(roleId){
+    
+	function edit_info(){
+		var trueName=$("#up_trueName").val();
+		var roleId=$("#up_roleId").val();
+		var groupId=$("#up_groupId").val();
+		var desc=$("#up_desc").val();
+		var userId=$("#ed_userId").val();
+		$.post("{{$root_path}}user/editUser",{"ed_userId":userId,"trueName":trueName,"roleId":roleId,"groupId":groupId,"desc":desc},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('编辑成功');
+					window.location.reload();
+				}
+				else{
+					alert(dataObj.msg);
+				}
+		  	},"text");
+	}
+	
+	function select_group(roleId){
 		$("#groupId").empty();
 		$("#groupId").append('<option value="">请选择</option>');
 		$.post("{{$root_path}}user/getUserGroupListAjax",{"roleId":roleId},
@@ -151,8 +199,77 @@
 
 		  },
 		  "text");
+	}
+	
+	function select_group_up(roleId,groupId=''){
+		$("#up_groupId").empty();
+		$("#up_groupId").append('<option value="">请选择</option>');
+		$.post("{{$root_path}}user/getUserGroupListAjax",{"roleId":roleId},
+		  function(data){
+
+			var dataObj=eval("("+data+")");
+			if(dataObj.length>0){
+				var html="";			
+				for(var i=0;i<dataObj.length;i++){
+					html+="<option value='"+dataObj[i].groupId+"'>"+dataObj[i].groupName+"</option>";
+					 
+				}
+				$("#up_groupId").append(html);
+				if(groupId){
+					$("#up_groupId").val(groupId);
+				}
+			}
+			else{
+				alert('没有这个角色的用户组请先添加该角色的用户组');
+			}
+
+		  },
+		  "text");
+	}
+	
+	function re_pwd(userId){
+		$.post("{{$root_path}}user/rePwd",{"reUserId":userId},
+		  function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('重置成功');
+				}
+				else{
+					alert(dataObj.msg);
+				}
+		  },
+		  "text");
 	}	
 	
+	function freeze(userId){
+		$.post("{{$root_path}}user/freeze",{"freezeUserId":userId},
+		  function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('冻结成功');
+				}
+				else{
+					alert(dataObj.msg);
+				}
+		  },
+		  "text");
+	}
+	
+	function get_info(userId){
+		$.post("{{$root_path}}user/info",{"upUserId":userId},
+		  function(data){
+
+			var dataObj=eval("("+data+")");
+
+			$("#up_userName").val(dataObj.userName);
+			$("#up_trueName").val(dataObj.trueName);
+			$("#up_roleId").val(dataObj.roleId);
+			$("#up_desc").html(dataObj.desc);
+			$("#ed_userId").val(dataObj.userId);
+			select_group_up(dataObj.roleId,dataObj.groupId);
+		  },
+		  "text");
+	}
 </script>
 
 </body>

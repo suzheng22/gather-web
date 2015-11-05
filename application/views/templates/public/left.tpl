@@ -25,6 +25,10 @@
                 <dd class="first_dd"><a href="ps_check.html">修图审核</a></dd>
                 <dd><a href="#">录入审核</a></dd>
             </dl>
+			 <dl class="custom">
+                <dt onClick="changeImage()"><i class="icon iconfont">&#xf01d8;</i>录入管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                <dd class="first_dd"><a href="{{$root_path}}input/index">录入</a></dd>
+            </dl>
 		</div>
 		<div class="projectAction"></div>
 	</div>

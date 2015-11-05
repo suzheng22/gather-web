@@ -86,4 +86,5 @@ class Input extends My_Controller {
         $ret= $this->input_model->SaveNutrient($data);
         print_r($ret);exit;
     }
+
 }

@@ -31,4 +31,13 @@ class Role extends My_Controller {
             $this->ci_smarty->assign('roleList',$role_list['list']);
             $this->ci_smarty->display('role_list.tpl');
         }
+        
+        function addRole(){
+            $data['roleName']=$this->input->post('roleName');
+            $data['desc']=$this->input->post('desc');
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            echo $str=$this->role_model->addRole($data);
+            exit;
+        }
 }

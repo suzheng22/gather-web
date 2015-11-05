@@ -307,6 +307,9 @@
 				if(dataObj.msgCode==0){
 					alert('添加成功');
 				}
+				else{
+					alert(dataObj.msg);
+				}
 		  },
 		  "text");
 	}
@@ -324,6 +327,9 @@
 			var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){
 					alert('添加成功');
+				}
+				else{
+					alert(dataObj.msg);
 				}
 		  },
 		  "text");
@@ -347,6 +353,9 @@ var str=str.substring(0,(str.length-1));
 				if(dataObj.msgCode==0){
 					alert('添加成功');
 				}
+				else{
+					alert(dataObj.msg);
+				}
 		  },
 		  "text");              
 	}
@@ -361,7 +370,9 @@ var str=str.substring(0,(str.length-1));
 					alert('录入成功');
 					window.location.reload();
 				}
-			//$('#msg').html(data);
+				else{
+					alert(dataObj.msg);
+				}
 		  },
 		  "text");
 	}
@@ -374,6 +385,9 @@ var str=str.substring(0,(str.length-1));
 				var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){
 					alert('添加成功');
+				}
+				else{
+					alert(dataObj.msg);
 				}
 		  	},"text");
 	}

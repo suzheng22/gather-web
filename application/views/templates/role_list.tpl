@@ -30,17 +30,14 @@
                       <tr>
                         <th>角色名称</th>
                         <th>创建时间</th>
-                        <th>操作</th>
-                        
-                        
+                        <th>描述</th>
                       </tr>
 					 {{foreach from=$roleList item=list}}
                       <tr>
                         <td>{{$list.roleName}}</td>
                         <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
                         <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
+                        	{{$list.desc}}
                         </td>
                       </tr>
 					  {{/foreach}} 
@@ -59,16 +56,31 @@
 	<div class="content">
 		<div class="login_main">
 			<div class="login_form">
-				<div class="clearfix one"><label for="user_name">角色编码:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">角色名称:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">描述:</label><textarea></textarea></div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
+                <div class="clearfix one"><label for="user_name">角色名称:</label><input type="text" class="zhmm" id="roleName"></div>
+                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="addRole()">确认</a>
             </div>
 	   </div>
     </div>
 </div>
 {{include file='public/js.tpl'}}
-
+<script>
+	function addRole(){
+		var roleName=$("#roleName").val();
+		var desc=$("#desc").val();
+		$.post("{{$root_path}}role/addRole",{"roleName":roleName,"desc":desc},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('添加成功');
+					window.location.reload();
+				}
+				else{
+					alert(dataObj.msg);
+				}
+		  	},"text");
+	}
+</script>
 
 </body>
 </html>

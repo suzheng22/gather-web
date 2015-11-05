@@ -14,8 +14,21 @@ $(function(){
         bShade:true,                //是否有遮罩
         bShadeClose:false,          //是否点遮罩关闭
         fnAdditional:function(){
-            
+           
         }
     });
+	$("#newuser_pop_revamp").pop({
+			oMain:".revamp",         //触发弹出层的元素。为空时直接弹出
+			sEvent:"click",             //触发事件
+			oClose:"#newuser_pop_revamp .close", //关闭按钮
+			bIframe:false,              //是否有iframe
+			iSrc:"",                    //iframe地址
+			bShade:true,                //是否有遮罩
+			bShadeClose:false,          //是否点遮罩关闭
+			fnAdditional:function(){
+				 
+				 
+			}
+		});
 });	
 </script>	

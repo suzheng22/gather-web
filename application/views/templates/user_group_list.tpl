@@ -52,8 +52,7 @@
                         <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
                         <td>创建人</td>
                         <td>
-                        	<a href="javascript;">删除</a>
-                        	<a href="javascript;">修改</a>
+                        	<a  class="revamp" onclick="get_info({{$list.groupId}})">修改</a>
                         </td>
                       </tr>
 					  {{/foreach}}
@@ -73,17 +72,90 @@
 	<div class="content">
 		<div class="login_main">
 			<div class="login_form">
-				<div class="clearfix one"><label for="user_name">用户组编码:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">用户组名称:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">角色名称:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">描述:</label><textarea></textarea></div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
+                <div class="clearfix one"><label for="user_name">用户组名称:</label><input type="text" id="groupName" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">角色名称:</label><select id="roleId">
+																					<option value="">请选择</option>
+																					{{foreach from =$role_list item=list}}
+																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
+																					{{/foreach}}
+																			  </select></div>
+                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="addUserGroup()">确认</a>
+            </div>
+	   </div>
+    </div>
+</div>
+
+<!-- 编辑用户组弹出层 开始-->
+<div class="newuser_pop" id="newuser_pop_revamp">
+	<div class="tit clearfix"><h4>修改用户组</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+	<div class="content">
+		<div class="login_main">
+			<div class="login_form"><input type="hidden" id="ed_groupId" />
+                <div class="clearfix one"><label for="user_name">用户组名称:</label><input type="text" id="up_groupName" class="zhmm" readonly=""></div>
+                <div class="clearfix one"><label for="user_name">角色名称:</label><select id="up_roleId">
+																					<option value="">请选择</option>
+																					{{foreach from =$role_list item=list}}
+																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
+																					{{/foreach}}
+																			  </select></div>
+                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="up_desc"></textarea></div>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="edit_info()">确认</a>
             </div>
 	   </div>
     </div>
 </div>
 {{include file='public/js.tpl'}}
+<script>
+	function addUserGroup(){
+		var groupName=$("#groupName").val();
+		var desc=$("#desc").val();
+		var roleId=$("#roleId").val();
+		$.post("{{$root_path}}user/addGroup",{"groupName":groupName,"desc":desc,"roleId":roleId},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('添加成功');
+					window.location.reload();
+				}
+				else{
+					alert(dataObj.msg);
+				}
+		  	},"text");
+	}
+	
+	function get_info(groupId){
+		$.post("{{$root_path}}user/groupInfo",{"groupId":groupId},
+		  function(data){
 
+			var dataObj=eval("("+data+")");
+
+			$("#up_groupName").val(dataObj.groupName);
+			$("#up_roleId").val(dataObj.roleId);
+			$("#up_desc").html(dataObj.desc);
+			$("#ed_groupId").val(dataObj.groupId);
+
+		  },
+		  "text");
+	}
+	
+	function edit_info(){
+		var roleId=$("#up_roleId").val();
+		var groupId=$("#ed_groupId").val();
+		var desc=$("#up_desc").val();
+		$.post("{{$root_path}}user/editGroup",{"roleId":roleId,"groupId":groupId,"desc":desc},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('编辑成功');
+					window.location.reload();
+				}
+				else{
+					alert(dataObj.msg);
+				}
+		  	},"text");
+	}
+</script>
 
 </body>
 </html>

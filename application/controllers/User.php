@@ -9,13 +9,15 @@ class User extends My_Controller {
 			$this->load->model('user/user_model');
         }
                 
-        
+        //登录
         public function doLogin()
         {
            $data['userName']=$this->input->post('userName');
 			$data['pwd']=$this->input->post('pwd');
+			
 			$json=$this->user_model->checkLogin($data);
-			$arr=json_decode($json,'false');
+
+			$arr=json_decode($json,'true');
 			
             if($arr['msgCode']>0){
                 $msg=$arr['msg'];
@@ -28,16 +30,16 @@ class User extends My_Controller {
                 $user['lastLoginTime']=$arr['lastLoginTime'];
                 $user_str=serialize($user);
                 set_cookie("user",$user_str,3600*24);
-                header("Location: ".site_url('input/index')); 
+                header("Location: ".site_url('user/index')); 
             }
             
         }
-        
+        //登录页面
         public function login(){
             $this->ci_smarty->assign('msg','');
             $this->ci_smarty->display('login.tpl');
         }
-        
+        //用户首页列表页
         public function index(){
             $data['userName']=$this->input->get('userName');
             $data['trueName']=$this->input->get('trueName');
@@ -67,11 +69,7 @@ class User extends My_Controller {
                 $page_url.='status='.$data['status']."&";
                 $this->ci_smarty->assign('status',$data['status']);
             }
-            
-           //$page_url=substr($page_url, 0,strlen($$page_url)-1);
-            
 
-          //echo $page_url;exit;
             
             
             $data['userId']=$this->user_info['userId'];
@@ -97,6 +95,15 @@ class User extends My_Controller {
              $this->ci_smarty->display('user_list.tpl');
         }
         
+        //获取单个用户信息
+        function info(){
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['upUserId']=$this->input->post('upUserId');
+            echo  $this->user_model->getInfo($data);exit;
+        }
+        
+        //用户组列表页
         function userGroupList(){
             $page_url=$this->root_path.'user/userGroupList/?';
             $data['groupName']=$this->input->get('groupName');
@@ -127,6 +134,7 @@ class User extends My_Controller {
             $this->ci_smarty->display('user_group_list.tpl');
         }
         
+        //根据角色获取用户组 ajax
         function getUserGroupListAjax(){
             $data['roleId']=$this->input->post('roleId');
             $data['userId']=$this->user_info['userId'];
@@ -137,7 +145,7 @@ class User extends My_Controller {
             exit;
         }
         
-        
+        //添加用户
         function addUser(){
             $data['userName']=$this->input->post('userName');
             $data['trueName']=$this->input->post('trueName');
@@ -147,5 +155,64 @@ class User extends My_Controller {
             $data['userId']=$this->user_info['userId'];
             $data['lastLoginTime']=$this->user_info['lastLoginTime'];
            echo  $this->user_model->addUser($data);
+        }
+        
+        
+        //重置密码
+        function rePwd(){
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['reUserId']=$this->input->post('reUserId');
+            echo  $this->user_model->rePwd($data);exit;
+        }
+        
+        //冻结账户
+        function freeze(){
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['freezeUserId']=$this->input->post('freezeUserId');
+            echo  $this->user_model->freeze($data);exit;
+        }
+        //编辑用户
+        function editUser(){
+            $data['trueName']=$this->input->post('trueName');
+            $data['roleId']=$this->input->post('roleId');
+            $data['groupId']=$this->input->post('groupId');
+            $data['desc']=$this->input->post('desc');
+            $data['ed_userId']=$this->input->post('ed_userId');
+            
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            echo  $this->user_model->editUser($data);exit;
+        }
+        
+        //添加用户组
+        function addGroup(){
+            $data['groupName']=$this->input->post('groupName');
+            $data['roleId']=$this->input->post('roleId');
+            $data['desc']=$this->input->post('desc');
+
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            echo  $this->user_model->addGroup($data);exit;
+        }
+        
+        //获取单个用户组信息
+        function groupInfo(){
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['groupId']=$this->input->post('groupId');
+            echo  $this->user_model->getGroupInfo($data);exit;
+        }
+        
+        //编辑用户组
+        function editGroup(){
+            $data['groupId']=$this->input->post('groupId');
+            $data['desc']=$this->input->post('desc');
+            $data['roleId']=$this->input->post('roleId');
+            
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            echo  $this->user_model->editGroup($data);exit;
         }
 }
