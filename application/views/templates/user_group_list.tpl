@@ -50,7 +50,7 @@
                         <td>123</td>
                         <td>{{$list.desc}}</td>
                         <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
-                        <td>创建人</td>
+                        <td>{{$list.userName}}</td>
                         <td>
                         	<a  class="revamp" onclick="get_info({{$list.groupId}})">修改</a>
                         </td>
