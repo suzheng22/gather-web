@@ -11,13 +11,13 @@ class Role_model extends MY_Model {
     
     function getRoleList($data) {
         $url=$this->user_api_url."/user/getUserRoleList";
-        $return=$this->curl->_simple_call('post',$url,$data);
+        $return=$this->curl($url,$data);
         return $return;
     }
     
     function addRole($data) {
         $url=$this->user_api_url."/user/addRole";
-        $return=$this->curl->_simple_call('post',$url,$data);
+        $return=$this->curl($url,$data);
         return $return;
     }
 }

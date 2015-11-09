@@ -3,10 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>数据采集系统</title>
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}style/global.css"/>
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}style/head.css" />
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}style/public.css"/>
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}style/iconfont.css"/>
+{{include file='public/css.tpl'}}
 
 <script type="text/javascript"  src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
