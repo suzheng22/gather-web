@@ -89,8 +89,9 @@ class User_model extends MY_Model {
         return $return;
     }
     
-    function curl($url,$data){
-        $return=$this->curl->_simple_call('post',$url,$data);
+    function editPwd($data){
+        $url=$this->user_api_url."/user/editPwd";
+        $return=$this->curl($url,$data);
         return $return;
     }
 }

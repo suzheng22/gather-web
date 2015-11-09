@@ -47,7 +47,7 @@
 					  {{foreach from=$group_list item=list}}
                       <tr>
                         <td>{{$list.groupName}}</td>
-                        <td>123</td>
+                        <td>{{$list.roleName}}</td>
                         <td>{{$list.desc}}</td>
                         <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
                         <td>{{$list.userName}}</td>
@@ -106,7 +106,7 @@
     </div>
 </div>
 {{include file='public/js.tpl'}}
-<script>
+<script  type="text/javascript">
 	function addUserGroup(){
 		var groupName=$("#groupName").val();
 		var desc=$("#desc").val();
@@ -114,12 +114,14 @@
 		$.post("{{$root_path}}user/addGroup",{"groupName":groupName,"desc":desc,"roleId":roleId},
 		  	function(data){
 				var dataObj=eval("("+data+")");
+				
 				if(dataObj.msgCode==0){
 					alert('添加成功');
 					window.location.reload();
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  	},"text");
 	}
@@ -129,7 +131,10 @@
 		  function(data){
 
 			var dataObj=eval("("+data+")");
-
+			if(dataObj.msgCode>0){
+				alert(dataObj.msg);
+				window.location.reload();
+			}
 			$("#up_groupName").val(dataObj.groupName);
 			$("#up_roleId").val(dataObj.roleId);
 			$("#up_desc").html(dataObj.desc);
@@ -152,6 +157,7 @@
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  	},"text");
 	}

@@ -139,7 +139,7 @@
     </div>
 </div>
 {{include file='public/js.tpl'}}
-<script>
+<script  type="text/javascript">
 	function addUser(){
 		var userName=$("#userName").val();
 		var trueName=$("#trueName").val();
@@ -155,6 +155,7 @@
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  	},"text");
 	}
@@ -174,6 +175,7 @@
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  	},"text");
 	}
@@ -185,6 +187,10 @@
 		  function(data){
 
 			var dataObj=eval("("+data+")");
+			if(dataObj.msgCode>0){
+				alert(dataObj.msg);
+				window.location.reload();
+			}
 			if(dataObj.length>0){
 				var html="";			
 				for(var i=0;i<dataObj.length;i++){
@@ -201,13 +207,17 @@
 		  "text");
 	}
 	
-	function select_group_up(roleId,groupId=''){
+	function select_group_up(roleId,groupId){
 		$("#up_groupId").empty();
 		$("#up_groupId").append('<option value="">请选择</option>');
 		$.post("{{$root_path}}user/getUserGroupListAjax",{"roleId":roleId},
 		  function(data){
 
 			var dataObj=eval("("+data+")");
+			if(dataObj.msgCode>0){
+				alert(dataObj.msg);
+				window.location.reload();
+			}
 			if(dataObj.length>0){
 				var html="";			
 				for(var i=0;i<dataObj.length;i++){
@@ -236,6 +246,7 @@
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  },
 		  "text");
@@ -250,6 +261,7 @@
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  },
 		  "text");
@@ -260,7 +272,10 @@
 		  function(data){
 
 			var dataObj=eval("("+data+")");
-
+			if(dataObj.msgCode>0){
+				alert(dataObj.msg);
+				window.location.reload();
+			}
 			$("#up_userName").val(dataObj.userName);
 			$("#up_trueName").val(dataObj.trueName);
 			$("#up_roleId").val(dataObj.roleId);

@@ -34,6 +34,13 @@ class User extends My_Controller {
             }
             
         }
+         
+        //登出
+        function logout(){
+            set_cookie("user",'',time()-3600);
+            header("Location: ".site_url('user/login'));
+        }
+        
         //登录页面
         public function login(){
             $this->ci_smarty->assign('msg','');
@@ -74,12 +81,13 @@ class User extends My_Controller {
             
             $data['userId']=$this->user_info['userId'];
             $data['lastLoginTime']=$this->user_info['lastLoginTime'];
-           
-            $str=$this->user_model->getuserRoleList($data);
+           $no_master['userId']=$this->user_info['userId'];
+           $no_master['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $str=$this->user_model->getuserRoleList($no_master);
             $role_list=json_decode($str,true);
              $this->ci_smarty->assign('role_list',$role_list['list']);
            
-              $str=$this->user_model->getGroupList($data);
+              $str=$this->user_model->getGroupList($no_master);
               $group_list=json_decode($str,true);
               $this->ci_smarty->assign('group_list',$group_list['list']);
               
@@ -121,7 +129,9 @@ class User extends My_Controller {
             $data['userId']=$this->user_info['userId'];
             $data['lastLoginTime']=$this->user_info['lastLoginTime'];
             
-            $str=$this->user_model->getuserRoleList($data);
+            $no_master['userId']=$this->user_info['userId'];
+            $no_master['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $str=$this->user_model->getuserRoleList($no_master);
             $role_list=json_decode($str,true);
             $this->ci_smarty->assign('role_list',$role_list['list']);
             
@@ -214,5 +224,23 @@ class User extends My_Controller {
             $data['userId']=$this->user_info['userId'];
             $data['lastLoginTime']=$this->user_info['lastLoginTime'];
             echo  $this->user_model->editGroup($data);exit;
+        }
+        
+        function editPwd(){
+            $this->ci_smarty->display('usdate_pws.tpl');
+        }
+        
+        function doEditPwd(){
+            $data['userId']=$this->user_info['userId'];
+            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['oldPwd']=$this->input->post('oldPwd');
+            $data['newPwd']=$this->input->post('newPwd');
+            $json=$this->user_model->editPwd($data);
+            $r=json_decode($json,true);
+            if ($r['msgCode']==0){
+                set_cookie("user",'',time()-3600);
+                
+            }
+            echo $json;
         }
 }

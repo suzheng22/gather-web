@@ -309,6 +309,7 @@
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  },
 		  "text");
@@ -330,6 +331,7 @@
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  },
 		  "text");
@@ -355,6 +357,7 @@ var str=str.substring(0,(str.length-1));
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  },
 		  "text");              
@@ -372,6 +375,7 @@ var str=str.substring(0,(str.length-1));
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  },
 		  "text");
@@ -388,6 +392,7 @@ var str=str.substring(0,(str.length-1));
 				}
 				else{
 					alert(dataObj.msg);
+					window.location.reload();
 				}
 		  	},"text");
 	}
