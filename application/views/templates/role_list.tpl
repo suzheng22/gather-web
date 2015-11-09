@@ -14,14 +14,13 @@
      	{{include file='public/left.tpl'}}
         <div class="viewport_main">
         	<div class="rose_box cc_box">
-            	<h3>角色管理</h3>
+            	<h3>角色管理<a href="javascript:;" id="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}role/index" method="get">
                 	<div class="cc_top_one"><label>角色名称:</label><input type="text" name="roleName" value="{{$roleName}}"/></div>
                     <div class="cc_top_two">
-                        <a href="javascript:;" id="new_user">新增</a>
-                        <input type="submit" value="查询" />
-                        <a href="javascript:;">清空</a>
+                        <span><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 				</form>
                    	<div class="clearfix"></div>

@@ -15,7 +15,7 @@
      	{{include file='public/left.tpl'}}
         <div class="viewport_main">
         	<div class="rose_box cc_box">
-            	<h3>用户管理</h3>
+            	<h3>用户管理<a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
 				
                 <div class="rose_top main_rignt_top clearfix">
 						<form action="{{$root_path}}user/index" method="get">
@@ -42,8 +42,9 @@
 																			</select></p> 
                         <p class="cc_top_two clearfix">
                             
-                            <input type="submit" value="查询" />
-							<a href="javascript:;" id="new_user">新增</a>
+                            <!--<input type="submit" value="查询" />
+							<a href="javascript:;" id="new_user">新增</a>-->
+                            <span><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                             <a href="javascript:;">清空</a>
                         </p>
 						</form>

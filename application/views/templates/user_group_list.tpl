@@ -14,21 +14,21 @@
      	{{include file='public/left.tpl'}}
         <div class="viewport_main">
         	<div class="rose_box cc_box">
-            	<h3>用户组管理</h3>
+            	<h3>用户组管理 <a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}user/userGroupList" method="get">
-                        <p class="cc_top_one clearfix"><label>用户组名称:</label><input type="text" name="groupName" value="{{$groupName}}"/></P>
-                        <p class="cc_top_one clearfix"><label>角色名称:</label><select name="roleId">
+                        <div class="cc_top_one clearfix"><label>用户组名称:</label><input type="text" name="groupName" value="{{$groupName}}"/></div>
+                        <div class="cc_top_one clearfix"><label>角色名称:</label><select name="roleId">
 																					<option value="">请选择</option>
 																					{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
 																					{{/foreach}}
-																			  </select></p> 
-                        <p class="cc_top_two clearfix">
-                            <a href="javascript:;" id="new_user">新增</a>
-                           <input type="submit" value="查询" />
-                            <a href="javascript:;">清空</a>
-                        </p>
+																			  </select></div> 
+                        <div class="cc_top_two clearfix">
+                           <!--<input type="submit" value="查询"  />-->
+                           <span><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                           <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        </div>
 						</form>
                     <div class="clearfix"></div>
                  
