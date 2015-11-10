@@ -3,60 +3,23 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>用户管理系统</title>
-<link rel="stylesheet" type="text/css" href="style/global.css"/>
-<link rel="stylesheet" type="text/css" href="style/head.css" />
-<link rel="stylesheet" type="text/css" href="style/public.css"/>
-<link rel="stylesheet" type="text/css" href="style/iconfont.css"/>
+{{include file='public/css.tpl'}}
 </head>
 <body>
 
-<div class="j-top">
-    <div class="j-top-warp">
-        <h3>用户管理系统<span>v1.0</span></h3>
-        <div class="top_right"><span id="user_name_show"></span><em>,欢迎你</em><a href="index.html">退出</a></div>
-    </div>
-</div>
+  {{include file='public/top.tpl'}}
   
 <div id="warp_box">
      <div class="main">
-     	<div class="aside_nav">
-        	<div class="aside_menu">
-                <div class="slimScrollDiv leftsidebar_box">
-                	
-                        <dl class="system_log">
-                            <dt onClick="changeImage()"><i class="icon iconfont">&#xf0226;</i>用户管理<img src="images/left/select_xl01.png"></dt>
-                            <dd class="first_dd"><a href="user_manager.html">用户管理</a></dd>
-                            <dd><a href="user_rose.html">角色管理</a></dd>
-                            <dd><a href="user_group_manger.html">用户组管理</a></dd>
-                        </dl>
-                        <dl class="cloud">
-                            <dt><a href="#"><i class="icon iconfont">&#x346a;</i>录入管理<img src="images/left/select_xl01.png"></a></dt>
-                        </dl>
-                         <dl class="custom">
-                            <dt onClick="changeImage()"><i class="icon iconfont">&#xf01d8;</i>审核管理<img src="images/left/select_xl01.png"></dt>
-                            <dd class="first_dd"><a href="ps_check.html">修图审核</a></dd>
-                            <dd><a href="#">录入审核</a></dd>
-                        </dl>
-                        
-                        <dl class="channel">
-                            <dt><i class="icon iconfont">&#xf0141;</i>统计管理<img src="images/left/select_xl01.png"></dt>
-                            <dd class="first_dd"><a href="#">录入统计</a></dd>
-                            <dd><a href="#">录入审核统计</a></dd>
-                            <dd><a href="#">修图统计</a></dd>
-                            <dd><a href="#">修图审核统计</a></dd>
-                        </dl>
-                </div>
-                <div class="projectAction"><!--<span><i class="icon iconfont">&#xf01b5;</i>增加</span><span><i class="icon iconfont">&#xf018f;</i>设置</span>--></div>
-            </div>
-        </div>
+     	{{include file='public/left.tpl'}}
         <div class="viewport_main">
         	<div class="rose_box cc_box">
             	<h3>修图审核-详情</h3>	
                 <div class="rose_top main_rignt_top clearfix">
                 	
-                        <div class="cc_top_one"><label>修图人:</label><span>XXX</span></div>
-                        <div class="cc_top_one"><label>抽查通过率:</label><span>90%</span></div>
-                        <div class="cc_top_one"><label>待审核商品数:</label><span>XXX</span></div>
+                        <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span></div>
+                        <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
+                        <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
                         <div class="clearfix"></div>
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text" value=""/></div>
                      	<div class="cc_top_one"><label>上传时间:</label><input type="text" id="datetimepicker"/></div>
@@ -110,7 +73,6 @@
                 	<div class="tab_box">
                     <table>
                       <tr>
-                        <th>序号</th>
                         <th>商品条形码</th>
                         <th>商品名称</th>
                         <th>商品分类</th>
@@ -120,30 +82,18 @@
                         
                         
                       </tr>
+					  {{foreach from=$glist.gtins item=list}}
                       <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>正常修图</td>
-                        <td>修图已驳回</td>
+                        <td>{{$list.gtin}}</td>
+                        <td>{{$list.proName}}</td>
+                        <td>{{$list.typeName}}</td>
+                        <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
+                        <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                         <td>
                         	<a href="javascript;">审核详细</a>
                         </td>
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>驳回修图</td>
-                        <td>修图审核通过</td>
-                        <td>
-                        	<a href="ps_check_pic.html" target="_blank">审核详细</a>
-                        </td>
-                      </tr>
-                       
-                      
+					  {{/foreach}}
                     </table>
                 </div>
                 	<div class="page_nav" id="page_nav">
@@ -169,13 +119,10 @@
         </div>
      </div><!--main end-->  
 </div>
-<script type="text/javascript"  src="js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="js/popup/popup.js"></script>
-<script type="text/javascript" src="js/defined.js"></script>
-<script type="text/javascript" src="js/full_screen.js"></script>
+{{include file='public/js.tpl'}}
 <!--时间控件-->
-<link rel="stylesheet" type="text/css" href="js/time/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="js/time/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
+<script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $('#datetimepicker').datetimepicker();
 </script>

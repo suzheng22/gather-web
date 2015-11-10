@@ -28,6 +28,7 @@ class User extends My_Controller {
                 $user['userId']=$arr['userId'];
                 $user['trueName']=$arr['trueName'];
                 $user['lastLoginTime']=$arr['lastLoginTime'];
+                $user['roleId']=$arr['roleId'];
                 $user_str=serialize($user);
                 set_cookie("user",$user_str,3600*24);
                 header("Location: ".site_url('user/index')); 

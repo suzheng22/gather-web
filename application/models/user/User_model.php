@@ -94,5 +94,11 @@ class User_model extends MY_Model {
         $return=$this->curl($url,$data);
         return $return;
     }
+    
+    function getUserIdsByFiled($data){
+        $url=$this->user_api_url."/user/getUserIdsByFiled";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
 }
 ?>
