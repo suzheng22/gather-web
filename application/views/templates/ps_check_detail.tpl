@@ -68,6 +68,7 @@
                             <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
+					<input type="button" value="批量审核" onclick="check(1)" />
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
@@ -89,29 +90,13 @@
                         <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                         <td>
-                        	<a href="javascript;">审核详细</a>
+                        	<a href="{{$root_path}}marlboro/psDetailPic/{{$list.gtin}}">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
                     </table>
                 </div>
-                	<div class="page_nav" id="page_nav">
-                	<a href="javascript:;" class="pageNum">上一页</a>
-                    <a href="javascript:;" class="pageNum">1</a>
-                    <a href="javascript:;" class="pageNum">2</a>
-                    <a href="javascript:;" class="pageNum">3</a>
-                    <a href="javascript:;" class="pageNum">4</a>
-                    <a href="javascript:;" class="pageNum">5</a>
-                    <a href="javascript:;" class="pageNum">6</a>
-                    <a href="javascript:;" class="pageNum">7</a>
-                    <a href="javascript:;" class="pageNum">8</a>
-                    <a href="javascript:;" class="pageNum">9</a>
-                    <a href="javascript:;" class="pageNum">下一页</a>
-                    <span>共<em>100</em>页,</span>
-                    <span>共<em>66</em>条记录,</span>
-                    <span>跳转到第<input type="text"/>页</span>
-                    <a href="javascript:;" class="pageNum">确定</a>
-                </div>
+                	{{$pages}}
                 	
                 </div>
             </div>
@@ -125,6 +110,30 @@
 <script type="text/javascript">
 $('#datetimepicker_start').datetimepicker();
 $('#datetimepicker_end').datetimepicker();
+
+function check(){
+	var gtin={{$p_info.gtin}};
+
+		$.post("{{$root_path}}marlboro/checkStatus",{"gtin":gtin,"type":2,"status":1},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					if(status==1){
+					   alert('审核成功');
+					}
+					else{
+						alert('驳回成功');
+					}
+					window.location.reload();
+				}
+				else{
+					alert(dataObj.msgText);
+					window.location.reload();
+				}
+		  	},"text");
+
+
+}
 </script>
 <!---->  	
 

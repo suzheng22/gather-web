@@ -20,5 +20,13 @@ class Product_model extends MY_Model {
         return $list;
     }
     
+    function getProduct($data){
+        $url=$this->tmore_api_url."/product/getproductbygtin";
+        $return=$this->curl($url,$data,'get');
+        $list=json_decode($return,true);
+        
+        return $list;
+    }
+    
 }
 ?>

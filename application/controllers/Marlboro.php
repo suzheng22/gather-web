@@ -105,6 +105,31 @@ class Marlboro extends My_Controller {
        //print_r($list);exit;
        $showpage= parent::page($page_url,10,$list['totalCount']);
        $this->ci_smarty->assign('glist',$list);
+       $this->ci_smarty->assign('pages',$showpage['show']);
        $this->ci_smarty->display('ps_check_detail.tpl'); 
+    }
+    
+    function psDetailPic($gtin){
+        $this->load->model('sdk/product_model','product');
+        $arr['gtin']=$gtin;
+        $list=$this->marlboro_model->getMarlboroInfoPic($arr);
+        
+        $product_info=$this->product->getProduct($arr);
+        $this->ci_smarty->assign('p_info',$product_info);
+        
+        $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->display('ps_check_pic.tpl');
+    }
+    
+    function checkStatus(){
+        $data['gtin']=$this->input->post('gtin');
+        $data['type']=$this->input->post('type');
+        $data['status']=$this->input->post('status');
+        $data['userId']=$this->user_info['userId'];
+        $memo=$this->input->post('memo');
+        if(isset($memo)){
+            $data['memo']=$this->input->post('memo');
+        }
+       echo $this->marlboro_model->changeStatus($data);exit;
     }
 }

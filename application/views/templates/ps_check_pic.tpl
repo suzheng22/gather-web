@@ -9,15 +9,15 @@
 <body>
 <!--------------------------- 修图详情------------------------------------> 
 <div class="record_info_warp" style="margin-top:0px;">
-	<h2>xxxxxxxxx条形码-修图详情
+	<h2>{{$p_info.gtin}}条形码-修图详情
       </h2>
 	<ul class="clearfix" id="nav_info">
-            <li class="black"><em>条形码:</em><span>12321312</span></li>
-            <li class="black"><em>商品名称:</em><span>321312321312321</span></li>
-            <li class="black"><em>商品类型:</em><span>32312312312</span></li>
+            <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
+            <li class="black"><em>商品名称:</em><span>{{$p_info.proName}}</span></li>
+            <li class="black"><em>商品类型:</em><span>{{$p_info.typeName}}</span></li>
             <li class="black">
             	<div class="ps_top_menu">
-                <a href="#" class="pass"><i class="iconfont">&#xf01b1;</i>通过</a>
+                <a href="#" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
                 <a href="javascript:;" id="new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
                 </div>
             </li>
@@ -34,8 +34,27 @@
                 <!--正常显示层-->
                      <div class="show_a_01">
                         <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>主图jpg</p>
+                            </div>
+                        	<div style="float:left" class="v_show">
+                                <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                                <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                                <div class="v_content">
+                                    <div  class="v_content_list">
+                                        <ul class="con-FangDa-ImgList">
+										{{foreach from=$plist.a2 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+										{{/foreach}}
+                                         </ul>
+                                    </div>
+                                </div>
+                       		</div>
+                    	</div>
+                        <!--主图jpg-->
+                    	<div class="pic_box clearfix">
                         <div class="pic_box_left">
-                            <p>标签图</p>
+                            <p>主图png</p>
                         </div>
                         <div style="float:left" class="v_show">
                             <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
@@ -43,41 +62,101 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        <li class="active"><img src="images/photos/IMG_6125.JPG" /></li>
-                                        <li class=""><img src="images/photos/IMG_6125.JPG"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
+                                        {{foreach from=$plist.a3 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+										{{/foreach}}
                                       
                                      </ul>
                                 </div>
                             </div>
                        </div>
-                    </div><!---->
-                        <!--箱装图-->
+                    </div>
+                        <!--主图png-->
+                        <!--细节图-->
                         <div class="pic_box clearfix">
-                        <div class="pic_box_left">
-                            <p>箱装图</p>
-                        </div>
-                        <div style="float:left" class="v_show">
+                            <div class="pic_box_left">
+                                <p>细节图</p>
+                            </div>
+                           <div style="float:left" class="v_show">
                             <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
                             <span class="next"><i class="icon iconfont">&#x3464;</i></span>
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
+									{{foreach from=$plist.b2 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
                                      </ul>
                                 </div>
                             </div><!--v_content-->
                        </div>
-                    </div>
+                    	</div>
+                        <!--细节图-->
+                        <!--标签图-->
+                        <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>标签图</p>
+                            </div>
+                           <div style="float:left" class="v_show">
+                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                            <div class="v_content">
+                                <div  class="v_content_list">
+                                    <ul class="con-FangDa-ImgList">
+                                    {{foreach from=$plist.c2 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
+                                     </ul>
+                                </div>
+                            </div><!--v_content-->
+                       </div>
+                    	</div>
+                        <!--标签图-->
+                        
+                        <!--组合图-->
+                        <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>组合图</p>
+                            </div>
+                           <div style="float:left" class="v_show">
+                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                            <div class="v_content">
+                                <div  class="v_content_list">
+                                    <ul class="con-FangDa-ImgList">
+                                    {{foreach from=$plist.d2 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
+                                     </ul>
+                                </div>
+                            </div><!--v_content-->
+                       </div>
+                    	</div>
+                        <!--组合图-->
+                        
+                        <!--箱装图-->
+                        <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>箱装图</p>
+                            </div>
+                           <div style="float:left" class="v_show">
+                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                            <div class="v_content">
+                                <div  class="v_content_list">
+                                    <ul class="con-FangDa-ImgList">
+                                        {{foreach from=$plist.e2 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200"  mm="{{$list}}" /></li>
+									{{/foreach}}
+                                     </ul>
+                                </div>
+                            </div><!--v_content-->
+                       </div>
+                    	</div>
+                        <!--箱装图-->
+                        
                     </div><!--show_a_01-->
-                </div>
+                </div><!--popup_box-->
 			</div>
   	</div><!--left-->
   	<div class="right ps_right" style="display:none;">
@@ -92,49 +171,110 @@
     			<div class="popup_box" style="margin-top:10px;">
             	<!--正常显示层-->
                  <div class="show_a_01">
-                    <div class="pic_box clearfix">
-                        <div class="pic_box_left">
-                            <p>标签图</p>
-                        </div>
-                        <div style="float:left" class="v_show">
+                   	  <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>主图jpg</p>
+                            </div>
+                        	<div style="float:left" class="v_show">
+                                <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                                <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                                <div class="v_content">
+                                    <div  class="v_content_list">
+                                        <ul class="con-FangDa-ImgList">
+                                    {{foreach from=$plist.a1 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
+                                         </ul>
+                                    </div>
+                                </div>
+                       		</div>
+                    	</div>
+                        <!--细节图-->
+                        <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>细节图</p>
+                            </div>
+                           <div style="float:left" class="v_show">
                             <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
                             <span class="next"><i class="icon iconfont">&#x3464;</i></span>
                             <div class="v_content">
                                 <div  class="v_content_list">
-                                    <ul class="ps_con-FangDa-ImgList">
-                                        <li class="active"><img src="images/photos/IMG_6125.JPG" /></li>
-                                        <li class=""><img src="images/photos/IMG_6125.JPG"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                        <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                      
+                                    <ul class="con-FangDa-ImgList">
+                                    {{foreach from=$plist.b1 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
                                      </ul>
                                 </div>
-                            </div>
+                            </div><!--v_content-->
                        </div>
-                	</div><!---->
-                	<!--箱装图-->
-                 	<div class="pic_box clearfix">
-                    <div class="pic_box_left">
-                        <p>箱装图</p>
-                    </div>
-                    <div style="float:left" class="v_show">
-                        <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
-                        <span class="next"><i class="icon iconfont">&#x3464;</i></span>
-                        <div class="v_content">
-                            <div  class="v_content_list">
-                                <ul class="ps_con-FangDa-ImgList">
-                                    <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                    <li class=""><img src="images/photos/2J0A9712.jpg"/></li>
-                                 </ul>
+                    	</div>
+                        <!--细节图-->
+                        <!--标签图-->
+                        <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>标签图</p>
                             </div>
-                        </div><!--v_content-->
-                   </div>
-                </div>
+                           <div style="float:left" class="v_show">
+                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                            <div class="v_content">
+                                <div  class="v_content_list">
+                                    <ul class="con-FangDa-ImgList">
+                                    {{foreach from=$plist.c1 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
+                                     </ul>
+                                </div>
+                            </div><!--v_content-->
+                       </div>
+                    	</div>
+                        <!--标签图-->
+                        
+                        <!--组合图-->
+                        <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>组合图</p>
+                            </div>
+                           <div style="float:left" class="v_show">
+                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                            <div class="v_content">
+                                <div  class="v_content_list">
+                                    <ul class="con-FangDa-ImgList">
+                                    {{foreach from=$plist.d1 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
+                                     </ul>
+                                </div>
+                            </div><!--v_content-->
+                       </div>
+                    	</div>
+                        <!--组合图-->
+                        
+                        <!--箱装图-->
+                        <div class="pic_box clearfix">
+                            <div class="pic_box_left">
+                                <p>箱装图</p>
+                            </div>
+                           <div style="float:left" class="v_show">
+                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                            <div class="v_content">
+                                <div  class="v_content_list">
+                                    <ul class="con-FangDa-ImgList">
+                                    {{foreach from=$plist.e2 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+									{{/foreach}}
+                                     </ul>
+                                </div>
+                            </div><!--v_content-->
+                       </div>
+                    	</div>
+                        <!--箱装图-->
+                   
+                   
+                   
+                   
             	</div><!--show_a_01-->
     		</div>
 		</div><!--detail_zoom_right-->
@@ -144,15 +284,15 @@
 </div>
 <!-- 驳回弹出层 开始-->
 <div class="newuser_pop" id="ps_newuser_pop">
-	<div class="tit clearfix"><h4>xxxx条形码-审核</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+	<div class="tit clearfix"><h4>{{$p_info.gtin}}条形码-审核</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
 	<div class="content">
 		<div class="login_main">
 			<div class="login_form">
-				<div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm"></span></div>
-                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm"></span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm"></span></div>
-                <div class="clearfix one"><label for="user_name">备注:</label><textarea></textarea></div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
+				<div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.proName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.typeName}}</span></div>
+                <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
+                <a href="##" id="confirm_btn" class="confirm_btn" onclick="check(2)">确认</a>
             </div>
 	   </div>
     </div>
@@ -171,11 +311,11 @@
 		//实例化
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "images/zoomFullScreen.jpg"
+			src: "{{$plist.a2.0}}"
 		});
 		var iv2 = $(".viewer").iviewer(
 		{
-			src: "images/photos/2J0A9712.jpg"
+			src: "{{$plist.a1.0}}"
 		});
 
 		//驳回
@@ -220,6 +360,31 @@
 
 						
 });
+
+function check(status){
+	var gtin={{$p_info.gtin}};
+	var memo=$("#memo").val();
+
+		$.post("{{$root_path}}marlboro/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					if(status==1){
+					   alert('审核成功');
+					}
+					else{
+						alert('驳回成功');
+					}
+					window.location.reload();
+				}
+				else{
+					alert(dataObj.msgText);
+					window.location.reload();
+				}
+		  	},"text");
+
+
+}
 </script> 
 </body>
 </html>

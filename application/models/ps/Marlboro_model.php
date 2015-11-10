@@ -41,6 +41,17 @@ class Marlboro_model extends MY_Model {
         return $list;
     }
     
+    function  getMarlboroInfoPic($data){
+        $url=$this->tmore_api_url."/image/GetReviewImageByGtin";
+        $return=$this->curl($url,$data,'get');
+        $list=json_decode($return,true);
+        return $list;
+    }
     
+    function changeStatus($data){
+        $url=$this->tmore_api_url."/review/ChangeStatus";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
 }
 ?>
