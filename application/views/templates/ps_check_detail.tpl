@@ -25,7 +25,8 @@
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="proName" value="{{$proName}}"/></div>
                      	<div class="cc_top_one"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/></div>
                         <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
-                        <div class="cc_top_one last_show"><label>商品分类:</label>
+                       <div class="clearfix"></div>
+                        <div class="cc_top_one last_show" style="width:30%"><label>商品分类:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
                                     <select name="type">
@@ -37,7 +38,6 @@
                                 </dl>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
                          <div class="cc_top_one last_show"><label>修图类型:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
@@ -64,8 +64,8 @@
                         </div>
                     <div class="cc_top_two">
                         
-                        <input type="submit" value="查询" />
-                            <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                         <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
 					<input type="button" value="批量审核" onclick="check(1)" />
@@ -135,8 +135,6 @@ function check(){
 
 }
 </script>
-<!---->  	
-
 
 </body>
 </html>

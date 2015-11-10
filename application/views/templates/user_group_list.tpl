@@ -6,9 +6,7 @@
 {{include file='public/css.tpl'}}
 </head>
 <body>
-
-{{include file='public/top.tpl'}}
-  
+{{include file='public/top.tpl'}} 
 <div id="warp_box">   	
      <div class="main">
      	{{include file='public/left.tpl'}}
@@ -25,8 +23,7 @@
 																					{{/foreach}}
 																			  </select></div> 
                         <div class="cc_top_two clearfix">
-                           <!--<input type="submit" value="查询"  />-->
-                           <span><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                           <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                            <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
 						</form>

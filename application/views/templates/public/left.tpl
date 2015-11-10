@@ -19,9 +19,10 @@
             </dl>
             <dl class="system_log">
                 <dt onClick="changeImage()"><i class="icon iconfont">&#xf0226;</i>统计<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-                <dd class="first_dd"><a href="{{$root_path}}user/index" title="用户管理">录入统计</a></dd>
-                <dd><a href="{{$root_path}}role/index" title="角色管理">角色管理</a></dd>
-                <dd><a href="{{$root_path}}user/userGroupList" title="用户组管理">用户组管理</a></dd>
+                <dd class="first_dd"><a href="#" title="录入统计">录入统计</a></dd>
+                <dd><a href="#">录入审核统计</a></dd>
+                <dd><a href="#">修图统计</a></dd>
+                <dd><a href="#">修图审核统计</a></dd>
             </dl>
 			 
 		</div>

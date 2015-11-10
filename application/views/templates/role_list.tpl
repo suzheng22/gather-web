@@ -19,7 +19,7 @@
 				<form action="{{$root_path}}role/index" method="get">
                 	<div class="cc_top_one"><label>角色名称:</label><input type="text" name="roleName" value="{{$roleName}}"/></div>
                     <div class="cc_top_two">
-                        <span><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                         <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 				</form>

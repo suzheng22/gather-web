@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/head.css" />
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/public.css"/>
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/iconfont.css"/>
-
+<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/rotate/jquery.iviewer.css"/>
  
 </head>
 
@@ -32,7 +32,7 @@
 <div class="record_info_warp">
 	<div class="left">
 			<div id="pageContent">
-				<div id="imgContainer">
+				<!--<div id="imgContainer">
 				{{foreach from=$skuInfo.images.0 item=info name=name}}
 
 									{{if $smarty.foreach.name.first}}
@@ -41,7 +41,10 @@
 								{{/foreach}}
 			    	
 			    </div>
-               	<h3>O(∩_∩)O滑动鼠标可放大缩小图片O(∩_∩)O</h3>
+               	<h3>O(∩_∩)O滑动鼠标可放大缩小图片O(∩_∩)O</h3>-->
+                <div class="wrapper">
+                    <div id="viewer" class="viewer"></div>
+                </div>
 			</div>
 	    <div class="detail_zoom_right">	
     		<div class="popup_box" style="margin-top:10px;">
@@ -256,17 +259,30 @@
 </div>    	
 
 
-<script type="text/javascript" src="{{$resource_url}}js/imgfd/jquery-1.8.2.min.js"></script>
+<!--<script type="text/javascript" src="{{$resource_url}}js/imgfd/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script> 
 <script type="text/javascript" src="{{$resource_url}}js/record.js"></script> 
-<script src="{{$resource_url}}js/img_zoom/e-smart-zoom-jquery.min.js"></script> 
-<!--图片延时加载-->
+<script src="{{$resource_url}}js/img_zoom/e-smart-zoom-jquery.min.js"></script> ->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
+-->
+
+<script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/record.js"></script> 
+<script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
+
 <script type="text/javascript">  
 	$(function(){ 
 		$("img").lazyload({ 
 		});
-		
+		//实例化
+		var iv2 = $("#viewer").iviewer(
+		{
+			src: "{{$plist.a2.0}}"
+		});
 		$("#nav_info").fiexd({top:"-2px"}); 
 	}); 
 	//营养成分增加参数

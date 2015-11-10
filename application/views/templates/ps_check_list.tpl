@@ -32,7 +32,7 @@
                      </div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
                        
-                       <input type="submit" value="查询" />
+                       <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
@@ -76,11 +76,11 @@
 </div>
 {{include file='public/js.tpl'}}
 <!--时间控件-->
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
+<!--<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $('#datetimepicker').datetimepicker();
-</script>
+</script>-->
 <!---->  	
 
 
