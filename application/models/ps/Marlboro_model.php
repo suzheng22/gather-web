@@ -11,7 +11,7 @@ class Marlboro_model extends MY_Model {
     
     //获取修图审核列表
     function getMarlboroList($data) {
-        $url=$this->api_url."/review/GetReviewData";
+        $url=$this->tmore_api_url."/review/GetReviewData";
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
         
@@ -35,10 +35,12 @@ class Marlboro_model extends MY_Model {
     }
     
     function getMarlboroInfo($data){
-        $url=$this->api_url."/review/GetReviewList";
+        $url=$this->tmore_api_url."/review/GetReviewList";
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
         return $list;
     }
+    
+    
 }
 ?>

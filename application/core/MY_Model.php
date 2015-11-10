@@ -8,13 +8,12 @@ class MY_Model extends CI_Model
 	     
          $this->user_api_url="http://192.168.8.29:8080";
 	     //线上$this->user_api_url="http://121.40.241.156:8000";
-	     $this->tmore_api_url="http://test.tmore.net:81/api.php";
+	     $this->tmore_api_url="http://apics.greensea.com.cn/api.php";
 	     
-	     $this->api_url='http://apics.greensea.com.cn/api.php';
     }
     
-    function curl($url,$data){
-        $return=$this->curl->_simple_call('post',$url,$data);
+    function curl($url,$data,$m='post'){
+        $return=$this->curl->_simple_call($m,$url,$data);
         $return_str=json_decode($return,true);
                 if($return_str['msgCode']>0){
                     if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest"){

@@ -21,19 +21,19 @@
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
                         <div class="clearfix"></div>
-                    	<div class="cc_top_one"><label>商品名称:</label><input type="text" value=""/></div>
-                     	<div class="cc_top_one"><label>上传时间:</label><input type="text" id="datetimepicker"/></div>
-                        
+						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}">
+                    	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="proName" value="{{$proName}}"/></div>
+                     	<div class="cc_top_one"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/></div>
+                        <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
-                                    <dt>全部</dt>
-                                    <dd>
-                                        <ul>
-                                            <li><a href="#">001</a></li>
-                                            <li><a href="#">002</a></li>
-                                        </ul>
-                                    </dd>
+                                    <select name="type">
+										<option value="">全部</option>
+										{{foreach from=$type_list item=list}}
+												<option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+											{{/foreach}}
+									</select>
                                 </dl>
                             </div>
                         </div>
@@ -41,34 +41,33 @@
                          <div class="cc_top_one last_show"><label>修图类型:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
-                                    <dt>全部</dt>
-                                    <dd>
-                                        <ul>
-                                            <li><a href="#">正常修图</a></li>
-                                            <li><a href="#">驳回修图</a></li>
-                                        </ul>
-                                    </dd>
+								<select name="retouchType">
+									<option value="">全部</option>
+									<option value="1" {{if $retouchType==1}}selected="selected"{{/if}}>正常修图</option>
+									<option value="2" {{if $retouchType==2}}selected="selected"{{/if}}>驳回修图</option>
+								</select>
                                 </dl>
                             </div>
                         </div>
                          <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
-                                    <dt>全部</dt>
-                                    <dd>
-                                        <ul>
-                                            <li><a href="#">修图已驳回</a></li>
-                                            <li><a href="#">修图已通过</a></li>
-                                        </ul>
-                                    </dd>
+								<select name="status">
+									<option value="">全部</option>
+									<option value="0" {{if $status==0}}selected="selected"{{/if}}>未审核</option>
+									<option value="1" {{if $status==1}}selected="selected"{{/if}}>修图已通过</option>
+									<option value="2" {{if $status==2}}selected="selected"{{/if}}>修图已驳回</option>
+								</select>
+                                   
                                 </dl>
                             </div>
                         </div>
                     <div class="cc_top_two">
                         
-                        <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
+                        <input type="submit" value="查询" />
                             <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
+					</form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
@@ -124,7 +123,8 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-$('#datetimepicker').datetimepicker();
+$('#datetimepicker_start').datetimepicker();
+$('#datetimepicker_end').datetimepicker();
 </script>
 <!---->  	
 
