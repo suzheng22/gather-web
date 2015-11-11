@@ -276,14 +276,14 @@
 
 <script type="text/javascript">  
 	$(function(){ 
-		$("img").lazyload({ 
-		});
+		//$("img").lazyload({ 
+		//});
 		//实例化
 		var iv2 = $("#viewer").iviewer(
 		{
 			src: "{{$plist.a2.0}}"
 		});
-		$("#nav_info").fiexd({top:"-2px"}); 
+		//$("#nav_info").fiexd({top:"-2px"}); 
 	}); 
 	//营养成分增加参数
 	$("#add_param").click(function(){
