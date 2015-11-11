@@ -19,34 +19,35 @@
 				
                 <div class="rose_top main_rignt_top clearfix">
 						<form action="{{$root_path}}user/index" method="get">
-                        <p class="cc_top_one clearfix"><label>账号名:</label><input type="text" name="userName" value="{{$userName}}"/></P>
-                        <p class="cc_top_one clearfix"><label>用户名:</label><input type="text" name="trueName" value="{{$trueName}}"/></P>
-                        <p class="cc_top_one clearfix"><label>角色名称:</label><select name="roleId">
+                        <div class="cc_top_one clearfix"><label>账号名:</label><input type="text" name="userName" value="{{$userName}}"/></div>
+                        <div class="cc_top_one clearfix"><label>用户名:</label><input type="text" name="trueName" value="{{$trueName}}"/></div>
+                        <div class="cc_top_one clearfix"><label>角色名称:</label><select name="roleId">
 																					<option value="">请选择</option>
 																					{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
 																					{{/foreach}}
-																			  </select></P>
-                        <p class="cc_top_one clearfix"><label>用户组名称:</label>
+																			  </select></div>
+                        <div class="cc_top_one clearfix"><label>用户组名称:</label>
 																					<select name="groupId">
 																					<option value="">请选择</option>
 																					{{foreach from =$group_list item=list}}
 																						<option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
 																					{{/foreach}}
 																					</select>
-																					</P>
-                        <p class="cc_top_one clearfix"><label>状态:</label><select name="status">
+																					</div>
+                         <div class="clearfix"></div>                                                           
+                        <div class="cc_top_one clearfix"><label>状态:</label><select name="status">
 																				<option value="">请选择</option>
 																				<option value="1" {{if $status==1}}selected="selected"{{/if}}>正常</option>
 																				<option value="2" {{if $status==2}}selected="selected"{{/if}}>禁用</option>
-																			</select></p> 
-                        <p class="cc_top_two clearfix">
+																			</select></div> 
+                        <div class="cc_top_two clearfix">
                             
                             <!--<input type="submit" value="查询" />
 							<a href="javascript:;" id="new_user">新增</a>-->
-                            <span><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                            <a href="javascript:;">清空</a>
-                        </p>
+                            <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                            <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        </div>
 						</form>
                     <div class="clearfix"></div>
                  

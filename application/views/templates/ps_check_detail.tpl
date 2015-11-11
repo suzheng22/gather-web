@@ -63,12 +63,13 @@
                             </div>
                         </div>
                     <div class="cc_top_two">
-                        
-                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                        <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="check(1)" /></span>
+                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                          <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                         
                     </div>
 					</form>
-					<input type="button" value="批量审核" onclick="check(1)" />
+					
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
