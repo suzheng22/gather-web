@@ -45,7 +45,7 @@
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
 										{{foreach from=$plist.a2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
 										{{/foreach}}
                                          </ul>
                                     </div>
@@ -64,7 +64,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plist.a3 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
 										{{/foreach}}
                                       
                                      </ul>
@@ -85,7 +85,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
 									{{foreach from=$plist.b2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -105,7 +105,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                     {{foreach from=$plist.c2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -126,7 +126,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                     {{foreach from=$plist.d2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -147,7 +147,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plist.e2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200"  mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50"  mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -296,18 +296,25 @@
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/record.js"></script> 
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
-<script type="text/javascript">  
+<script type="text/javascript"> 
+ 
 	$(function(){ 
 		//实例化
+		
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "{{$plist.a2.0}}"
+			src: "{{$plist.a2.0}}?imageView/1/w/500/h/500"
+			//?imageView/1/w/500/h/500"
 		});
 		var iv2 = $(".viewer").iviewer(
 		{
-			src: "{{$plist.a1.0}}"
+			src: "{{$plist.a1.0}}?imageView/1/w/500/h/500"
+			//?imageView/1/w/500/h/500
 		});
 
+		//var ww=$("#left .ps_FullScreen").width();
+		//var hh=$("#left .ps_FullScreen").height();
+		//if(ww>hh){
 		//驳回
 		 $("#ps_newuser_pop").pop({
 			oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
@@ -331,7 +338,7 @@
 				$("#cc_flex").html('<i class="iconfont">&#xf01f0;</i>查看原图');
 				$(".left_pc_check").css({"width":"1200px","overflow":"hidden","margin":"0 auto"});
 				$(".ps_right").hide();
-			  	$(".ps_check_pic").css({"height":"500px"});
+			  	$(".ps_check_pic").css({"height":"500px","margin-bottom":"50px"});
 				$(".left_pc_check .detail_zoom_right").css({"margin-left":"100px"});
 			}else{
 				
@@ -339,16 +346,14 @@
 				$(".left_pc_check").css({"width":"598px","float":"left"});
 			 	$(".ps_right").css({"float":"left","display":"block"});
 				$(".ps_right").show();
+				$(".ps_check_pic").css({"height":"500px","margin-bottom":"0px"});
 				$(".left_pc_check .detail_zoom_right").css({"margin-left":"-40px"});
 				$(".ps_check").css({"height":"500px"});
 				
 			}
 			return false;
 			
-		});
-	
-
-						
+		});			
 });
 
 function check(status){
