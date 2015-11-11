@@ -17,19 +17,19 @@
             	<h3>修图审核-详情</h3>	
                 <div class="rose_top main_rignt_top clearfix">
                 	
-                        <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span></div>
+                        <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span><input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}">
-                    	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="proName" value="{{$proName}}"/></div>
+                    	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="proName" value="{{$proName}}" id="proName"/></div>
                      	<div class="cc_top_one"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/></div>
                         <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
                        <div class="clearfix"></div>
                         <div class="cc_top_one last_show" style="width:30%"><label>商品分类:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
-                                    <select name="type">
+                                    <select name="type" id="type" >
 										<option value="">全部</option>
 										{{foreach from=$type_list item=list}}
 												<option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
@@ -112,18 +112,16 @@ $('#datetimepicker_start').datetimepicker();
 $('#datetimepicker_end').datetimepicker();
 
 function check(){
-	var gtin={{$p_info.gtin}};
-
-		$.post("{{$root_path}}marlboro/checkStatus",{"gtin":gtin,"type":2,"status":1},
+	var datetimepicker_start=$("#datetimepicker_start").val();
+	var datetimepicker_end=$("#datetimepicker_end").val();
+	var type=$("#type").val();
+	var rId=$("#rId").val();
+	var proName=$("#proName").val();
+		$.post("{{$root_path}}marlboro/batchChangeStatus",{"rId":rId,"type":type,"start_time":datetimepicker_start,"end_time":datetimepicker_end,"proName":proName},
 		  	function(data){
 				var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){
-					if(status==1){
-					   alert('审核成功');
-					}
-					else{
-						alert('驳回成功');
-					}
+					alert('审核成功');
 					window.location.reload();
 				}
 				else{

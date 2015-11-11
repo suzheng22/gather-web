@@ -132,4 +132,25 @@ class Marlboro extends My_Controller {
         }
        echo $this->marlboro_model->changeStatus($data);exit;
     }
+    
+    function batchChangeStatus(){
+        $data['rId']=$this->input->post('rId');
+        $data['userId']=$this->user_info['userId'];
+        $start_time=$this->input->post('start_time');
+        $end_time=$this->input->post('end_time');
+        $type=$this->input->post('type');
+        $proName=$this->input->post('proName');
+        if(isset($start_time)&&isset($end_time)){
+           $data['sTime']=strtotime($start_time);
+           $data['eTime']=strtotime($end_time);
+        }
+        
+        if(isset($type)){
+            $data['type']=$type;
+        }
+        if(isset($proName)){
+            $data['proName']=$proName;
+        }
+        echo $this->marlboro_model->batchChangeStatus($data);exit;
+    }
 }

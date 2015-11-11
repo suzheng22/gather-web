@@ -53,5 +53,11 @@ class Marlboro_model extends MY_Model {
         $return=$this->curl($url,$data);
         return $return;
     }
+    
+    function batchChangeStatus($data){
+        $url=$this->tmore_api_url."/review/BatchChangeStatus";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
 }
 ?>
