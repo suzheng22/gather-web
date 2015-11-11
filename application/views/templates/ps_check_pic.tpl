@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>数据采集系统</title>
 {{include file='public/css.tpl'}}
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/rotate/jquery.iviewer.css"/>
+<link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
 </head>
 <body>
 <!--------------------------- 修图详情------------------------------------> 
