@@ -23,11 +23,12 @@
             </li>
        </ul>
      <div class="clearfix"><a href="javascript:;" id="cc_flex"><i class="iconfont">&#xf01f0;</i>查看原图</a></div>
-	<div class="left_pc_check">
+	<div class="left_pc_check" id="left">
 			<div class="pageContent ps_check_pic" >
                 <div class="wrapper">
                     <div id="viewer" class="viewer"></div>
                 </div>
+                <h5>修图</h5>
 			</div>
 	    	<div class="detail_zoom_right" style="margin-left:100px;">	
                 <div class="popup_box" style="margin-top:10px;">
@@ -159,7 +160,7 @@
                 </div><!--popup_box-->
 			</div>
   	</div><!--left-->
-  	<div class="right ps_right" style="display:none;">
+  	<div class="right ps_right" style="display:none;" id="ps_right">
 		<div class="pageContent ps_check" >
 				<div class="imgContainer ps_check_pic">
                     <div id="viewer" class="viewer"></div>
@@ -167,9 +168,8 @@
                 <h5>原图</h5>
                <!--	<h3><i class="iconfont">&#xf004c;</i></h3>-->
 		</div>
-	    <div class="detail_zoom_right" style="margin-left:0px;">	
+	    <!--<div class="detail_zoom_right" style="margin-left:0px;">	
     			<div class="popup_box" style="margin-top:10px;">
-            	<!--正常显示层-->
                  <div class="show_a_01">
                    	  <div class="pic_box clearfix">
                             <div class="pic_box_left">
@@ -189,7 +189,6 @@
                                 </div>
                        		</div>
                     	</div>
-                        <!--细节图-->
                         <div class="pic_box clearfix">
                             <div class="pic_box_left">
                                 <p>细节图</p>
@@ -205,11 +204,9 @@
 									{{/foreach}}
                                      </ul>
                                 </div>
-                            </div><!--v_content-->
+                            </div>
                        </div>
                     	</div>
-                        <!--细节图-->
-                        <!--标签图-->
                         <div class="pic_box clearfix">
                             <div class="pic_box_left">
                                 <p>标签图</p>
@@ -225,12 +222,9 @@
 									{{/foreach}}
                                      </ul>
                                 </div>
-                            </div><!--v_content-->
+                            </div>
                        </div>
                     	</div>
-                        <!--标签图-->
-                        
-                        <!--组合图-->
                         <div class="pic_box clearfix">
                             <div class="pic_box_left">
                                 <p>组合图</p>
@@ -246,12 +240,9 @@
 									{{/foreach}}
                                      </ul>
                                 </div>
-                            </div><!--v_content-->
+                            </div>
                        </div>
                     	</div>
-                        <!--组合图-->
-                        
-                        <!--箱装图-->
                         <div class="pic_box clearfix">
                             <div class="pic_box_left">
                                 <p>箱装图</p>
@@ -267,17 +258,16 @@
 									{{/foreach}}
                                      </ul>
                                 </div>
-                            </div><!--v_content-->
+                            </div>
                        </div>
                     	</div>
-                        <!--箱装图-->
                    
                    
                    
                    
-            	</div><!--show_a_01-->
+            	</div>
     		</div>
-		</div><!--detail_zoom_right-->
+		</div>--><!--detail_zoom_right-->
 		
   	</div><!--ps_right-->
   	

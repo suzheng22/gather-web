@@ -26,7 +26,7 @@
                      	<div class="cc_top_one"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/></div>
                         <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
                        <div class="clearfix"></div>
-                        <div class="cc_top_one last_show" style="width:30%"><label>商品分类:</label>
+                        <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
                                     <select name="type" id="type" >

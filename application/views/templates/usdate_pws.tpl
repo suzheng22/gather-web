@@ -26,10 +26,8 @@ $(function(){
     </div> 
 	<div class="login_box">
 			<div class="login_main">
-                
-                    <div class="login_tit">修改密码</div>
                     <div class="login_form_box">
-                    	<div class="ipt">账号：{{$userInfo.trueName}}</div>
+                    	<div class="ipt"><span style="width:250px; height:30px; line-height:30px; font-size:14px;">账号：{{$userInfo.trueName}}</span></div>
                         <div class="ipt"><input type="password" id="oldPwd" class="zhmm" placeholder="旧密码"/></div>
                         <div class="ipt"><input type="password" id="newPwd" class="zhmm" placeholder="设置新密码"/></div>
                         <div class="ipt"><input type="password" id="re_newPwd" class="zhmm" placeholder="确认次输入密码"/></div>
