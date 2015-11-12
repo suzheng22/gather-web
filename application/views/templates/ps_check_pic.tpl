@@ -330,7 +330,7 @@
 		}); 
 		
 		//动画展开收起
-		$(".ps_check_pic").css({"height":"500px"});
+		$(".ps_check_pic").css({"height":"500px","margin-bottom":"50px"});
 		$("#cc_flex").click(function(){
 			var txt=$(this).html();
 			var aa=$(".ps_right");
