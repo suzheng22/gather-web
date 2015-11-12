@@ -53,8 +53,8 @@
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
 								<select name="status">
-									<option value="">全部</option>
-									<option value="0" {{if $status==0}}selected="selected"{{/if}}>未审核</option>
+									<option value="" {{if $status eq 'NULL'}}selected="selected"{{/if}}>全部</option>
+									<option value="0" {{if $status eq '0'}}selected="selected"{{/if}}>未审核</option>
 									<option value="1" {{if $status==1}}selected="selected"{{/if}}>修图已通过</option>
 									<option value="2" {{if $status==2}}selected="selected"{{/if}}>修图已驳回</option>
 								</select>
@@ -91,7 +91,7 @@
                         <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                         <td>
-                        	<a href="{{$root_path}}marlboro/psDetailPic/{{$list.gtin}}">审核详细</a>
+                        	<a href="{{$root_path}}marlboro/psDetailPic/{{$list.gtin}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}

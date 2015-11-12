@@ -77,7 +77,9 @@ class User extends My_Controller {
                 $page_url.='status='.$data['status']."&";
                 $this->ci_smarty->assign('status',$data['status']);
             }
-
+            if($data['currentPage']==''){
+                $data['currentPage']=1;
+            }
             
             
             $data['userId']=$this->user_info['userId'];

@@ -65,6 +65,7 @@ class Marlboro extends My_Controller {
        $start_time=$this->input->get('start_time');
        $end_time=$this->input->get('end_time');
        $page=$this->input->get('page');
+
        if(isset($proName)){
            $arr['proName']=$proName;
            $page_url.='proName='.$proName."&";
@@ -84,6 +85,9 @@ class Marlboro extends My_Controller {
            $arr['status']=$status;
            $page_url.='status='.$status."&";
            $this->ci_smarty->assign('status',$status);
+       }
+       else {
+           $this->ci_smarty->assign('status','NULL');
        }
        if(isset($start_time)&&isset($end_time)){
            $arr['sTime']=strtotime($start_time);

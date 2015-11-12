@@ -303,12 +303,12 @@
 		
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "{{$plist.a2.0}}?imageView/1/w/500/h/500"
+			src: "{{$plist.a2.0}}?imageView/0/w/500/h/500"
 			//?imageView/1/w/500/h/500"
 		});
 		var iv2 = $(".viewer").iviewer(
 		{
-			src: "{{$plist.a1.0}}?imageView/1/w/500/h/500"
+			src: "{{$plist.a1.0}}?imageView/0/w/500/h/500"
 			//?imageView/1/w/500/h/500
 		});
 
