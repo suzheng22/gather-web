@@ -77,7 +77,7 @@
                         <td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
                         <td>{{$list.creatUser}}</td>
                         <td>
-                        	<a href="##" onclick="freeze({{$list.userId}})">冻结</a>
+                        	{{if $list.status==1}}<a href="##" onclick="freeze({{$list.userId}},2)">冻结</a>{{else}}<a href="##" onclick="freeze({{$list.userId}},1)">解冻</a>{{/if}}
                         	<a href="##" class="revamp" onclick="get_info({{$list.userId}})">修改</a>
                             <a href="##" onclick="re_pwd({{$list.userId}})">重置密码</a>
                         </td>
@@ -151,14 +151,8 @@
 		$.post("{{$root_path}}user/addUser",{"userName":userName,"trueName":trueName,"roleId":roleId,"groupId":groupId,"desc":desc},
 		  	function(data){
 				var dataObj=eval("("+data+")");
-				if(dataObj.msgCode==0){
-					alert('添加成功');
-					window.location.reload();
-				}
-				else{
-					alert(dataObj.msg);
-					window.location.reload();
-				}
+				alert(dataObj.msg);
+				window.location.reload();
 		  	},"text");
 	}
     
@@ -171,14 +165,8 @@
 		$.post("{{$root_path}}user/editUser",{"ed_userId":userId,"trueName":trueName,"roleId":roleId,"groupId":groupId,"desc":desc},
 		  	function(data){
 				var dataObj=eval("("+data+")");
-				if(dataObj.msgCode==0){
-					alert('编辑成功');
-					window.location.reload();
-				}
-				else{
-					alert(dataObj.msg);
-					window.location.reload();
-				}
+				alert(dataObj.msg);
+				window.location.reload();
 		  	},"text");
 	}
 	
@@ -243,28 +231,18 @@
 		$.post("{{$root_path}}user/rePwd",{"reUserId":userId},
 		  function(data){
 				var dataObj=eval("("+data+")");
-				if(dataObj.msgCode==0){
-					alert('重置成功');
-				}
-				else{
-					alert(dataObj.msg);
-					window.location.reload();
-				}
+				alert(dataObj.msg);
+				window.location.reload();
 		  },
 		  "text");
 	}	
 	
-	function freeze(userId){
-		$.post("{{$root_path}}user/freeze",{"freezeUserId":userId},
+	function freeze(userId,status){
+		$.post("{{$root_path}}user/freeze",{"freezeUserId":userId,"status":status},
 		  function(data){
 				var dataObj=eval("("+data+")");
-				if(dataObj.msgCode==0){
-					alert('冻结成功');
-				}
-				else{
-					alert(dataObj.msg);
-					window.location.reload();
-				}
+				alert(dataObj.msg);
+				window.location.reload();
 		  },
 		  "text");
 	}

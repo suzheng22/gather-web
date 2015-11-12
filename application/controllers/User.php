@@ -12,17 +12,17 @@ class User extends My_Controller {
         //登录
         public function doLogin()
         {
-           $data['userName']=$this->input->post('userName');
+          
+            $data['userName']=$this->input->post('userName');
 			$data['pwd']=$this->input->post('pwd');
 			
 			$json=$this->user_model->checkLogin($data);
-
 			$arr=json_decode($json,'true');
-			
+
             if($arr['msgCode']>0){
                 $msg=$arr['msg'];
-                $this->ci_smarty->assign('msg',$msg);
-                header("Location: ".site_url('user/login')); 
+               echo "<script>alert('".$msg."');window.location.href='".$this->root_path."user/login'</script>";
+                //header("Location: ".site_url('user/login')); 
             }
             else{
                 $user['userId']=$arr['userId'];
@@ -182,6 +182,7 @@ class User extends My_Controller {
             $data['userId']=$this->user_info['userId'];
             $data['lastLoginTime']=$this->user_info['lastLoginTime'];
             $data['freezeUserId']=$this->input->post('freezeUserId');
+            $data['status']=$this->input->post('status');
             echo  $this->user_model->freeze($data);exit;
         }
         //编辑用户

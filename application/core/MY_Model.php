@@ -20,9 +20,20 @@ class MY_Model extends CI_Model
                         // ajax 请求的处理方式
                         echo $return;exit;
                     }else{
-                        // 正常请求的处理方式
-                       header("Location: ".site_url('user/logout')); 
-                    };
+                        $c=$this->uri->segment(1, 0);
+                        $m=$this->uri->segment(2, 0);
+                        $acction=$c.'/'.$m;
+                        $noLoginArray=array('user/login','user/doLogin');
+                        
+                        if(!in_array($acction,$noLoginArray)){
+                            // 正常请求的处理方式
+
+                            header("Location: ".site_url('user/logout')); 
+                        }
+                        else{
+                            return $return;
+                        }
+                    }
                     
             
         }
