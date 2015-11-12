@@ -117,10 +117,15 @@ class Marlboro extends My_Controller {
         $this->load->model('sdk/product_model','product');
         $arr['gtin']=$gtin;
         $list=$this->marlboro_model->getMarlboroInfoPic($arr);
-        
+        foreach ($list['a3'] as $k=>$v){
+            $png=$v;
+            $v=str_replace('a3', 'a2', $v);
+            $jpg=str_replace('png', 'JPG', $v);
+            $str.="<li><img src='".$jpg."?imageView/1/w/50/h/50' mm='".$png."' /></li>";
+        }
+        $this->ci_smarty->assign('png',$str);
         $product_info=$this->product->getProduct($arr);
-        $this->ci_smarty->assign('p_info',$product_info);
-        
+        $this->ci_smarty->assign('p_info',$product_info);     
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->display('ps_check_pic.tpl');
     }

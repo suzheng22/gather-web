@@ -63,9 +63,7 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.a3 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
-										{{/foreach}}
+                                        {{$png}}
                                       
                                      </ul>
                                 </div>

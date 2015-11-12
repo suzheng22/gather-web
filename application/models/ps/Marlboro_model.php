@@ -45,6 +45,7 @@ class Marlboro_model extends MY_Model {
         $url=$this->tmore_api_url."/image/GetReviewImageByGtin";
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
+        
         return $list;
     }
     
