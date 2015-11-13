@@ -21,7 +21,7 @@
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
                         <div class="clearfix"></div>
-						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}">
+						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}" id="myform">
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="proName" value="{{$proName}}" id="proName"/></div>
                      	<div class="cc_top_one"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/></div>
                         <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
@@ -65,7 +65,7 @@
                     <div class="cc_top_two">
                         <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="check(1)" /></span>
                          <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                         <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                         <a href="javascript:;" id="btn_empty"><i class="iconfont">&#xf014a;</i>清空</a>
                          
                     </div>
 					</form>
@@ -109,9 +109,28 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-$('#datetimepicker_start').datetimepicker();
-$('#datetimepicker_end').datetimepicker();
-
+$('#datetimepicker_start').datetimepicker({
+	onGenerate:function( ct ){
+		$(this).find('.xdsoft_date')
+			.toggleClass('xdsoft_disabled');
+	},
+		format:'d/m/Y',
+	formatDate:'Y/m/d',
+	minDate:'-1970/01/2',
+	maxDate:'+1970/01/2',
+	timepicker:false
+});
+$('#datetimepicker_end').datetimepicker({
+	onGenerate:function( ct ){
+		$(this).find('.xdsoft_date')
+			.toggleClass('xdsoft_disabled');
+	},
+		format:'d/m/Y',
+	formatDate:'Y/m/d',
+	minDate:'-1970/01/2',
+	maxDate:'+1970/01/2',
+	timepicker:false
+});
 function check(){
 	var datetimepicker_start=$("#datetimepicker_start").val();
 	var datetimepicker_end=$("#datetimepicker_end").val();
@@ -130,9 +149,14 @@ function check(){
 					window.location.reload();
 				}
 		  	},"text");
-
-
 }
+$("#btn_empty").click(function(){
+	$("#myform").reset();
+/*	$("#datetimepicker_start").val("");
+	$("#datetimepicker_end").val("");
+	$("#proName").val("");*/
+});
+ 
 </script>
 
 </body>

@@ -19,7 +19,7 @@
                 
             </dl>
             <dl class="system_log">
-                <dt onClick="changeImage()"><i class="icon iconfont">&#xf0226;</i>统计<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                <dt onClick="changeImage()"><i class="icon iconfont">&#xf0226;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                 <dd class="first_dd"><a href="#" title="录入统计">录入统计</a></dd>
                 <dd><a href="#">录入审核统计</a></dd>
                 <dd><a href="#">修图统计</a></dd>

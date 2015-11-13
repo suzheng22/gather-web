@@ -159,10 +159,10 @@
 			</div>
   	</div><!--left-->
   	<div class="right ps_right" style="display:none;" id="ps_right">
-		<div class="pageContent ps_check" >
-				<div class="imgContainer ps_check_pic">
+		<div class="pageContent ps_check_pic">
+                 <div class="wrapper">
                     <div id="viewer" class="viewer"></div>
-			    </div>
+                </div>
                 <h5>原图</h5>
                <!--	<h3><i class="iconfont">&#xf004c;</i></h3>-->
 		</div>
@@ -301,12 +301,12 @@
 		
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "{{$plist.a2.0}}?imageView/0/w/500/h/500"
+			src: "{{$plist.a2.0}}?imageView/0/h/500/"
 			//?imageView/1/w/500/h/500"
 		});
 		var iv2 = $(".viewer").iviewer(
 		{
-			src: "{{$plist.a1.0}}?imageView/0/w/500/h/500"
+			src: "{{$plist.a1.0}}?imageView/0/h/500/"
 			//?imageView/1/w/500/h/500
 		});
 
