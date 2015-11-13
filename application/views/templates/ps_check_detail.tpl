@@ -65,7 +65,7 @@
                     <div class="cc_top_two">
                         <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="check(1)" /></span>
                          <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                         <a href="javascript:;" id="btn_empty"><i class="iconfont">&#xf014a;</i>清空</a>
+                         <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                          
                     </div>
 					</form>
@@ -114,7 +114,7 @@ $('#datetimepicker_start').datetimepicker({
 		$(this).find('.xdsoft_date')
 			.toggleClass('xdsoft_disabled');
 	},
-		format:'d/m/Y',
+		format:'Y/m/d',
 	formatDate:'Y/m/d',
 	minDate:'-1970/01/2',
 	maxDate:'+1970/01/2',
@@ -125,7 +125,7 @@ $('#datetimepicker_end').datetimepicker({
 		$(this).find('.xdsoft_date')
 			.toggleClass('xdsoft_disabled');
 	},
-		format:'d/m/Y',
+		format:'Y/m/d',
 	formatDate:'Y/m/d',
 	minDate:'-1970/01/2',
 	maxDate:'+1970/01/2',
@@ -150,12 +150,13 @@ function check(){
 				}
 		  	},"text");
 }
-$("#btn_empty").click(function(){
-	$("#myform").reset();
-/*	$("#datetimepicker_start").val("");
-	$("#datetimepicker_end").val("");
-	$("#proName").val("");*/
-});
+	//清空
+	function btn_empty(){
+		$("#proName").val("");
+		$("#datetimepicker_start").val("");
+		$("#datetimepicker_end").val("");
+		$(".cc_top_one select").val("");
+	}
  
 </script>
 

@@ -19,8 +19,8 @@
 				
                 <div class="rose_top main_rignt_top clearfix">
 						<form action="{{$root_path}}user/index" method="get">
-                        <div class="cc_top_one clearfix"><label>账号名:</label><input type="text" name="userName" value="{{$userName}}"/></div>
-                        <div class="cc_top_one clearfix"><label>用户名:</label><input type="text" name="trueName" value="{{$trueName}}"/></div>
+                        <div class="cc_top_one clearfix"><label>账号名:</label><input type="text" name="userName" value="{{$userName}}"/ id="count_user"></div>
+                        <div class="cc_top_one clearfix"><label>用户名:</label><input type="text" name="trueName" value="{{$trueName}}"/ id="user"></div>
                         <div class="cc_top_one clearfix"><label>角色名称:</label><select name="roleId">
 																					<option value="">请选择</option>
 																					{{foreach from =$role_list item=list}}
@@ -46,7 +46,7 @@
                             <!--<input type="submit" value="查询" />
 							<a href="javascript:;" id="new_user">新增</a>-->
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                            <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                            <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
 						</form>
                     <div class="clearfix"></div>
@@ -264,6 +264,13 @@
 			select_group_up(dataObj.roleId,dataObj.groupId);
 		  },
 		  "text");
+	}
+	
+		//清空
+	function btn_empty(){
+		$("#count_user").val("");
+		$("#user").val("");
+		$(".cc_top_one select").val("");
 	}
 </script>
 

@@ -17,7 +17,7 @@
             	<h3>修图审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}marlboro/ps" method="get">
-                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName"/></div>
+                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName"/ id="user_name"></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                     	<div class="choice_count choice_box">            	 			
 							<dl class="select">
@@ -33,7 +33,7 @@
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
                        
                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                       <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                       <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
                    	<div class="clearfix"></div>
@@ -75,13 +75,14 @@
 
 </div>
 {{include file='public/js.tpl'}}
-<!--时间控件-->
-<!--<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-$('#datetimepicker').datetimepicker();
-</script>-->
-<!---->  	
+		//清空
+		function btn_empty(){
+			$("#user_name").val("");
+			$(".cc_top_one select").val("");
+		}
+
+</script>
 
 
 </body>
