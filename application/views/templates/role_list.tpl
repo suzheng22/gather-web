@@ -63,7 +63,16 @@
     </div>
 </div>
 {{include file='public/js.tpl'}}
-<script>
+<script type="text/javascript">
+$(function(){
+	var url = window.location;
+    $('.system_log dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .user_manager dd").show();
+	
+});
 	function addRole(){
 		var roleName=$("#roleName").val();
 		var desc=$("#desc").val();
