@@ -308,9 +308,6 @@
 			src: "{{$plist.a1.0}}?imageView/0/h/500/"
 			//?imageView/1/w/500/h/500
 		});
-
-		//var ww=$("#left .ps_FullScreen").width();
-		//var hh=$("#left .ps_FullScreen").height();
 		//if(ww>hh){
 		//驳回
 		 $("#ps_newuser_pop").pop({
