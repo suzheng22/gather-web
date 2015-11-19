@@ -142,6 +142,16 @@
 </div>
 {{include file='public/js.tpl'}}
 <script  type="text/javascript">
+
+$(function(){
+	//左侧菜单	
+	var url = window.location;
+    $('.system_log dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .user_manager dd").show();
+});
 	function addUser(){
 		var userName=$("#userName").val();
 		var trueName=$("#trueName").val();
