@@ -82,6 +82,14 @@ class Marlboro_model extends MY_Model {
         return $list;
     }
     
+    function getReviewStatus($data){
+        $url=$this->tmore_api_url."/review/GetReviewStatus";
+        $return=$this->curl($url,$data);
+        $list=json_decode($return,true);
+        
+        return $list;
+    }
+    
     function changeStatus($data){
         $url=$this->tmore_api_url."/review/ChangeStatus";
         $return=$this->curl($url,$data);

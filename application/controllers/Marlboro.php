@@ -114,7 +114,10 @@ class Marlboro extends My_Controller {
     function psDetailPic($gtin){
         $this->load->model('sdk/product_model','product');
         $arr['gtin']=$gtin;
+        $arr['type']='pic';
         $list=$this->marlboro_model->getMarlboroInfoPic($arr);
+        $status=$this->marlboro_model->getReviewStatus($arr);
+
         foreach ($list['a3'] as $k=>$v){
             $png=$v;
             $v=str_replace('a3', 'a2', $v);
@@ -125,8 +128,23 @@ class Marlboro extends My_Controller {
         $product_info=$this->product->getProduct($arr);
         $this->ci_smarty->assign('p_info',$product_info);     
         $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('status',$status['status']);
         $this->ci_smarty->display('ps_check_pic.tpl');
     }
+    
+    function shootDetailPic($gtin){
+        $this->load->model('sdk/product_model','product');
+        $arr['gtin']=$gtin;
+        $arr['type']='shoot';
+        $list=$this->marlboro_model->getMarlboroInfoPic($arr);
+        $status=$this->marlboro_model->getReviewStatus($arr);
+        $product_info=$this->product->getProduct($arr);
+        $this->ci_smarty->assign('p_info',$product_info);
+        $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('status',$status['status']);
+        $this->ci_smarty->display('shoot_check_pic.tpl');
+    }
+    
     
     function checkStatus(){
         $data['gtin']=$this->input->post('gtin');
@@ -134,6 +152,7 @@ class Marlboro extends My_Controller {
         $data['status']=$this->input->post('status');
         $data['userId']=$this->user_info['userId'];
         $memo=$this->input->post('memo');
+        $data['table']=$this->input->post('table');
         if(isset($memo)){
             $data['memo']=$this->input->post('memo');
         }

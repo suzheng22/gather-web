@@ -9,6 +9,7 @@ class MY_Controller extends CI_Controller
         $this->load->helper('cookie');
         $this->load->helper('url');
         $this->load->library('CI_Smarty');
+        $this->load->library('LvlangMemcache');
         $c=$this->uri->segment(1, 0);
         $m=$this->uri->segment(2, 0);
         $acction=$c.'/'.$m;

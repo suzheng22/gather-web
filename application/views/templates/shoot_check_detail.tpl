@@ -21,6 +21,7 @@
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
                         <div class="clearfix"></div>
+						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}" id="myform">
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text" name="proName" value="{{$proName}}" id="proName"/></div>
                      	<div class="cc_top_one">
                             <label>拍摄开始时间:</label>
@@ -69,8 +70,10 @@
                     <div class="cc_top_two">
                         
                         <input type="submit" value="查询" />
+						
                             <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
+					</form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
@@ -94,7 +97,7 @@
 						<td>{{$list.createTime|date_format:"Y-m-d"}}</td>
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                         <td>
-                        	<a href="{{$root_path}}marlboro/psDetailPic/{{$list.gtin}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}marlboro/shootDetailPic/{{$list.gtin}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}

@@ -16,10 +16,14 @@
             <li class="black"><em>商品名称:</em><span>{{$p_info.proName}}</span></li>
             <li class="black"><em>商品类型:</em><span>{{$p_info.typeName}}</span></li>
             <li class="black">
+			{{if $status!=1 && $status!=2}}
             	<div class="ps_top_menu">
                 <a href="#" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
                 <a href="javascript:;" id="new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
                 </div>
+			{{else}}
+				{{if $status==1}}已通过{{else if $status==2}}已驳回{{/if}}
+			{{/if}}
             </li>
        </ul>
      <div class="clearfix"><a href="javascript:;" id="cc_flex"><i class="iconfont">&#xf01f0;</i>查看原图</a></div>
@@ -354,7 +358,7 @@ function check(status){
 	var gtin={{$p_info.gtin}};
 	var memo=$("#memo").val();
 
-		$.post("{{$root_path}}marlboro/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo},
+		$.post("{{$root_path}}marlboro/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'pic'},
 		  	function(data){
 				var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){

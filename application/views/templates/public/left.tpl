@@ -15,11 +15,8 @@
              <dl class="custom">
                 <dt onClick="changeImage()"><i class="icon iconfont">&#xf01d8;</i>审核管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                 <dd><a href="{{$root_path}}marlboro/shoot">拍摄审核</a></dd>
-             <dl class="check_manager system_log">
-                <dt><i class="icon iconfont">&#xf01d8;</i>审核管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-                <dd><a href="#">录入审核</a></dd>
-                <dd><a href="{{$root_path}}marlboro/ps">修图审核</a></dd>
-                
+				<dd><a href="#">录入审核</a></dd>
+                <dd><a href="{{$root_path}}marlboro/ps">修图审核</a></dd>          
             </dl>
             <dl class="counts system_log">
                 <dt><i class="icon iconfont">&#xf0226;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
