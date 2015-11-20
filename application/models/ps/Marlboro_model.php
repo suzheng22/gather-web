@@ -34,8 +34,41 @@ class Marlboro_model extends MY_Model {
         return $list;
     }
     
+    
+    function getShootList($data){
+        $url=$this->tmore_api_url."/review/GetShootReviewData";
+        $return=$this->curl($url,$data);;
+        $list=json_decode($return,true);
+        
+        foreach ($list as $k => $v){
+            $ids[]=$v['userId'];
+        }
+        
+        $data['ids']=serialize($ids);
+        $url=$this->user_api_url."/user/getUserInfoByIds";
+        $return=$this->curl($url,$data);
+        $user_list=json_decode($return,true);
+        foreach ($list as $k => $v){
+            foreach ($user_list as $k1=>$v1){
+                if($v['userId']==$v1['userId']){
+                    $list[$k]['userName']=$v1['userName'];
+                    $list[$k]['groupName']=$v1['groupName'];
+                }
+            }
+        }
+        return $list;
+    }
+    
     function getMarlboroInfo($data){
         $url=$this->tmore_api_url."/review/GetReviewList";
+        $return=$this->curl($url,$data);
+        $list=json_decode($return,true);
+        return $list;
+    }
+    
+    
+    function getShootInfo($data){
+        $url=$this->tmore_api_url."/review/GetShootReviewList";
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
         return $list;
