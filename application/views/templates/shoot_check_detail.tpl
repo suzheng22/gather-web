@@ -141,6 +141,26 @@ $('#datetimepicker_end').datetimepicker({
 	maxDate:'+1970/01/2',
 	timepicker:false
 });
+
+function check(){
+	var datetimepicker_start=$("#datetimepicker_start").val();
+	var datetimepicker_end=$("#datetimepicker_end").val();
+	var type=$("#type").val();
+	var rId=$("#rId").val();
+	var proName=$("#proName").val();
+		$.post("{{$root_path}}marlboro/batchChangeStatus",{"rId":rId,"type":type,"start_time":datetimepicker_start,"end_time":datetimepicker_end,"proName":proName,'table':'shoot'},
+		  	function(data){
+				var dataObj=eval("("+data+")");
+				if(dataObj.msgCode==0){
+					alert('审核成功');
+					window.location.reload();
+				}
+				else{
+					alert(dataObj.msgText);
+					window.location.reload();
+				}
+		  	},"text");
+}
 </script>
 <!---->  	
 

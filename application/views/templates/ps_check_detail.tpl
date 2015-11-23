@@ -137,7 +137,7 @@ function check(){
 	var type=$("#type").val();
 	var rId=$("#rId").val();
 	var proName=$("#proName").val();
-		$.post("{{$root_path}}marlboro/batchChangeStatus",{"rId":rId,"type":type,"start_time":datetimepicker_start,"end_time":datetimepicker_end,"proName":proName},
+		$.post("{{$root_path}}marlboro/batchChangeStatus",{"rId":rId,"type":type,"start_time":datetimepicker_start,"end_time":datetimepicker_end,"proName":proName,'table':'pic'},
 		  	function(data){
 				var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){

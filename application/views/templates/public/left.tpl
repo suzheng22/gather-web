@@ -35,7 +35,7 @@
                 <dd><a href="shoot_check_count.html" title="拍摄审核统计">拍摄审核统计</a></dd>
                 <dd><a href="record_count.html" title="录入统计">录入统计</a></dd>
                 <dd><a href="record_check_count.html" title="录入审核统计">录入审核统计</a></dd>
-                <dd><a href="ps_count.html" title="修图统计">修图统计</a></dd>
+                <dd><a href="{{$root_path}}statistics/ps" title="修图统计">修图统计</a></dd>
                 <dd><a href="ps_check_count.html" title="修图审核统计">修图审核统计</a></dd>
                 <dd><a href="#" title="拍摄驳回统计">拍摄驳回统计</a></dd>
             </dl>

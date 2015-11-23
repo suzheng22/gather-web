@@ -166,6 +166,7 @@ class Marlboro extends My_Controller {
         $end_time=$this->input->post('end_time');
         $type=$this->input->post('type');
         $proName=$this->input->post('proName');
+        $data['table']=$this->input->post('table');
         if(isset($start_time)&&isset($end_time)){
            $data['sTime']=strtotime($start_time);
            $data['eTime']=strtotime($end_time);
