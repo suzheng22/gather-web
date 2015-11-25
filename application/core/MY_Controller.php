@@ -25,12 +25,12 @@ class MY_Controller extends CI_Controller
             }
         }
         //本地
-        $this->root_path='http://192.168.8.29:8082/';
+        $this->root_path=ROOTPATH;
         //线上
         //$this->root_path='http://121.40.241.156:8002/';
         
         //本地
-        $resource_url='http://192.168.8.29:8083/collect_web/';
+        $resource_url=RESOURCE;
         //线上
         //$resource_url='http://121.40.241.156:8009/collect_web/';
         $this->ci_smarty->assign('root_path', $this->root_path);

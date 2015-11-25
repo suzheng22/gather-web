@@ -6,9 +6,9 @@ class MY_Model extends CI_Model
         parent::__construct();
          $this->load->library('Curl');
 	     
-         $this->user_api_url="http://192.168.8.29:8080";
+         $this->user_api_url=USERAPI;
 	     //线上$this->user_api_url="http://121.40.241.156:8000";
-	     $this->tmore_api_url="http://apics.greensea.com.cn/api.php";
+	     $this->tmore_api_url=CONTROL;
 	     
     }
     

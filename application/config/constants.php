@@ -83,3 +83,8 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+define('USERAPI', 'http://192.168.8.29:8080');
+define('CONTROL', 'http://apics.greensea.com.cn/api.php');
+define('RESOURCE', 'http://192.168.8.29:8083/collect_web/');
+define('ROOTPATH', 'http://192.168.8.29:8082/');
