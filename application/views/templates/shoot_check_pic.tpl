@@ -54,7 +54,7 @@
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
                                            {{foreach from=$plist.a2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 										{{/foreach}}
                                             
                                          </ul>
@@ -74,7 +74,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                     {{foreach from=$plist.b2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -93,7 +93,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plist.c2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -112,7 +112,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plist.d2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -131,7 +131,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plist.e2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50"  mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50"  mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -185,7 +185,7 @@
 		//实例化
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "{{$plist.a2.0}}?imageView/0/h/500/"
+			src: "{{$plist.a2.0}}-thumbnail500"
 		});
 
 	
