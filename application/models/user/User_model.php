@@ -104,7 +104,7 @@ class User_model extends MY_Model {
     function getGroupListByRole($roleId){
         $data['roleId']=$roleId;
         $data['userId']=$this->user_info['userId'];
-        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+        $data['token']=$this->user_info['token'];
         $str=$this->getGroupList($data);
         return  $group_list=json_decode($str,true);
     }

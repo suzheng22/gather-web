@@ -18,7 +18,7 @@ class Role extends My_Controller {
             $data['currentPage']=$this->input->get('currentPage');
             $data['pageSize']=10;
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             $page_url=$this->root_path.'role/index/?';
             if($data['roleName']!=''){
                 $page_url.='roleName='.$data['roleName']."&";
@@ -36,7 +36,7 @@ class Role extends My_Controller {
             $data['roleName']=$this->input->post('roleName');
             $data['desc']=$this->input->post('desc');
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             echo $str=$this->role_model->addRole($data);
             exit;
         }

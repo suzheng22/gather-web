@@ -12,7 +12,7 @@ class Marlboro extends My_Controller {
     
     function ps(){
         $data['userId']=$this->user_info['userId'];
-        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+        $data['token']=$this->user_info['token'];
         $group_list= $this->user_model->getGroupListByRole(6);
 
         $this->ci_smarty->assign('group_list',$group_list['list']);
@@ -42,7 +42,7 @@ class Marlboro extends My_Controller {
        $this->load->model('user/user_model','user');
        $this->load->model('sdk/product_model','product');
        $data['userId']=$this->user_info['userId'];
-       $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+       $data['token']=$this->user_info['token'];
        $data['upUserId']=$userId;
        
        $str=$this->user->getInfo($data);
@@ -185,7 +185,7 @@ class Marlboro extends My_Controller {
     function shoot(){
         $this->load->model('user/user_model','user');
         $data['userId']=$this->user_info['userId'];
-        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+        $data['token']=$this->user_info['token'];
         
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
@@ -214,7 +214,7 @@ class Marlboro extends My_Controller {
         $this->load->model('user/user_model','user');
         $this->load->model('sdk/product_model','product');
         $data['userId']=$this->user_info['userId'];
-        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+        $data['token']=$this->user_info['token'];
         $data['upUserId']=$userId;
          
         $str=$this->user->getInfo($data);

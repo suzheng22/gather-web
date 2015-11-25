@@ -11,7 +11,7 @@ class Input extends My_Controller {
     
     function index(){
         $data['uid']=$this->user_info['userId'];
-        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+        $data['token']=$this->user_info['token'];
         $skuInfo=$this->input_model->getSkuInfo($data);
         foreach ($skuInfo['type']['basic_info'] as $k=>$v){
             if($v[field]=='field14'&& $v['type']==2){

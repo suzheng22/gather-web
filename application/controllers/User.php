@@ -17,6 +17,7 @@ class User extends My_Controller {
 			$data['pwd']=$this->input->post('pwd');
 			
 			$json=$this->user_model->checkLogin($data);
+			//echo $json;exit;
 			$arr=json_decode($json,'true');
 
             if($arr['msgCode']>0){
@@ -27,7 +28,7 @@ class User extends My_Controller {
             else{
                 $user['userId']=$arr['userId'];
                 $user['trueName']=$arr['trueName'];
-                $user['lastLoginTime']=$arr['lastLoginTime'];
+                $user['token']=$arr['token'];
                 $user['roleId']=$arr['roleId'];
                 $user_str=serialize($user);
                 set_cookie("user",$user_str,3600*24);
@@ -83,9 +84,9 @@ class User extends My_Controller {
             
             
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
            $no_master['userId']=$this->user_info['userId'];
-           $no_master['lastLoginTime']=$this->user_info['lastLoginTime'];
+           $no_master['token']=$this->user_info['token'];
             $str=$this->user_model->getuserRoleList($no_master);
             $role_list=json_decode($str,true);
              $this->ci_smarty->assign('role_list',$role_list['list']);
@@ -109,7 +110,7 @@ class User extends My_Controller {
         //获取单个用户信息
         function info(){
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             $data['upUserId']=$this->input->post('upUserId');
             echo  $this->user_model->getInfo($data);exit;
         }
@@ -130,10 +131,10 @@ class User extends My_Controller {
                 $this->ci_smarty->assign('roleId',$data['roleId']);
             }
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             
             $no_master['userId']=$this->user_info['userId'];
-            $no_master['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $no_master['token']=$this->user_info['token'];
             $str=$this->user_model->getuserRoleList($no_master);
             $role_list=json_decode($str,true);
             $this->ci_smarty->assign('role_list',$role_list['list']);
@@ -151,7 +152,7 @@ class User extends My_Controller {
         function getUserGroupListAjax(){
             $data['roleId']=$this->input->post('roleId');
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             $str=$this->user_model->getGroupList($data);
             $group_list=json_decode($str,true);
             echo json_encode($group_list['list']);
@@ -166,7 +167,7 @@ class User extends My_Controller {
             $data['groupId']=$this->input->post('groupId');
             $data['desc']=$this->input->post('desc');
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
            echo  $this->user_model->addUser($data);
         }
         
@@ -174,7 +175,7 @@ class User extends My_Controller {
         //重置密码
         function rePwd(){
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             $data['reUserId']=$this->input->post('reUserId');
             echo  $this->user_model->rePwd($data);exit;
         }
@@ -182,7 +183,7 @@ class User extends My_Controller {
         //冻结账户
         function freeze(){
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             $data['freezeUserId']=$this->input->post('freezeUserId');
             $data['status']=$this->input->post('status');
             echo  $this->user_model->freeze($data);exit;
@@ -196,7 +197,7 @@ class User extends My_Controller {
             $data['ed_userId']=$this->input->post('ed_userId');
             
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             echo  $this->user_model->editUser($data);exit;
         }
         
@@ -207,14 +208,14 @@ class User extends My_Controller {
             $data['desc']=$this->input->post('desc');
 
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             echo  $this->user_model->addGroup($data);exit;
         }
         
         //获取单个用户组信息
         function groupInfo(){
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             $data['groupId']=$this->input->post('groupId');
             echo  $this->user_model->getGroupInfo($data);exit;
         }
@@ -226,7 +227,7 @@ class User extends My_Controller {
             $data['roleId']=$this->input->post('roleId');
             
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             echo  $this->user_model->editGroup($data);exit;
         }
         
@@ -236,7 +237,7 @@ class User extends My_Controller {
         
         function doEditPwd(){
             $data['userId']=$this->user_info['userId'];
-            $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+            $data['token']=$this->user_info['token'];
             $data['oldPwd']=$this->input->post('oldPwd');
             $data['newPwd']=$this->input->post('newPwd');
             $json=$this->user_model->editPwd($data);

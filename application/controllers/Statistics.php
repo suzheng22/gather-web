@@ -87,7 +87,7 @@ class Statistics extends My_Controller {
     
     function input($page_url){
         $data['userId']=$this->user_info['userId'];
-        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+        $data['token']=$this->user_info['token'];
         $data['is_ext']='no';
         $data['userName']=$this->input->get('userName');
         $data['groupId']=$this->input->get('groupId');
