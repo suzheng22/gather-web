@@ -49,7 +49,7 @@
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
 										{{foreach from=$plist.a2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 										{{/foreach}}
                                          </ul>
                                     </div>
@@ -87,7 +87,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
 									{{foreach from=$plist.b2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -107,7 +107,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                     {{foreach from=$plist.c2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -128,7 +128,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                     {{foreach from=$plist.d2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50" mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -149,7 +149,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plist.e2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}?imageView/1/w/50/h/50"  mm="{{$list}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50"  mm="{{$list}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -297,22 +297,35 @@
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/record.js"></script> 
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
+<!--dom预加载-->
+<script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
+<!--图片延时加载-->
+<script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript"> 
  
 	$(function(){ 
+	
+	//预加载
+		$('body').fadeloader({
+			mode: 'class',
+			fadeSpeed : 500,
+			displayType : 'inline-block',
+			easeLoad : 'swing',
+			onComplete : ''
+		});
+		//延时加载
+		$("img").lazyload();
 		//实例化
-		
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "{{$plist.a2.0}}?imageView/0/h/500/"
+			src: "{{$plist.a2.0}}-thumbnail500"
 			//?imageView/1/w/500/h/500"
 		});
 		var iv2 = $(".viewer").iviewer(
 		{
-			src: "{{$plist.a1.0}}?imageView/0/h/500/"
+			src: "{{$plist.a1.0}}-thumbnail500"
 			//?imageView/1/w/500/h/500
 		});
-		//if(ww>hh){
 		//驳回
 		 $("#ps_newuser_pop").pop({
 			oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出

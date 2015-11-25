@@ -33,12 +33,14 @@
                      <div class="cc_top_one" style="width:50%;">
                          <label>提交时间:</label>
                          <input type="text" class="datetimepicker" name="startTime" value="{{$startTime}}"/>
+                         <label style="width:20px;">-</label>
                          <input type="text" class="datetimepicker" name="endTime" value="{{$endTime}}"/>
                      </div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
-                    	<input type="submit" value="查询" />
+                    	
                         <a href="{{$page_url}}&is_ext=1" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>导出</a>
-                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                        <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
                    	<div class="clearfix"></div>
@@ -82,9 +84,36 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-$('.datetimepicker').datetimepicker();
-</script>
-<!---->  
+$(function(){
+	//菜单高亮显示和地址栏比对
+	var url = window.location;
+    $('.system_log dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .counts dd").show();
+	
+});
+/*$('.datetimepicker').datetimepicker();*/
+$('.datetimepicker').datetimepicker({
+	onGenerate:function( ct ){
+		$(this).find('.xdsoft_date')
+			.toggleClass('xdsoft_disabled');
+	},
+		format:'Y/m/d',
+	formatDate:'Y/m/d',
+	minDate:'-1970/01/2',
+	maxDate:'+1970/01/2',
+	timepicker:false
+});
+
+//清空
+	function btn_empty(){
+		$("#user_name").val("");
+		$(".datetimepicker").val("");
+		$(".cc_top_one select").val("");
+	}
+</script> 
 
 </body>
 </html>

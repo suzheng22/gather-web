@@ -11,7 +11,7 @@
                  <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="images/left/select_xl01.png"></dt>
                  <dd><a href=".html" title="商品管理">商品管理</a></dd>
                  <dd><a href=".html" title="扩充成分">扩充成分</a></dd>
-                 <dd><a href=".html" title="营养成风">营养成风</a></dd>
+                 <dd><a href=".html" title="营养成风">营养成分</a></dd>
                  <dd><a href="#" title="基本信息管理">基本信息管理</a></dd>
              </dl>
                         

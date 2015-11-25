@@ -16,7 +16,7 @@
         	<div class="rose_box cc_box">
             	<h3>拍摄审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
-                	<div class="cc_top_one"><label>用户名:</label><input type="text"/></div>
+                	<div class="cc_top_one"><label>用户名:</label><input type="text" id="count_user"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                     	<div class="choice_count choice_box">            	 			
 							<dl class="select">
@@ -33,7 +33,7 @@
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
                        
                        <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
-                       <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                       <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
@@ -75,34 +75,26 @@
 </div>
 
 {{include file='public/js.tpl'}}
-<!--时间控件-->
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-$('#datetimepicker_start').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
-	},
-		format:'Y/m/d',
-	formatDate:'Y/m/d',
-	minDate:'-1970/01/2',
-	maxDate:'+1970/01/2',
-	timepicker:false
+$(function(){
+	
+	//菜单高亮显示和地址栏比对
+	var url = window.location;
+    $('.system_log dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .check_manager dd").show();
+	
 });
-$('#datetimepicker_end').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
-	},
-		format:'Y/m/d',
-	formatDate:'Y/m/d',
-	minDate:'-1970/01/2',
-	maxDate:'+1970/01/2',
-	timepicker:false
-});
+
+	//清空
+	function btn_empty(){
+		$("#count_user").val("");
+		$(".cc_top_one select").val("");
+	}
 </script>
-<!---->  	
+ 	
 
 
 </body>

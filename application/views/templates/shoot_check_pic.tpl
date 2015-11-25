@@ -21,10 +21,8 @@
             <li class="black">
             	<div class="ps_top_menu">
 				{{if $status!=1 && $status!=2}}
-            	<div class="ps_top_menu">
                  <a href="#" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
                 <a href="javascript:;" id="shoot_new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
-                </div>
 			{{else}}
 				{{if $status==1}}已通过{{else if $status==2}}已驳回{{/if}}
 			{{/if}}
@@ -171,6 +169,8 @@
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript"> 
 	$(function(){ 
+
+
 	
 		//预加载
 		$('body').fadeloader({

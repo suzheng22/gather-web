@@ -76,6 +76,18 @@
 </div>
 {{include file='public/js.tpl'}}
 <script type="text/javascript">
+
+$(function(){
+	
+	//菜单高亮显示和地址栏比对
+	var url = window.location;
+    $('.check_manager dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .check_manager dd").show();
+	
+});
 		//清空
 		function btn_empty(){
 			$("#user_name").val("");

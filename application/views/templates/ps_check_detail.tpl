@@ -23,8 +23,12 @@
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}" id="myform">
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="proName" value="{{$proName}}" id="proName"/></div>
-                     	<div class="cc_top_one"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/></div>
-                        <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
+                     	<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/> <label style="width:20px;">-</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
+                        
+                        
+                    <!--    <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>-->
+                        
+                        
                        <div class="clearfix"></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box">            	 			
@@ -109,6 +113,18 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
+
+$(function(){
+	
+	//菜单高亮显示和地址栏比对
+	var url = window.location;
+    $('.system_log dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .check_manager dd").show();
+	
+});
 $('#datetimepicker_start').datetimepicker({
 	onGenerate:function( ct ){
 		$(this).find('.xdsoft_date')

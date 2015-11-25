@@ -16,7 +16,7 @@
         	<div class="rose_box cc_box">
             	<h3>拍摄统计</h3>
                 <div class="rose_top main_rignt_top clearfix">
-                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" value="{{$userName}}"/></div>
+                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" value="{{$userName}}" id="user_name"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
@@ -29,18 +29,20 @@
                                 </dl>
                             </div>
                         </div>
-                     <div class="cc_top_one">
+                     <div class="cc_top_one" style="width:40%;">
                             <label>拍摄开始时间:</label>
                             <input type="text" id="datetimepicker_start" name="startTime" value="{{$startTime}}"/>
-                        </div>
-                        <div class="cc_top_one">
-                            <label>拍摄结束时间:</label>
+                            <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" name="endTime" value="{{$endTime}}"/>
                         </div>
+                        <!--<div class="cc_top_one">
+                            <label>拍摄结束时间:</label>
+                            <input type="text" id="datetimepicker_end" name="endTime" value="{{$endTime}}"/>
+                        </div>-->
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                     	<a href="record.html" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
-                        <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
-                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                        <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
@@ -120,6 +122,18 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
+$(function(){
+	
+	//菜单高亮显示和地址栏比对
+	var url = window.location;
+    $('.system_log dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .counts dd").show();
+	
+});
+
 $('#datetimepicker_start').datetimepicker({
 	onGenerate:function( ct ){
 		$(this).find('.xdsoft_date')
@@ -141,7 +155,14 @@ $('#datetimepicker_end').datetimepicker({
 	minDate:'-1970/01/2',
 	maxDate:'+1970/01/2',
 	timepicker:false
-}); 
+});
+//清空
+	function btn_empty(){
+		$("#user_name").val("");
+		$("#datetimepicker_start").val("");
+		$("#datetimepicker_end").val("");
+		$(".cc_top_one select").val("");
+	} 
 </script>
 </body>
 </html>

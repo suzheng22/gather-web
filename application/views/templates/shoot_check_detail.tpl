@@ -23,14 +23,18 @@
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}" id="myform">
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text" name="proName" value="{{$proName}}" id="proName"/></div>
-                     	<div class="cc_top_one">
+                     	<div class="cc_top_one" style="width:40%;">
                             <label>拍摄开始时间:</label>
                             <input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/>
-                        </div>
-                        <div class="cc_top_one">
-                            <label>拍摄结束时间:</label>
+                            <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/>
                         </div>
+                        <!--<div class="cc_top_one">
+                            <label>拍摄结束时间:</label>
+                            <input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/>
+                        </div>-->
+                        
+                       
                         <div class="clearfix"></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box">            	 			
@@ -68,10 +72,8 @@
                             </div>
                         </div>
                     <div class="cc_top_two">
-                        
-                        <input type="submit" value="查询" />
-						
-                            <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        	<span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
+                            <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
                    	<div class="clearfix"></div>
@@ -119,6 +121,18 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
+$(function(){
+	
+	//菜单高亮显示和地址栏比对
+	var url = window.location;
+    $('.system_log dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    })
+    .parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .check_manager dd").show();
+	
+});
+
 $('#datetimepicker_start').datetimepicker({
 	onGenerate:function( ct ){
 		$(this).find('.xdsoft_date')
@@ -161,8 +175,17 @@ function check(){
 				}
 		  	},"text");
 }
+
+//清空
+	function btn_empty(){
+		$("#proName").val("");
+		$("#count_user").val("");
+		$("#datetimepicker_start").val("");
+		$("#datetimepicker_end").val("");
+		$(".cc_top_one select").val("");
+	}
 </script>
-<!---->  	
+ 	
 
 
 </body>
