@@ -17,7 +17,7 @@
             	<h3>修图审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}marlboro/ps" method="get">
-                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName"/ id="user_name"></div>
+                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" id="user_name"></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                     	<div class="choice_count choice_box">            	 			
 							<dl class="select">

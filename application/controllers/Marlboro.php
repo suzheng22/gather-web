@@ -7,12 +7,13 @@ class Marlboro extends My_Controller {
     {
         parent::__construct();
         $this->load->model('ps/marlboro_model');
+        $this->load->model('user/user_model');
     }
     
     function ps(){
         $data['userId']=$this->user_info['userId'];
         $data['lastLoginTime']=$this->user_info['lastLoginTime'];
-        $group_list= $this->getGroupListByRole(6);
+        $group_list= $this->user_model->getGroupListByRole(6);
 
         $this->ci_smarty->assign('group_list',$group_list['list']);
 
@@ -26,7 +27,7 @@ class Marlboro extends My_Controller {
             $this->ci_smarty->assign('groupId',$data['groupId']);
         }
         if($data['userName']!='' ||$data['groupId']!=''){
-            $str=$this->user->getUserIdsByFiled($data);
+            $str=$this->user_model->getUserIdsByFiled($data);
             $user_id_list=json_decode($str,true);
             $data['users']=serialize($user_id_list);
         }
@@ -186,7 +187,7 @@ class Marlboro extends My_Controller {
         $data['userId']=$this->user_info['userId'];
         $data['lastLoginTime']=$this->user_info['lastLoginTime'];
         
-        $group_list=$this->getGroupListByRole(3);
+        $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         
         $data['userName']=$this->input->get('userName');
@@ -282,12 +283,5 @@ class Marlboro extends My_Controller {
     }
     
     
-    function getGroupListByRole($roleId){
-        $this->load->model('user/user_model','user');
-        $data['roleId']=$roleId;
-        $data['userId']=$this->user_info['userId'];
-        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
-        $str=$this->user->getGroupList($data);
-       return  $group_list=json_decode($str,true);
-    }
+    
 }

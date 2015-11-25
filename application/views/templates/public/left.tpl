@@ -31,12 +31,12 @@
             <dl class="counts system_log">
                 <dt><i class="icon iconfont">&#xf0226;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                 <dd><a href="#" title="商品统计">商品统计</a></dd>
-                <dd><a href="shoot_count.html" title="拍摄统计">拍摄统计</a></dd>
+                <dd><a href="{{$root_path}}statistics/shoot" title="拍摄统计">拍摄统计</a></dd>
                 <dd><a href="shoot_check_count.html" title="拍摄审核统计">拍摄审核统计</a></dd>
                 <dd><a href="record_count.html" title="录入统计">录入统计</a></dd>
                 <dd><a href="record_check_count.html" title="录入审核统计">录入审核统计</a></dd>
                 <dd><a href="{{$root_path}}statistics/ps" title="修图统计">修图统计</a></dd>
-                <dd><a href="ps_check_count.html" title="修图审核统计">修图审核统计</a></dd>
+                <dd><a href="{{$root_path}}statistics/psCheck" title="修图审核统计">修图审核统计</a></dd>
                 <dd><a href="#" title="拍摄驳回统计">拍摄驳回统计</a></dd>
             </dl>
 			 

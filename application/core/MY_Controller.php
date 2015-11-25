@@ -89,4 +89,18 @@ class MY_Controller extends CI_Controller
         $showpage[show]=$show;
         return $showpage;
     }
+    
+   
+    
+
+    function export_csv($filename,$data)
+    {
+        header("Content-type:text/csv");
+        header("Content-Disposition:attachment;filename=".$filename);
+        header('Cache-Control:must-revalidate,post-check=0,pre-check=0');
+        header('Expires:0');
+        header('Pragma:public');
+        echo $data;
+    }
+    
 }

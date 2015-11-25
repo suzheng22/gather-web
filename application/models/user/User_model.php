@@ -100,5 +100,13 @@ class User_model extends MY_Model {
         $return=$this->curl($url,$data);
         return $return;
     }
+    
+    function getGroupListByRole($roleId){
+        $data['roleId']=$roleId;
+        $data['userId']=$this->user_info['userId'];
+        $data['lastLoginTime']=$this->user_info['lastLoginTime'];
+        $str=$this->getGroupList($data);
+        return  $group_list=json_decode($str,true);
+    }
 }
 ?>
