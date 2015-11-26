@@ -16,6 +16,7 @@
         	<div class="rose_box cc_box">
             	<h3>拍摄审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
+                	<form action="{{$root_path}}marlboro/shoot" method="get">
                 	<div class="cc_top_one"><label>用户名:</label><input type="text" id="count_user"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                     	<div class="choice_count choice_box">            	 			
@@ -35,6 +36,7 @@
                        <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"/></a>
                        <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
+                    </form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
