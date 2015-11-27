@@ -95,7 +95,7 @@
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.proName}}</td>
                         <td>{{$list.typeName}}</td>
-                        <td>{{if $list.shootType==1}}正常修图{{else}}驳回修图{{/if}}</td>
+                        <td>{{if $list.shootType==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
 						<td>{{$list.createTime|date_format:"Y-m-d"}}</td>
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                         <td>
