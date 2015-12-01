@@ -17,7 +17,8 @@
             	<h3>拍摄审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
                 	<form action="{{$root_path}}marlboro/shoot" method="get">
-                        {*项目*}
+
+                        <!--项目*-->
                      <div class="cc_top_one">
                          <label>项目:</label>
                          <div class="choice_count choice_box">
@@ -70,7 +71,7 @@
                       {{foreach from =$glist item=list}}
                       <tr>
                         <th>
-                            {*{{$list.id}}*}
+                            <!--{{$list.id}}-->
                             1
                         </th>
                         <td>{{$list.userName}}</td>

@@ -204,8 +204,8 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('group_list',$group_list['list']);
         //添加项目
 //        $project_list=$this->user_model->getProjectListByRole(3);
-        $project_list=['list'=>['projectId'=>['001','002']]];
-        $project_list=array('list'=>array('projectId'=>array('001','002')));
+//        $project_list=['list'=>['projectId'=>['001','002']]];
+        $project_list=array('list'=>array('projectId'=>array('001')));
         $this->ci_smarty->assign('project_list',$project_list['list']);
 
         $data['userName']=$this->input->get('userName');
@@ -329,12 +329,15 @@ class Marlboro extends My_Controller {
         
         $list=$this->marlboro_model->getShootInfo($arr);
         //项目
-        if(isset($list['project']))
-            $list['project']='001';
-        if(isset($list['pack']))
-            $list['pack']='包装一';
-        if(isset($list['batch']))
-            $list['batch']='批次一';
+        foreach ($list as $key=>$val){
+            if(isset($val['project']))
+                $list[$key]['project']='001';
+            if(isset($val['pack']))
+                $list[$key]['pack']='包装一';
+            if(isset($val['batch']))
+                $list[$key]['batch']='批次一';
+        }
+
         $showpage= parent::page($page_url,10,$list['totalCount']);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->assign('pages',$showpage['show']);
