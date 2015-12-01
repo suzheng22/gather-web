@@ -205,7 +205,7 @@ class Marlboro extends My_Controller {
         //添加项目
 //        $project_list=$this->user_model->getProjectListByRole(3);
 //        $project_list=['list'=>['projectId'=>['001','002']]];
-        $project_list=array('list'=>array('projectId'=>array('001')));
+        $project_list=array('list'=>array('0'=>array('projectId'=>'001'),'1'=>array('projectId'=>'002')));
         $this->ci_smarty->assign('project_list',$project_list['list']);
 
         $data['userName']=$this->input->get('userName');
@@ -248,7 +248,10 @@ class Marlboro extends My_Controller {
         
         $type_list=$this->product->getType();
         $this->ci_smarty->assign('type_list',$type_list);
-        
+        //项目
+        //$project_list=$this->user_model->getProjectListByRole(3);
+        $project_list=array('list'=>array('0'=>array('projectId'=>'001'),'1'=>array('projectId'=>'002')));
+        $this->ci_smarty->assign('project_list',$project_list['list']);
         
         $page_url=$this->root_path.'Marlboro/shootDetail/'.$userId.'?';
         $arr['rId']=$userId;
