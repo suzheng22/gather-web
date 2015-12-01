@@ -29,20 +29,18 @@
         <!-- 批次 -->
 
             <li class="black"><em>批次:</em><span>{{$p_info.batch}}</span></li>
-            <li class="black">
-            	<div class="ps_top_menu">
-				{{if $status!=1 && $status!=2}}
-                 <a href="#" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
-                <a href="javascript:;" id="shoot_new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
-			{{else}}
-				{{if $status==1}}已通过{{else if $status==2}}已驳回{{/if}}
-			{{/if}}
-               
-                </div>
-            </li>
             <li class="black"><em>最新驳回原因:</em><span>{{$p_info.lastReason}}</span></li>
             <li class="black"><em>上次驳回原因:</em><span>{{$p_info.preReason}}</span></li>
-       </ul>
+        <div class="ps_top_menu">
+            {{if $status!=1 && $status!=2}}
+            <a href="javascript:;" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
+            <a href="javascript:;" id="shoot_new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
+            {{else}}
+            {{if $status==1}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
+            {{else if $status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>{{/if}}
+            {{/if}}
+        </div>
+    </ul>
 	<div class="left shoot_left" style="width:1200px; margin:0 auto;">
             <div class="pageContent ps_check_pic" >
                 <div class="wrapper">

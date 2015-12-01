@@ -70,10 +70,10 @@
                       </tr>
                       {{foreach from =$glist item=list}}
                       <tr>
-                        <th>
+                        <td>
                             <!--{{$list.id}}-->
                             1
-                        </th>
+                        </td>
                         <td>{{$list.userName}}</td>
                         <td>{{$list.groupName}}</td>
                         <td>{{$list.totalCount}}</td>

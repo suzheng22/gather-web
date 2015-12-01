@@ -205,7 +205,16 @@ class Marlboro extends My_Controller {
         //添加项目
 //        $project_list=$this->user_model->getProjectListByRole(3);
 //        $project_list=['list'=>['projectId'=>['001','002']]];
-        $project_list=array('list'=>array('0'=>array('projectId'=>'001'),'1'=>array('projectId'=>'002')));
+        $project_list=array(
+            'list'=>array(
+                '0'=>array(
+                    'projectId'=>'1',
+                    'projectName'=>'项目一'
+                    ),
+                '1'=>array(
+                    'projectId'=>'2',
+                    'projectName'=>'项目二')
+            ));
         $this->ci_smarty->assign('project_list',$project_list['list']);
 
         $data['userName']=$this->input->get('userName');
@@ -250,7 +259,16 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('type_list',$type_list);
         //项目
         //$project_list=$this->user_model->getProjectListByRole(3);
-        $project_list=array('list'=>array('0'=>array('projectId'=>'001'),'1'=>array('projectId'=>'002')));
+        $project_list=array(
+            'list'=>array(
+                '0'=>array(
+                    'projectId'=>'1',
+                    'projectName'=>'项目一'
+                ),
+                '1'=>array(
+                    'projectId'=>'2',
+                    'projectName'=>'项目二')
+            ));
         $this->ci_smarty->assign('project_list',$project_list['list']);
         
         $page_url=$this->root_path.'Marlboro/shootDetail/'.$userId.'?';
@@ -333,8 +351,10 @@ class Marlboro extends My_Controller {
         $list=$this->marlboro_model->getShootInfo($arr);
         //项目
         foreach ($list as $key=>$val){
-            if(isset($val['project']))
+            if(isset($val['project'])){
                 $list[$key]['project']='001';
+            }
+
             if(isset($val['pack']))
                 $list[$key]['pack']='包装一';
             if(isset($val['batch']))
