@@ -140,6 +140,19 @@ class Marlboro extends My_Controller {
         $list=$this->marlboro_model->getMarlboroInfoPic($arr);
         $status=$this->marlboro_model->getReviewStatus($arr);
         $product_info=$this->product->getProduct($arr);
+        //新增拍摄类型
+        if(!isset($product_info['shootType']))
+            $product_info['shootType']='立体';
+        //项目
+        if(!isset($product_info['project']))
+            $product_info['project']='001';
+        //包装
+        if(!isset($product_info['pack']))
+            $product_info['pack']='包装一';
+        //批次
+        if(!isset($product_info['batch']))
+            $product_info['batch']='批次一';
+
         $this->ci_smarty->assign('p_info',$product_info);
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('status',$status['status']);
@@ -189,9 +202,16 @@ class Marlboro extends My_Controller {
         
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
-        
+        //添加项目
+//        $project_list=$this->user_model->getProjectListByRole(3);
+        $project_list=['list'=>['projectId'=>['001','002']]];
+        $project_list=array('list'=>array('projectId'=>array('001','002')));
+        $this->ci_smarty->assign('project_list',$project_list['list']);
+
         $data['userName']=$this->input->get('userName');
         $data['groupId']=$this->input->get('groupId');
+        $data['projectId']=$this->input->get("projectId");//1
+      //  $data['projectId']='1';
         if($data['userName']!=''){
             $this->ci_smarty->assign('userName',$data['userName']);
         }
@@ -199,7 +219,11 @@ class Marlboro extends My_Controller {
         if($data['groupId']!=''){
             $this->ci_smarty->assign('groupId',$data['groupId']);
         }
-        if($data['userName']!='' ||$data['groupId']!=''){
+        if($data['projectId']!=''){
+            $this->ci_smarty->assign('projectId',$data['projectId']);
+        }//1
+
+        if($data['userName']!='' ||$data['groupId']!='' || $data['projectId']){//1
             $str=$this->user->getUserIdsByFiled($data);
             $user_id_list=json_decode($str,true);
             $data['users']=serialize($user_id_list);
@@ -231,6 +255,13 @@ class Marlboro extends My_Controller {
         $proName=$this->input->get('proName');
         $type=$this->input->get('type');
         $shootType=$this->input->get('shootType');
+        //项目
+        $project=$this->input->get('project');
+        //包装
+        $pack=$this->input->get('pack');
+        //批次
+        $batch=$this->input->get('batch');
+
         $status=$this->input->get('status');
         $start_time=$this->input->get('start_time');
         $end_time=$this->input->get('end_time');
@@ -251,13 +282,34 @@ class Marlboro extends My_Controller {
             $page_url.='shootType='.$shootType."&";
             $this->ci_smarty->assign('shootType',$shootType);
         }
+        //项目
+        if(isset($project)){
+            $arr['project']=$project;
+            $page_url.='project='.$project.'&';
+            $this->ci_smarty->assign('project',$project);
+        }
+        //包装
+        if(isset($pack)){
+            $arr['pack']=$pack;
+            $page_url.='packe='.$pack."&";
+            $this->ci_smarty->assign('pack',$pack);
+        }
+        //批次
+
+        if(isset($batch)){
+            $arr['batch']=$batch;
+            $page_url.='batch='.$batch."&";
+            $this->ci_smarty->assign('batch',$batch);
+        }
+
         if(isset($status)){
             $arr['status']=$status;
             $page_url.='status='.$status."&";
             $this->ci_smarty->assign('status',$status);
         }
         else {
-            $this->ci_smarty->assign('status','NULL');
+            $this->ci_smarty->assign('status
+            ','NULL');
         }
         if(isset($start_time)&&isset($end_time)){
             $arr['sTime']=strtotime($start_time);
@@ -276,6 +328,13 @@ class Marlboro extends My_Controller {
         }
         
         $list=$this->marlboro_model->getShootInfo($arr);
+        //项目
+        if(isset($list['project']))
+            $list['project']='001';
+        if(isset($list['pack']))
+            $list['pack']='包装一';
+        if(isset($list['batch']))
+            $list['batch']='批次一';
         $showpage= parent::page($page_url,10,$list['totalCount']);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->assign('pages',$showpage['show']);

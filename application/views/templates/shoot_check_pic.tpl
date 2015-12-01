@@ -18,6 +18,14 @@
             <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
             <li class="black"><em>商品名称:</em><span>{{$p_info.proName}}</span></li>
             <li class="black"><em>商品类型:</em><span>{{$p_info.typeName}}</span></li>
+            {*拍摄类型*}
+            <li class="black"><em>拍摄类型:</em><span>{{$p_info.shootType}}</span></li>
+            {*项目*}
+            <li class="black"><em>项目:</em><span>{{$p_info.project}}</span></li>
+            {*包装*}
+            <li class="black"><em>包装:</em><span>{{$p_info.pack}}</span></li>
+            {*批次*}
+            <li class="black"><em>批次:</em><span>{{$p_info.batch}}</span></li>
             <li class="black">
             	<div class="ps_top_menu">
 				{{if $status!=1 && $status!=2}}
@@ -29,6 +37,8 @@
                
                 </div>
             </li>
+            <li class="black"><em>最新驳回原因:</em><span>{{$p_info.lastReason}}</span></li>
+            <li class="black"><em>上次驳回原因:</em><span>{{$p_info.preReason}}</span></li>
        </ul>
 	<div class="left shoot_left" style="width:1200px; margin:0 auto;">
             <div class="pageContent ps_check_pic" >

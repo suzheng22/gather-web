@@ -22,8 +22,23 @@
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}" id="myform">
-                    	<div class="cc_top_one"><label>商品名称:</label><input type="text" name="proName" value="{{$proName}}" id="proName"/></div>
-                     	<div class="cc_top_one" style="width:40%;">
+                            {*项目*}
+                            <div class="cc_top_one last_show"><label>项目:</label>
+                                <div class="choice_count choice_box">
+                                    <dl class="select">
+                                        <select name="projectType">
+                                            <option value="">全部</option>
+                                            {{foreach from=$project_list item=list}}
+                                            <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.projectName}}</option>
+                                            {{/foreach}}
+                                        </select>
+                                    </dl>
+                                </div>
+                            </div>
+                            {*条形码*}
+                            <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="barCode" value="{{$proName}}" id="barCode"/></div>
+                    	    <div class="cc_top_one"><label>商品名称:</label><input type="text" name="proName" value="{{$proName}}" id="proName"/></div>
+                     	    <div class="cc_top_one" style="width:40%;">
                             <label>拍摄开始时间:</label>
                             <input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/>
                             <label style="width:20px;">-</label>
@@ -72,6 +87,7 @@
                             </div>
                         </div>
                     <div class="cc_top_two">
+                            <span class="queryAll"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询结果内通过"></span>
                         	<span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
@@ -83,6 +99,11 @@
                         <th>商品条形码</th>
                         <th>商品名称</th>
                         <th>商品分类</th>
+                          {*新增字段*}
+                        <th>项目</th>
+                          <th>包装</th>
+                          <th>批次</th>
+
                         <th>拍摄类型</th>
                         <th>拍摄时间</th>
                         <th>状态</th>
@@ -95,6 +116,11 @@
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.proName}}</td>
                         <td>{{$list.typeName}}</td>
+                          {*新增字段*}
+                          <td>{{$list.project}}</td>
+                          <td>{{$list.pack}}</td>
+                          <td>{{$list.batch}}</td>
+                          {*新增字段*}
                         <td>{{if $list.shootType==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
 						<td>{{$list.createTime|date_format:"Y-m-d"}}</td>
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
@@ -178,7 +204,7 @@ function check(){
 
 //清空
 	function btn_empty(){
-		$("#proName").val("");
+		$("#proName,#barCode").val("");
 		$("#count_user").val("");
 		$("#datetimepicker_start").val("");
 		$("#datetimepicker_end").val("");

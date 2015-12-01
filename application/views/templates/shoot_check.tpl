@@ -17,6 +17,21 @@
             	<h3>拍摄审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
                 	<form action="{{$root_path}}marlboro/shoot" method="get">
+                        {*项目*}
+                     <div class="cc_top_one">
+                         <label>项目:</label>
+                         <div class="choice_count choice_box">
+                         <dl class="select">
+                             <select name="project">
+                                 <option value="">全部</option>
+                                 {{foreach from=$project_list item=list}}
+                                 <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.projectName}}</option>
+                                 {{/foreach}}
+                             </select>
+                         </dl>
+                     </div>
+                     </div>
+
                 	<div class="cc_top_one"><label>用户名:</label><input type="text" id="count_user"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                     	<div class="choice_count choice_box">            	 			
@@ -41,6 +56,7 @@
                 	<div class="tab_box">
                     <table>
                       <tr>
+                          <th>序列号</th>
                         <th>用户名</th>
                         <th>用户组</th>
                         <th>总商品数</th>
@@ -53,6 +69,10 @@
                       </tr>
                       {{foreach from =$glist item=list}}
                       <tr>
+                        <th>
+                            {*{{$list.id}}*}
+                            1
+                        </th>
                         <td>{{$list.userName}}</td>
                         <td>{{$list.groupName}}</td>
                         <td>{{$list.totalCount}}</td>
