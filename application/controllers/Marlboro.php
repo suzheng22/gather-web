@@ -197,30 +197,19 @@ class Marlboro extends My_Controller {
     
     function shoot(){
         $this->load->model('user/user_model','user');
+        $this->load->model('user/project_model','project');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
-        //添加项目
-//        $project_list=$this->user_model->getProjectListByRole(3);
-//        $project_list=['list'=>['projectId'=>['001','002']]];
-        $project_list=array(
-            'list'=>array(
-                '0'=>array(
-                    'projectId'=>'1',
-                    'projectName'=>'项目一'
-                    ),
-                '1'=>array(
-                    'projectId'=>'2',
-                    'projectName'=>'项目二')
-            ));
+        //获取项目
+        $project_list=$this->project->getProjectList();
         $this->ci_smarty->assign('project_list',$project_list['list']);
 
         $data['userName']=$this->input->get('userName');
         $data['groupId']=$this->input->get('groupId');
         $data['projectId']=$this->input->get("projectId");//1
-      //  $data['projectId']='1';
         if($data['userName']!=''){
             $this->ci_smarty->assign('userName',$data['userName']);
         }
@@ -246,6 +235,7 @@ class Marlboro extends My_Controller {
     function shootDetail($userId){
         $this->load->model('user/user_model','user');
         $this->load->model('sdk/product_model','product');
+        $this->load->model('user/project_model','project');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         $data['upUserId']=$userId;
@@ -253,23 +243,12 @@ class Marlboro extends My_Controller {
         $str=$this->user->getInfo($data);
         $u_info=json_decode($str,true);
         $this->ci_smarty->assign('u_info',$u_info);
-        
-        
         $type_list=$this->product->getType();
         $this->ci_smarty->assign('type_list',$type_list);
-        //项目
-        //$project_list=$this->user_model->getProjectListByRole(3);
-        $project_list=array(
-            'list'=>array(
-                '0'=>array(
-                    'projectId'=>'1',
-                    'projectName'=>'项目一'
-                ),
-                '1'=>array(
-                    'projectId'=>'2',
-                    'projectName'=>'项目二')
-            ));
+        //获取项目
+        $project_list=$this->project->getProjectList();
         $this->ci_smarty->assign('project_list',$project_list['list']);
+
         
         $page_url=$this->root_path.'Marlboro/shootDetail/'.$userId.'?';
         $arr['rId']=$userId;
@@ -316,13 +295,11 @@ class Marlboro extends My_Controller {
             $this->ci_smarty->assign('pack',$pack);
         }
         //批次
-
         if(isset($batch)){
             $arr['batch']=$batch;
             $page_url.='batch='.$batch."&";
             $this->ci_smarty->assign('batch',$batch);
         }
-
         if(isset($status)){
             $arr['status']=$status;
             $page_url.='status='.$status."&";
@@ -339,34 +316,24 @@ class Marlboro extends My_Controller {
             $this->ci_smarty->assign('start_time',$start_time);
             $this->ci_smarty->assign('end_time',$end_time);
         }
-         
-         
         if(isset($page)){
             $arr['page']=$page;
         }
         else{
             $arr['page']=1;
         }
-        
         $list=$this->marlboro_model->getShootInfo($arr);
         //项目
-        foreach ($list as $key=>$val){
-            if(isset($val['project'])){
-                $list[$key]['project']='001';
-            }
-
-            if(isset($val['pack']))
-                $list[$key]['pack']='包装一';
-            if(isset($val['batch']))
-                $list[$key]['batch']='批次一';
-        }
-
         $showpage= parent::page($page_url,10,$list['totalCount']);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check_detail.tpl');
     }
-    
+    function shootPass(){
+        $data['gtin']=$this->input->post('gtin');
+        $str=$this->marlboro_model->changeStatus($data);
+        echo json_encode($str);
+    }
     
     
 }

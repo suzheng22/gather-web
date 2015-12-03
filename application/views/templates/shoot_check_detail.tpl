@@ -29,7 +29,7 @@
                                         <select name="projectType">
                                             <option value="">全部</option>
                                             {{foreach from=$project_list item=list}}
-                                            <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.projectName}}</option>
+                                            <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
                                             {{/foreach}}
                                         </select>
                                     </dl>
@@ -88,15 +88,14 @@
                         </div>
                             <div class="clearfix"></div>
                     <div class="cc_top_two">
-                            <span class="queryAll query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询结果内通过"></span>
+                            <span class="queryAll query"><input type="button" value="查询结果内通过" onclick="shoot_pass()"></span>
                         	<span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
-
 					</form>
                    	<div class="clearfix"></div>
-                	<div class="tab_box">
-                    <table>
+                	<div class="tab_box" >
+                    <table id="show_detail">
                       <tr>
                         <th>商品条形码</th>
                         <th>商品名称</th>
@@ -105,16 +104,13 @@
                         <th>项目</th>
                           <th>包装</th>
                           <th>批次</th>
-
                         <th>拍摄类型</th>
                         <th>拍摄时间</th>
                         <th>状态</th>
                         <th>操作</th>
-                        
-                        
                       </tr>
                       {{foreach from=$glist.gtins item=list}}
-                      <tr>
+                      <tr class="t_{{$list.gtin}}">
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.proName}}</td>
                         <td>{{$list.typeName}}</td>
@@ -126,15 +122,13 @@
                         <td>{{if $list.shootType==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
 						<td>{{$list.createTime|date_format:"Y-m-d"}}</td>
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
+                          <input type="hidden" value="{{$list.status}}">
                         <td>
                         	<a href="{{$root_path}}marlboro/shootDetailPic/{{$list.gtin}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
                       </tr>
-                      
-                       
-                      
                     </table>
                 </div>
                 	{{$pages}}
@@ -150,7 +144,6 @@
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $(function(){
-	
 	//菜单高亮显示和地址栏比对
 	var url = window.location;
     $('.system_log dd a').filter(function (){
@@ -203,7 +196,41 @@ function check(){
 				}
 		  	},"text");
 }
-
+//查询内通过
+function shoot_pass(){
+    var num=0;
+    var num_gtin='';
+    var shoot=0;
+    var data="";
+    {{foreach from=$glist.gtins item=list}}
+        var gtin={{$list.gtin}};
+        var status={{$list.status}};
+        var shootType={{$list.shootType}};
+        if(status===0 && shootType!==1){
+            $(".t_"+gtin).css('color','red');
+            num++;
+        }else{
+            if(status===0 && shootType===1){
+                shoot++;
+            }
+        }
+    {{/foreach}}
+    //查询每条数据的拍摄类型，如果拍摄类型是驳回拍摄且状态是未审核状态需要提醒操作人手动操作
+    if(num){
+        alert("请手动操作带有红色标识的条码");
+        return false;
+    }
+    //如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
+    if(shoot){
+        //ajax
+        $.post("{{$root_path}}marlboro/shootPass",data,function(e){
+            alert('共有'+shoot+'审核成功');
+        })
+    }else{
+        //其余状态不变
+        alert("无审核操作");
+    }
+}
 //清空
 	function btn_empty(){
 		$("#proName,#barCode").val("");

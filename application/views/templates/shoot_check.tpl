@@ -26,7 +26,7 @@
                              <select name="project">
                                  <option value="">全部</option>
                                  {{foreach from=$project_list item=list}}
-                                 <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.projectName}}</option>
+                                 <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
                                  {{/foreach}}
                              </select>
                          </dl>

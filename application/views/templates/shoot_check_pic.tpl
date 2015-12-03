@@ -4,7 +4,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>数据采集系统</title>
 {{include file='public/css.tpl'}}
-{{include file='public/css.tpl'}}
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
 
 </head>
@@ -29,15 +28,16 @@
         <!-- 批次 -->
 
             <li class="black"><em>批次:</em><span>{{$p_info.batch}}</span></li>
-            <li class="black"><em>最新驳回原因:</em><span>{{$p_info.lastReason}}</span></li>
-            <li class="black"><em>上次驳回原因:</em><span>{{$p_info.preReason}}</span></li>
+        <div class="clearfix"></div>
+        <p class="back_why_info">最新驳回原因:<span>aaaaa;</span>上次驳回原因:<span>bbbbb</span></p>
+
         <div class="ps_top_menu">
             {{if $status!=1 && $status!=2}}
             <a href="javascript:;" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
             <a href="javascript:;" id="shoot_new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
             {{else}}
             {{if $status==1}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
-            {{else if $status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>{{/if}}
+            {{elseif $status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>{{/if}}
             {{/if}}
         </div>
     </ul>
@@ -179,10 +179,10 @@
 <!--图片延时加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript"> 
-	$(function(){ 
+	$(function(){
 
 
-	
+
 		//预加载
 		$('body').fadeloader({
 			mode: 'class',
@@ -200,7 +200,7 @@
 			src: "{{$plist.a2.0}}"
 		});
 
-	
+
 		//拍摄详情
 		 $("#shoot_newuser_pop").pop({
 			oMain:"#shoot_new_user",         //触发弹出层的元素。为空时直接弹出
@@ -219,9 +219,10 @@
 function check(status){
 	var gtin={{$p_info.gtin}};
 	var memo=$("#memo").val();
-
-		$.post("{{$root_path}}marlboro/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'shoot'},
+    var data={"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'shoot'};
+		$.post("{{$root_path}}marlboro/checkStatus",data,
 		  	function(data){
+                alert(data);
 				var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){
 					if(status==1){
