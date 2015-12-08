@@ -135,19 +135,19 @@ $(function(){
 	
 	function get_info(groupId){
 		$.post("{{$root_path}}user/groupInfo",{"groupId":groupId},
-		  function(data){
+						function(data){
 
-			var dataObj=eval("("+data+")");
-			if(dataObj.msgCode>0){
-				alert(dataObj.msg);
-				window.location.reload();
-			}
-			$("#up_groupName").val(dataObj.groupName);
-			$("#up_roleId").val(dataObj.roleId);
-			$("#up_desc").html(dataObj.desc);
-			$("#ed_groupId").val(dataObj.groupId);
+							var dataObj=eval("("+data+")");
+							if(dataObj.msgCode>0){
+								alert(dataObj.msg);
+								window.location.reload();
+							}
+							$("#up_groupName").val(dataObj.groupName);
+							$("#up_roleId").val(dataObj.roleId);
+							$("#up_desc").html(dataObj.desc);
+							$("#ed_groupId").val(dataObj.groupId);
 
-		  },
+						},
 		  "text");
 	}
 	

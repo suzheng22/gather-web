@@ -101,5 +101,41 @@ class Marlboro_model extends MY_Model {
         $return=$this->curl($url,$data);
         return $return;
     }
+    //增加通过缺图
+    function addMissFigure($data){
+        $url=$this->tmore_api_url."/review/addMissFigure";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    //获取无法测量数据
+    function getNoMeasureList($data){
+        $url=$this->tmore_api_url."/review/getNoMeasureList";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    //获取无法拍摄数据
+    function getNoShootList($data){
+        $url=$this->tmore_api_url."/review/getNoShootList";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    //获取拍摄新增列表
+    function getShootAddList($data){
+        $url=$this->tmore_api_url."/review/getShootAddList";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    //新增拍摄
+    function addShoot($data){
+        $url=$this->tmore_api_url."/review/addShoot";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    //修改拍摄
+    function updateShoot($data){
+        $url=$this->tmore_api_url."/review/updateShoot";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
 }
 ?>

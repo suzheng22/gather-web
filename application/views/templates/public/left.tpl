@@ -17,7 +17,8 @@
                  <dd><a href=".html" title="营养成风">营养成分</a></dd>
                  <dd><a href="#" title="基本信息管理">基本信息管理</a></dd>
              </dl>
-                        
+
+
             <dl class="record system_log">
                 <dt><i class="icon iconfont">&#x346a;</i>录入管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                 <dd><a href="{{$root_path}}input/index" title="录入">录入</a></dd>
@@ -25,6 +26,10 @@
 
              <dl class="check_manager system_log">
                 <dt><i class="icon iconfont">&#xf01d8;</i>审核管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                 <dd><a href="{{$root_path}}marlboro/shootAddManager" title="拍摄审核">拍摄新增管理</a></dd>
+                 <dd><a href="{{$root_path}}marlboro/noshoot" title="录入">无法拍摄</a></dd>
+                 <dd><a href="{{$root_path}}marlboro/shootBackDetail" title="录入">拍摄驳回统计</a></dd>
+                 <dd><a href="{{$root_path}}marlboro/noMeasure" title="录入">无法测量</a></dd>
                 <dd><a href="{{$root_path}}marlboro/shoot" title="拍摄审核">拍摄审核</a></dd>
                 <dd><a href="{{$root_path}}marlboro/ps" title="修图审核">修图审核</a></dd>
                 <dd><a href="#" title="录入审核">录入审核</a></dd>

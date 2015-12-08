@@ -17,11 +17,11 @@
             	<h3>项目成员管理 <a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
                 <div class="rose_top main_rignt_top clearfix">
                     <form action="{{$root_path}}project/projectUserManager" id="myform">
-                        <div class="cc_top_one clearfix"><label>项目名称:</label><input type="text" name="project" value="{{$project}}"/></div>
+                        <div class="cc_top_one clearfix"><label>项目名称:</label><input type="text" name="project" value="{{$project}}" class="project"/></div>
                         <div class="cc_top_one clearfix last_show"><label>用户名:</label>
                           <div class="choice_count choice_box">            	 			
                                 <dl class="select">
-                                    <select name="username">
+                                    <select name="username" class="username">
                                     		<option value="">请选择</option>
                                         {{foreach from =$userList item=list}}
                                                 <option value="{{$list.userId}}" {{if $list.userId==$username}}selected="selected"{{/if}}>{{$list.userName}}</option>
@@ -33,7 +33,7 @@
                         <div class="cc_top_one clearfix last_show"><label>状态:</label>
                           <div class="choice_count choice_box">            	 			
                                 <dl class="select">
-                                    <select name="status">
+                                    <select name="status" class="status">
 											<option value="">请选择</option>
                                         <option value="1" {{if $status==1}}selected="selected"{{/if}}>正常</option>
                                         <option value="2" {{if $status==2}}selected="selected"{{/if}}>冻结</option>
@@ -44,7 +44,7 @@
                         <div class="clearfix"></div>
                          <div class="cc_top_two clearfix">
                            <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                            <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                            <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
                     </form>
                     	<div class="clearfix"></div>

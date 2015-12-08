@@ -35,9 +35,11 @@
             {{if $status!=1 && $status!=2}}
             <a href="javascript:;" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
             <a href="javascript:;" id="shoot_new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
+            <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>
             {{else}}
             {{if $status==1}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
-            {{elseif $status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>{{/if}}
+            {{elseif $status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>
+            {{elseif $status==3}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>{{/if}}
             {{/if}}
         </div>
     </ul>
@@ -154,25 +156,44 @@
 </div>
 <!-- 驳回弹出层 开始-->
 <div class="newuser_pop" id="shoot_newuser_pop">
-	<div class="tit clearfix"><h4>xxxx-拍摄驳回</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
-	<div class="content">
-		<div class="login_main">
-			<div class="login_form">
-				<div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
+    <div class="tit clearfix"><h4>xxxx-拍摄驳回</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="content">
+        <div class="login_main">
+            <div class="login_form">
+                <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.proName}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.typeName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(2)">确认</a>
             </div>
-	   </div>
+        </div>
     </div>
 </div>
+
+<!-- 通过缺图  开始-->
+<div class="newuser_pop" id="shoot_pass_less">
+    <div class="tit clearfix"><h4>xxxx-缺图</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="content">
+        <div class="login_main">
+            <div class="login_form">
+                <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm gtin1">{{$p_info.gtin}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.proName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm typeName1">{{$p_info.typeName}}</span></div>
+                <div class="clearfix one"><label for="user_name">备注:</label><textarea id="remark"></textarea></div>
+                <a href="javascript:;"  class="confirm_btn" onclick="add_miss_figure(2)">确认</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script> 	
+<script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/record.js"></script> 
+<script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
@@ -213,18 +234,37 @@
 			fnAdditional:function(){
 				
 			}
-		}); 					
-});
+		});
+
+        //拍摄详情
+
+        $("#shoot_pass_less").pop({
+            oMain:"#shoot_pass_less_btn",         //触发弹出层的元素。为空时直接弹出
+            sEvent:"click",             //触发事件
+            oClose:"#shoot_pass_less .close", //关闭按钮
+            bIframe:false,              //是否有iframe
+            iSrc:"",                    //iframe地址
+            bShade:true,                //是否有遮罩
+            bShadeClose:false,          //是否点遮罩关闭
+            fnAdditional:function(){
+
+            }
+        });
+    });
 
 function check(status){
 	var gtin={{$p_info.gtin}};
+    if(status == 1 && confirm("你确定要审核通过吗？")==false){
+        return false;
+    }
 	var memo=$("#memo").val();
     var data={"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'shoot'};
 		$.post("{{$root_path}}marlboro/checkStatus",data,
 		  	function(data){
-                alert(data);
 				var dataObj=eval("("+data+")");
+                alert(123);
 				if(dataObj.msgCode==0){
+
 					if(status==1){
 					   alert('审核成功');
 					}
@@ -238,9 +278,29 @@ function check(status){
 					window.location.reload();
 				}
 		  	},"text");
-
-
 }
+    function add_miss_figure(){
+        //条形码
+        var gtin=$(".gtin1").html();
+        //商品名称
+        var  proName=$(".proName1").html();
+        //商品类型
+        var typeName=$(".typeName1").html();
+        var remark=$("#remark").val();
+        var data={gtin:gtin,proName:proName,typeName:typeName,remark:remark};
+        $.ajax({
+            url:'{{$root_path}}marlboro/addMissFigure',
+            type:"POST",
+            dataType:'json',
+            data:data,
+            success:function(e){
+                alert(e.msg);
+            }
+
+        });
+
+    }
+
 </script> 
 
 </body>

@@ -128,7 +128,6 @@
                         </td>
                       </tr>
 					  {{/foreach}}
-                      </tr>
                     </table>
                 </div>
                 	{{$pages}}
