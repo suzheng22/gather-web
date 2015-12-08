@@ -31,21 +31,21 @@
                         
                        <div class="clearfix"></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
-                            <div class="choice_count choice_box">            	 			
+                            <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="type" id="type" >
+                                    <select name="type" id="type" class="select3">
 										<option value="">全部</option>
-										{{foreach from=$type_list item=list}}
+									 {{foreach from=$type_list item=list}}
 												<option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-											{{/foreach}}
+										 {{/foreach}}
 									</select>
                                 </dl>
                             </div>
                         </div>
                          <div class="cc_top_one last_show"><label>修图类型:</label>
-                            <div class="choice_count choice_box">            	 			
+                            <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-								<select name="retouchType">
+								<select name="retouchType" class="select3">
 									<option value="">全部</option>
 									<option value="1" {{if $retouchType==1}}selected="selected"{{/if}}>正常修图</option>
 									<option value="2" {{if $retouchType==2}}selected="selected"{{/if}}>驳回修图</option>
@@ -54,9 +54,9 @@
                             </div>
                         </div>
                          <div class="cc_top_one last_show"><label>状态:</label>
-                            <div class="choice_count choice_box">            	 			
+                            <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-								<select name="status">
+								<select name="status" class="select3">
 									<option value="" {{if $status eq 'NULL'}}selected="selected"{{/if}}>全部</option>
 									<option value="0" {{if $status eq '0'}}selected="selected"{{/if}}>未审核</option>
 									<option value="1" {{if $status==1}}selected="selected"{{/if}}>修图已通过</option>
@@ -66,6 +66,7 @@
                                 </dl>
                             </div>
                         </div>
+                        <div class="clearfix"></div>
                     <div class="cc_top_two">
                         <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="check(1)" /></span>
                          <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>

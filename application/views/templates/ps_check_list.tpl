@@ -19,17 +19,18 @@
 				<form action="{{$root_path}}marlboro/ps" method="get">
                 	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" id="user_name"></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
-                    	<div class="choice_count choice_box">            	 			
+                    	<div class="choice_count choice_box vocation">            	 			
 							<dl class="select">
-									<select name="groupId">
+									<select name="groupId" class="select3">
 										<option value="">全部</option>
-										{{foreach from=$group_list item=list}}
+									{{foreach from=$group_list item=list}}
 												<option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
-											{{/foreach}}
+									{{/foreach}}
 									</select>
 								</dl>
 	            	 	</div>
                      </div>
+                    <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
                        
                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
@@ -66,7 +67,10 @@
                       
                     </table>
                 </div>
-                	
+                	<!--分页-->
+                    <div class="page_nav" id="page_nav">
+                      {{$pages}}
+                    </div>
                 </div>
             </div>
         </div>

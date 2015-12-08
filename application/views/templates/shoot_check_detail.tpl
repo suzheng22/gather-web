@@ -24,13 +24,13 @@
 						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}" id="myform">
                             <!-- 项目 -->
                             <div class="cc_top_one last_show"><label>项目:</label>
-                                <div class="choice_count choice_box">
+                                <div class="choice_count choice_box vocation">
                                     <dl class="select">
-                                        <select name="projectType">
+                                        <select name="projectType" class="select3">
                                             <option value="">全部</option>
-                                            {{foreach from=$project_list item=list}}
+                                          {{foreach from=$project_list item=list}}
                                             <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                            {{/foreach}}
+                                          {{/foreach}}
                                         </select>
                                     </dl>
                                 </div>
@@ -44,55 +44,49 @@
                             <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/>
                         </div>
-                        <!--<div class="cc_top_one">
-                            <label>拍摄结束时间:</label>
-                            <input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/>
-                        </div>-->
-                        
-                       
-                        <div class="clearfix"></div>
-                        <div class="cc_top_one last_show"><label>商品分类:</label>
-                            <div class="choice_count choice_box">            	 			
-                                <dl class="select">
-                                   <select name="type" id="type" >
-										<option value="">全部</option>
-										{{foreach from=$type_list item=list}}
-												<option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-											{{/foreach}}
-									</select>
-                                </dl>
-                            </div>
-                        </div>
-                         <div class="cc_top_one last_show"><label>拍摄类型:</label>
-                            <div class="choice_count choice_box">            	 			
-                                <dl class="select">
-                                     <select name="shootType">
-                                   		<option value="">全部</option>
-                                        <option value="1" {{if $shootType==1}}selected="selected"{{/if}}>正常拍摄</option>
-                                        <option value="2" {{if $shootType==2}}selected="selected"{{/if}}>驳回拍摄</option>
-                                   </select>
-                                </dl>
-                            </div>
-                        </div>
-                         <div class="cc_top_one last_show"><label>状态:</label>
-                            <div class="choice_count choice_box">            	 			
-                                <dl class="select">
-								<select name="status">
-									<option value="" {{if $status eq 'NULL'}}selected="selected"{{/if}}>全部</option>
-									<option value="0" {{if $status eq '0'}}selected="selected"{{/if}}>未审核</option>
-									<option value="1" {{if $status==1}}selected="selected"{{/if}}>拍摄已通过</option>
-									<option value="2" {{if $status==2}}selected="selected"{{/if}}>拍摄已驳回</option>
-								</select>
-                                </dl>
-                            </div>
-                        </div>
                             <div class="clearfix"></div>
-                    <div class="cc_top_two">
-                            <span class="queryAll query"><input type="button" value="查询结果内通过" onclick="shoot_pass()"></span>
-                        	<span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
-                            <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
-                    </div>
-					</form>
+                             <div class="cc_top_one last_show"><label>商品分类:</label>
+                                <div class="choice_count choice_box vocation">            	 			
+                                    <dl class="select">
+                                       <select name="type" id="type" class="select3">
+                                            <option value="">全部</option>
+                                             {{foreach from=$type_list item=list}}
+                                                    <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                                 {{/foreach}}
+                                        </select>
+                                    </dl>
+                                </div>
+                            </div>
+                             <div class="cc_top_one last_show"><label>拍摄类型:</label>
+                                <div class="choice_count choice_box vocation">            	 			
+                                    <dl class="select">
+                                         <select name="shootType" class="select3">
+                                            <option value="">全部</option>
+                                            <option value="1" {{if $shootType==1}}selected="selected"{{/if}}>正常拍摄</option>
+                                            <option value="2" {{if $shootType==2}}selected="selected"{{/if}}>驳回拍摄</option>
+                                       </select>
+                                    </dl>
+                                </div>
+                            </div>
+                             <div class="cc_top_one last_show"><label>状态:</label>
+                                <div class="choice_count choice_box vocation">            	 			
+                                    <dl class="select">
+                                    <select name="status" class="select3">
+                                        <option value="" {{if $status eq 'NULL'}}selected="selected"{{/if}}>全部</option>
+                                        <option value="0" {{if $status eq '0'}}selected="selected"{{/if}}>未审核</option>
+                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>拍摄已通过</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>拍摄已驳回</option>
+                                    </select>
+                                    </dl>
+                                </div>
+                            </div>
+                                <div class="clearfix"></div>
+                            <div class="cc_top_two">
+                                <span class="queryAll query"><input type="button" value="查询结果内通过" onclick="shoot_pass()"></span>
+                                <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
+                                <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
+                        </div>
+						</form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box" >
                     <table id="show_detail">
@@ -130,7 +124,10 @@
 					  {{/foreach}}
                     </table>
                 </div>
-                	{{$pages}}
+                	<!--分页-->
+                    <div class="page_nav" id="page_nav">
+                      {{$pages}}
+                    </div>
                 	
                 </div>
             </div>

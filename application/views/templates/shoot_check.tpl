@@ -17,41 +17,39 @@
             	<h3>拍摄审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
                 	<form action="{{$root_path}}marlboro/shoot" method="get">
-
-                        <!--项目*-->
-                     <div class="cc_top_one">
-                         <label>项目:</label>
-                         <div class="choice_count choice_box">
-                         <dl class="select">
-                             <select name="project">
-                                 <option value="">全部</option>
-                                 {{foreach from=$project_list item=list}}
-                                 <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                 {{/foreach}}
-                             </select>
-                         </dl>
-                     </div>
-                     </div>
-
-                	<div class="cc_top_one"><label>用户名:</label><input type="text" id="count_user"/></div>
-                    <div class="cc_top_one last_show"><label>用户组:</label>
-                    	<div class="choice_count choice_box">            	 			
-							<dl class="select">
-                                     <select name="groupId">
-										<option value="">全部</option>
-										{{foreach from=$group_list item=list}}
-												<option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
-											{{/foreach}}
-									</select>
-								</dl>
-	            	 	</div>
-                     </div>
-                    <div class="clearfix"></div>
-                    <div class="cc_top_two" style="margin-left:14px; display:inline;">
-                       
-                       <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"/></span>
-                       <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
-                    </div>
+                         <!--项目*-->
+                         <div class="cc_top_one">
+                             <label>项目:</label>
+                             <div class="choice_count choice_box vocation">
+                             <dl class="select">
+                                 <select name="project" class="select3">
+                                     <option value="">全部</option>
+                                    {{foreach from=$project_list item=list}}
+                                     <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
+                                    {{/foreach}}
+                                 </select>
+                             </dl>
+                            </div>
+                         </div>
+                        <div class="cc_top_one"><label>用户名:</label><input type="text" id="count_user"/></div>
+                        <div class="cc_top_one last_show"><label>用户组:</label>
+                            <div class="choice_count choice_box vocation">            	 			
+                                <dl class="select">
+                                         <select name="groupId" class="select3">
+                                            <option value="">全部</option>
+                                            {{foreach from=$group_list item=list}}
+                                                    <option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
+                                            {{/foreach}}
+                                        </select>
+                                    </dl>
+                            </div>
+                         </div>
+                        <div class="clearfix"></div>
+                        <div class="cc_top_two" style="margin-left:14px; display:inline;">
+                           
+                           <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"/></span>
+                           <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
+                        </div>
                     </form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
@@ -89,8 +87,10 @@
                       
                     </table>
                 </div>
-                	
-                	
+                	<!--分页-->
+                    <div class="page_nav" id="page_nav">
+                      {{$pages}}
+                    </div>
                 </div>
             </div>
         </div>

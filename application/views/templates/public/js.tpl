@@ -2,6 +2,7 @@
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/full_screen.js"></script>
+<script type="text/javascript" src="{{$resource_url}}style/select2/select-ui.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	//用户列表

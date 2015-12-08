@@ -20,7 +20,8 @@ $(function(){
 	<!------------------------login------------------------------------->
 	<div class="j-top">
     	<div class="j-top-warp">
-			<h3>数据采集系统<span>v1.0</span></h3>
+			<!--<h3>数据采集系统<span>v1.0</span></h3>-->
+            <h3><img src="images/logo.png"/></h3>
         </div>
     
     </div> 

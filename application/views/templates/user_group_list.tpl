@@ -16,20 +16,20 @@
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}user/userGroupList" method="get">
                         <div class="cc_top_one clearfix"><label>用户组名称:</label><input type="text" name="groupName" value="{{$groupName}}"/ id="user_group_name"></div>
-                        <div class="cc_top_one clearfix"><label>角色名称:</label><select name="roleId">
+                         <div class="cc_top_one clearfix vocation"><label>角色名称:</label><select name="roleId" class="select3">
 																					<option value="">请选择</option>
-																					{{foreach from =$role_list item=list}}
-																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
+																			{{foreach from =$role_list item=list}}
+																			<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
 																					{{/foreach}}
-																			  </select></div> 
-                        <div class="cc_top_two clearfix">
+																			</select></div> 
+                       <div class="clearfix"></div>
+                       <div class="cc_top_two clearfix">
                            <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                            <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
 						</form>
                     <div class="clearfix"></div>
-                 
-                <div class="tab_box">
+                	<div class="tab_box">
                     <table>
                       <tr>
                         <th>用户组名称</th>
@@ -57,10 +57,14 @@
                       
                     </table>
                 </div>
-                {{$pages}}
+                <!--分页-->
+                    <div class="page_nav" id="page_nav">
+                      {{$pages}}
+                    </div>
             </div>
         
         </div>
+      </div>
      </div><!--main end-->  		
 </div>
 <!-- 新建用户弹出层 开始-->
@@ -72,10 +76,10 @@
                 <div class="clearfix one"><label for="user_name">用户组名称:</label><input type="text" id="groupName" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">角色名称:</label><select id="roleId">
 																					<option value="">请选择</option>
-																					{{foreach from =$role_list item=list}}
+																			{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
 																					{{/foreach}}
-																			  </select></div>
+																			</select></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="addUserGroup()">确认</a>
             </div>
@@ -104,7 +108,6 @@
 </div>
 {{include file='public/js.tpl'}}
 <script  type="text/javascript">
-
 $(function(){	
 	var url = window.location;
     $('.system_log dd a').filter(function (){

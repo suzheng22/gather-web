@@ -18,9 +18,9 @@
                 <div class="rose_top main_rignt_top clearfix">
                     <form id="{{$root_path}}marlboro/shootBackDetail">
                 	 <div class="cc_top_one last_show"><label>项目名称:</label>
-                            <div class="choice_count choice_box">            	 			
+                            <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="project">
+                                    <select name="project" class="select3">
                                         <option value="">全部</option>
                                         {{foreach from=$project_list item=list}}
                                         <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
@@ -32,9 +32,9 @@
                     <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" class="gtin"/></div>
                     <div class="cc_top_one"><label>商品名称:</label><input type="text" name="proName" value="{{$proName}}" class="proName"/></div>
                     <div class="cc_top_one last_show"><label>商品分类:</label>
-                        <div class="choice_count choice_box">
+                        <div class="choice_count choice_box vocation">
                             <dl class="select">
-                                <select name="type">
+                                <select name="type" class="select3">
                                     <option value="">全部</option>
                                     {{foreach from=$type_list item=list}}
                                     <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
@@ -50,9 +50,9 @@
                          <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
                         </div>
                     <div class="cc_top_one last_show"><label>状态:</label>
-                        <div class="choice_count choice_box">
+                        <div class="choice_count choice_box vocation">
                             <dl class="select">
-                                <select name="status">
+                                <select name="status" class="select3">
                                     <option value="">全部</option>
                                     <option value="1" {{if $status==1}}selected="selected"{{/if}}>已处理</option>
                                     <option value="2" {{if $status==2}}selected="selected"{{/if}}>未处理</option>
