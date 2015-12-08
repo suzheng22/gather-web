@@ -1,20 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-include("../libraries/PHPExcel.php");
 class Marlboro extends My_Controller {
-
     public function __construct()
     {
         parent::__construct();
-        include("../libraries/PHPExcel.php");
         $this->load->model('ps/marlboro_model');
         $this->load->model('user/user_model');
         $this->load->model('publicFuc/publicFuc_model','publicFuc');
-    }
-    function test()
-    {
-        $a=$this-> getUrl('1',array('a'=>123));
-        var_dump($a);
     }
     function ps(){
         $data['userId']=$this->user_info['userId'];
@@ -227,6 +219,7 @@ class Marlboro extends My_Controller {
 
         $data['userName']=$this->input->get('userName');
         $data['groupId']=$this->input->get('groupId');
+
         $data['projectId']=$this->input->get("projectId");//1
         if($data['userName']!=''){
             $this->ci_smarty->assign('userName',$data['userName']);
