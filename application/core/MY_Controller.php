@@ -175,7 +175,7 @@ class MY_Controller extends CI_Controller
         }
     }
     //保存到本地图片
-    function getImg($url,$save_dir='C:/Users/Administrator/Pictures',$filename='',$type=0){
+    function getImg($url,$save_dir='',$filename='',$type=0){
         if(trim($url)==''){
             return array('file_name'=>'','save_path'=>'','error'=>1);
         }
