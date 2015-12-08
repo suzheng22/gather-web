@@ -4,7 +4,6 @@ class PublicFuc_model extends MY_Model {
     {
         // Call the CI_Model constructor
         parent::__construct();
-
     }
     //导出csv
     function export_csv($fileName,$firstLine,$result){

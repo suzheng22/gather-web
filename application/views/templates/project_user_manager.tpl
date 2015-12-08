@@ -99,9 +99,9 @@
                         <dl class="select">
                             <select name="username" id="role" onchange="role_change()">
                                 <option value="">请选择</option>
-                                {{foreach from =$rList item=list}}
+                              {{foreach from =$rList item=list}}
                                 <option value="{{$list.roleId}}">{{$list.roleName}}</option>
-                                {{/foreach}}
+                              {{/foreach}}
                             </select>
                         </dl>
                     </div></div>

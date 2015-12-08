@@ -19,9 +19,9 @@
                     <form action="{{$root_path}}project/projectManager" id="myform">
                         <div class="cc_top_one clearfix"><label>项目名称:</label><input type="text" name="project" value="{{$project}}" class="project"/></div>
                         <div class="cc_top_one clearfix last_show"><label>状态:</label>
-                          <div class="choice_count choice_box">            	 			
+                          <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="status">
+                                    <select name="status" class="select3">
 											<option value="">请选择</option>
 											<option value="1" {{if $status==1}}selected="selected"{{/if}}>正常</option>
                                             <option value="2" {{if $status==2}}selected="selected"{{/if}}>冻结</option>

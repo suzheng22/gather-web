@@ -16,14 +16,14 @@
             	<h3>无法拍摄管理</h3>
                 <div class="rose_top main_rignt_top clearfix">
                     <form action="{{$root_path}}marlboro/noShoot" id="myform">
-                	 <div class="cc_top_one last_show"><label>项目名称:</label>
+                	 <div class="cc_top_one last_show vocation"><label>项目名称:</label>
                             <div class="choice_count choice_box">            	 			
                                 <dl class="select">
-                                    <select name="project">
+                                    <select name="project" class="select3">
                                         <option value="">全部</option>
-                                        {{foreach from=$project_list item=list}}
+                                       {{foreach from=$project_list item=list}}
                                         <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                        {{/foreach}}
+                                       {{/foreach}}
                                     </select>
                                 </dl>
                             </div>
@@ -31,13 +31,13 @@
                     <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" class="gtin"/></div>
                     <div class="cc_top_one"><label>商品名称:</label><input type="text" name="proName" value="{{$proName}}" class="proName"/></div>
                     <div class="cc_top_one last_show"><label>商品分类:</label>
-                        <div class="choice_count choice_box">
+                        <div class="choice_count choice_box vocation">
                             <dl class="select">
-                                <select name="type">
+                                <select name="type" class="select3">
                                     <option value="">全部</option>
-                                    {{foreach from=$type_list item=list}}
+                                   {{foreach from=$type_list item=list}}
                                     <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-                                    {{/foreach}}
+                                   {{/foreach}}
                                 </select>
                             </dl>
                         </div>
