@@ -22,9 +22,9 @@
                                 <dl class="select">
                                     <select name="project" class="select3">
                                         <option value="">全部</option>
-                                       {{foreach from=$project_list item=list}}
+                                     {{foreach from=$project_list item=list}}
                                         <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                       {{/foreach}}
+                                     {{/foreach}}
                                     </select>
                                 </dl>
                             </div>
@@ -34,11 +34,11 @@
                     <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box vocation">
                                 <dl class="select">
-                                    <select name="type" select3>
+                                    <select name="type" class="select3">
                                         <option value="">全部</option>
-                                       {{foreach from=$type_list item=list}}
+                                      {{foreach from=$type_list item=list}}
                                         <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-                                       {{/foreach}}
+                                      {{/foreach}}
                                     </select>
                                 </dl>
                             </div>

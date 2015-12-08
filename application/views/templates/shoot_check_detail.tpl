@@ -28,9 +28,9 @@
                                     <dl class="select">
                                         <select name="projectType" class="select3">
                                             <option value="">全部</option>
-                                          {{foreach from=$project_list item=list}}
+                                         {{foreach from=$project_list item=list}}
                                             <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                          {{/foreach}}
+                                         {{/foreach}}
                                         </select>
                                     </dl>
                                 </div>
@@ -50,9 +50,9 @@
                                     <dl class="select">
                                        <select name="type" id="type" class="select3">
                                             <option value="">全部</option>
-                                             {{foreach from=$type_list item=list}}
+                                            {{foreach from=$type_list item=list}}
                                                     <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-                                                 {{/foreach}}
+                                                {{/foreach}}
                                         </select>
                                     </dl>
                                 </div>

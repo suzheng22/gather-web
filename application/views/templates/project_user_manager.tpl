@@ -19,13 +19,13 @@
                     <form action="{{$root_path}}project/projectUserManager" id="myform">
                         <div class="cc_top_one clearfix"><label>项目名称:</label><input type="text" name="project" value="{{$project}}" class="project"/></div>
                         <div class="cc_top_one clearfix last_show"><label>用户名:</label>
-                          <div class="choice_count choice_box">            	 			
+                          <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="username" class="username">
+                                    <select name="username" class="username select3">
                                     		<option value="">请选择</option>
-                                       {{foreach from =$userList item=list}}
+                                      {{foreach from =$userList item=list}}
                                                 <option value="{{$list.userId}}" {{if $list.userId==$username}}selected="selected"{{/if}}>{{$list.userName}}</option>
-                                           {{/foreach}}
+                                          {{/foreach}}
 										</select>
                                     </dl>
                             </div>

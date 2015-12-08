@@ -21,28 +21,38 @@
 						<form action="{{$root_path}}user/index" method="get">
                         <div class="cc_top_one clearfix"><label>账号名:</label><input type="text" name="userName" value="{{$userName}}"/ id="count_user"></div>
                         <div class="cc_top_one clearfix"><label>用户名:</label><input type="text" name="trueName" value="{{$trueName}}"/ id="user"></div>
-                        <div class="cc_top_one clearfix vocation"><label>角色名称:</label><select name="roleId" class="select3">
+                        <div class="cc_top_one clearfix"><label>角色名称:</label>
+                         <div class="choice_count choice_box vocation">            	 			
+                                <dl class="select">
+                        <select name="roleId" class="select3">
 																					<option value="">请选择</option>
 																					{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
 																					{{/foreach}}
-																			  </select></div>
-                        <div class="cc_top_one clearfix vocation"><label>用户组名称:</label>
+																			  </select>
+                                                                              </dl>
+                                                                              </div></div>
+                        <div class="cc_top_one clearfix"><label>用户组名称:</label>
+                        <div class="choice_count choice_box vocation">            	 			
+                                <dl class="select">
 																					<select name="groupId" class="select3">
 																					<option value="">请选择</option>
 																					{{foreach from =$group_list item=list}}
 																						<option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
 																					{{/foreach}}
 																					</select>
-																					</div>
+																					</dl></div></div>
                          <div class="clearfix"></div>                                                           
-                        <div class="cc_top_one clearfix vocation"><label>状态:</label><select name="status" class="select3">
+                        <div class="cc_top_one clearfix vocation"><label>状态:</label>
+                        <div class="choice_count choice_box vocation">            	 			
+                                <dl class="select">
+                        <select name="status" class="select3">
 																				<option value="">请选择</option>
 																				<option value="1" {{if $status==1}}selected="selected"{{/if}}>正常</option>
 																				<option value="2" {{if $status==2}}selected="selected"{{/if}}>禁用</option>
 							
                             
-                           												</select></div>
+                           												</select></dl></div></div>
                                                                         
                         <div class="clearfix"></div> 
                         <div class="cc_top_two clearfix">

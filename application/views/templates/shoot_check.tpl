@@ -24,9 +24,9 @@
                              <dl class="select">
                                  <select name="project" class="select3">
                                      <option value="">全部</option>
-                                    {{foreach from=$project_list item=list}}
+                                   {{foreach from=$project_list item=list}}
                                      <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                    {{/foreach}}
+                                   {{/foreach}}
                                  </select>
                              </dl>
                             </div>
@@ -37,9 +37,9 @@
                                 <dl class="select">
                                          <select name="groupId" class="select3">
                                             <option value="">全部</option>
-                                            {{foreach from=$group_list item=list}}
+                                           {{foreach from=$group_list item=list}}
                                                     <option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
-                                            {{/foreach}}
+                                           {{/foreach}}
                                         </select>
                                     </dl>
                             </div>
