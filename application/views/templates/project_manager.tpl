@@ -100,6 +100,7 @@ $(function(){
 		width : 100
 	});
 	
+	
 	//侧栏菜单美化
 	
 	var url = window.location;

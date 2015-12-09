@@ -95,9 +95,10 @@
 		<div class="login_main">
 			<div class="login_form">
 				<div class="clearfix one"><label for="user_name">项目名称:</label><input type="text" id="projectName" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">用户角色:</label> <div class="choice_count choice_box">
+                <div class="clearfix one"><label for="user_name">用户角色:</label> 
+                	<div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select name="username" id="role" onchange="role_change()">
+                            <select name="username" id="role" onchange="role_change()" class="select1">
                                 <option value="">请选择</option>
                              {{foreach from =$rList item=list}}
                                 <option value="{{$list.roleId}}">{{$list.roleName}}</option>
@@ -105,9 +106,10 @@
                             </select>
                         </dl>
                     </div></div>
-                <div class="clearfix one"><label for="user_name">用户名:</label> <div class="choice_count choice_box">
+                <div class="clearfix one"><label for="user_name">用户名:</label>
+                 <div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select name="username" id="username">
+                            <select name="username" id="username" class="select1">
                                 <option value="">请选择</option>
                             </select>
                         </dl>
@@ -127,7 +129,9 @@ $(function(){
 	$(".select3").uedSelect({
 		width : 100
 	});
-	
+	 $(".select1").uedSelect({
+		width :250			  
+	});
 	//侧栏菜单美化
 	var url = window.location;
     $('.system_log dd a').filter(function (){
