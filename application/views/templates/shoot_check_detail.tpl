@@ -28,9 +28,9 @@
                                     <dl class="select">
                                         <select name="projectType" class="select3">
                                             <option value="">全部</option>
-                                         {{foreach from=$project_list item=list}}
+                                       {{foreach from=$project_list item=list}}
                                             <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                         {{/foreach}}
+                                       {{/foreach}}
                                         </select>
                                     </dl>
                                 </div>
@@ -50,9 +50,9 @@
                                     <dl class="select">
                                        <select name="type" id="type" class="select3">
                                             <option value="">全部</option>
-                                            {{foreach from=$type_list item=list}}
+                                          {{foreach from=$type_list item=list}}
                                                     <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-                                                {{/foreach}}
+                                              {{/foreach}}
                                         </select>
                                     </dl>
                                 </div>
@@ -140,6 +140,10 @@
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $(function(){
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
 	//菜单高亮显示和地址栏比对
 	var url = window.location;
     $('.system_log dd a').filter(function (){

@@ -100,6 +100,13 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
+
+
+
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
 $('#datetimepicker_start').datetimepicker({
 	onGenerate:function( ct ){
 		$(this).find('.xdsoft_date')

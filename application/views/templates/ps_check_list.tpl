@@ -83,6 +83,12 @@
 
 $(function(){
 	
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
 	//菜单高亮显示和地址栏比对
 	var url = window.location;
     $('.check_manager dd a').filter(function (){

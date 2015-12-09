@@ -159,6 +159,12 @@
 <script  type="text/javascript">
 
 $(function(){
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
 	//左侧菜单	
 	var url = window.location;
     $('.system_log dd a').filter(function (){

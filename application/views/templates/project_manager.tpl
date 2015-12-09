@@ -93,6 +93,14 @@
 <script type="text/javascript">
 $(function(){
 	
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
+	//侧栏菜单美化
+	
 	var url = window.location;
     $('.system_log dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;

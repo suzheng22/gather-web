@@ -23,9 +23,9 @@
                                 <dl class="select">
                                     <select name="username" class="username select3">
                                     		<option value="">请选择</option>
-                                      {{foreach from =$userList item=list}}
+                                     {{foreach from =$userList item=list}}
                                                 <option value="{{$list.userId}}" {{if $list.userId==$username}}selected="selected"{{/if}}>{{$list.userName}}</option>
-                                          {{/foreach}}
+                                         {{/foreach}}
 										</select>
                                     </dl>
                             </div>
@@ -99,9 +99,9 @@
                         <dl class="select">
                             <select name="username" id="role" onchange="role_change()">
                                 <option value="">请选择</option>
-                              {{foreach from =$rList item=list}}
+                             {{foreach from =$rList item=list}}
                                 <option value="{{$list.roleId}}">{{$list.roleName}}</option>
-                              {{/foreach}}
+                             {{/foreach}}
                             </select>
                         </dl>
                     </div></div>
@@ -122,6 +122,13 @@
 <script type="text/javascript">
 $(function(){
 	
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
+	//侧栏菜单美化
 	var url = window.location;
     $('.system_log dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;

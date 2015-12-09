@@ -193,6 +193,13 @@
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
 	//用户列表
      $("#newuser_pop").pop({
         oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
