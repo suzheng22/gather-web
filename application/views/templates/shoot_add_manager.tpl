@@ -146,18 +146,18 @@
 				<div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="gtin_1" class="zhmm" onkeyup="get_gtin_detail()"><span style="color:red" class="show_msg"></span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="proName_1" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one"><label for="user_name">项目:</label>
-                	<div class="vocation">
-                        <select name="project" id="project_1" class="select3">
+                	<div class="vocation" style="float:left;">
+                        <select name="project" id="project_1" class="select1">
                             <option value="">全部</option>
-                           {{foreach from=$project_list item=list}}
+                          {{foreach from=$project_list item=list}}
                             <option value="{{$list.projectId}}">{{$list.project}}</option>
-                           {{/foreach}}
+                          {{/foreach}}
                         </select>
                         </div>
                 </div>
                 <div class="clearfix one"><label for="user_name">包装:</label>
-                	<div class="vocation">
-                    <select id="pack_1" class="select3">
+                	<div class="vocation" style="float:left;">
+                    <select id="pack_1" class="select1">
                         <option value="">无</option>
                     </select>
                     </div>
@@ -177,8 +177,8 @@
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="gtin_2" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="proName_2" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one"><label for="user_name">项目:</label>
-                <div class="vocation">
-                    <select id="project_2" class="select3">
+                <div class="vocation" style="float:left">
+                    <select id="project_2" class="select1">
                         <option value="">全部</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -210,6 +210,9 @@ $(function(){
 	//select 表单美化
 	$(".select3").uedSelect({
 		width : 100
+	});
+	 $(".select1").uedSelect({
+		width :250			  
 	});
 	
 	//用户列表
