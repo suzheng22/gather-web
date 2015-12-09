@@ -18,20 +18,21 @@
                 <div class="rose_top main_rignt_top clearfix">
                 	<form action="{{$root_path}}marlboro/shoot" method="get">
                          <!--项目*-->
+
                          <div class="cc_top_one last_show">
-                             <label>项目:</label>
+                             <label>项目:{{$pId}}</label>
                              <div class="choice_count choice_box vocation">
                              <dl class="select">
-                                 <select name="project" class="select3">
+                                 <select name="pId" class="select3">
                                      <option value="">全部</option>
                                    {{foreach from=$project_list item=list}}
-                                     <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
+                                     <option value="{{$list.pId}}" {{if $pId==$list.pId}}selected="selected"{{/if}}>{{$list.pName}}</option>
                                    {{/foreach}}
                                  </select>
                              </dl>
                             </div>
                          </div>
-                        <div class="cc_top_one"><label>用户名:</label><input type="text" id="count_user"/></div>
+                        <div class="cc_top_one"><label>用户名:</label><input type="text" id="count_user" name="userName" value="{{$userName}}"/></div>
                         <div class="cc_top_one last_show"><label>用户组:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
