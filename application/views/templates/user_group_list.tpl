@@ -20,7 +20,7 @@
                          
                          <select name="roleId" class="select3">
 							<option value="">请选择</option>
-							{foreach from =$role_list item=list}}
+							{{foreach from =$role_list item=list}}
 							<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
 																			{{/foreach}}
 																			</select></div> 
