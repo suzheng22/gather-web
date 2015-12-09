@@ -19,7 +19,7 @@ $(function(){
 	<!------------------------login------------------------------------->
 	<div class="j-top">
     	<div class="j-top-warp">
-			<h3>数据采集系统</h3>
+			<h3><img src="{{$resource_url}}images/logo.png"/></h3>
            <!-- <div class="top_right"><span>RingKing</span><em>,欢迎你</em>|<a href="#">退出</a></div>-->
         </div>
     

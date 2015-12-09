@@ -6,11 +6,12 @@
                 <dd><a href="{{$root_path}}user/index" title="用户管理">用户管理</a></dd>
                 <dd><a href="{{$root_path}}role/index" title="角色管理">角色管理</a></dd>
                 <dd><a href="{{$root_path}}user/userGroupList" title="用户组管理">用户组管理</a></dd>
+                <dd><a href="{{$root_path}}project/projectManager" title="项目管理">项目管理</a></dd>
+                <dd><a href="{{$root_path}}project/projectUserManager" title="项目成员管理">项目成员管理</a></dd>
             </dl>
              <dl class="menu_base_info system_log">
                  <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="images/left/select_xl01.png"></dt>
-                 <dd><a href="{{$root_path}}project/projectManager" title="项目管理">项目管理</a></dd>
-                 <dd><a href="{{$root_path}}project/projectUserManager" title="项目成员管理">项目成员管理</a></dd>
+                
                  <dd><a href=".html" title="商品管理">商品管理</a></dd>
                  <dd><a href=".html" title="商品管理">商品管理</a></dd>
                  <dd><a href=".html" title="扩充成分">扩充成分</a></dd>
