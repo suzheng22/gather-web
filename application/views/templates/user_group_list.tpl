@@ -16,14 +16,15 @@
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}user/userGroupList" method="get">
                         <div class="cc_top_one clearfix"><label>用户组名称:</label><input type="text" name="groupName" value="{{$groupName}}"/ id="user_group_name"></div>
-                         <div class="cc_top_one clearfix vocation"><label>角色名称:</label>
-                         
+                         <div class="cc_top_one clearfix last_show"><label>角色名称:</label>
+                          <dl class="select">
+                                 
                          <select name="roleId" class="select3">
 							<option value="">请选择</option>
 							{{foreach from =$role_list item=list}}
 							<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
 																			{{/foreach}}
-																			</select></div> 
+																			</select></dl></div> 
                        <div class="clearfix"></div>
                        <div class="cc_top_two clearfix">
                            <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
