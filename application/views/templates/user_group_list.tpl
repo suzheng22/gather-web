@@ -16,11 +16,13 @@
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}user/userGroupList" method="get">
                         <div class="cc_top_one clearfix"><label>用户组名称:</label><input type="text" name="groupName" value="{{$groupName}}"/ id="user_group_name"></div>
-                         <div class="cc_top_one clearfix vocation"><label>角色名称:</label><select name="roleId" class="select3">
-																					<option value="">请选择</option>
-																			{foreach from =$role_list item=list}}
-																			<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
-																				{{/foreach}}
+                         <div class="cc_top_one clearfix vocation"><label>角色名称:</label>
+                         
+                         <select name="roleId" class="select3">
+							<option value="">请选择</option>
+							{foreach from =$role_list item=list}}
+							<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
+																			{{/foreach}}
 																			</select></div> 
                        <div class="clearfix"></div>
                        <div class="cc_top_two clearfix">
@@ -76,9 +78,9 @@
                 <div class="clearfix one"><label for="user_name">用户组名称:</label><input type="text" id="groupName" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">角色名称:</label><select id="roleId">
 																					<option value="">请选择</option>
-																			{{foreach from =$role_list item=list}}
+																		{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
-																					{{/foreach}}
+																				{{/foreach}}
 																			</select></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="addUserGroup()">确认</a>
@@ -96,10 +98,10 @@
                 <div class="clearfix one"><label for="user_name">用户组名称:</label><input type="text" id="up_groupName" class="zhmm" readonly=""></div>
                 <div class="clearfix one"><label for="user_name">角色名称:</label><select id="up_roleId">
 																					<option value="">请选择</option>
-																					{{foreach from =$role_list item=list}}
+																		{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
-																					{{/foreach}}
-																			  </select></div>
+																				{{/foreach}}
+																			</select></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="up_desc"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="edit_info()">确认</a>
             </div>

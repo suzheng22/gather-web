@@ -21,7 +21,7 @@
 						<form action="{{$root_path}}user/index" method="get">
                         <div class="cc_top_one clearfix"><label>账号名:</label><input type="text" name="userName" value="{{$userName}}"/ id="count_user"></div>
                         <div class="cc_top_one clearfix"><label>用户名:</label><input type="text" name="trueName" value="{{$trueName}}"/ id="user"></div>
-                        <div class="cc_top_one clearfix"><label>角色名称:</label>
+                        <div class="cc_top_one clearfix last_show"><label>角色名称:</label>
                          <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
                         <select name="roleId" class="select3">
@@ -32,7 +32,7 @@
 								</select>
                                                                               </dl>
                                                                               </div></div>
-                        <div class="cc_top_one clearfix"><label>用户组名称:</label>
+                        <div class="cc_top_one clearfix last_show"><label>用户组名称:</label>
                         <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
 																					<select name="groupId" class="select3">
@@ -43,7 +43,7 @@
 																					</select>
 																					</dl></div></div>
                          <div class="clearfix"></div>                                                           
-                        <div class="cc_top_one clearfix vocation"><label>状态:</label>
+                        <div class="cc_top_one clearfix last_show"><label>状态:</label>
                         <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
                         <select name="status" class="select3">
