@@ -27,7 +27,7 @@ class Project extends My_Controller {
             $this->ci_smarty->assign('status',$status);
         }
         //获取项目列表
-        $project_list=$this->project_model->getProjectList();
+        $project_list=$this->project_model->getProjectList($data);
         $showPage= parent::page($page_url,1,$project_list['totalCount']);
         //获取项目标签
         $this->ci_smarty->assign('plist',$project_list['list']);
@@ -69,7 +69,7 @@ class Project extends My_Controller {
         $userList=json_decode($userStr,true);
         $this->ci_smarty->assign('userList',$userList['list']);
         //获取项目列表
-        $project_list=$this->project_model->getProjectList();
+        $project_list=$this->project_model->getProjectList($data);
 
         $showPage= parent::page($page_url,1,$project_list['totalCount']);
         //获取项目标签

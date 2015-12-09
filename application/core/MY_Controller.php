@@ -139,24 +139,23 @@ class MY_Controller extends CI_Controller
                     $file=$this->getImg($data[$imageName]);
                     if($file['error']==0){
                         $path=$file['save_path'];
+                        $temp_path[]=$path;
+                        $objDrawing->setPath($path);
+                        /*设置图片高度*/
+                        $objDrawing->setHeight(100);
+                        /*设置图片要插入的单元格*/
+                        $objDrawing->setCoordinates($letter[$col-1].$row);
+                        /*设置图片所在单元格的格式*/
+                        $objDrawing->setOffsetX(20);
+                        $objDrawing->setOffsetY(20);
+                        $objDrawing->setRotation(10);
+                        $objDrawing->getShadow()->setVisible(true);
+                        $objDrawing->getShadow()->setDirection(50);
+                        $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
+                        $objPHPExcel->getActiveSheet()->setCellValue($letter[$col-1].$row,"111");
+                        continue;
                     }
-                    $temp_path[]=$path;
-                    $objDrawing->setPath($path);
-                    /*设置图片高度*/
-                    $objDrawing->setHeight(100);
-                    /*设置图片要插入的单元格*/
-                    $objDrawing->setCoordinates($letter[$col-1].$row);
-                    /*设置图片所在单元格的格式*/
-                    $objDrawing->setOffsetX(20);
-                    $objDrawing->setOffsetY(20);
-                    $objDrawing->setRotation(10);
-                    $objDrawing->getShadow()->setVisible(true);
-                    $objDrawing->getShadow()->setDirection(50);
-                    $objDrawing->setWorksheet($objPHPExcel->getActiveSheet());
-                    $objPHPExcel->getActiveSheet()->setCellValue($letter[$col-1].$row,"111");
-                    continue;
                 }
-
             }
             $row++;
         }
@@ -175,12 +174,12 @@ class MY_Controller extends CI_Controller
         }
     }
     //保存到本地图片
-    function getImg($url,$save_dir='',$filename='',$type=0){
+    function getImg($url,$save_dir="./application/temImage",$filename='',$type=0){
         if(trim($url)==''){
             return array('file_name'=>'','save_path'=>'','error'=>1);
         }
         if(trim($save_dir)==''){
-            $save_dir='./';
+            $save_dir='/';
         }
         if(trim($filename)==''){//保存文件名
             $ext=strrchr($url,'.');
