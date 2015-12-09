@@ -25,11 +25,11 @@
                          <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
                         <select name="roleId" class="select3">
-																					<option value="">请选择</option>
-																					{{foreach from =$role_list item=list}}
+													<option value="">请选择</option>
+															{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>
-																					{{/foreach}}
-																			  </select>
+															{{/foreach}}
+								</select>
                                                                               </dl>
                                                                               </div></div>
                         <div class="cc_top_one clearfix"><label>用户组名称:</label>
