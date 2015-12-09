@@ -114,16 +114,22 @@
 			<div class="login_form">
 				<div class="clearfix one"><label for="user_name">账号名:</label><input type="text" id="userName" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">用户名:</label><input type="text" id="trueName" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">角色名称:</label><select id="roleId" onchange="select_group(this.value)">
+                <div class="clearfix one"><label for="user_name">角色名称:</label>
+                <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                <select id="roleId" onchange="select_group(this.value)" class="select1">
 																					<option value="">请选择</option>
 																					{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}" >{{$list.roleName}}</option>
 																					{{/foreach}}
-																			  </select></div>
-                <div class="clearfix one"><label for="user_name">用户组名称:</label><select id="groupId">
+																			  </select></dl></div></div>
+                <div class="clearfix one"><label for="user_name">用户组名称:</label>
+                <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                <select id="groupId" class="select1">
 																					<option value="">请选择</option>
 																					
-																					</select></div>
+																					</select></dl></div></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="addUser()">确认</a>
             </div>
@@ -139,16 +145,22 @@
 			<div class="login_form"><input type="hidden" id="ed_userId" />
 				<div class="clearfix one"><label for="user_name">账号名:</label><input type="text" id="up_userName" class="zhmm" readonly=""></div>
                 <div class="clearfix one"><label for="user_name">用户名:</label><input type="text" id="up_trueName" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">角色名称:</label><select id="up_roleId" onchange="select_group_up(this.value)">
+                <div class="clearfix one"><label for="user_name">角色名称:</label>
+                <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                <select id="up_roleId" onchange="select_group_up(this.value)" class="select1">
 																					<option value="">请选择</option>
 																					{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}" >{{$list.roleName}}</option>
 																					{{/foreach}}
-																			  </select></div>
-                <div class="clearfix one"><label for="user_name">用户组名称:</label><select id="up_groupId">
+																			  </select></dl></div></div>
+                <div class="clearfix one"><label for="user_name">用户组名称:</label>
+                <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                <select id="up_groupId" class="select1">
 																					<option value="">请选择</option>
 																					
-																					</select></div>
+																					</select></dl></div></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="up_desc"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="edit_info()">确认</a>
             </div>
@@ -163,6 +175,9 @@ $(function(){
 	//select 表单美化
 	$(".select3").uedSelect({
 		width : 100
+	});
+	 $(".select1").uedSelect({
+		width :250			  
 	});
 	
 	//左侧菜单	

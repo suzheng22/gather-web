@@ -80,7 +80,7 @@
                 <div class="clearfix one"><label for="user_name">角色名称:</label>
                 <div class="choice_count choice_box vocation">
                         <dl class="select">
-                <select id="roleId">
+                <select id="roleId" class="select1">
 																					<option value="">请选择</option>
 																		{{foreach from =$role_list item=list}}
 																						<option value="{{$list.roleId}}"  {{if $roleId==$list.roleId}}selected="selected"{{/if}}>{{$list.roleName}}</option>

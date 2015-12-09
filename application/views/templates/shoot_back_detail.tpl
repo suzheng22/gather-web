@@ -119,16 +119,23 @@
 			<div class="login_form">
 				<div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">项目:</label><select>
+                <div class="clearfix one"><label for="user_name">项目:</label>
+                <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                <select class="select1">
                                    		<option value="">全部</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
-                                   </select></div>
-                <div class="clearfix one"><label for="user_name">包装:</label><select>
+                                   </select></dl></div></div>
+                <div class="clearfix one"><label for="user_name">包装:</label>
+                <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                
+                <select class="select1">
                                    		<option value="">全部</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
-                                   </select></div>
+                                   </select></dl></div></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
             </div>
@@ -145,6 +152,10 @@
 	//select 表单美化
 	$(".select3").uedSelect({
 		width : 100
+	});
+	
+	$(".select1").uedSelect({
+		width :250			  
 	});
 $('#datetimepicker_start').datetimepicker({
 	onGenerate:function( ct ){
