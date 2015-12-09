@@ -21,9 +21,9 @@
                             <dl class="select">
                                 <select name="project" class="select3">
                                     <option value="">全部</option>
-                                 {{foreach from=$project_list item=list}}
+                                {{foreach from=$project_list item=list}}
                                     <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                 {{/foreach}}
+                                {{/foreach}}
                                 </select>
                             </dl>
                         </div>
@@ -146,17 +146,21 @@
 				<div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="gtin_1" class="zhmm" onkeyup="get_gtin_detail()"><span style="color:red" class="show_msg"></span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="proName_1" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one"><label for="user_name">项目:</label>
-                    <select name="project" id="project_1">
-                        <option value="">全部</option>
-                        {{foreach from=$project_list item=list}}
-                        <option value="{{$list.projectId}}">{{$list.project}}</option>
-                        {{/foreach}}
-                    </select>
+                	<div class="vocation">
+                        <select name="project" id="project_1" class="select3">
+                            <option value="">全部</option>
+                           {{foreach from=$project_list item=list}}
+                            <option value="{{$list.projectId}}">{{$list.project}}</option>
+                           {{/foreach}}
+                        </select>
+                        </div>
                 </div>
                 <div class="clearfix one"><label for="user_name">包装:</label>
-                    <select id="pack_1">
+                	<div class="vocation">
+                    <select id="pack_1" class="select3">
                         <option value="">无</option>
                     </select>
+                    </div>
                 </div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="describe_1"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="add_shoot(1)">确认</a>
@@ -173,14 +177,22 @@
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="gtin_2" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="proName_2" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one"><label for="user_name">项目:</label>
-                    <select id="project_2">
+                <div class="vocation">
+                    <select id="project_2" class="select3">
                         <option value="">全部</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
-                    </select></div>
-                <div class="clearfix one"><label for="user_name">包装:</label><select id="pack_2">
-
-                    </select></div>
+                    </select>
+                    </div>
+                 </div>
+                <div class="clearfix one"><label for="user_name">包装:</label>
+                	<div class="vocation">
+                        <select id="pack_2" class="select3">
+    
+                        </select>
+                        </div>
+                    </div>
+                    
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="describe_2"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="add_shoot(2)">确认</a>
             </div>
