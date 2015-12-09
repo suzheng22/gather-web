@@ -18,13 +18,16 @@ $(function(){
 </head>
 <body id="login_bg">
 	<!------------------------login------------------------------------->
-	<div class="j-top">
+	<!--<div class="j-top">
     	<div class="j-top-warp">
-			<!--<h3>数据采集系统<span>v1.0</span></h3>-->
+			
             <h3><img src="images/logo.png"/></h3>
         </div>
     
-    </div> 
+    </div>
+    
+    -->
+{{include file='public/top.tpl'}} 
 	<div class="login_box">
 			<div class="login_main">
                     <div class="login_form_box">
