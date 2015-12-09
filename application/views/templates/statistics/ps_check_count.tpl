@@ -20,9 +20,9 @@
 				<form action="{{$root_path}}statistics/psCheck" method="get">
                     <div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" value="{{$userName}}" id="user_name"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
-                    	<div class="choice_count choice_box">            	 			
+                    	<div class="choice_count choice_box vocation">            	 			
 							<dl class="select">
-									<select name="groupId">
+									<select name="groupId" class="select3">
 										<option value="">全部</option>
 										{{foreach from=$group_list item=list}}
 												<option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
@@ -80,6 +80,11 @@
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
 	
 	//菜单高亮显示和地址栏比对
 	var url = window.location;

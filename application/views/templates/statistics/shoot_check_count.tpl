@@ -55,16 +55,9 @@
                 <div class="rose_top main_rignt_top clearfix">
                     <div class="cc_top_one"><label>用户名:</label><input type="text"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
-                    	<div class="choice_count choice_box">            	 			
+                    	<div class="choice_count choice_box vocation">            	 			
 							<dl class="select">
-									<!--<dt>全部</dt>
-									<dd>
-										<ul>
-											<li><a href="#">001</a></li>
-											<li><a href="#">002</a></li>
-										</ul>
-									</dd>-->
-                                    <select>
+                                    <select class="select3">
                                    		<option value="">全部</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
@@ -72,14 +65,13 @@
 							</dl>
 	            	 	</div>
                      </div>
-                     <div class="cc_top_one">
+                     <div class="cc_top_one" style="width:40%;">
+                         
                             <label>审核开始时间:</label>
-                            <input type="text" id="datetimepicker_start"/>
+                            <input type="text" id="datetimepicker_start" name="startTime"/>
+                            <label style="width:20px;">-</label>
+                            <input type="text" id="datetimepicker_end" name="endTime"/>   
                         </div>
-                        <div class="cc_top_one">
-                            <label>审核结束时间:</label>
-                            <input type="text" id="datetimepicker_end"/>
-                       </div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
                     	<a href="javascript:;" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
                         <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
@@ -146,6 +138,12 @@
 <link rel="stylesheet" type="text/css" href="js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
+
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+
 $('#datetimepicker_start').datetimepicker({
 	onGenerate:function( ct ){
 		$(this).find('.xdsoft_date')

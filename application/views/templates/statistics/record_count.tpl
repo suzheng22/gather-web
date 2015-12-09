@@ -55,21 +55,22 @@
                 <div class="rose_top main_rignt_top clearfix">
                     <div class="cc_top_one"><label>用户名:</label><input type="text"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
-                    	<div class="choice_count choice_box">            	 			
+                    	<div class="choice_count choice_box vocation">            	 			
 							<dl class="select">
-									<dt>全部</dt>
-									<dd>
-										<ul>
-											<li><a href="#">001</a></li>
-											<li><a href="#">002</a></li>
-										</ul>
-									</dd>
+									
+                                    <select class="select3">
+                                   		<option value="">全部</option>
+                                        <option value="">1</option>
+                                        <option value="">2</option>
+                                   </select>
+                              
 								</dl>
 	            	 	</div>
                      </div>
                      <div class="cc_top_one" style="width:50%;">
                          <label>提交时间:</label>
                          <input type="text" class="datetimepicker"/>
+                         <label style="width:20px;">-</label>
                          <input type="text" class="datetimepicker"/>
                      </div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
@@ -153,6 +154,12 @@
 <link rel="stylesheet" type="text/css" href="js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
+
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
 $('.datetimepicker').datetimepicker();
 </script>
 <!---->  

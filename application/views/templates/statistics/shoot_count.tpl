@@ -6,9 +6,7 @@
 {{include file='public/css.tpl'}}
 </head>
 <body>
-
 {{include file='public/top.tpl'}}
-  
 <div id="warp_box">
      <div class="main">
      	{{include file='public/left.tpl'}}
@@ -18,9 +16,9 @@
                 <div class="rose_top main_rignt_top clearfix">
                 	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" value="{{$userName}}" id="user_name"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
-                            <div class="choice_count choice_box">            	 			
+                            <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="groupId">
+                                    <select name="groupId" class="select3">
 										<option value="">全部</option>
 										{{foreach from=$group_list item=list}}
 												<option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
@@ -35,12 +33,9 @@
                             <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" name="endTime" value="{{$endTime}}"/>
                         </div>
-                        <!--<div class="cc_top_one">
-                            <label>拍摄结束时间:</label>
-                            <input type="text" id="datetimepicker_end" name="endTime" value="{{$endTime}}"/>
-                        </div>-->
+                       
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                    	<a href="record.html" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
+                    	<a href="javascript:;" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                         <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
@@ -104,12 +99,7 @@
                     <span>跳转到第<input type="text"/>页</span>
                     <a href="javascript:;" class="pageNum">确定</a>
                 </div>
-                	<!--<div class="notes">
-                    <P>注意事项：</P>
-                    <P>新增时，角色编码和角色名称不可重复；</P>
-                    <P>修改时，角色编码不可修改，角色编码不可重复</P>
-                    <P>删除时，已用在用户组和用户信息的角色不可删除；</P>
-               </div>-->
+                	
                 </div>
             </div>
         </div>
@@ -123,6 +113,11 @@
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
 	
 	//菜单高亮显示和地址栏比对
 	var url = window.location;

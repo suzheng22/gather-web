@@ -58,9 +58,9 @@
                 	<div class="cc_top_one"><label>商品条形码:</label><input type="text"/></div>
                     <div class="cc_top_one"><label>商品名称:</label><input type="text"/></div>
                     <div class="cc_top_one last_show"><label>商品分类:</label>
-                            <div class="choice_count choice_box">            	 			
+                            <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select>
+                                    <select class="select3">
                                    		<option value="">全部</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
@@ -76,7 +76,7 @@
                             <input type="text" id="datetimepicker_end"/>
                      </div>
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                    	<a href="record.html" class="query"><i class="icon iconfont">&#xf00ab;</i>导出</a>
+                    	<a href="javascript:;" class="query"><i class="icon iconfont">&#xf00ab;</i>导出</a>
                         <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
                         <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
@@ -156,6 +156,13 @@
 <script type="text/javascript" src="js/full_screen.js"></script>
 <script type="text/javascript">
 $(function(){
+		//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
+	
+	
 	//用户列表
      $("#newuser_pop").pop({
         oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出

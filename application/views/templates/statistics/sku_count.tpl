@@ -60,9 +60,9 @@
                 	<div class="cc_top_one"><label>商品条形码:</label><input type="text"/></div>
                     <div class="cc_top_one"><label>商品名称:</label><input type="text"/></div>
                     <div class="cc_top_one last_show"><label>商品分类:</label>
-                            <div class="choice_count choice_box">            	 			
+                            <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select>
+                                    <select class="select3">
                                    		<option value="">全部</option>
                                         <option value="">1</option>
                                         <option value="">2</option>
@@ -141,12 +141,7 @@
                     <span>跳转到第<input type="text"/>页</span>
                     <a href="javascript:;" class="pageNum">确定</a>
                 </div>
-                	<!--<div class="notes">
-                    <P>注意事项：</P>
-                    <P>新增时，角色编码和角色名称不可重复；</P>
-                    <P>修改时，角色编码不可修改，角色编码不可重复</P>
-                    <P>删除时，已用在用户组和用户信息的角色不可删除；</P>
-               </div>-->
+                	
                 </div>
             </div>
         </div>
@@ -172,6 +167,12 @@
 <script type="text/javascript" src="js/full_screen.js"></script>
 <script type="text/javascript">
 $(function(){
+	
+	//select 表单美化
+	$(".select3").uedSelect({
+		width : 100
+	});
+	
 	//用户列表
      $("#newuser_pop").pop({
         oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
