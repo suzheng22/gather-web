@@ -18,7 +18,7 @@
                 <div class="rose_top main_rignt_top clearfix">
                 	<form action="{{$root_path}}marlboro/shoot" method="get">
                          <!--项目*-->
-                         <div class="cc_top_one">
+                         <div class="cc_top_one last_show">
                              <label>项目:</label>
                              <div class="choice_count choice_box vocation">
                              <dl class="select">

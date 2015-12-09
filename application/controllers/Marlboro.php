@@ -204,45 +204,59 @@ class Marlboro extends My_Controller {
         }
         echo $this->marlboro_model->batchChangeStatus($data);exit;
     }
-    
+    //拍摄审核
     function shoot(){
         $this->load->model('user/user_model','user');
         $this->load->model('user/project_model','project');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-        
+
+        $page_url=$this->root_path.'/marlboro/shoot?';
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         //获取项目
-        $project_list=$this->project->getProjectList();
-        $this->ci_smarty->assign('project_list',$project_list['list']);
-
-        $data['userName']=$this->input->get('userName');
-        $data['groupId']=$this->input->get('groupId');
-
-        $data['projectId']=$this->input->get("projectId");//1
-        if($data['userName']!=''){
-            $this->ci_smarty->assign('userName',$data['userName']);
+        $project_list=$this->project->getProjectList($data);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
+        $arr=$this->input->get();
+        $arr['pId']=$arr['project'];
+        unset($arr['project']);
+        if(!isset($arr['page'])){
+            $arr['page']=1;
         }
-        
-        if($data['groupId']!=''){
-            $this->ci_smarty->assign('groupId',$data['groupId']);
-        }
-        if($data['projectId']!=''){
-            $this->ci_smarty->assign('projectId',$data['projectId']);
-        }//1
-
-        if($data['userName']!='' ||$data['groupId']!='' || $data['projectId']){//1
-            $str=$this->user->getUserIdsByFiled($data);
+        $arr['userId']=$this->user_info['userId'];
+        $arr['token']=$this->user_info['token'];
+        if($arr['userName']!='' ||$arr['groupId']!='' || $arr['pId']){//1
+            $str=$this->user->getUserIdsByFiled($arr);
             $user_id_list=json_decode($str,true);
-            $data['users']=serialize($user_id_list);
+            $arr['users']=serialize($user_id_list);
         }
+       // var_dump($arr);
+        //增加参数
+      //  $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+     //   $showpage= parent::page($page_url,10,$list['totalCount']);
+   //     $this->ci_smarty->assign('glist',$list);
+    //    $this->ci_smarty->assign('pages',$showpage['show']);
+//        $data['userName']=$this->input->get('userName');
+//        $data['groupId']=$this->input->get('groupId');
+//        $data['pId']=$this->input->get("project");//1
+//        if($data['userName']!=''){
+//            $this->ci_smarty->assign('userName',$data['userName']);
+//        }
+//        if($data['groupId']!=''){
+//            $this->ci_smarty->assign('groupId',$data['groupId']);
+//        }
+//        if($data['pId']!=''){
+//            $this->ci_smarty->assign('projectId',$data['projectId']);
+//        }//1
+
+
+
         $list=$this->marlboro_model->getShootList($data);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('shoot_check.tpl');
         
     }
-    
+    //拍摄详情
     function shootDetail($userId){
         $this->load->model('user/user_model','user');
         $this->load->model('sdk/product_model','product');
@@ -256,8 +270,8 @@ class Marlboro extends My_Controller {
         $type_list=$this->product->getType();
         $this->ci_smarty->assign('type_list',$type_list);
         //获取项目
-        $project_list=$this->project->getProjectList();
-        $this->ci_smarty->assign('project_list',$project_list['list']);
+        $project_list=$this->project->getProjectList($data);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'Marlboro/shootDetail/'.$userId.'?';
         $arr=$this->input->get();
         if($arr['sTime']==''||$arr['eTime']==''){
@@ -280,6 +294,7 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check_detail.tpl');
     }
+    //拍摄通过
     function shootPass(){
         $data['gtin']=$this->input->post('gtin');
         $data['userId']=$this->user_info['userId'];
@@ -364,7 +379,7 @@ class Marlboro extends My_Controller {
         //获取无法测量管理列表
         $noMeasureList=$this->marlboro_model->getNoShootList($arr);
         if($arr['is_ext']==1){
-            //        $query=$noMeasureList['list'];
+           // $query=$noMeasureList['list'];
             $fileName='拍摄驳回统计';
             $fields=array('大家好','很好','俗话');
             $imgName='image';
@@ -406,7 +421,7 @@ class Marlboro extends My_Controller {
         //获取拍摄管理列表
         $shootAddList=$this->marlboro_model->getShootAddList($arr);
         if($arr['is_ext']==1){
-            //        $query=$noMeasureList['list'];
+            //query= $shootAddList['list'];
             $fileName='拍摄驳回统计';
             $fields=array('大家好','很好','俗话');
             $imgName='image';
@@ -493,6 +508,7 @@ class Marlboro extends My_Controller {
         }
         echo json_encode($data);
     }
+    //获取拍摄
     function getShoot(){
         $data['shootId']=$this->input->post('shootId');
         $return=$this->marlboro_model->getShootInfo($data);

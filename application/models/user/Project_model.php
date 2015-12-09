@@ -14,35 +14,10 @@ class Project_model extends MY_Model {
     }
 
     function getProjectList($data){
-        $url=$this->user_api_url."/user/getProjectList";
+        //先获取userID
+        $url=$this->user_api_url.'/user/getProjectAll';
         $return=$this->curl($url,$data);
-        if(!$return){
-            $return=array(
-                'list'=>array(
-                    '0'=>array(
-                        'projectId'=>'1',
-                        'project'=>'项目一',
-                        'status'=>'1',
-                        'describe'=>'123',
-                        'createTime'=>'2015-10-12 11:21:11',
-                        'creater'=>'苏正',
-                        'modifyTime'=>'2015-10-12 11:21:11',
-                        'modifyPerson'=>'suzheng'
-                    ),
-                    '1'=>array(
-                        'projectId'=>'2',
-                        'project'=>'项目二',
-                        'status'=>'2',
-                        'describe'=>'1233',
-                        'createTime'=>'2015-10-12 11:21:11',
-                        'creater'=>'苏正',
-                        'modifyTime'=>'2015-10-12 11:21:11',
-                        'modifyPerson'=>'suzheng'
-                    )),
-                'totalCount'=>2
-            );
-        }
-        return $return;
+        return json_decode($return,true);
     }
     function addProject($data){
         $url=$this->user_api_url."/project/addProject";
