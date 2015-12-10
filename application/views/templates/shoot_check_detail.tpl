@@ -51,7 +51,7 @@
                                        <select name="category1" id="category1" class="select3">
                                             <option value="">全部</option>
                                           {{foreach from=$type_list item=list}}
-                                                    <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                                    <option value="{{$list.id}}" {{if $category1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
                                               {{/foreach}}
                                         </select>
                                     </dl>
@@ -63,7 +63,7 @@
                                          <select name="shootType" class="select3">
                                             <option value="">全部</option>
                                              <option value="1" {{if $shootType==1}}selected="selected"{{/if}}>正常拍摄</option>
-                                            <option value="1" {{if $shootType==2}}selected="selected"{{/if}}>驳回拍摄</option>
+                                            <option value="2" {{if $shootType==2}}selected="selected"{{/if}}>驳回拍摄</option>
                                        </select>
                                     </dl>
                                 </div>
@@ -73,9 +73,9 @@
                                     <dl class="select">
                                     <select name="status" class="select3">
                                         <option value="" {{if $status eq 'NULL'}}selected="selected"{{/if}}>全部</option>
-                                        <option value="1" {{if $status eq '1'}}selected="selected"{{/if}}>未审核</option>
-                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>拍摄已通过</option>
-                                        <option value="3" {{if $status==3}}selected="selected"{{/if}}>拍摄已驳回</option>
+                                        <option value="0" {{if $status eq '0'}}selected="selected"{{/if}}>未审核</option>
+                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>拍摄已通过</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>拍摄已驳回</option>
                                     </select>
                                     </dl>
                                 </div>
@@ -118,7 +118,7 @@
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                           <input type="hidden" value="{{$list.status}}">
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetailPic/{{$list.gtin}}/{{$list.pId}}/{{$list.packet}}/{{$list.batchNo}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}marlboro/shootDetailPic/?gtin={{$list.gtin}}&pId={{$list.pId}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}&status={{$list.status}}&shootType={{$list.shootType}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}

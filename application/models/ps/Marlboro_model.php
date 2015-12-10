@@ -11,8 +11,6 @@ class Marlboro_model extends MY_Model {
     
     //获取修图审核列表
     function getMarlboroList1($data){
-     //  var_dump($data);
-     //   exit;
         $url=$this->more_api_url.'/shoot/MarlboroList';
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
@@ -37,14 +35,27 @@ class Marlboro_model extends MY_Model {
         return $list;
     }
     function getMarlboroDetail($data){
-        var_dump($data);
-     //   exit;
         $url=$this->more_api_url.'/shoot/MarlboroDetail';
         $return=$this->curl($url,$data);
-        var_dump($data);
         $list=json_decode($return,true);
-        return $list;
+        $count=count($list['data']);
+        $datas=$list['data'];
 
+        for ($i=0;$i<$count;$i++){
+            foreach ($datas[$i] as $key=>$val){
+                if($key=='gtin'){
+                    $data['gtin']=$val;
+                    $url=$this->tmore_api_url."/product/getproductbygtin";
+                    $return=$this->curl($url,$data,'get');
+                    $goods=json_decode($return,true);
+                    $datas[$i]['gName']=$goods['proName'];
+                    $datas[$i]['catgroryName']=$goods['typeName'];
+                }
+            }
+        }
+        $return_data['total']=$count;
+        $return_data['data']=$datas;
+        return $return_data;
     }
 
     function getMarlboroList($data) {
@@ -76,11 +87,9 @@ class Marlboro_model extends MY_Model {
         $url=$this->tmore_api_url."/review/GetShootReviewData";
         $return=$this->curl($url,$data);;
         $list=json_decode($return,true);
-        
         foreach ($list as $k => $v){
             $ids[]=$v['userId'];
         }
-        
         $data['ids']=serialize($ids);
         $url=$this->user_api_url."/user/getUserInfoByIds";
         $return=$this->curl($url,$data);
@@ -99,8 +108,10 @@ class Marlboro_model extends MY_Model {
     function getMarlboroInfo($data){
 //        $url=$this->tmore_api_url."/review/GetReviewList";
         $url=$this->more_api_url."/shoot/MarlboroInfo";
+       // var_dump($data);exit;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
+   //     var_dump($list);
         return $list;
     }
     

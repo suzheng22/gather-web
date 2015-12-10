@@ -144,37 +144,24 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->display('ps_check_pic.tpl');
     }
     
-    function shootDetailPic($gtin,$pId,$packet,$batchNo){
+    function shootDetailPic($gtin,$pId,$packet,$batchNo,$status,$shootType){
         $this->load->model('sdk/product_model','product');
       //  $this->load->model('user/user_model','user');
         $this->load->model('user/project_model','project');
+        $arr=$this->input->get();
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
-        $arr['gtin']=$gtin;
-        $arr['pId']=$pId;
-        $arr['packet']=$packet;
-        $arr['batchNO']=$batchNo;
-       // var_dump($arr);
-       $list=$this->marlboro_model->getMarlboroInfo($arr);
-      //  var_dump($list);
-     //   $list=$this->marlboro_model->getMarlboroInfoPic($arr);
-      //  $status=$this->marlboro_model->getReviewStatus($arr);
+        //获取项目
+       // $arr['pName']=$this->project->getProjectInfo($arr);
+        var_dump($arr);
+      $list=$this->marlboro_model->getMarlboroInfo($arr);
+        var_dump($list);
+        $list=$this->marlboro_model->getMarlboroInfoPic($arr);
         $product_info=$this->product->getProduct($arr);
-        //新增拍摄类型
-        if(!isset($product_info['shootType']))
-            $product_info['shootType']='立体';
-        //项目
-        if(!isset($product_info['project']))
-            $product_info['project']='001';
-        //包装
-        if(!isset($product_info['pack']))
-            $product_info['pack']='包装一';
-        //批次
-        if(!isset($product_info['batch']))
-            $product_info['batch']='批次一';
-        $this->ci_smarty->assign('p_info',$product_info);
+        $arr['proName']=$product_info['proName'];
+        $arr['catgrory']=$product_info['typeName'];
+        $this->ci_smarty->assign('p_info',$arr);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('status',$status['status']);
         $this->ci_smarty->display('shoot_check_pic.tpl');
     }
 
@@ -221,6 +208,7 @@ class Marlboro extends My_Controller {
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         //获取项目
+        var_dump($data);
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $arr=$this->input->get();
@@ -246,6 +234,7 @@ class Marlboro extends My_Controller {
     }
     //拍摄详情
     function shootDetail($userId){
+      //  header("content-type:")
         $this->load->model('user/user_model','user');
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
@@ -255,17 +244,13 @@ class Marlboro extends My_Controller {
         $str=$this->user->getInfo($data);
         $u_info=json_decode($str,true);
         $this->ci_smarty->assign('u_info',$u_info);
-        $type_list=$this->product->getType();
-        $this->ci_smarty->assign('type_list',$type_list);
+        $type_list=$this->product->getCatgroryList();
+        $this->ci_smarty->assign('type_list',$type_list['data']);
         //获取项目
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'Marlboro/shootDetail/'.$userId.'?';
         $arr=$this->input->get();
-        if($arr['s_time']!=''&&$arr['e_time']!=''){
-            $arr['s_time']=strtotime($arr['s_time']);
-            $arr['e_time']=strtotime($arr['e_time']);
-        }
         if(!isset($arr['status'])){
             $arr['status']=null;
         }
@@ -276,12 +261,15 @@ class Marlboro extends My_Controller {
         $arr['token']=$this->user_info['token'];
         //增加参数
         $page_url=$this->publicFuc->getUrl($page_url,$arr);
+        if($arr['s_time']!=''&&$arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
+        }
         $arr['photoId']=$userId;
-     //   $list=$this->marlboro_model->getShootInfo($arr);
         $list=$this->marlboro_model->getMarlboroDetail($arr);
-      //  $count=count($list['data']);
+     //   $count=count($list['data']);
         //项目
-        $showpage= parent::page($page_url,10,2);
+        $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check_detail.tpl');
@@ -298,7 +286,7 @@ class Marlboro extends My_Controller {
     function addMissFigure(){
         $data=$this->input->post();
         $data['userId']=$this->user_info['userId'];
-        $data['token']=$this->user_info['token'];;
+        $data['token']=$this->user_info['token'];
         $str=$this->marlboro_model->addMissFigure($data);
         $str['msg']='添加成功';
         echo json_encode($str);
@@ -310,15 +298,11 @@ class Marlboro extends My_Controller {
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         //商品分类的查询
-        $type_list=$this->product->getType();
-        $this->ci_smarty->assign('type_list',$type_list);
+        $type_list=$this->product->getCatgroryList();
+        $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
         //加入项目
         $arr=$this->input->get();
-        if($arr['sTime']==''||$arr['eTime']==''){
-            unset($arr['sTime']);
-            unset($arr['eTime']);
-        }
         if(!isset($arr['status'])){
             $arr['status']=null;
         }
@@ -327,6 +311,10 @@ class Marlboro extends My_Controller {
         }
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        if($arr['s_time']!=''&&$arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
+        }
         //获取无法测量管理列表
         $noMeasureList=$this->marlboro_model->getNoMeasureList($arr);
         if($arr['is_ext']==1){
@@ -351,15 +339,11 @@ class Marlboro extends My_Controller {
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         //商品分类的查询
-        $type_list=$this->product->getType();
-        $this->ci_smarty->assign('type_list',$type_list);
+        $type_list=$this->product->getCatgroryList();
+        $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
         //加入项目
         $arr=$this->input->get();
-        if($arr['sTime']==''||$arr['eTime']==''){
-            unset($arr['sTime']);
-            unset($arr['eTime']);
-        }
         if(!isset($arr['status'])){
             $arr['status']=null;
         }
@@ -368,6 +352,10 @@ class Marlboro extends My_Controller {
         }
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        if($arr['s_time']!=''&&$arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
+        }
         //获取无法测量管理列表
         $noMeasureList=$this->marlboro_model->getNoShootList($arr);
         if($arr['is_ext']==1){
@@ -393,15 +381,11 @@ class Marlboro extends My_Controller {
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //商品分类的查询
-        $type_list=$this->product->getType();
-        $this->ci_smarty->assign('type_list',$type_list);
+        $type_list=$this->product->getCatgroryList();
+        $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
         //加入项目
         $arr=$this->input->get();
-        if($arr['sTime']==''||$arr['eTime']==''){
-            unset($arr['sTime']);
-            unset($arr['eTime']);
-        }
         if(!isset($arr['status'])){
             $arr['status']=null;
         }
@@ -410,6 +394,10 @@ class Marlboro extends My_Controller {
         }
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        if($arr['s_time']!=''&&$arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
+        }
         //获取拍摄管理列表
         $shootAddList=$this->marlboro_model->getShootAddList($arr);
         if($arr['is_ext']==1){
@@ -434,15 +422,11 @@ class Marlboro extends My_Controller {
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //商品分类的查询
-        $type_list=$this->product->getType();
-        $this->ci_smarty->assign('type_list',$type_list);
+        $type_list=$this->product->getCatgroryList();
+        $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
         //获取传递参数并转为page_yrl
         $arr=$this->input->get();
-        if($arr['sTime']==''||$arr['eTime']==''){
-            unset($arr['sTime']);
-            unset($arr['eTime']);
-        }
         if(!isset($arr['status'])){
             $arr['status']=null;
         }
@@ -451,6 +435,10 @@ class Marlboro extends My_Controller {
         }
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        if($arr['s_time']!=''&&$arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
+        }
         //获取拍摄管理列表
         $shootAddList=$this->marlboro_model->getShootAddList($arr);
         //导出拍摄驳回

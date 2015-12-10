@@ -16,7 +16,7 @@ class Product_model extends MY_Model {
         $data['fid']=0;
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
-      
+
         return $list;
     }
     
@@ -24,9 +24,16 @@ class Product_model extends MY_Model {
         $url=$this->tmore_api_url."/product/getproductbygtin";
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
-        
         return $list;
     }
+    //获取商品分类
+    function getCatgroryList(){
+        $url=$this->more_api_url."/catgrory/catgroryList";
+        $return=$this->curl($url,'','get');
+        $list=json_decode($return,true);
+        return $list;
+    }
+
     
 }
 ?>

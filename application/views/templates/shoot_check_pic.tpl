@@ -16,30 +16,27 @@
 	<ul class="clearfix" id="nav_info">
             <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
             <li class="black"><em>商品名称:</em><span>{{$p_info.proName}}</span></li>
-            <li class="black"><em>商品类型:</em><span>{{$p_info.typeName}}</span></li>
+            <li class="black"><em>商品类型:</em><span>{{$p_info.catgrory}}</span></li>
         <!-- 拍摄类型 -->
             <li class="black"><em>拍摄类型:</em><span>{{$p_info.shootType}}</span></li>
-
         <!-- 项目 -->
-            <li class="black"><em>项目:</em><span>{{$p_info.project}}</span></li>
+            <li class="black"><em>项目:</em><span>{{$p_info.pId}}</span></li>
         <!-- 包装 -->
-
-            <li class="black"><em>包装:</em><span>{{$p_info.pack}}</span></li>
+            <li class="black"><em>包装:</em><span>{{$p_info.packet}}</span></li>
         <!-- 批次 -->
-
-            <li class="black"><em>批次:</em><span>{{$p_info.batch}}</span></li>
+            <li class="black"><em>批次:</em><span>{{$p_info.batchNo}}</span></li>
         <div class="clearfix"></div>
-        <p class="back_why_info">最新驳回原因:<span>aaaaa;</span>上次驳回原因:<span>bbbbb</span></p>
-
+        <p class="back_why_info">最新驳回原因:<span>{{$p_info.new}}</span>上次驳回原因:<span>{{$p_info.pre}}</span></p>
+        {{$arr.status}}
         <div class="ps_top_menu">
-            {{if $status!=1 && $status!=2}}
+            {{if $p_info.status===0}}
             <a href="javascript:;" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
             <a href="javascript:;" id="shoot_new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
             <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>
             {{else}}
-            {{if $status==1}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
-            {{elseif $status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>
-            {{elseif $status==3}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>{{/if}}
+            {{if $p_info.status==1}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
+            {{elseif $p_info.status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>
+            {{elseif $p_info.status==3}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>{{/if}}
             {{/if}}
         </div>
     </ul>
