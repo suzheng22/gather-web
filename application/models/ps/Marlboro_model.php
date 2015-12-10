@@ -11,6 +11,7 @@ class Marlboro_model extends MY_Model {
     
     //获取修图审核列表
     function getMarlboroList1($data){
+        var_dump($data);
         $url=$this->more_api_url.'/shoot/MarlboroList';
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
@@ -32,6 +33,7 @@ class Marlboro_model extends MY_Model {
                 }
             }
         }
+
         return $list;
     }
     function getMarlboroDetail($data){
@@ -55,6 +57,7 @@ class Marlboro_model extends MY_Model {
         }
         $return_data['total']=$count;
         $return_data['data']=$datas;
+
         return $return_data;
     }
 
