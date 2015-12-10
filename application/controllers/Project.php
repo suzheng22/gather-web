@@ -31,7 +31,7 @@ class Project extends My_Controller {
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //获取项目列表
-        $project_list=$this->project_model->getProjectList($arr);
+        $project_list=$this->project_model->getProjectByField($arr);
         $showPage= parent::page($page_url,3,$project_list['total']);
         //获取项目标签
         $this->ci_smarty->assign('plist',$project_list['data']);
@@ -56,7 +56,8 @@ class Project extends My_Controller {
             $this->ci_smarty->assign('project',$project);
         }
         if(isset($username)){
-            $arr['pUserId']=$username;
+            $arr['pUserId']=serialize($username);
+         //   echo unserialize($arr['pUserI'])
             $page_url.='username='.$username."&";
             $this->ci_smarty->assign('username',$username);
         }
@@ -78,9 +79,11 @@ class Project extends My_Controller {
         //根据用户角色获取
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
+
         //获取项目列表
-        $project_list=$this->project_model->getProjectList($arr);
-       // var_dump($project_list);
+       // var_dump($arr);
+       $project_list=$this->project_model->getProjectByField($arr);
+    //    var_dump($project_list);
         $showPage= parent::page($page_url,1,$project_list['total']);
 
         //获取项目标签
@@ -101,10 +104,10 @@ class Project extends My_Controller {
     function addProjectUser(){
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-        $data['pId']=$this->input->post('project');
+        $data['pId']=$this->input->post('pIds');
         $data['desc']=$this->input->post('describe');
-
         $data['pUserId']=$this->input->post('userId');
+        echo  $data['userId'].",". $data['token'].','.$data['pId'].','. $data['desc'].','.$data['pUserId'];
         $data=$this->project_model->addProjectUser($data);
         echo json_encode($data);
     }

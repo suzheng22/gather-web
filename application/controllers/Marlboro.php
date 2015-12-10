@@ -227,6 +227,7 @@ class Marlboro extends My_Controller {
 //        unset($arr['groupId']);
        // var_dump($arr);
         $list=$this->marlboro_model->getMarlboroList1($arr);
+
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('shoot_check.tpl');
         
@@ -266,6 +267,7 @@ class Marlboro extends My_Controller {
         }
         $arr['photoId']=$userId;
         $list=$this->marlboro_model->getMarlboroDetail($arr);
+       // var_dump($list);
      //   $count=count($list['data']);
         //项目
         $showpage= parent::page($page_url,10,$list['total']);
