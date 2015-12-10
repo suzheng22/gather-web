@@ -153,7 +153,8 @@ class Marlboro extends My_Controller {
         $arr['token']=$this->user_info['token'];
         //获取项目
        // $arr['pName']=$this->project->getProjectInfo($arr);
-      $list=$this->marlboro_model->getMarlboroInfo($arr);
+      $lists=$this->marlboro_model->getMarlboroInfo($arr);
+       // var_dump($lists);
         $list=$this->marlboro_model->getMarlboroInfoPic($arr);
         $product_info=$this->product->getProduct($arr);
         $arr['proName']=$product_info['proName'];

@@ -19,7 +19,7 @@
                     <form action="{{$root_path}}project/projectUserManager" id="myform">
                         <div class="cc_top_one clearfix"><label>项目名称:</label><input type="text" name="project" value="{{$project}}" class="project"/></div>
                         <div class="cc_top_one clearfix last_show"><label>用户名:</label>
-                          <div class="choice_count choice_box vocation">            	 			
+                          <div class="choice_count choice_box vocation">
                                 <dl class="select">
                                     <select name="username" class="username select3">
                                     		<option value="">请选择</option>
@@ -67,6 +67,8 @@
                         <tr>
                             <td>{{$list.pId}}</td>
                             <td>{{$list.pName}}</td>
+                            <td>{{$list.userName}}</td>
+                            <td>{{$list.roleName}}</td>
                             <td>{{$list.desc}}</td>
                             <td class="status_val_{{$list.projectId}}">{{if $list.status==1}}正常{{else}}已冻结{{/if}}</td>
                             <td>{{$list.creatTime}}</td>
@@ -96,11 +98,22 @@
 	<div class="content">
 		<div class="login_main">
 			<div class="login_form">
-				<div class="clearfix one"><label for="user_name">项目名称:</label><input type="text" id="projectName" class="zhmm"></div>
+                <div class="clearfix one" ><label for="user_name">项目:</label>
+                    <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                            <select name="pId" class="select1" id="pIds">
+                                <option value="">全部</option>
+                                {{foreach from=$project_list item=list}}
+                                <option value="{{$list.pId}}" {{if $pId==$list.pId}} selected="selected"{{/if}}>{{$list.pName}}</option>
+                                {{/foreach}}
+                            </select>
+                        </dl>
+                    </div>
+                </div>
                 <div class="clearfix one"><label for="user_name">用户角色:</label> 
                 	<div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select name="username" id="role" onchange="role_change()" class="select1">
+                            <select name="username" id="roles" onchange="role_change()" class="select1">
                                 <option value="">请选择</option>
                              {{foreach from =$rList item=list}}
                                 <option value="{{$list.roleId}}">{{$list.roleName}}</option>
@@ -111,12 +124,12 @@
                 <div class="clearfix one"><label for="user_name">用户名:</label>
                  <div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select name="username" id="username" class="select1">
+                            <select name="username" id="usernames" class="select1">
                                 <option value="">请选择</option>
                             </select>
                         </dl>
                     </div></div>
-                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="describe"></textarea></div>
+                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="describes"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="addProjectUser()">确认</a>
             </div>
 	   </div>
@@ -157,20 +170,21 @@ $(function(){
 });
 //根据角色获取用户
 function role_change(){
-    $(".uew-select-text").html('');
-    $("#username").val('');
-    var roleId=$("#role").val();
+    $("#usernames").val('');
+    var roleId=$("#roles").val();
+
     var option="<option>请选择</option>";
+    //alert(roleId);
     if(roleId!=""){
         var data={roleId:roleId};
         $.post("{{$root_path}}project/getUserListByRole",data,function(data){
             for(var i in data){
                 option+="<option value=\'"+data[i].userId+"\'>"+data[i].userName+"</option>";
             }
-            $("#username").html(option);
+            $("#usernames").html(option);
         },'json')
     }else{
-        $("#username").html(option);
+        $("#usernames").html(option);
     }
 }
 function update_status(projectId){
@@ -201,17 +215,16 @@ function update_status(projectId){
 
 }
 function addProjectUser(){
-    var roleId=$("#role").val();
-    var userId=$("#username").val();
-    var projectName=$("#projectName").val();
-    var describe=$("#describe").val();
-    var data={project:projectName,describe:describe,roleId:roleId,userId:userId};
-
+    var roleId=$("#roles").val();
+    var userId=$("#usernames").val();
+    var projectName=$("#pIds").val();
+    var describe=$("#describes").val();
+    var data={pIds:projectName,describe:describe,roleId:roleId,userId:userId};
     $.post("{{$root_path}}project/addProjectUser",data,
             function(data){
-                alert(data.msg);
+                alert(data);
                 window.location.reload();
-            },'json');
+            },'text');
 }
 function btn_empty(){
     $(".project").val("");

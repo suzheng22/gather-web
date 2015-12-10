@@ -44,19 +44,19 @@ class Project extends My_Controller {
         $this->load->model('user/user_model','user');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
+        $project_list=$this->project_model->getProjectList($data);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'project/projectUserManager?';
         $project=$this->input->get('pId');
         $status=$this->input->get('status');
-        $username['userName']=$this->input->get('username');
-        //根据用户名查询userid
-        $userIds=$this->user->getUserIdsByFiled($username);
+        $username=$this->input->get('username');
         if(isset($project)){
             $arr['pId']=$project;
             $page_url.='pId='.$project."&";
             $this->ci_smarty->assign('project',$project);
         }
         if(isset($username)){
-            $arr['userName']=$username;
+            $arr['pUserId']=$username;
             $page_url.='username='.$username."&";
             $this->ci_smarty->assign('username',$username);
         }
@@ -70,16 +70,17 @@ class Project extends My_Controller {
         $no_master['token']=$this->user_info['token'];
         $str=$this->user->getuserRoleList($no_master);
         $role_list=json_decode($str,true);
-        var_dump($role_list);
         $this->ci_smarty->assign('rList',$role_list['list']);
         //获取用户列表
         $userStr=$this->user->getUserList($no_master);
         $userList=json_decode($userStr,true);
         $this->ci_smarty->assign('userList',$userList['list']);
+        //根据用户角色获取
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //获取项目列表
         $project_list=$this->project_model->getProjectList($arr);
+       // var_dump($project_list);
         $showPage= parent::page($page_url,1,$project_list['total']);
 
         //获取项目标签
@@ -102,8 +103,8 @@ class Project extends My_Controller {
         $data['token']=$this->user_info['token'];
         $data['pId']=$this->input->post('project');
         $data['desc']=$this->input->post('describe');
-        $data['role']=$this->input->post('role');
-        $data['userName']=$this->input->post('username');
+
+        $data['pUserId']=$this->input->post('userId');
         $data=$this->project_model->addProjectUser($data);
         echo json_encode($data);
     }
