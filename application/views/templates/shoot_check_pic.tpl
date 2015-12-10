@@ -12,7 +12,7 @@
 <!--------------------------- 拍摄详情------------------------------------> 
 
 <div class="record_info_warp" style="margin-top:0px;">
-	<h2>xxxxxxxxx-拍摄详情</h2>
+	<h2>{{$p_info.gtin}}-拍摄详情</h2>
 	<ul class="clearfix" id="nav_info">
             <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
             <li class="black"><em>商品名称:</em><span>{{$p_info.proName}}</span></li>
@@ -29,14 +29,14 @@
         <p class="back_why_info">最新驳回原因:<span>{{$p_info.new}}</span>上次驳回原因:<span>{{$p_info.pre}}</span></p>
         {{$arr.status}}
         <div class="ps_top_menu">
-            {{if $p_info.status===0}}
+            {{if $p_info.status===1}}
             <a href="javascript:;" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
             <a href="javascript:;" id="shoot_new_user" class="back" onclick="check(2)"><i class="iconfont">&#xf0223;</i>驳回</a>
             <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>
             {{else}}
-            {{if $p_info.status==1}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
-            {{elseif $p_info.status==2}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>
-            {{elseif $p_info.status==3}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>{{/if}}
+            {{if $p_info.status==2}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
+            {{elseif $p_info.status==3}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>
+            {{elseif $p_info.status==4}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>{{/if}}
             {{/if}}
         </div>
     </ul>

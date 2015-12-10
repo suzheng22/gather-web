@@ -54,6 +54,17 @@ class Marlboro_model extends MY_Model {
                     $datas[$i]['gName']=$goods['proName'];
                     $datas[$i]['catgroryName']=$goods['typeName'];
                 }
+                if($key==='pId'){
+                    $data['pId']=$val;
+                    $url=$this->user_api_url."/user/getProjectByFiled";
+                    $return =$this->curl($url,$data);
+                    $project=json_decode($return,true);
+                    foreach($project as $key=>$val){
+                        if($data['pId']==$val['pId']){
+                            $datas[$i]['pName']=$val['pName'];
+                        }
+                    }
+                }
             }
         }
         $return_data['total']=$count;

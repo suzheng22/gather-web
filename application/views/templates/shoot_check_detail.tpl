@@ -109,13 +109,13 @@
                         <td>{{$list.gName}}</td>
                         <td>{{$list.catgroryName}}</td>
                           <!-- 新增字段 -->
-                          <td>{{$list.pId}}</td>
+                          <td>{{$list.pName}}</td>
                           <td>{{$list.packet}}</td>
                           <td>{{$list.batchNo}}</td>
                           <!-- 新增字段 -->
                         <td>{{if $list.type==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
 						<td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
-                        <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
+                        <td>{{if $list.status==1}}未审核{{else if $list.status==2}}正常{{else}}驳回{{/if}}</td>
                           <input type="hidden" value="{{$list.status}}">
                         <td>
                         	<a href="{{$root_path}}marlboro/shootDetailPic/?orderId={{$list.orderId}}&gtin={{$list.gtin}}&pId={{$list.pId}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}&status={{$list.status}}&shootType={{$list.shootType}}" target="_blank">审核详细</a>
@@ -196,8 +196,10 @@ function check(){
 				}
 		  	},"text");
 }
+
 //查询内通过
 function shoot_pass(){
+    alert(123);
     var num=0;
     var shoot=0;
     var data_id="";
@@ -223,6 +225,7 @@ function shoot_pass(){
         alert("请手动操作带有红色标识的条码");
         return false;
     }
+
     //如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
     if(shoot){
         var data={orderId:data_id,type:2};

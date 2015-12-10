@@ -82,7 +82,7 @@ class Project extends My_Controller {
 
         //获取项目列表
        // var_dump($arr);
-       $project_list=$this->project_model->getProjectByField($arr);
+       $project_list=$this->project_model->getProjectUserByField($arr);
     //    var_dump($project_list);
         $showPage= parent::page($page_url,1,$project_list['total']);
 
