@@ -153,9 +153,7 @@ class Marlboro extends My_Controller {
         $arr['token']=$this->user_info['token'];
         //获取项目
        // $arr['pName']=$this->project->getProjectInfo($arr);
-        var_dump($arr);
       $list=$this->marlboro_model->getMarlboroInfo($arr);
-        var_dump($list);
         $list=$this->marlboro_model->getMarlboroInfoPic($arr);
         $product_info=$this->product->getProduct($arr);
         $arr['proName']=$product_info['proName'];
@@ -208,7 +206,6 @@ class Marlboro extends My_Controller {
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         //获取项目
-        var_dump($data);
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $arr=$this->input->get();
@@ -225,8 +222,8 @@ class Marlboro extends My_Controller {
         };
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
-        unset($arr['userName']);
-        unset($arr['groupId']);
+//        unset($arr['userName']);
+//        unset($arr['groupId']);
         $list=$this->marlboro_model->getMarlboroList1($arr);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('shoot_check.tpl');
@@ -276,10 +273,24 @@ class Marlboro extends My_Controller {
     }
     //拍摄通过
     function shootPass(){
-        $data['gtin']=$this->input->post('gtin');
+        $data['type']=$this->input->post('type');
+        $data['status']=$this->input->post('status');
+        $data['orderId']=$this->input->post('orderId');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-        $str=$this->marlboro_model->changeStatus($data);
+        //审核通过和驳回
+        if($data['type']==1){
+            $data['orderIds']= $data['orderId'];
+            $str=$this->marlboro_model->marlboro($data);
+        }
+        //批量通过
+        else if($data['type']==2){
+            $orderId=explode(',',$data['orderId']);
+            $count=count($orderId);
+            unset($orderId[$count-1]);
+            $data['orderIds']=serialize($orderId);
+            $str=$this->marlboro_model->batchMarlboro($data);
+        }
         echo json_encode($str);
     }
     //增加缺图
@@ -301,6 +312,8 @@ class Marlboro extends My_Controller {
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
+        $project_list=$this->project->getProjectList($data);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
         //加入项目
         $arr=$this->input->get();
         if(!isset($arr['status'])){
@@ -341,6 +354,8 @@ class Marlboro extends My_Controller {
         //商品分类的查询
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
+        $project_list=$this->project->getProjectList($data);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
         //加入项目
         $arr=$this->input->get();
@@ -383,6 +398,8 @@ class Marlboro extends My_Controller {
         //商品分类的查询
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
+        $project_list=$this->project->getProjectList($data);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
         //加入项目
         $arr=$this->input->get();
@@ -419,11 +436,14 @@ class Marlboro extends My_Controller {
     function shootBackDetail(){
         $this->load->model('user/project_model','project');
         $this->load->model('sdk/product_model','product');
+
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //商品分类的查询
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
+        $project_list=$this->project->getProjectList($arr);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'marlboro/noMeasure?';
         //获取传递参数并转为page_yrl
         $arr=$this->input->get();

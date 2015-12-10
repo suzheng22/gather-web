@@ -17,7 +17,18 @@
             	<h3>项目管理 <a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
                 <div class="rose_top main_rignt_top clearfix">
                     <form action="{{$root_path}}project/projectManager" id="myform">
-                        <div class="cc_top_one clearfix"><label>项目名称:</label><input type="text" name="project" value="{{$project}}" class="project"/></div>
+                        <div class="cc_top_one last_show"><label>项目名称:</label>
+                            <div class="choice_count choice_box vocation">
+                                <dl class="select">
+                                    <select name="pId" class="select3">
+                                        <option value="">全部</option>
+                                        {{foreach from=$project_list item=list}}
+                                        <option value="{{$list.pId}}" {{if $pId==$list.pId}}selected="selected"{{/if}}>{{$list.pName}}</option>
+                                        {{/foreach}}
+                                    </select>
+                                </dl>
+                            </div>
+                        </div>
                         <div class="cc_top_one clearfix last_show"><label>状态:</label>
                           <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
@@ -48,8 +59,6 @@
                         <th>修改时间</th>
                         <th>修改人</th>
                         <th>操作</th>
-                        
-                        
                       </tr>
                         {{foreach from =$plist item=list}}
                       <tr>
@@ -156,9 +165,10 @@ function addProject(){
     var data={project:projectName,describe:describe};
     $.post("{{$root_path}}project/addProject",data,
             function(data){
-                alert(data.msg);
+             //   alert(data==null);
+             //   alert(data.msg);
                 window.location.reload();
-            },'json');
+            },'text');
 }
 function btn_empty(){
     $(".project").val("");

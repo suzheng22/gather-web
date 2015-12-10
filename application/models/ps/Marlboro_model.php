@@ -150,6 +150,18 @@ class Marlboro_model extends MY_Model {
         $return=$this->curl($url,$data);
         return $return;
     }
+    //单独操作审核（通过和驳回）
+    function marlboro($data){
+        $url=$this->tmore_api_url."/shoot/marlboro";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
+    //批量审核通过
+    function batchMarlboro($data){
+        $url=$this->tmore_api_url."/shoot/batchMarlboro";
+        $return=$this->curl($url,$data);
+        return $return;
+    }
 
     //增加通过缺图
     function addMissFigure($data){

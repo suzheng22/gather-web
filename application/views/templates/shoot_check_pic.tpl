@@ -31,7 +31,7 @@
         <div class="ps_top_menu">
             {{if $p_info.status===0}}
             <a href="javascript:;" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
-            <a href="javascript:;" id="shoot_new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
+            <a href="javascript:;" id="shoot_new_user" class="back" onclick="check(2)"><i class="iconfont">&#xf0223;</i>驳回</a>
             <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>
             {{else}}
             {{if $p_info.status==1}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
@@ -255,17 +255,15 @@ function check(status){
         return false;
     }
 	var memo=$("#memo").val();
-    var data={"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'shoot'};
-		$.post("{{$root_path}}marlboro/checkStatus",data,
+    var data={"orderId":{{$p_info.orderId}},"type":1,"status":status,"memo":memo};
+		$.post("{{$root_path}}marlboro/shootPass",data,
 		  	function(data){
 				var dataObj=eval("("+data+")");
-                alert(123);
 				if(dataObj.msgCode==0){
-
 					if(status==1){
 					   alert('审核成功');
 					}
-					else{
+					else if(status==2){
 						alert('驳回成功');
 					}
 					window.location.reload();
@@ -277,6 +275,7 @@ function check(status){
 		  	},"text");
 }
     function add_miss_figure(){
+        var orderId={{$p_info.orderId}};
         //条形码
         var gtin=$(".gtin1").html();
         //商品名称
@@ -284,7 +283,7 @@ function check(status){
         //商品类型
         var typeName=$(".typeName1").html();
         var remark=$("#remark").val();
-        var data={gtin:gtin,proName:proName,typeName:typeName,remark:remark};
+        var data={orderId:orderId,gtin:gtin,proName:proName,typeName:typeName,remark:remark};
         $.ajax({
             url:'{{$root_path}}marlboro/addMissFigure',
             type:"POST",

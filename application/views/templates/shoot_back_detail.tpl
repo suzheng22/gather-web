@@ -20,11 +20,11 @@
                 	 <div class="cc_top_one last_show"><label>项目名称:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="project" class="select3">
+                                    <select name="pId" class="select3">
                                         <option value="">全部</option>
-                                      {{foreach from=$project_list item=list}}
-                                        <option value="{{$list.projectId}}" {{if $projectId==$list.projectId}}selected="selected"{{/if}}>{{$list.project}}</option>
-                                      {{/foreach}}
+                                        {{foreach from=$project_list item=list}}
+                                        <option value="{{$list.pId}}" {{if $pId==$list.pId}}selected="selected"{{/if}}>{{$list.pName}}</option>
+                                        {{/foreach}}
                                     </select>
                                 </dl>
                             </div>
@@ -81,7 +81,6 @@
                         <th>驳回原因</th>
                         <th>驳回时间</th>
                         <th>处理状态</th>
-                       
                       </tr>
                         {{foreach from=$flist item=list}}
                       <tr>
@@ -95,9 +94,6 @@
                         <td>{{$list.reson}}</td>
                         <td>{{$list.time}}</td>
                         <td>{{$list.status}}</td>
-                       
-                        
-                       
                       </tr>
                      {{/foreach}}
                     </table>

@@ -13,11 +13,13 @@ class Project extends My_Controller {
         $this->load->model('user/project_model','user');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
+        $project_list=$this->project_model->getProjectList($data);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'project/projectManager?';
-        $project=$this->input->get('project');
+        $project=$this->input->get('pId');
         $status=$this->input->get('status');
         if(isset($project)){
-            $arr['project']=$project;
+            $arr['pId']=$project;
             $page_url.='project='.$project."&";
             $this->ci_smarty->assign('project',$project);
         }
@@ -33,6 +35,7 @@ class Project extends My_Controller {
         $showPage= parent::page($page_url,3,$project_list['total']);
         //获取项目标签
         $this->ci_smarty->assign('plist',$project_list['data']);
+
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('project_manager.tpl');
     }
@@ -42,16 +45,18 @@ class Project extends My_Controller {
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         $page_url=$this->root_path.'project/projectUserManager?';
-        $project=$this->input->get('project');
+        $project=$this->input->get('pId');
         $status=$this->input->get('status');
-        $username=$this->input->get('username');
+        $username['userName']=$this->input->get('username');
+        //根据用户名查询userid
+        $userIds=$this->user->getUserIdsByFiled($username);
         if(isset($project)){
-            $arr['project']=$project;
-            $page_url.='project='.$project."&";
+            $arr['pId']=$project;
+            $page_url.='pId='.$project."&";
             $this->ci_smarty->assign('project',$project);
         }
         if(isset($username)){
-            $arr['username']=$username;
+            $arr['userName']=$username;
             $page_url.='username='.$username."&";
             $this->ci_smarty->assign('username',$username);
         }
@@ -65,6 +70,7 @@ class Project extends My_Controller {
         $no_master['token']=$this->user_info['token'];
         $str=$this->user->getuserRoleList($no_master);
         $role_list=json_decode($str,true);
+        var_dump($role_list);
         $this->ci_smarty->assign('rList',$role_list['list']);
         //获取用户列表
         $userStr=$this->user->getUserList($no_master);
@@ -83,17 +89,21 @@ class Project extends My_Controller {
     }
     //增加项目
     function addProject(){
-        $data['project']=$this->input->post('project');
-        $data['describe']=$this->input->post('describe');
+        $data['userId']=$this->user_info['userId'];
+        $data['token']=$this->user_info['token'];
+        $data['pName']=$this->input->post('project');
+        $data['desc']=$this->input->post('describe');
         $data=$this->project_model->addProject($data);
         echo json_encode($data);
     }
     //增加用户项目
     function addProjectUser(){
-        $data['project']=$this->input->post('project');
-        $data['describe']=$this->input->post('describe');
+        $data['userId']=$this->user_info['userId'];
+        $data['token']=$this->user_info['token'];
+        $data['pId']=$this->input->post('project');
+        $data['desc']=$this->input->post('describe');
         $data['role']=$this->input->post('role');
-        $data['username']=$this->input->post('username');
+        $data['userName']=$this->input->post('username');
         $data=$this->project_model->addProjectUser($data);
         echo json_encode($data);
     }
@@ -109,10 +119,10 @@ class Project extends My_Controller {
     }
     //更新项目状态
     function updateProjectStatus(){
-        $data['projectId']=$this->input->post('projectId');
-        $data['status']=$this->input->post('status');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
+        $data['pId']=$this->input->post('projectId');
+        $data['status']=$this->input->post('status');
         $str=$this->project_model->updateProjectStatus($data);
         echo json_encode($str);
     }

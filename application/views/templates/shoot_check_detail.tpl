@@ -118,7 +118,7 @@
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                           <input type="hidden" value="{{$list.status}}">
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetailPic/?gtin={{$list.gtin}}&pId={{$list.pId}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}&status={{$list.status}}&shootType={{$list.shootType}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}marlboro/shootDetailPic/?orderId={{$list.orderId}}&gtin={{$list.gtin}}&pId={{$list.pId}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}&status={{$list.status}}&shootType={{$list.shootType}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
@@ -199,22 +199,25 @@ function check(){
 //查询内通过
 function shoot_pass(){
     var num=0;
-    var num_gtin='';
     var shoot=0;
-    var data="";
-    {{foreach from=$glist.gtins item=list}}
+    var data_id="";
+    {{foreach from=$glist item=list}}
         var gtin={{$list.gtin}};
         var status={{$list.status}};
         var shootType={{$list.shootType}};
+        var orderId={{$list.orderId}};
         if(status===0 && shootType!==1){
             $(".t_"+gtin).css('color','red');
             num++;
         }else{
             if(status===0 && shootType===1){
                 shoot++;
+                data_id+=orderId+',';
             }
         }
+
     {{/foreach}}
+
     //查询每条数据的拍摄类型，如果拍摄类型是驳回拍摄且状态是未审核状态需要提醒操作人手动操作
     if(num){
         alert("请手动操作带有红色标识的条码");
@@ -222,10 +225,12 @@ function shoot_pass(){
     }
     //如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
     if(shoot){
+        var data={orderId:data_id,type:2};
         //ajax
         $.post("{{$root_path}}marlboro/shootPass",data,function(e){
+            if(e.msg==1)
             alert('共有'+shoot+'审核成功');
-        })
+        },'json')
     }else{
         //其余状态不变
         alert("无审核操作");
