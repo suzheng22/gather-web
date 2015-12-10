@@ -26,11 +26,13 @@ class Project extends My_Controller {
             $page_url.='status='.$status."&";
             $this->ci_smarty->assign('status',$status);
         }
+        $arr['userId']=$this->user_info['userId'];
+        $arr['token']=$this->user_info['token'];
         //获取项目列表
-        $project_list=$this->project_model->getProjectList($data);
-        $showPage= parent::page($page_url,1,$project_list['totalCount']);
+        $project_list=$this->project_model->getProjectList($arr);
+        $showPage= parent::page($page_url,3,$project_list['total']);
         //获取项目标签
-        $this->ci_smarty->assign('plist',$project_list['list']);
+        $this->ci_smarty->assign('plist',$project_list['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('project_manager.tpl');
     }
@@ -68,12 +70,14 @@ class Project extends My_Controller {
         $userStr=$this->user->getUserList($no_master);
         $userList=json_decode($userStr,true);
         $this->ci_smarty->assign('userList',$userList['list']);
+        $arr['userId']=$this->user_info['userId'];
+        $arr['token']=$this->user_info['token'];
         //获取项目列表
-        $project_list=$this->project_model->getProjectList($data);
+        $project_list=$this->project_model->getProjectList($arr);
+        $showPage= parent::page($page_url,1,$project_list['total']);
 
-        $showPage= parent::page($page_url,1,$project_list['totalCount']);
         //获取项目标签
-        $this->ci_smarty->assign('plist',$project_list['list']);
+        $this->ci_smarty->assign('plist',$project_list['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('project_user_manager.tpl');
     }

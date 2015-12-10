@@ -18,9 +18,8 @@
                 <div class="rose_top main_rignt_top clearfix">
                 	<form action="{{$root_path}}marlboro/shoot" method="get">
                          <!--项目*-->
-
                          <div class="cc_top_one last_show">
-                             <label>项目:{{$pId}}</label>
+                             <label>项目:</label>
                              <div class="choice_count choice_box vocation">
                              <dl class="select">
                                  <select name="pId" class="select3">
@@ -70,17 +69,16 @@
                       {{foreach from =$glist item=list}}
                       <tr>
                         <td>
-                            <!--{{$list.id}}-->
-                            1
+                            {{$list.num}}
                         </td>
                         <td>{{$list.userName}}</td>
                         <td>{{$list.groupName}}</td>
                         <td>{{$list.totalCount}}</td>
-                        <td>{{$list.dCount}}</td>
-                        <td>{{$list.yCount}}</td>
+                        <td>{{$list.noMarlboroCount}}</td>
+                        <td>{{$list.MarlboroCount}}</td>
                         <td>{{$list.passCount*100}}%</td>
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.userId}}">详情</a>
+                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}">详情</a>
                         </td>
                       </tr>
                        {{/foreach}}

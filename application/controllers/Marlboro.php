@@ -50,7 +50,6 @@ class Marlboro extends My_Controller {
        $type_list=$this->product->getType();
        $this->ci_smarty->assign('type_list',$type_list);
 
-
        $page_url=$this->root_path.'Marlboro/psDetail/'.$userId.'?';
         $arr=$this->input->get();
         if($arr['sTime']==''||$arr['eTime']==''){
@@ -145,12 +144,21 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->display('ps_check_pic.tpl');
     }
     
-    function shootDetailPic($gtin){
+    function shootDetailPic($gtin,$pId,$packet,$batchNo){
         $this->load->model('sdk/product_model','product');
+      //  $this->load->model('user/user_model','user');
+        $this->load->model('user/project_model','project');
+        $arr['userId']=$this->user_info['userId'];
+        $arr['token']=$this->user_info['token'];
         $arr['gtin']=$gtin;
-        $arr['type']='shoot';
-        $list=$this->marlboro_model->getMarlboroInfoPic($arr);
-        $status=$this->marlboro_model->getReviewStatus($arr);
+        $arr['pId']=$pId;
+        $arr['packet']=$packet;
+        $arr['batchNO']=$batchNo;
+       // var_dump($arr);
+       $list=$this->marlboro_model->getMarlboroInfo($arr);
+      //  var_dump($list);
+     //   $list=$this->marlboro_model->getMarlboroInfoPic($arr);
+      //  $status=$this->marlboro_model->getReviewStatus($arr);
         $product_info=$this->product->getProduct($arr);
         //新增拍摄类型
         if(!isset($product_info['shootType']))
@@ -164,7 +172,6 @@ class Marlboro extends My_Controller {
         //批次
         if(!isset($product_info['batch']))
             $product_info['batch']='批次一';
-
         $this->ci_smarty->assign('p_info',$product_info);
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('status',$status['status']);
@@ -210,7 +217,6 @@ class Marlboro extends My_Controller {
         $this->load->model('user/project_model','project');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-
         $page_url=$this->root_path.'/marlboro/shoot?';
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
@@ -218,40 +224,22 @@ class Marlboro extends My_Controller {
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $arr=$this->input->get();
-        $arr['pId']=$arr['project'];
-        unset($arr['project']);
         if(!isset($arr['page'])){
-            $arr['page']=1;
+            $post['page']=1;
         }
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
-        if($arr['userName']!='' ||$arr['groupId']!='' || $arr['pId']){//1
-            $str=$this->user->getUserIdsByFiled($arr);
+        //根据用户名和用户组确定userId
+        $str=$this->user->getUserIdsByFiled($arr);
+        if($str){
             $user_id_list=json_decode($str,true);
-            $arr['users']=serialize($user_id_list);
-        }
-       // var_dump($arr);
+           $arr['photoIds']=serialize($user_id_list);
+        };
         //增加参数
-      //  $page_url=$this->publicFuc->getUrl( $page_url,$arr);
-     //   $showpage= parent::page($page_url,10,$list['totalCount']);
-   //     $this->ci_smarty->assign('glist',$list);
-    //    $this->ci_smarty->assign('pages',$showpage['show']);
-//        $data['userName']=$this->input->get('userName');
-//        $data['groupId']=$this->input->get('groupId');
-//        $data['pId']=$this->input->get("project");//1
-//        if($data['userName']!=''){
-//            $this->ci_smarty->assign('userName',$data['userName']);
-//        }
-//        if($data['groupId']!=''){
-//            $this->ci_smarty->assign('groupId',$data['groupId']);
-//        }
-//        if($data['pId']!=''){
-//            $this->ci_smarty->assign('projectId',$data['projectId']);
-//        }//1
-
-
-
-        $list=$this->marlboro_model->getShootList($data);
+        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        unset($arr['userName']);
+        unset($arr['groupId']);
+        $list=$this->marlboro_model->getMarlboroList1($arr);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('shoot_check.tpl');
         
@@ -274,9 +262,9 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'Marlboro/shootDetail/'.$userId.'?';
         $arr=$this->input->get();
-        if($arr['sTime']==''||$arr['eTime']==''){
-            unset($arr['sTime']);
-            unset($arr['eTime']);
+        if($arr['s_time']!=''&&$arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
         }
         if(!isset($arr['status'])){
             $arr['status']=null;
@@ -284,13 +272,17 @@ class Marlboro extends My_Controller {
         if(!isset($arr['page'])){
             $arr['page']=1;
         }
-        $arr['rId']=$userId;
+        $arr['userId']=$this->user_info['userId'];
+        $arr['token']=$this->user_info['token'];
         //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
-        $list=$this->marlboro_model->getShootInfo($arr);
+        $page_url=$this->publicFuc->getUrl($page_url,$arr);
+        $arr['photoId']=$userId;
+     //   $list=$this->marlboro_model->getShootInfo($arr);
+        $list=$this->marlboro_model->getMarlboroDetail($arr);
+      //  $count=count($list['data']);
         //项目
-        $showpage= parent::page($page_url,10,$list['totalCount']);
-        $this->ci_smarty->assign('glist',$list);
+        $showpage= parent::page($page_url,10,2);
+        $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check_detail.tpl');
     }

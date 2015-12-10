@@ -53,14 +53,14 @@
                       </tr>
                         {{foreach from =$plist item=list}}
                       <tr>
-                        <td>{{$list.projectId}}</td>
-                        <td>{{$list.project}}</td>
-                        <td>{{$list.describe}}</td>
+                        <td>{{$list.pId}}</td>
+                        <td>{{$list.pName}}</td>
+                        <td>{{$list.desc}}</td>
                         <td class="status_val_{{$list.projectId}}">{{if $list.status==1}}正常{{else}}已冻结{{/if}}</td>
-                        <td>{{$list.createTime}}</td>
-                        <td>{{$list.creater}}</td>
-                        <td>{{$list.modifyTime}}</td>
-                        <td>{{$list.modifyPerson}}</td>
+                        <td>{{$list.creatTime}}</td>
+                        <td>{{$list.createName}}</td>
+                        <td>{{$list.updateTime}}</td>
+                        <td>{{$list.updateName}}</td>
                         <td>
                         	<a href="javascript:;" onclick="update_status({{$list.projectId}},{{$list.status}})" class="status_{{$list.projectId}}">{{if $list.status==1}}冻结{{else}}解冻{{/if}}</a>
                         </td>

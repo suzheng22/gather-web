@@ -10,6 +10,43 @@ class Marlboro_model extends MY_Model {
     }
     
     //获取修图审核列表
+    function getMarlboroList1($data){
+     //  var_dump($data);
+     //   exit;
+        $url=$this->more_api_url.'/shoot/MarlboroList';
+        $return=$this->curl($url,$data);
+        $list=json_decode($return,true);
+        //根据获取得到的userID获取数据
+        $data['ids']=$data['photoIds'];
+        //根据每个用户的ID去查找项目的数据
+        $url=$this->user_api_url."/user/getUserInfoByIds";
+        $return=$this->curl($url,$data);
+        $user_list=json_decode($return,true);
+        $num=0;
+        foreach ($list as $k => $v){
+            foreach ($user_list as $k1=>$v1){
+                if($v['photoId']==$v1['userId']){
+                    $num++;
+                    $list[$k]['num']=$num;
+                    $list[$k]['userName']=$v1['userName'];
+                    $list[$k]['groupName']=$v1['groupName'];
+                    $list[$k]['passCount']=$list[$k]['MarlboroCount']/$list[$k]['totalCount'];
+                }
+            }
+        }
+        return $list;
+    }
+    function getMarlboroDetail($data){
+        var_dump($data);
+     //   exit;
+        $url=$this->more_api_url.'/shoot/MarlboroDetail';
+        $return=$this->curl($url,$data);
+        var_dump($data);
+        $list=json_decode($return,true);
+        return $list;
+
+    }
+
     function getMarlboroList($data) {
         $url=$this->tmore_api_url."/review/GetReviewData";
         $return=$this->curl($url,$data);
@@ -60,7 +97,8 @@ class Marlboro_model extends MY_Model {
     }
     
     function getMarlboroInfo($data){
-        $url=$this->tmore_api_url."/review/GetReviewList";
+//        $url=$this->tmore_api_url."/review/GetReviewList";
+        $url=$this->more_api_url."/shoot/MarlboroInfo";
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
         return $list;
@@ -101,6 +139,7 @@ class Marlboro_model extends MY_Model {
         $return=$this->curl($url,$data);
         return $return;
     }
+
     //增加通过缺图
     function addMissFigure($data){
         $url=$this->tmore_api_url."/review/addMissFigure";

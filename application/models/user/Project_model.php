@@ -12,12 +12,35 @@ class Project_model extends MY_Model {
         parent::__construct();
 
     }
-
+    //获取项目列表
     function getProjectList($data){
         //先获取userID
         $url=$this->user_api_url.'/user/getProjectAll';
         $return=$this->curl($url,$data);
-        return json_decode($return,true);
+        $datas=json_decode($return,true);
+        $count=count($datas['data']);
+        $datas=$datas['data'];
+        for($i=0;$i<$count;$i++){
+            foreach( $datas[$i] as $key=>$val){
+                if($key==='creatUserId'){
+                    $data['upUserId']=$val;
+                    $url=$this->user_api_url."/user/info";
+                    $return=$this->curl($url,$data);
+                    $user=json_decode($return,true);
+                    $datas[$i]['createName']=$user['trueName'];
+                }
+                else if($key='upUserId'){
+                    $data['upUserId']=$val;
+                    $url=$this->user_api_url."/user/info";
+                    $return=$this->curl($url,$data);
+                    $user=json_decode($return,true);
+                    $datas[$i]['updateName']=$user['trueName'];
+                }
+            }
+        }
+        $project['total']=$count;
+        $project['data']=$datas;
+        return $project;
     }
     function addProject($data){
         $url=$this->user_api_url."/project/addProject";
