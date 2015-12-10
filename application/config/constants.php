@@ -85,6 +85,7 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 define('USERAPI', 'http://192.168.8.29:8080');
+define('MOREAPI', 'http://192.168.8.29:8085');
 define('CONTROL', 'http://apics.greensea.com.cn/api.php');
 define('RESOURCE', 'http://192.168.8.29:8083/collect_web/');
 define('ROOTPATH', 'http://192.168.8.29:8082/');

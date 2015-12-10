@@ -225,6 +225,7 @@ class Marlboro extends My_Controller {
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
 //        unset($arr['userName']);
 //        unset($arr['groupId']);
+        var_dump($arr);
         $list=$this->marlboro_model->getMarlboroList1($arr);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('shoot_check.tpl');
