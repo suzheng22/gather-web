@@ -106,19 +106,19 @@
                       {{foreach from=$glist item=list}}
                       <tr class="t_{{$list.gtin}}">
                         <td>{{$list.gtin}}</td>
-                        <td>{{$list.gName}}</td>
+                        <td>{{$list.goodsName}}</td>
                         <td>{{$list.catgroryName}}</td>
                           <!-- 新增字段 -->
                           <td>{{$list.pName}}</td>
-                          <td>{{$list.packet}}</td>
-                          <td>{{$list.batchNo}}</td>
+                          <td>包装{{$list.packet}}</td>
+                          <td>批次{{$list.batchNo}}</td>
                           <!-- 新增字段 -->
                         <td>{{if $list.type==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
 						<td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
-                        <td>{{if $list.status==1}}未审核{{else if $list.status==2}}正常{{else}}驳回{{/if}}</td>
+                        <td>{{if $list.status==1}}未审核{{else if $list.status==2}}通过{{else}}驳回{{/if}}</td>
                           <input type="hidden" value="{{$list.status}}">
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetailPic/?orderId={{$list.orderId}}&gtin={{$list.gtin}}&pId={{$list.pId}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}&status={{$list.status}}&shootType={{$list.shootType}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}marlboro/shootDetailPic/?orderId={{$list.orderId}}&gtin={{$list.gtin}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
@@ -199,7 +199,6 @@ function check(){
 
 //查询内通过
 function shoot_pass(){
-    alert(123);
     var num=0;
     var shoot=0;
     var data_id="";
@@ -208,18 +207,16 @@ function shoot_pass(){
         var status={{$list.status}};
         var shootType={{$list.shootType}};
         var orderId={{$list.orderId}};
-        if(status===0 && shootType!==1){
+        if(status===1 && shootType!==1){
             $(".t_"+gtin).css('color','red');
             num++;
         }else{
-            if(status===0 && shootType===1){
+            if(status===1 && shootType===1){
                 shoot++;
                 data_id+=orderId+',';
             }
         }
-
     {{/foreach}}
-
     //查询每条数据的拍摄类型，如果拍摄类型是驳回拍摄且状态是未审核状态需要提醒操作人手动操作
     if(num){
         alert("请手动操作带有红色标识的条码");
@@ -230,10 +227,16 @@ function shoot_pass(){
     if(shoot){
         var data={orderId:data_id,type:2};
         //ajax
-        $.post("{{$root_path}}marlboro/shootPass",data,function(e){
-            if(e.msg==1)
-            alert('共有'+shoot+'审核成功');
-        },'json')
+        $.ajax({
+           url:"{{$root_path}}marlboro/shootPass",
+            data:data,
+            type:'POST',
+            dataType:'text',
+            success:function(e){
+              //  alert(e);
+                alert('审核成功');
+            }
+        });
     }else{
         //其余状态不变
         alert("无审核操作");

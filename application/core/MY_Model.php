@@ -10,6 +10,7 @@ class MY_Model extends CI_Model
 	     //线上$this->user_api_url="http://121.40.241.156:8000";
 	     $this->tmore_api_url=CONTROL;
 	     $this->more_api_url=MOREAPI;
+        $this->pic_path=PICPATH;
     }
     
     function curl($url,$data,$m='post'){

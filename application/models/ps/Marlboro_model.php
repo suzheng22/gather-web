@@ -119,17 +119,20 @@ class Marlboro_model extends MY_Model {
         }
         return $list;
     }
-    
+    //根据orderId获取详细信息
     function getMarlboroInfo($data){
-//        $url=$this->tmore_api_url."/review/GetReviewList";
-        $url=$this->more_api_url."/shoot/MarlboroInfo";
-       // var_dump($data);exit;
+        $url=$this->more_api_url."/shoot/getMarboro";
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
-   //     var_dump($list);
         return $list;
     }
-    
+    function getAllImage($data){
+       // var_dump($data);
+        $url=$this->more_api_url."/shoot/getAllImage";
+        $return=$this->curl($url,$data);
+        $list=json_decode($return,true);
+        return $list;
+    }
     
     function getShootInfo($data){
         $url=$this->tmore_api_url."/review/GetShootReviewList";
@@ -167,13 +170,13 @@ class Marlboro_model extends MY_Model {
     }
     //单独操作审核（通过和驳回）
     function marlboro($data){
-        $url=$this->tmore_api_url."/shoot/marlboro";
+        $url=$this->more_api_url."/shoot/marlboro";
         $return=$this->curl($url,$data);
         return $return;
     }
     //批量审核通过
     function batchMarlboro($data){
-        $url=$this->tmore_api_url."/shoot/batchMarlboro";
+        $url=$this->more_api_url."/shoot/batchMarboro";
         $return=$this->curl($url,$data);
         return $return;
     }

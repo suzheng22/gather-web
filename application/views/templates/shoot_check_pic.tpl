@@ -15,23 +15,27 @@
 	<h2>{{$p_info.gtin}}-拍摄详情</h2>
 	<ul class="clearfix" id="nav_info">
             <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
-            <li class="black"><em>商品名称:</em><span>{{$p_info.proName}}</span></li>
-            <li class="black"><em>商品类型:</em><span>{{$p_info.catgrory}}</span></li>
+            <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
+            <li class="black"><em>商品类型:</em><span>{{$p_info.catgrory1}}</span></li>
         <!-- 拍摄类型 -->
-            <li class="black"><em>拍摄类型:</em><span>{{$p_info.shootType}}</span></li>
+            <li class="black"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
         <!-- 项目 -->
             <li class="black"><em>项目:</em><span>{{$p_info.pId}}</span></li>
         <!-- 包装 -->
-            <li class="black"><em>包装:</em><span>{{$p_info.packet}}</span></li>
+            <li class="black"><em>包装:</em><span>包装{{$p_info.packet}}</span></li>
         <!-- 批次 -->
-            <li class="black"><em>批次:</em><span>{{$p_info.batchNo}}</span></li>
+            <li class="black"><em>批次:</em><span>批次{{$p_info.batchNo}}</span></li>
         <div class="clearfix"></div>
-        <p class="back_why_info">最新驳回原因:<span>{{$p_info.new}}</span>上次驳回原因:<span>{{$p_info.pre}}</span></p>
-        {{$arr.status}}
+        <p class="back_why_info">
+       <!-- {{if $p_info.status==3}}-->
+       最新驳回原因:<span>{{$p_info.memo}}</span>上次驳回原因:<span>{{$p_info.memo}}</span>
+      <!--  {{/if}}-->
+        </p>
+
         <div class="ps_top_menu">
-            {{if $p_info.status===1}}
-            <a href="javascript:;" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
-            <a href="javascript:;" id="shoot_new_user" class="back" onclick="check(2)"><i class="iconfont">&#xf0223;</i>驳回</a>
+            {{if $p_info.status==1}}
+            <a href="" class="pass" onclick="check(2)"><i class="iconfont">&#xf01b1;</i>通过</a>
+            <a href="javascript:;" id="shoot_new_user" class="back" ><i class="iconfont">&#xf0223;</i>驳回</a>
             <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>
             {{else}}
             {{if $p_info.status==2}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
@@ -40,6 +44,7 @@
             {{/if}}
         </div>
     </ul>
+
 	<div class="left shoot_left" style="width:1200px; margin:0 auto;">
             <div class="pageContent ps_check_pic" >
                 <div class="wrapper">
@@ -61,8 +66,9 @@
                                 <div class="v_content">
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
-                                           {{foreach from=$plist.a2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
+                                           {{foreach from=$plist.1 item =list name=name}}
+
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
 										{{/foreach}}
                                             
                                          </ul>
@@ -81,8 +87,8 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.b2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
+                                    {{foreach from=$plist.2 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -100,8 +106,8 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.c2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
+                                        {{foreach from=$plist.3 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -119,9 +125,9 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.d2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
-									{{/foreach}}
+                                        {{foreach from=$plist.4 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$this->pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+									    {{/foreach}}
                                      </ul>
                                 </div>
                             </div><!--v_content-->
@@ -138,8 +144,8 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.e2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50"  mm="{{$list}}" /></li>
+                                        {{foreach from=$plist.5 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}} " /></li>
 									{{/foreach}}
                                      </ul>
                                 </div>
@@ -161,7 +167,7 @@
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.proName}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.typeName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(2)">确认</a>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(3)">确认</a>
             </div>
         </div>
     </div>
@@ -229,7 +235,7 @@
 			bShade:true,                //是否有遮罩
 			bShadeClose:false,          //是否点遮罩关闭
 			fnAdditional:function(){
-				
+
 			}
 		});
 
@@ -269,7 +275,8 @@ function check(status){
 					window.location.reload();
 				}
 				else{
-					alert(dataObj.msgText);
+                    alert('审核通过失败');
+					//alert(dataObj.msgText);
 					window.location.reload();
 				}
 		  	},"text");

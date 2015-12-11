@@ -144,27 +144,27 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->display('ps_check_pic.tpl');
     }
     
-    function shootDetailPic($gtin,$pId,$packet,$batchNo,$status,$shootType){
+    function shootDetailPic($orderId,$gtin){
         $this->load->model('sdk/product_model','product');
-      //  $this->load->model('user/user_model','user');
         $this->load->model('user/project_model','project');
         $arr=$this->input->get();
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
-        //获取项目
-       // $arr['pName']=$this->project->getProjectInfo($arr);
-      $lists=$this->marlboro_model->getMarlboroInfo($arr);
-       // var_dump($lists);
-        $list=$this->marlboro_model->getMarlboroInfoPic($arr);
-        $product_info=$this->product->getProduct($arr);
+        //获取图片
+        $list=$this->marlboro_model->getAllImage($arr);
+        $product_info=$this->marlboro_model->getMarlboroInfo($arr);
+        $product_info['userId']=$this->user_info['userId'];
+        $product_info['token']=$this->user_info['token'];
+
+      //  $product_info=$this->product->getProduct($arr);
+       //var_dump($list);
         $arr['proName']=$product_info['proName'];
-        $arr['catgrory']=$product_info['typeName'];
-        $this->ci_smarty->assign('p_info',$arr);
+        $arr['catgrory']=$product_info['type'];
+        $this->ci_smarty->assign('p_info',$product_info);
         $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('pic_path',"http://7xny7g.com2.z0.glb.qiniucdn.com/");
         $this->ci_smarty->display('shoot_check_pic.tpl');
     }
-
-
     function checkStatus(){
         $data['gtin']=$this->input->post('gtin');
         $data['type']=$this->input->post('type');
@@ -276,20 +276,20 @@ class Marlboro extends My_Controller {
         $data['orderId']=$this->input->post('orderId');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
+
         //审核通过和驳回
         if($data['type']==1){
-            $data['orderIds']= $data['orderId'];
+            echo $data['status'];
             $str=$this->marlboro_model->marlboro($data);
-        }
-        //批量通过
-        else if($data['type']==2){
+            echo json_encode($str);
+        }else{
+            //批量通过
             $orderId=explode(',',$data['orderId']);
-            $count=count($orderId);
-            unset($orderId[$count-1]);
+            array_pop($orderId);
             $data['orderIds']=serialize($orderId);
             $str=$this->marlboro_model->batchMarlboro($data);
+            echo json_encode($str);
         }
-        echo json_encode($str);
     }
     //增加缺图
     function addMissFigure(){

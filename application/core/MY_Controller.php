@@ -12,7 +12,7 @@ class MY_Controller extends CI_Controller
         $this->load->library('LvlangMemcache');
         $this->load->library('PHPExcel');
         $this->load->library('PHPExcel/IOFactory');
-
+        $this->pic_path=PICPATH;
         $c=$this->uri->segment(1, 0);
         $m=$this->uri->segment(2, 0);
         $acction=$c.'/'.$m;
@@ -29,6 +29,7 @@ class MY_Controller extends CI_Controller
         }
 
         $this->root_path=ROOTPATH;
+
         $resource_url=RESOURCE;
 
         $this->ci_smarty->assign('root_path', $this->root_path);
