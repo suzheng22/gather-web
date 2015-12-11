@@ -20,7 +20,6 @@ class Marlboro extends My_Controller {
         if($data['userName']!=''){
                 $this->ci_smarty->assign('userName',$data['userName']);
         }
-        
         if($data['groupId']!=''){
             $this->ci_smarty->assign('groupId',$data['groupId']);
         }
@@ -225,13 +224,11 @@ class Marlboro extends My_Controller {
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
         $list=$this->marlboro_model->getMarlboroList1($arr);
-
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('shoot_check.tpl');
     }
     //拍摄详情
-    function shootDetail($userId){
-      //  header("content-type:")
+    function shootDetail($userId,$no){
         $this->load->model('user/user_model','user');
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
@@ -267,6 +264,7 @@ class Marlboro extends My_Controller {
        // var_dump($list);
         //项目
         $showpage= parent::page($page_url,10,$list['total']);
+        $this->ci_smarty->assign('no',$no);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check_detail.tpl');
@@ -371,6 +369,7 @@ class Marlboro extends My_Controller {
         }
         //获取无法测量管理列表
         $noMeasureList=$this->marlboro_model->getNoShootList($arr);
+
         if($arr['is_ext']==1){
            // $query=$noMeasureList['list'];
             $fileName='拍摄驳回统计';

@@ -19,7 +19,7 @@
                 	
                         <div class="cc_top_one"><label>拍摄人:</label><span>{{$u_info.trueName}}</span> <input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
-                        <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
+                        <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}" id="myform">
                             <!-- 项目 -->
@@ -248,7 +248,7 @@ function shoot_pass(){
 		$("#count_user").val("");
 		$("#datetimepicker_start").val("");
 		$("#datetimepicker_end").val("");
-		$(".cc_top_one select").val("");
+		$(".select3").val("");
 	}
 </script>
  	

@@ -84,8 +84,9 @@
                             <td>{{$list.roleName}}</td>
                             <td>{{$list.desc}}</td>
                             <td class="status_val_{{$list.projectId}}">{{if $list.status==1}}正常{{else}}已冻结{{/if}}</td>
-                            <td>{{$list.creatTime}}</td>
-                            <td>{{$list.createName}}</td>
+                            <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
+                            <td>{{$list.createName}}
+                                </td>
                             <td>{{$list.updateTime}}</td>
                             <td>{{$list.updateName}}</td>
                             <td>
@@ -151,8 +152,6 @@
 {{include file='public/js.tpl'}}
 <script type="text/javascript">
 $(function(){
-	
-	
 	//select 表单美化
 	$(".select3").uedSelect({
 		width : 100
@@ -177,7 +176,6 @@ $(function(){
         bShade:true,                //是否有遮罩
         bShadeClose:false,          //是否点遮罩关闭
         fnAdditional:function(){
-            
         }
     });
 });
@@ -185,7 +183,6 @@ $(function(){
 function role_change(){
     $("#usernames").val('');
     var roleId=$("#roles").val();
-
     var option="<option>请选择</option>";
     //alert(roleId);
     if(roleId!=""){
@@ -244,8 +241,6 @@ function btn_empty(){
     $(".project").val("");
     $(".cc_top_one select").val("");
 }
-</script>	
-
-
+</script>
 </body>
 </html>

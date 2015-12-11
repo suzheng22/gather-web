@@ -78,7 +78,7 @@
                         <td>{{$list.MarlboroCount}}</td>
                         <td>{{$list.passCount*100}}%</td>
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}">详情</a>
+                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}/{{$list.noMarlboroCount}}">详情</a>
                         </td>
                       </tr>
                        {{/foreach}}
