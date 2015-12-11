@@ -222,10 +222,7 @@ function update_status(projectId){
                 alert("操作失败")
             }
         },'json')
-
     }
-
-
 }
 function addProjectUser(){
     var roleId=$("#roles").val();
@@ -235,11 +232,12 @@ function addProjectUser(){
     var data={pIds:projectName,describe:describe,roleId:roleId,userId:userId};
     $.post("{{$root_path}}project/addProjectUser",data,
             function(data){
-              //  alert(data);
-              //  if(data['msgCode']===0){
+                if(data){
                    alert('添加成功');
                     window.location.reload();
-             //   }
+                }else{
+                    alert('添加失败');
+                }
             },'json');
 }
 function btn_empty(){

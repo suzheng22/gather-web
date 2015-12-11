@@ -41,11 +41,9 @@ class Project extends My_Controller {
     }
   //商品用户管理
     function projectUserManager(){
-
         $this->load->model('user/user_model','user');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-        var_dump($data);
         $project_list=$this->project_model->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'project/projectUserManager?';
@@ -59,7 +57,6 @@ class Project extends My_Controller {
         }
         if(isset($username)){
             $arr['pUserId']=serialize($username);
-         //   echo unserialize($arr['pUserI'])
             $page_url.='username='.$username."&";
             $this->ci_smarty->assign('username',$username);
         }
