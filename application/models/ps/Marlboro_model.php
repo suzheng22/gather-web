@@ -43,17 +43,16 @@ class Marlboro_model extends MY_Model {
         $list=json_decode($return,true);
         $count=count($list['data']);
         $datas=$list['data'];
-
         for ($i=0;$i<$count;$i++){
             foreach ($datas[$i] as $key=>$val){
-                if($key=='gtin'){
-                    $data['gtin']=$val;
-                    $url=$this->tmore_api_url."/product/getproductbygtin";
-                    $return=$this->curl($url,$data,'get');
-                    $goods=json_decode($return,true);
-                    $datas[$i]['gName']=$goods['proName'];
-                    $datas[$i]['catgroryName']=$goods['typeName'];
-                }
+//                if($key=='gtin'){
+//                    $data['gtin']=$val;
+//                    $url=$this->tmore_api_url."/product/getproductbygtin";
+//                    $return=$this->curl($url,$data,'get');
+//                    $goods=json_decode($return,true);
+//                    $datas[$i]['gName']=$goods['proName'];
+//                    $datas[$i]['catgroryName']=$goods['typeName'];
+//                }
                 if($key==='pId'){
                     $data['pId']=$val;
                     $url=$this->user_api_url."/user/getProjectByFiled";

@@ -220,8 +220,7 @@
 		//实例化
 		var iv2 = $("#viewer").iviewer(
 		{
-			//src: "{{$plist.a2.0}}-thumbnail500"
-			src: "{{$plist.a2.0}}"
+			src: "{{$pic_path}}{{$picList.0.key}}"
 		});
 
 

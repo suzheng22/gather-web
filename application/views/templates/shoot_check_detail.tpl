@@ -39,7 +39,7 @@
                             <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" id="gtin"/></div>
                     	    <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}" id="gName"/></div>
                      	    <div class="cc_top_one" style="width:40%;">
-                            <label>拍摄开始时间:</label>
+                            <label>上传时间:</label>
                             <input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/>
                             <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/>
@@ -72,10 +72,10 @@
                                 <div class="choice_count choice_box vocation">            	 			
                                     <dl class="select">
                                     <select name="status" class="select3">
-                                        <option value="" {{if $status eq 'NULL'}}selected="selected"{{/if}}>全部</option>
-                                        <option value="0" {{if $status eq '0'}}selected="selected"{{/if}}>未审核</option>
-                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>拍摄已通过</option>
-                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>拍摄已驳回</option>
+                                        <option value="" {{if $status == 'NULL'}}selected="selected"{{/if}}>全部</option>
+                                        <option value="1" {{if $status ==1}}selected="selected"{{/if}}>未审核</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>拍摄已通过</option>
+                                        <option value="3" {{if $status==3}}selected="selected"{{/if}}>拍摄已驳回</option>
                                     </select>
                                     </dl>
                                 </div>
@@ -99,14 +99,14 @@
                           <th>包装</th>
                           <th>批次</th>
                         <th>拍摄类型</th>
-                        <th>拍摄时间</th>
+                        <th>上传时间</th>
                         <th>状态</th>
                         <th>操作</th>
                       </tr>
                       {{foreach from=$glist item=list}}
                       <tr class="t_{{$list.gtin}}">
                         <td>{{$list.gtin}}</td>
-                        <td>{{$list.goodsName}}</td>
+                        <td>{{$list.gName}}</td>
                         <td>{{$list.catgroryName}}</td>
                           <!-- 新增字段 -->
                           <td>{{$list.pName}}</td>
@@ -114,7 +114,7 @@
                           <td>批次{{$list.batchNo}}</td>
                           <!-- 新增字段 -->
                         <td>{{if $list.type==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
-						<td>{{$list.creatTime|date_format:"Y-m-d"}}</td>
+						<td>{{$list.uploadTime|date_format:"Y-m-d H:i:s"}}</td>
                         <td>{{if $list.status==1}}未审核{{else if $list.status==2}}通过{{else}}驳回{{/if}}</td>
                           <input type="hidden" value="{{$list.status}}">
                         <td>

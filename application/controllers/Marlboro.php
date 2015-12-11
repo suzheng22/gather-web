@@ -162,6 +162,7 @@ class Marlboro extends My_Controller {
         $arr['catgrory']=$product_info['type'];
         $this->ci_smarty->assign('p_info',$product_info);
         $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('picList',$list[1]);
         $this->ci_smarty->assign('pic_path',"http://7xny7g.com2.z0.glb.qiniucdn.com/");
         $this->ci_smarty->display('shoot_check_pic.tpl');
     }
@@ -263,6 +264,7 @@ class Marlboro extends My_Controller {
         }
         $arr['photoId']=$userId;
         $list=$this->marlboro_model->getMarlboroDetail($arr);
+       // var_dump($list);
         //项目
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('glist',$list['data']);
@@ -276,7 +278,6 @@ class Marlboro extends My_Controller {
         $data['orderId']=$this->input->post('orderId');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-
         //审核通过和驳回
         if($data['type']==1){
             echo $data['status'];
