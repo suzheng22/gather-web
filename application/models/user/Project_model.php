@@ -126,12 +126,12 @@ class Project_model extends MY_Model {
         return json_decode($return);
     }
     function addProjectUser($data){
-        $url=$this->user_api_url."/project/addProjectUser";
+        $url=$this->user_api_url."/user/addProjectUser";
         $return =$this->curl($url,$data);
         return $return;
     }
     function updateProjectStatus($data){
-        $url=$this->user_api_url."/project/updateProjectStatus";
+        $url=$this->user_api_url."/user/updateProjectStatus";
         $return =$this->curl($url,$data);
         if(!$return){
             $return =array('msg'=>'1');

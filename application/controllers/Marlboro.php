@@ -280,7 +280,6 @@ class Marlboro extends My_Controller {
         $data['token']=$this->user_info['token'];
         //审核通过和驳回
         if($data['type']==1){
-            echo $data['status'];
             $str=$this->marlboro_model->marlboro($data);
             echo json_encode($str);
         }else{

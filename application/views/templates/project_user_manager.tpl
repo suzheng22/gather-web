@@ -235,9 +235,12 @@ function addProjectUser(){
     var data={pIds:projectName,describe:describe,roleId:roleId,userId:userId};
     $.post("{{$root_path}}project/addProjectUser",data,
             function(data){
-                alert(data);
-                window.location.reload();
-            },'text');
+              //  alert(data);
+              //  if(data['msgCode']===0){
+                   alert('添加成功');
+                    window.location.reload();
+             //   }
+            },'json');
 }
 function btn_empty(){
     $(".project").val("");

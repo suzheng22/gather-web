@@ -205,8 +205,6 @@
 <script type="text/javascript"> 
 	$(function(){
 
-
-
 		//预加载
 		$('body').fadeloader({
 			mode: 'class',
@@ -261,20 +259,22 @@ function check(status){
     }
 	var memo=$("#memo").val();
     var data={"orderId":{{$p_info.orderId}},"type":1,"status":status,"memo":memo};
+  //  return false;
 		$.post("{{$root_path}}marlboro/shootPass",data,
 		  	function(data){
-				var dataObj=eval("("+data+")");
-				if(dataObj.msgCode==0){
-					if(status==1){
+			//	var dataObj=eval("("+data+")");
+              //  alert( dataObj);
+				if(data){
+					if(status==2){
 					   alert('审核成功');
 					}
-					else if(status==2){
+					else if(status==3){
 						alert('驳回成功');
 					}
 					window.location.reload();
 				}
 				else{
-                    alert('审核通过失败');
+                    alert('审核失败');
 					//alert(dataObj.msgText);
 					window.location.reload();
 				}
