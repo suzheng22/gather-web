@@ -27,10 +27,10 @@
              </dl>
              <dl class="menu_base_info system_log">
                  <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-                 <dd><a href=".html" title="商品管理">商品管理</a></dd>
-                 <dd><a href=".html" title="扩充成分">扩充成分</a></dd>
-                 <dd><a href=".html" title="营养成风">营养成分</a></dd>
-                 <dd><a href="#" title="基本信息管理">基本信息管理</a></dd>
+                 <dd><a href="{{$root_path}}" title="商品管理">商品管理</a></dd>
+                 <dd><a href="{{$root_path}}information/extendInfo" title="扩充成分">扩充成分</a></dd>
+                 <dd><a href="{{$root_path}}information/nutrientInfo" title="营养成风">营养成分</a></dd>
+                 <dd><a href="{{$root_path}}information/baseInfoManager" title="基本信息管理">基本信息管理</a></dd>
              </dl>
 
 
@@ -49,7 +49,7 @@
                  <dd><a href="{{$root_path}}shoot/shootBackDetail" title="录入">拍摄驳回统计</a></dd>
                  <dd><a href="{{$root_path}}shoot/noMeasure" title="录入">无法测量</a></dd>
                 <dd><a href="{{$root_path}}marlboro/shoot" title="拍摄审核">拍摄审核</a></dd>
-                <dd><a href="{{$root_path}}marlboro/ps" title="修图审核">修图审核</a></dd>
+                <dd><a href="{{$root_path}}retouch/psCheckList" title="修图审核">修图审核</a></dd>
                 <dd><a href="#" title="录入审核">录入审核</a></dd>
                 <dd><a href="#" title="拍摄反馈审核">拍摄反馈审核</a></dd>
                

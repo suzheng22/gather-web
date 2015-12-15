@@ -12,14 +12,22 @@
 	<h2>{{$p_info.gtin}}条形码-修图详情
       </h2>
 	<ul class="clearfix" id="nav_info">
-            <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
-            <li class="black"><em>商品名称:</em><span>{{$p_info.proName}}</span></li>
-            <li class="black"><em>商品类型:</em><span>{{$p_info.typeName}}</span></li>
+            < <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
+        <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
+        <li class="black"><em>商品类型:</em><span>{{$p_info.catgrory1}}</span></li>
+        <!-- 拍摄类型 -->
+        <li class="black"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
+        <!-- 项目 -->
+        <li class="black"><em>项目:</em><span>{{$p_info.pId}}</span></li>
+        <!-- 包装 -->
+        <li class="black"><em>包装:</em><span>包装{{$p_info.packet}}</span></li>
+        <!-- 批次 -->
+        <li class="black"><em>批次:</em><span>批次{{$p_info.batchNo}}</span></li>
             <li class="black">
 			{{if $status!=1 && $status!=2}}
             	<div class="ps_top_menu">
                 <a href="#" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
-                <a href="javascript:;" id="new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
+                <a href="javascript:;"  id="new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
                 </div>
 			{{else}}
 				{{if $status==1}}已通过{{else if $status==2}}已驳回{{/if}}
@@ -335,8 +343,9 @@
 			iSrc:"",                    //iframe地址
 			bShade:true,                //是否有遮罩
 			bShadeClose:false,          //是否点遮罩关闭
-			fnAdditional:function(){
-				
+			fnAdditional:function(e){
+
+
 			}
 		}); 
 		
@@ -352,7 +361,6 @@
 			  	$(".ps_check_pic").css({"height":"500px","margin-bottom":"50px"});
 				$(".left_pc_check .detail_zoom_right").css({"margin-left":"100px"});
 			}else{
-				
 				$("#cc_flex").html('<i class="iconfont">&#xf01f0;</i>收起原图');
 				$(".left_pc_check").css({"width":"598px","float":"left"});
 			 	$(".ps_right").css({"float":"left","display":"block"});
@@ -360,7 +368,6 @@
 				$(".ps_check_pic").css({"height":"500px","margin-bottom":"0px"});
 				$(".left_pc_check .detail_zoom_right").css({"margin-left":"-40px"});
 				$(".ps_check").css({"height":"500px"});
-				
 			}
 			return false;
 			
@@ -368,10 +375,10 @@
 });
 
 function check(status){
-	var gtin={{$p_info.gtin}};
+//	var gtin={{$p_info.gtin}};
 	var memo=$("#memo").val();
 
-		$.post("{{$root_path}}marlboro/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'pic'},
+		$.post("{{$root_path}}retouch/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'pic'},
 		  	function(data){
 				var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){

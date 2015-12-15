@@ -16,24 +16,33 @@
         	<div class="rose_box cc_box">
             	<h3>修图审核-详情</h3>	
                 <div class="rose_top main_rignt_top clearfix">
-                	
+					<form action="{{$root_path}}retouch/psCheckDetail" method="get">
                         <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span><input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}" id="myform">
-                    	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="proName" value="{{$proName}}" id="proName"/></div>
-                     	<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/> <label style="width:20px;">-</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>
-                        
-                        
-                    <!--    <div class="cc_top_one"><label>上传结束时间:</label><input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/></div>-->
-                        
-                        
+							<div class="cc_top_one last_show"><label>项目:</label>
+								<div class="choice_count choice_box vocation">
+									<dl class="select">
+										<select name="pId" class="select3">
+											<option value="">全部</option>
+											{{foreach from=$project_list item=list}}
+											<option value="{{$list.pId}}" {{if $pId==$list.pId}}selected="selected"{{/if}}>{{$list.pName}}</option>
+											{{/foreach}}
+										</select>
+									</dl>
+								</div>
+							</div>
+							<!-- 条形码 -->
+							<div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" id="gtin"/></div>
+                    	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="gName" value="{{$gName}}" id="gName"/></div>
+                     	<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/> <label style="width:20px;">-</label><input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/></div>
                        <div class="clearfix"></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="type" id="type" class="select3">
+                                    <select name="catgrory1" id="type" class="select3">
 										<option value="">全部</option>
 									 {{foreach from=$type_list item=list}}
 												<option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
@@ -57,12 +66,11 @@
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
 								<select name="status" class="select3">
-									<option value="" {{if $status eq 'NULL'}}selected="selected"{{/if}}>全部</option>
-									<option value="0" {{if $status eq '0'}}selected="selected"{{/if}}>未审核</option>
-									<option value="1" {{if $status==1}}selected="selected"{{/if}}>修图已通过</option>
-									<option value="2" {{if $status==2}}selected="selected"{{/if}}>修图已驳回</option>
+									<option value="" {{if $status == 'NULL'}}selected="selected"{{/if}}>全部</option>
+									<option value="1" {{if $statu == 1}}selected="selected"{{/if}}>未审核</option>
+									<option value="2" {{if $status==2}}selected="selected"{{/if}}>修图已通过</option>
+									<option value="3" {{if $status==3}}selected="selected"{{/if}}>修图已驳回</option>
 								</select>
-                                   
                                 </dl>
                             </div>
                         </div>
@@ -71,7 +79,6 @@
                         <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="check(1)" /></span>
                          <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                          <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
-                         
                     </div>
 					</form>
 					
@@ -85,9 +92,17 @@
                         <th>修图类型</th>
                         <th>状态</th>
                         <th>操作</th>
-                        
-                        
                       </tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td>
+								<a href="{{$root_path}}retouch/psCheckPic/" target="_blank">审核详细</a>
+							</td>
+						</tr>
 					  {{foreach from=$glist.gtins item=list}}
                       <tr>
                         <td>{{$list.gtin}}</td>
@@ -96,7 +111,7 @@
                         <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
                         <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
                         <td>
-                        	<a href="{{$root_path}}marlboro/psDetailPic/{{$list.gtin}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}retouch/psCheckPic/{{$list.gtin}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
@@ -160,7 +175,7 @@ function check(){
 	var type=$("#type").val();
 	var rId=$("#rId").val();
 	var proName=$("#proName").val();
-		$.post("{{$root_path}}marlboro/batchChangeStatus",{"rId":rId,"type":type,"start_time":datetimepicker_start,"end_time":datetimepicker_end,"proName":proName,'table':'pic'},
+		$.post("{{$root_path}}retouch/batchChangeStatus",{"rId":rId,"type":type,"start_time":datetimepicker_start,"end_time":datetimepicker_end,"proName":proName,'table':'pic'},
 		  	function(data){
 				var dataObj=eval("("+data+")");
 				if(dataObj.msgCode==0){

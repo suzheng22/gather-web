@@ -16,8 +16,20 @@
         	<div class="rose_box cc_box">
             	<h3>修图审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
-				<form action="{{$root_path}}marlboro/ps" method="get">
-                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" id="user_name"></div>
+				<form action="{{$root_path}}retouch/psCheckList" method="get">
+                    <div class="cc_top_one last_show"><label>项目:</label>
+                        <div class="choice_count choice_box vocation">
+                            <dl class="select">
+                                <select name="pId" class="select3">
+                                    <option value="">全部</option>
+                                    {{foreach from=$project_list item=list}}
+                                    <option value="{{$list.pId}}" {{if $pId==$list.pId}}selected="selected"{{/if}}>{{$list.pName}}</option>
+                                    {{/foreach}}
+                                </select>
+                            </dl>
+                        </div>
+                    </div>
+                	<div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" id="user_name" value="{{$userName}}"></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                     	<div class="choice_count choice_box vocation">            	 			
 							<dl class="select">
@@ -48,20 +60,29 @@
                         <th>已审核商品数</th>
                         <th>抽查通过率</th>
                         <th>操作</th>
-                        
-                        
                       </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a href="{{$root_path}}retouch/psCheckDetail/14">详情</a>
+                            </td>
+                        </tr>
 					  {{foreach from =$glist item=list}}
                       <tr>
-                        <td>{{$list.userName}}</td>
-                        <td>{{$list.groupName}}</td>
-                        <td>{{$list.totalCount}}</td>
-                        <td>{{$list.dCount}}</td>
-                        <td>{{$list.yCount}}</td>
-                        <td>{{$list.passCount*100}}%</td>
-                        <td>
-                        	<a href="{{$root_path}}marlboro/psDetail/{{$list.userId}}">详情</a>
-                        </td>
+                          <td>{{$list.userName}}</td>
+                          <td>{{$list.groupName}}</td>
+                          <td>{{$list.totalCount}}</td>
+                          <td>{{$list.noMarlboroCount}}</td>
+                          <td>{{$list.MarlboroCount}}</td>
+                          <td>{{$list.passCount*100}}%</td>
+                          <td>
+                        	<a href="{{$root_path}}retouch/psCheckDetail/{{$list.userId}}">详情</a>
+                          </td>
                       </tr>
                        {{/foreach}}
                       

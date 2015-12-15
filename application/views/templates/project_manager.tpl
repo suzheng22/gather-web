@@ -66,9 +66,9 @@
                         <td>{{$list.pName}}</td>
                         <td>{{$list.desc}}</td>
                         <td class="status_val_{{$list.pId}}">{{if $list.status==1}}正常{{else}}已冻结{{/if}}</td>
-                        <td>{{$list.creatTime}}</td>
+                        <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                         <td>{{$list.createName}}</td>
-                        <td>{{$list.updateTime}}</td>
+                        <td>{{$list.updateTime|date_format:"Y-m-d H:i:s"}}</td>
                         <td>{{$list.updateName}}</td>
                         <td>
                         	<a href="javascript:;" onclick="update_status({{$list.pId}},{{$list.status}})" class="status_{{$list.projectId}}">{{if $list.status==1}}冻结{{else}}解冻{{/if}}</a>
