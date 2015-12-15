@@ -103,7 +103,7 @@ class MY_Controller extends CI_Controller
     }
     //导出excel
     /*如果想导出图片就必须将图片的字段设置为image*/
-    function phpExcel($imageName,$fileName,$fields,$query){
+    function phpExcel($fileName,$fields,$query,$imageName,$weight,$height){
         if(!$query)
             return false;
         $objPHPExcel = new PHPExcel();
@@ -112,6 +112,8 @@ class MY_Controller extends CI_Controller
         $objPHPExcel->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $objPHPExcel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
         $objActSheet = $objPHPExcel->getActiveSheet();
+        $len=sizeof($query)+2;
+        $len2=count($fields);
         //设置标题
         $col = 0;
         $letter = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N');
@@ -129,9 +131,14 @@ class MY_Controller extends CI_Controller
             $vals=array_values($keys);
             foreach ($data as $key=>$field)
             {
-                $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $data[$key]);
-                $objPHPExcel->getActiveSheet()->getRowDimension($row)->setRowHeight(100);
-                $objActSheet->getColumnDimension($letter[$col])->setWidth(28);
+                //设置成文本格式
+               if($key=='gtin'){
+                   $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($col, $row, $data[$key],PHPExcel_Cell_DataType::TYPE_STRING);
+               }else{
+                   $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $data[$key]);
+               }
+                $objPHPExcel->getActiveSheet()->getRowDimension($row)->setRowHeight($height);
+                $objActSheet->getColumnDimension($letter[$col])->setWidth($weight);
                 $col++;
                 if($key===$imageName){
                     $objDrawing = new PHPExcel_Worksheet_Drawing();

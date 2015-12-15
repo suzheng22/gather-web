@@ -6,7 +6,4 @@ class PublicFuc extends My_Controller{
         parent::__construct();
     }
 
-    //导出数据控制器
-
-
 }

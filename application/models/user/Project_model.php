@@ -22,6 +22,7 @@ class Project_model extends MY_Model {
         $datas=$datas['data'];
         for($i=0;$i<$count;$i++){
             foreach( $datas[$i] as $key=>$val){
+                $datas[$i]['lId']=$i+1;
                 if($key==='creatUserId'){
                     $data['upUserId']=$val;
                     $url=$this->user_api_url."/user/info";
@@ -40,6 +41,7 @@ class Project_model extends MY_Model {
                 }
             }
         }
+
         $project['total']=$count;
         $project['data']=$datas;
         return $project;
@@ -50,9 +52,9 @@ class Project_model extends MY_Model {
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
         $count=count($datas);
-     //   var_dump($datas);
         for($i=0;$i<$count;$i++){
             foreach( $datas[$i] as $key=>$val){
+                $datas[$i]['lId']=$i+1;
                 if($key==='userId'){
                     $data['upUserId']=$val;
                     $url=$this->user_api_url."/user/info";
@@ -71,28 +73,40 @@ class Project_model extends MY_Model {
                                 $datas[$i]['roleName']=$val['roleName'];
                             }
                     }
+                }else if($key==='creatUserId'){
+                    $data['upUserId']=$val;
+                    $url=$this->user_api_url."/user/info";
+                    $return=$this->curl($url,$data);
+                    $user=json_decode($return,true);
+                    $datas[$i]['createName']=$user['trueName'];
+                }
+                else if($key==='upUserId'){
+                    $data['upUserId']=$val;
+                    $url=$this->user_api_url."/user/info";
+                    $return=$this->curl($url,$data);
+                    $user=json_decode($return,true);
+                    $datas[$i]['updateName']=$user['trueName'];
                 }
             }
         }
-
      //   var_dump($datas);
         $data_return['total']=$count;
         $data_return['data']=$datas;
     //    var_dump($data_return);
         return $data_return;
     }
+    //根据条件获取用户信息
     function getProjectByField($data){
         $url=$this->user_api_url."/user/getProjectByFiled";
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
-        array_unique( $datas);
         $count=count($datas);
-
         for($i=0;$i<$count;$i++){
           if($datas[$i]['pId']==$datas[$i+1]['pId']){
               unset($datas[$i+1]);
           }
             foreach( $datas[$i] as $key=>$val){
+                $datas[$i]['lId']="".($i+1)."";
                 if($key==='userId'){
                     $data['upUserId']=$val;
                     $url=$this->user_api_url."/user/info";
@@ -111,6 +125,19 @@ class Project_model extends MY_Model {
                             $datas[$i]['roleName']=$val['roleName'];
                         }
                     }
+                }else if($key==='creatUserId'){
+                    $data['upUserId']=$val;
+                    $url=$this->user_api_url."/user/info";
+                    $return=$this->curl($url,$data);
+                    $user=json_decode($return,true);
+                    $datas[$i]['createName']=$user['trueName'];
+                }
+                else if($key==='upUserId'){
+                    $data['upUserId']=$val;
+                    $url=$this->user_api_url."/user/info";
+                    $return=$this->curl($url,$data);
+                    $user=json_decode($return,true);
+                    $datas[$i]['updateName']=$user['trueName'];
                 }
             }
         }
@@ -120,22 +147,24 @@ class Project_model extends MY_Model {
         //    var_dump($data_return);
         return $data_return;
     }
+    //改变项目状态
+    function freezeProject($data){
+        $url=$this->user_api_url."/user/freezeProject";
+        $return =$this->curl($url,$data);
+        return json_decode($return);
+    }
+    //增加项目
     function addProject($data){
         $url=$this->user_api_url."/user/addProject";
         $return =$this->curl($url,$data);
         return json_decode($return);
     }
+    //增加项目用户
     function addProjectUser($data){
         $url=$this->user_api_url."/user/addProjectUser";
         $return =$this->curl($url,$data);
         return $return;
     }
-    function updateProjectStatus($data){
-        $url=$this->user_api_url."/user/updateProjectStatus";
-        $return =$this->curl($url,$data);
-        if(!$return){
-            $return =array('msg'=>'1');
-        }
-        return $return;
-    }
+
+
 }

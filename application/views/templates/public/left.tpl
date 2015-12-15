@@ -20,10 +20,10 @@
             </dl>
             <dl class="menu_shoot_manager system_log">
                  <dt><i class="icon iconfont">&#xf0178;</i>拍摄管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-                 <dd><a href="no_shoot.html" title="无法拍摄">无法拍摄</a></dd>
-                 <dd><a href="no_measure.html" title="无法测量">无法测量</a></dd>
-                 <dd><a href="{{$root_path}}marlboro/shootAddManager" title="拍摄审核">拍摄新增管理</a></dd>
-                 <dd><a href="shoot_back_detail.html" title="拍摄驳回管理">拍摄驳回管理</a></dd>
+                 <dd><a href="{{$root_path}}shoot/noShoot" title="无法拍摄">无法拍摄</a></dd>
+                 <dd><a href="{{$root_path}}shoot/noMeasure" title="无法测量">无法测量</a></dd>
+                 <dd><a href="{{$root_path}}shoot/shootAddManager" title="拍摄审核">拍摄新增管理</a></dd>
+                 <dd><a href="{{$root_path}}shoot/shootBackDetail" title="拍摄驳回管理">拍摄驳回管理</a></dd>
              </dl>
              <dl class="menu_base_info system_log">
                  <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
@@ -45,9 +45,9 @@
              <dl class="check_manager system_log">
                 <dt><i class="icon iconfont">&#xf01d8;</i>审核管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                  
-                 <dd><a href="{{$root_path}}marlboro/noshoot" title="录入">无法拍摄</a></dd>
-                 <dd><a href="{{$root_path}}marlboro/shootBackDetail" title="录入">拍摄驳回统计</a></dd>
-                 <dd><a href="{{$root_path}}marlboro/noMeasure" title="录入">无法测量</a></dd>
+                 <dd><a href="{{$root_path}}shoot/noshoot" title="录入">无法拍摄</a></dd>
+                 <dd><a href="{{$root_path}}shoot/shootBackDetail" title="录入">拍摄驳回统计</a></dd>
+                 <dd><a href="{{$root_path}}shoot/noMeasure" title="录入">无法测量</a></dd>
                 <dd><a href="{{$root_path}}marlboro/shoot" title="拍摄审核">拍摄审核</a></dd>
                 <dd><a href="{{$root_path}}marlboro/ps" title="修图审核">修图审核</a></dd>
                 <dd><a href="#" title="录入审核">录入审核</a></dd>

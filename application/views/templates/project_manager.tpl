@@ -62,18 +62,18 @@
                       </tr>
                         {{foreach from =$plist item=list}}
                       <tr>
-                        <td>{{$list.pId}}</td>
+                        <td>{{$list.lId}}</td>
                         <td>{{$list.pName}}</td>
                         <td>{{$list.desc}}</td>
-                        <td class="status_val_{{$list.projectId}}">{{if $list.status==1}}正常{{else}}已冻结{{/if}}</td>
+                        <td class="status_val_{{$list.pId}}">{{if $list.status==1}}正常{{else}}已冻结{{/if}}</td>
                         <td>{{$list.creatTime}}</td>
                         <td>{{$list.createName}}</td>
                         <td>{{$list.updateTime}}</td>
                         <td>{{$list.updateName}}</td>
                         <td>
-                        	<a href="javascript:;" onclick="update_status({{$list.projectId}},{{$list.status}})" class="status_{{$list.projectId}}">{{if $list.status==1}}冻结{{else}}解冻{{/if}}</a>
+                        	<a href="javascript:;" onclick="update_status({{$list.pId}},{{$list.status}})" class="status_{{$list.projectId}}">{{if $list.status==1}}冻结{{else}}解冻{{/if}}</a>
                         </td>
-                          <input type="hidden" id="project_{{$list.projectId}}" value="{{$list.status}}">
+                          <input type="hidden" id="project_{{$list.pId}}" value="{{$list.status}}">
                       </tr>
                         {{/foreach}}
                     </table>
@@ -133,14 +133,28 @@ $(function(){
     });
 
 });
-function update_status(projectId){
-    var status=$("#project_"+projectId).val();
-    var  data={projectId:projectId,status:status};
+function update_status(projectId,status){
+//     var status=$("#project_"+projectId).val();
+    if(status==undefined){
+        status=2;
+    }
+    var   status_e;
     var msg=['','确定要冻结该项目吗','你确定要解冻改用户吗'];
         if(confirm(msg[status])){
+            if(status==1){
+             status_e=2;
+            }
+            else if(status===2){
+             status_e=1;
+            }else{
+             status_e=1;
+            }
+            var  data={projectId:projectId,status:status_e};
             //ajax
             $.post("{{$root_path}}project/updateProjectStatus",data,function(e){
-                if(e.msg==1){
+                if(e.msgCode==0){
+                    alert(e.msgText);
+                    window.location.reload();
                     if(status==1){
                         $("#project_"+projectId).val('2');
                         $(".status_"+projectId).html('解冻');
@@ -155,9 +169,7 @@ function update_status(projectId){
                     alert("操作失败")
                 }
             },'json')
-
         }
-
 }
 function addProject(){
     var projectName=$("#projectName").val();

@@ -62,7 +62,7 @@
                     </div>
                       <div class="clearfix"></div> 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                    	<a href="{{$root_path}}marlboro/shootBackDetail?is_ext=1" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
+                    	<a href="{{$root_path}}shoot/shootBackDetail?is_ext=1" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                         <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
@@ -82,17 +82,17 @@
                         <th>驳回时间</th>
                         <th>处理状态</th>
                       </tr>
-                        {{foreach from=$flist item=list}}
+                        {{foreach from=$slist item=list}}
                       <tr>
-                        <td>{{$list.id}}</td>
-                        <td>{{$list.project}}</td>
+                        <td>{{$list.lId}}</td>
+                        <td>{{$list.pName}}</td>
                         <td>{{$list.gtin}}</td>
-                        <td>{{$list.proName}}</td>
-                        <td>{{$list.type}}</td>
-                        <td>{{$list.pack}}</td>
-                        <td>{{$list.batch}}</td>
-                        <td>{{$list.reson}}</td>
-                        <td>{{$list.time}}</td>
+                        <td>{{$list.gName}}</td>
+                        <td>{{$list.catName}}</td>
+                        <td>{{$list.packet}}</td>
+                        <td>{{$list.batchNo}}</td>
+                        <td>{{$list.memo}}</td>
+                        <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                         <td>{{$list.status}}</td>
                       </tr>
                      {{/foreach}}

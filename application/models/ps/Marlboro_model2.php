@@ -226,12 +226,6 @@ class Marlboro_model extends MY_Model {
                     $return =$this->curl($url,$data);
                     $project=json_decode($return,true);
                     $datas[$i]['pName']=$project[0]['pName'];
-                }else if($key=='gtin'){
-                    $data[$key]=$val;
-                    $url=$this->more_api_url."/goods/getGoodsInfo";
-                    $return =$this->curl($url,$data);
-                    $goods=json_decode($return,true);
-                 //   var_dump($goods);
                 }
             }
         }
@@ -241,8 +235,10 @@ class Marlboro_model extends MY_Model {
     }
     //获取拍摄新增数据
     function getShootAddList($data){
+        var_dump($data);
         $url=$this->more_api_url."/shoot/NewPicList";
         $return=$this->curl($url,$data);
+        var_dump($return);
         $datas=json_decode($return,true);
         $count=count($datas);
         for($i=0;$i<$count;$i++){
@@ -270,8 +266,9 @@ class Marlboro_model extends MY_Model {
     }
     //获取拍摄驳回数据
     function getShootBackList($data){
-        $url=$this->more_api_url."/shoot/getShootReturnList";
+        $url=$this->more_api_url."/measure/ShootBackList";
         $return=$this->curl($url,$data);
+        //    var_dump($return);
         $datas=json_decode($return,true);
         $count=count($datas);
         for($i=0;$i<$count;$i++){
@@ -320,7 +317,6 @@ class Marlboro_model extends MY_Model {
         $packet=array_unique($packet);
         $packet=array_values($packet);
         $project_data['packet']=$packet;
-        $project_data['gtin']=$data['gtin'];
        foreach($project as $key=>$val){
             $data['pId']=$project[$key];
             //根据pId去获取所有的项目名称
@@ -329,7 +325,6 @@ class Marlboro_model extends MY_Model {
             $projects=json_decode($return,true);
             $project_data['project'][]=$projects[0];
         }
-
         //获取包装
         return json_encode($project_data);
     }
@@ -339,22 +334,6 @@ class Marlboro_model extends MY_Model {
         $datas=json_decode($return,true);
         return $datas;
     }
-    //根据主键 ID获取拍摄新增详细信息
-    function getNewPicInfo($data){
-        $url=$this->more_api_url."/shoot/getNewPicInfo";
-        $return=$this->curl($url,$data);
-        $datas=json_decode($return,true);
-        $data['gtin']=$datas['gtin'];
-        //根据项目获取其他信息
-        $data1=$this->getInfoByGtin($data);
-        $data1=json_decode($data1,true);
-        $data1['packet1']=$datas['packet'];
-        $data1['pId1']=$datas['pId'];
-        $data1['memo']=$datas['memo'];
-        return $data1;
-    }
-
-
 
 }
 ?>

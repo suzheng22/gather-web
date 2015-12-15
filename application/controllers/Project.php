@@ -13,6 +13,7 @@ class Project extends My_Controller {
         $this->load->model('user/project_model','user');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
+        //显示项目列表
         $project_list=$this->project_model->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'project/projectManager?';
@@ -31,10 +32,10 @@ class Project extends My_Controller {
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //获取项目列表
-        $project_list=$this->project_model->getProjectByField($arr);
-        $showPage= parent::page($page_url,3,$project_list['total']);
+        $p_list=$this->project_model->getProjectByField($arr);
+        $showPage= parent::page($page_url,3,$p_list['total']);
         //获取项目标签
-        $this->ci_smarty->assign('plist',$project_list['data']);
+        $this->ci_smarty->assign('plist',$p_list['data']);
 
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('project_manager.tpl');
@@ -78,13 +79,9 @@ class Project extends My_Controller {
         //根据用户角色获取
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
-
         //获取项目列表
-       // var_dump($arr);
        $project_list=$this->project_model->getProjectUserByField($arr);
-    //    var_dump($project_list);
         $showPage= parent::page($page_url,1,$project_list['total']);
-
         //获取项目标签
         $this->ci_smarty->assign('plist',$project_list['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
@@ -126,8 +123,18 @@ class Project extends My_Controller {
         $data['token']=$this->user_info['token'];
         $data['pId']=$this->input->post('projectId');
         $data['status']=$this->input->post('status');
-        $str=$this->project_model->updateProjectStatus($data);
-        echo json_encode($str);
+        $str=$this->project_model->freezeProject($data);
+        //echo json_encode($str);
+       // echo "<script>alert($str)</script>";
+        if($str){
+            if($data['status']==1){
+                echo json_encode($str);
+            }
+            else if($data['status']==2){
+                echo json_encode($str);
+            }
+
+        }
     }
 
 }
