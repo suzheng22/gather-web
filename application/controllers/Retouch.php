@@ -64,7 +64,6 @@ class Retouch extends My_Controller
         if(!isset($arr['page'])){
             $arr['page']=1;
         }
-
         $arr['rId']=$userId;
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);

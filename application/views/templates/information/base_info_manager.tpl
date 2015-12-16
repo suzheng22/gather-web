@@ -14,26 +14,27 @@
         	<div class="rose_box cc_box">
             	<h3>基本信息管理<a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
                 <div class="rose_top main_rignt_top clearfix">
+                    <form action="{{$root_path}}information/baseInfoManager">
                 	<div class="cc_top_one last_show"><label>商品类型:</label>
-                            <div class="choice_count choice_box vocation">            	 			
-                                <dl class="select">
-                                    <select class="select3">
-                                   		<option value="">全部</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                   </select>
-                                </dl>
-                            </div>
+                        <div class="choice_count choice_box vocation">
+                            <dl class="select">
+                                <select name="catgrory" class="select3">
+                                    <option value="">全部</option>
+                                    {{foreach from=$type_list item=list}}
+                                    <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                    {{/foreach}}
+                                </select>
+                            </dl>
+                        </div>
                      </div>
-                    <div class="cc_top_one"><label>字段属性:</label><input type="text"/></div>
+                    <div class="cc_top_one"><label>字段属性:</label><input type="text" value="{{$field}}" name="field"/></div>
                      <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select class="select3">
+                                    <select class="select3" name="status">
                                    		<option value="">全部</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                       
+                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>正常</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>冻结</option>
                                    </select>
                                 </dl>
                             </div>
@@ -41,9 +42,10 @@
                                          
                     <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                        <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
-                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
+                        <a href="javascript:;"><i class="iconfont" onclick="btn_empty()">&#xf014a;</i>清空</a>
                     </div>
+                    </form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
@@ -60,21 +62,20 @@
                         <th>操作</th>
                         
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>asda</td>
-                        <td>dsad</td>
-                        <td>dasdd</td>
-                        <td>dadas</td>
-                        <td>审核通过</td>
-                        <td>正常</td>
-                        <td>正常</td>
-                        <td>正常</td>
-                        <td><a href="#">冻结</a></td>
-                         
-                      </tr>
-                       
-                      
+                        {{foreach from= $glist item=list}}
+                        <tr>
+                            <td>{{$list.lId}}</td>
+                            <td>{{$list.catType}}</td>
+                            <td>{{$list.field}}</td>
+                            <td>{{$list.count}}</td>
+                            <td>{{$list_inputType}}</td>
+                            <td>{{$list.sort}}</td>
+                            <td>{{$list.status}}</td>
+                            <td>{{$list.desc}}</td>
+                            <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
+                            <td><a href="#">{{if $list.status==1}}冻结{{else if $list.status==2}}解冻{{/if}}</a></td>
+                        </tr>
+                        {{/foreach}}
                     </table>
                 </div>
                 	<div class="page_nav" id="page_nav">
@@ -95,46 +96,40 @@
 				<div class="clearfix one"><label for="user_name">商品类型:</label>
                 <div class="choice_count choice_box vocation">
                         <dl class="select">
-               					 <select class="select1">
-                                   		<option value="">全部</option>
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-                                       
-                                   </select>
-                                   </dl>
-                                   </div>
-                
+                            <select name="catgrory" class="select3" id="catgrory">
+                            <option value="">全部</option>
+                            {{foreach from=$type_list item=list}}
+                            <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                            {{/foreach}}
+                            </select>
+                        </dl>
+                </div>
                 </div>
                 <div class="clearfix one"><label for="user_name">字段属性:</label><input type="text" id="" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">数量:</label>
                  	<div class="choice_count choice_box vocation">
                         <dl class="select">
-               					 <select class="select1">
-                                   		<option value="">全部</option>
-                                        <option value="">1个</option>
-                                        <option value="">多个</option>
-                                       
-                                   </select>
-                                   </dl>
-                                   </div>
-                
+                            <select class="select1" id="count">
+                                <option value="">全部</option>
+                                <option value="1">1个</option>
+                                <option value="2">多个</option>
+                            </select>
+                        </dl>
+                    </div>
                 </div>
                 <div class="clearfix one"><label for="user_name">输入类型:</label>
                 <div class="choice_count choice_box vocation">
                         <dl class="select">
-               					 <select class="select1">
+               					 <select class="select1" id="inputType">
                                    		<option value="">全部</option>
-                                        <option value="">短文字</option>
-                                        <option value="">长文字</option>
-                                       
+                                        <option value="1">短文字</option>
+                                        <option value="2">长文字</option>
                                    </select>
-                                   </dl>
-                                   </div>
-                                   
-                
+                        </dl>
                 </div>
-                <div class="clearfix one"><label for="user_name">排序:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">描述:</label><textarea></textarea></div>
+                </div>
+                <div class="clearfix one"><label for="user_name">排序:</label><input type="text" id="sort" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn">保存</a>
             </div>
 	   </div>
@@ -164,9 +159,38 @@ $(function(){
         bShadeClose:false,          //是否点遮罩关闭
         fnAdditional:function(){
             
-        }
+            }
+        });
     });
-});	
+function check(){
+    var desc=$("#desc").val();
+    var sort=$("#sort").val();
+    var inputType=$("#inputType").val();
+    var count=$("#count").val();
+    var field=$("#field").val();
+    var catgrory=$("#catgrory").val();
+    //验证
+    $.ajax({
+        url:'{{$root_path}}information/addNutrient',
+        data:{desc:desc,count:count,sort:sort,field:field,catgrory:catgrory,inputType:inputType},
+        dataType:'text',
+        type:'post',
+        success:function(e){
+            alert("添加成功")
+        }
+    })
+}
+function changeStatus(id,status){
+    $.ajax({
+        url:'{{$root_path}}information/changeBaseStatus',
+        data:{id:id,status:status},
+        dataType:'text',
+        type:'post',
+        success:function(e){
+            alert("添加成功")
+        }
+    })
+}
 </script>	
 
 </body>

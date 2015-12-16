@@ -7,6 +7,8 @@ class Marlboro extends My_Controller {
         $this->load->model('ps/marlboro_model');
         $this->load->model('user/user_model');
         $this->load->model('publicFuc/publicFuc_model','publicFuc');
+        $this->load->model('sdk/product_model','product');
+        $this->load->model('user/project_model','project');
     }
     function shootDetailPic($orderId,$gtin){
         $this->load->model('sdk/product_model','product');
@@ -62,7 +64,7 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->display('shoot_check.tpl');
     }
     //拍摄详情
-    function shootDetail($userId,$no){
+    function shootDetail($userId,$total,$no){
         $this->load->model('user/user_model','user');
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
@@ -99,6 +101,7 @@ class Marlboro extends My_Controller {
         //项目
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('no',$no);
+        $this->ci_smarty->assign('total',$total);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check_detail.tpl');
@@ -140,7 +143,36 @@ class Marlboro extends My_Controller {
     }
     /*拍摄反馈管理*/
     function shootBackManager(){
+        $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
+        //商品分类的查询
+        $type_list=$this->product->getCatgroryList();
+        $this->ci_smarty->assign('type_list',$type_list['data']);
+        $project_list=$this->project->getProjectList($data);
+      //  var_dump($project_list);
+        $this->ci_smarty->assign('project_list',$project_list['data']);
+        $page_url=$this->root_path.'marlboro/shootBackManager?';
+        //获取传递参数并转为page_yrl
+        $arr=$this->input->get();
+        if(!isset($arr['status'])){
+            $arr['status']=null;
+        }
+        if(!isset($arr['page'])){
+            $arr['page']=1;
+        }
+        //增加参数
+        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        if($arr['s_time']!=''&&$arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
+        }
+        $arr['token']=$this->user_info['token'];
+        //获取拍摄管理列表
+        $shootBackManager=$this->marlboro_model->getShootBackManager($arr);
+        $showPage= parent::page($page_url,5,$shootBackManager['total']);
+        //获取项目标签
+        $this->ci_smarty->assign('slist',$shootBackManager['data']);
+        $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('shoot/shoot_back_manager.tpl');
     }
 

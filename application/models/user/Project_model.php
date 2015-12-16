@@ -15,9 +15,11 @@ class Project_model extends MY_Model {
     //获取项目列表
     function getProjectList($data){
         //先获取userID
+     //   var_dump($data);
         $url=$this->user_api_url.'/user/getProjectAll';
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
+    //    var_dump($datas);
         $count=count($datas['data']);
         $datas=$datas['data'];
         for($i=0;$i<$count;$i++){
