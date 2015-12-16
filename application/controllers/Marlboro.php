@@ -138,6 +138,11 @@ class Marlboro extends My_Controller {
         $return=$this->marlboro_model->getShootInfo($data);
         echo json_encode($return);
     }
+    /*拍摄反馈管理*/
+    function shootBackManager(){
+        $data['token']=$this->user_info['token'];
+        $this->ci_smarty->display('shoot/shoot_back_manager.tpl');
+    }
 
 
 }

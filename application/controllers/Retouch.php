@@ -8,6 +8,7 @@ class Retouch extends My_Controller
     {
         parent::__construct();
         $this->load->model('user/project_model', 'project');
+        $this->load->model('retouch/retouch_model');
         $this->load->model('sdk/product_model', 'product');
         $this->load->model('ps/marlboro_model', 'marlboro');
         $this->load->model('user/user_model', 'user');
@@ -33,8 +34,11 @@ class Retouch extends My_Controller
         }
         $str=$this->user->getUserIdsByFiled($data);
         $user_id_list=json_decode($str,true);
-        $data['photoIds']=serialize($user_id_list);
-        $list=$this->marlboro->getMarlboroList1($data);
+        $data['userIds']=serialize($user_id_list);
+        $data['token']=$this->user_info['token'];
+       // var_dump($data);
+        $list=$this->retouch_model->getMarlboroList($data);
+      //  var_dump($list);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('ps_check_list.tpl');
     }

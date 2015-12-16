@@ -93,7 +93,6 @@
 	<div class="content">
 		<div class="login_main">
 			<div class="login_form">
-				
                 <div class="clearfix one"><label for="user_name">成分名称:</label><input type="text" id="" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">成分单位:</label><input type="text" id="" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">排序:</label><input type="text" id="" class="zhmm"></div>

@@ -259,6 +259,7 @@ class Shoot extends My_Controller {
         echo json_encode($datas);
         exit;
     }
+    /*获取单个拍摄新增的详细信息*/
     function getNewPicInfo(){
         $data=$this->input->post();
         $data['userId']=$this->user_info['userId'];
@@ -268,5 +269,6 @@ class Shoot extends My_Controller {
         echo json_encode($datas);
         exit;
     }
+
 
 }
