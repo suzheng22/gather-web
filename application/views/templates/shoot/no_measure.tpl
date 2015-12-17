@@ -134,6 +134,7 @@ function btn_empty(){
     $("#datetimepicker_start").val("");
     $("#datetimepicker_end").val("");
     $(".cc_top_one select").val("");
+    $(".uew-select-text").html('全部');
 }
 </script>
 </body>

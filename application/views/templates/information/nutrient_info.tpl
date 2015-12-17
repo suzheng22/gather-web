@@ -31,7 +31,7 @@
                     <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
-                        <a href="javascript:;"><i class="iconfont" onclick="btn_empty()">&#xf014a;</i>清空</a>
+                        <a href="javascript:;" class="clear_all" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
                     </form>
                    	<div class="clearfix"></div>
@@ -90,7 +90,9 @@
 {{include file='public/js.tpl'}}
 <script type="text/javascript">
 $(function(){
-	
+//    $(".clear_all").on("click",function(){
+//        alert(1234);
+//    });
 		//select 表单美化
 	$(".select3").uedSelect({
 		width : 100
@@ -140,6 +142,11 @@ function changeStatus(id,status){
     })
 }
 
+function btn_empty() {
+    $("input[name='elementName']").val("");
+    $(".select3").val("");
+    $(".uew-select-text").html('全部');
+}
 
 </script>	
 

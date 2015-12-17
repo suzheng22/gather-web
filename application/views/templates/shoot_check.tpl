@@ -119,7 +119,9 @@ $(function(){
 	function btn_empty(){
 		$("#count_user").val("");
 		$(".cc_top_one select").val("");
+        $(".uew-select-text").html('全部');
 	}
+
 </script>
  	
 

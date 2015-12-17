@@ -43,7 +43,7 @@
                     <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
-                        <a href="javascript:;"><i class="iconfont" onclick="btn_empty()">&#xf014a;</i>清空</a>
+                        <a href="javascript:;" onclick="btn_empty()"><i class="iconfont" >&#xf014a;</i>清空</a>
                     </div>
                     </form>
                    	<div class="clearfix"></div>
@@ -190,6 +190,11 @@ function changeStatus(id,status){
             alert("添加成功")
         }
     })
+}
+function btn_empty() {
+    $("input[name='field']").val("");
+    $(".select3").val("");
+    $(".uew-select-text").html('全部');
 }
 </script>	
 

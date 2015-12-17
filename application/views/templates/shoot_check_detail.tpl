@@ -243,13 +243,14 @@ function shoot_pass(){
     }
 }
 //清空
-	function btn_empty(){
-		$("#proName,#barCode").val("");
-		$("#count_user").val("");
-		$("#datetimepicker_start").val("");
-		$("#datetimepicker_end").val("");
-		$(".select3").val("");
-	}
+	function btn_empty() {
+        $("#gtin,#gName").val("");
+        $("#count_user").val("");
+        $("#datetimepicker_start").val("");
+        $("#datetimepicker_end").val("");
+        $(".select3").val("");
+        $(".uew-select-text").html('全部');
+    }
 </script>
  	
 

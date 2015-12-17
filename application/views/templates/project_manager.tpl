@@ -184,7 +184,8 @@ function addProject(){
 }
 function btn_empty(){
     $(".project").val("");
-    $(".cc_top_one select").val("");
+    $(".cc_top_one select,.select3").val("");
+    $(".uew-select-text").html('全部');
 }
 </script>	
 

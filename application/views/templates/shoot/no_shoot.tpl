@@ -126,10 +126,11 @@ $('#datetimepicker_end').datetimepicker({
 	timepicker:false
 });
 function btn_empty(){
-    $(".proName,.gtin").val("");
-    $("#datetimepicker_start").val("");
-    $("#datetimepicker_end").val("");
-    $(".cc_top_one select").val("");
+    $(".proName,.gtin").val(" ");
+    $("#datetimepicker_start").val(" ");
+    $("#datetimepicker_end").val(" ");
+    $(".select3").val(" ");
+    $(".uew-select-text").html('全部');
 }
 </script>
 </body>

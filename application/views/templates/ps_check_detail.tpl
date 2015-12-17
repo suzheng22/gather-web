@@ -190,10 +190,11 @@ function check(){
 }
 	//清空
 	function btn_empty(){
-		$("#proName").val("");
+		$("#gtin,#gName").val("");
 		$("#datetimepicker_start").val("");
 		$("#datetimepicker_end").val("");
 		$(".cc_top_one select").val("");
+		$(".uew-select-text").html('全部');
 	}
  
 </script>

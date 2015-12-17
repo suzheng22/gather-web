@@ -155,21 +155,7 @@
                     </table>
                 </div>
                     <div class="page_nav" id="page_nav">
-                        <a href="javascript:;" class="pageNum">上一页</a>
-                        <a href="javascript:;" class="pageNum">1</a>
-                        <a href="javascript:;" class="pageNum">2</a>
-                        <a href="javascript:;" class="pageNum">3</a>
-                        <a href="javascript:;" class="pageNum">4</a>
-                        <a href="javascript:;" class="pageNum">5</a>
-                        <a href="javascript:;" class="pageNum">6</a>
-                        <a href="javascript:;" class="pageNum">7</a>
-                        <a href="javascript:;" class="pageNum">8</a>
-                        <a href="javascript:;" class="pageNum">9</a>
-                        <a href="javascript:;" class="pageNum">下一页</a>
-                        <span>共<em>100</em>页,</span>
-                        <span>共<em>66</em>条记录,</span>
-                        <span>跳转到第<input type="text"/>页</span>
-                        <a href="javascript:;" class="pageNum">确定</a>
+                     {{$pages}}
                     </div>
                 	
                 </div>
@@ -218,6 +204,13 @@ $('#datetimepicker_end').datetimepicker({
 }); 
 
 });
+function btn_empty(){
+    $(".proName,.gtin").val("");
+    $("#datetimepicker_start").val("");
+    $("#datetimepicker_end").val("");
+    $(".cc_top_one select").val("");
+    $(".uew-select-text").html('全部');
+}
 </script>
 </body>
 </html>

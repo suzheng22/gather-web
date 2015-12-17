@@ -123,6 +123,7 @@ $(function(){
 		function btn_empty(){
 			$("#user_name").val("");
 			$(".cc_top_one select").val("");
+            $(".uew-select-text").html('全部');
 		}
 
 </script>
