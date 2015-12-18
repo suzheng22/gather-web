@@ -162,58 +162,16 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url."/shoot/NewPicList";
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
-        $count=count($datas);
-        for($i=0;$i<$count;$i++){
-            foreach( $datas[$i] as $key=>$val){
-                $datas[$i]['lId']=($i+1);
-                if($key==='userId'){
-                    $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
-                    $return=$this->curl($url,$data);
-                    $user=json_decode($return,true);
-                    $datas[$i]['measurement']=$user['trueName'];
-                }else if($key=='pId'){
-                    //根据项目Id获取项目名称
-                    $data[$key]=$val;
-                    $url=$this->user_api_url."/user/getProjectByFiled";
-                    $return =$this->curl($url,$data);
-                    $project=json_decode($return,true);
-                    $datas[$i]['pName']=$project[0]['pName'];
-                }
-            }
-        }
-        $shootAdd['total']=$count;
-        $shootAdd['data']=$datas;
-        return $shootAdd;
+        $back=$this->back($datas,$data);
+        return $back;
     }
     //获取拍摄驳回数据
     function getShootBackList($data){
         $url=$this->more_api_url."/shoot/getShootReturnList";
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
-        $count=count($datas);
-        for($i=0;$i<$count;$i++){
-            foreach( $datas[$i] as $key=>$val){
-                $datas[$i]['lId']=($i+1);
-                if($key==='userId'){
-                    $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
-                    $return=$this->curl($url,$data);
-                    $user=json_decode($return,true);
-                    $datas[$i]['measurement']=$user['trueName'];
-                }else if($key=='pId'){
-                    //根据项目Id获取项目名称
-                    $data[$key]=$val;
-                    $url=$this->user_api_url."/user/getProjectByFiled";
-                    $return =$this->curl($url,$data);
-                    $project=json_decode($return,true);
-                    $datas[$i]['pName']=$project[0]['pName'];
-                }
-            }
-        }
-        $shootBack['total']=$count;
-        $shootBack['data']=$datas;
-        return $shootBack;
+        $back=$this->back($datas,$data);
+        return $back;
     }
     //根据条形码获取信息
     function getInfoByGtin($data){
@@ -247,7 +205,6 @@ class Marlboro_model extends MY_Model {
             $projects=json_decode($return,true);
             $project_data['project'][]=$projects[0];
         }
-
         //获取包装
         return json_encode($project_data);
     }
@@ -273,13 +230,40 @@ class Marlboro_model extends MY_Model {
     }
     /*获取拍摄反馈的数据*/
     function getShootBackManager($data){
-        $url=$this->more_api_url."/shoot/ShootBackManager";
-        $return=$this->curl($url,$data);
+        $url=$this->more_api_url."/lingmall/feed/list";
+        $return=$this->curl($url,$data,'get');
         if(!$return){
             $return=file_get_contents("f:/wamp/www/curl/marlboro/feedBack.txt");
         }
         $datas=json_decode($return,true);
-        return $datas;
+        $back=$this->back($datas,$data);
+    //    var_dump($back);
+        return $back;
+    }
+    function back($datas,$data){
+        $count=count($datas);
+        for($i=0;$i<$count;$i++){
+            foreach( $datas[$i] as $key=>$val){
+                $datas[$i]['lId']=($i+1);
+                if($key==='userId'){
+                    $data['upUserId']=$val;
+                    $url=$this->user_api_url."/user/info";
+                    $return=$this->curl($url,$data);
+                    $user=json_decode($return,true);
+                    $datas[$i]['measurement']=$user['trueName'];
+                }else if($key=='pId'){
+                    //根据项目Id获取项目名称
+                    $data[$key]=$val;
+                    $url=$this->user_api_url."/user/getProjectByFiled";
+                    $return =$this->curl($url,$data);
+                    $project=json_decode($return,true);
+                    $datas[$i]['pName']=$project[0]['pName'];
+                }
+            }
+        }
+        $shootBack['total']=$count;
+        $shootBack['data']=$datas;
+        return $shootBack;
     }
 }
 ?>

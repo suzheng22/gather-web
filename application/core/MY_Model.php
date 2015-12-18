@@ -15,7 +15,6 @@ class MY_Model extends CI_Model
     
     function curl($url,$data,$m='post'){
         $return=$this->curl->_simple_call($m,$url,$data);
-    //    return $return;
         $return_str=json_decode($return,true);
                 if($return_str['msgCode']>0){
 //                    if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest"){

@@ -16,7 +16,7 @@
         <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
         <li class="black"><em>商品类型:</em><span>{{$p_info.catName}}</span></li>
         <!-- 拍摄类型 -->
-        <li class="black"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
+        <li class="black"><em>拍摄类型:</em><span>{{if $p_info.retouchType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
         <!-- 项目 -->
         <li class="black"><em>项目:</em><span>{{$p_info.pName}}</span></li>
         <!-- 包装 -->
@@ -301,7 +301,7 @@
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.gName}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
-                <a href="##" id="confirm_btn" class="confirm_btn" onclick="check(2)">确认</a>
+                <a href="##" id="confirm_btn" class="confirm_btn" onclick="check(3)">确认</a>
             </div>
 	   </div>
     </div>
@@ -338,6 +338,8 @@
             src: "{{$pic_path}}{{$picList.0.key}}"
 			//?imageView/1/w/500/h/500"
 		});
+
+
 		var iv2 = $(".viewer").iviewer(
 		{
             src: "{{$pic_path}}{{$picList.0.key}}"
@@ -379,33 +381,19 @@
 				$(".ps_check").css({"height":"500px"});
 			}
 			return false;
-			
 		});			
 });
 
 function check(status){
+    var orderId="{{$p_info.orderId}}";
 	var gtin={{$p_info.gtin}};
 	var memo=$("#memo").val();
-
-		$.post("{{$root_path}}retouch/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'pic'},
+    alert(memo);
+		$.post("{{$root_path}}retouch/changeStatus",{'orderId':orderId,"status":status,"memo":memo},
 		  	function(data){
-				var dataObj=eval("("+data+")");
-				if(dataObj.msgCode==0){
-					if(status==1){
-					   alert('审核成功');
-					}
-					else{
-						alert('驳回成功');
-					}
-					window.location.reload();
-				}
-				else{
-					alert(dataObj.msgText);
-					window.location.reload();
-				}
-		  	},"text");
-
-
+                alert(data.msg);
+                window.location.reload();
+		  	},"json");
 }
 </script> 
 </body>

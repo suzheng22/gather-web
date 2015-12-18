@@ -56,7 +56,7 @@
                                     <option value="">全部</option>
                                     <option value="1" {{if $status==1}}selected="selected"{{/if}}>反馈中</option>
                                     <option value="2" {{if $status==2}}selected="selected"{{/if}}>反馈通过</option>
-                                    <option value="3" {{if $status==1}}selected="selected"{{/if}}>反馈驳回</option>
+                                    <option value="3" {{if $status==3}}selected="selected"{{/if}}>反馈驳回</option>
                                 </select>
                             </dl>
                         </div>
@@ -64,10 +64,10 @@
                         <div class="cc_top_one last_show"><label>反馈路径:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select class="select3" name="back_path">
+                                    <select class="select3" name="feedPath">
                                    		<option value="">全部</option>
-                                        <option value="1">修图反馈</option>
-                                        <option value="2">录入反馈</option>
+                                        <option value="1" {{if $feedPath==1}}selected="selected"{{/if}}>修图反馈</option>
+                                        <option value="2" {{if $feedPath==2}}selected="selected"{{/if}}>录入反馈</option>
                                    </select>
                                 </dl>
                             </div>
@@ -109,19 +109,19 @@
                                 {{$list.batchNo}}
                             </td>
                             <td>
-                                {{$list.back_path}}
+                                {{if $list.feedPath==1}}修图反馈{{else}}录入反馈{{/if}}
                             </td>
                             <td>
-                                {{if $list.status==1}}反馈中{{else if $list.status==2}}反馈通过{{else if $list.status==3}}反馈未通过{{/if}}
+                                {{if $list.status==1}}反馈中{{else if $list.status==2}}反馈通过{{else if $list.status==3}}反馈驳回{{/if}}
                             </td>
                             <td>
-                               {{$list.back_reason}}
+                               {{$list.feedbackInfo}}
                             </td>
                             <td>
-                                {{$list.backTime|date_format:"Y-m-d H:i:s"}}
+                                {{$list.createTime|date_format:"Y-m-d H:i:s"}}
                             </td>
                             <td>
-                               {{$list.backName}}
+                               {{$list.measurement}}
                             </td>
                         </tr>
                     {{/foreach}}

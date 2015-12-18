@@ -75,9 +75,9 @@ class Retouch extends My_Controller
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
         $arr['token']=$this->user_info['token'];
         $list=$this->retouch->getRetouchDetail($arr);
-        if($arr['s_time']!=''&&$arr['e_time']!=''){
-            $arr['s_time']=strtotime($arr['s_time']);
-            $arr['e_time']=strtotime($arr['e_time']);
+        if($arr['stime']!=''&&$arr['etime']!=''){
+            $arr['stime']=strtotime($arr['stime']);
+            $arr['etime']=strtotime($arr['etime']);
         }
         $showpage= parent::page($page_url,10,$list['totalCount']);
         $this->ci_smarty->assign('no',$no);
@@ -115,13 +115,15 @@ class Retouch extends My_Controller
         array_pop($orderId);
         $data['orderIds']=serialize($orderId);
         $str=$this->retouch->batchPass($data);
-        echo json_encode($str);
+        echo $str;
     }
     /*修图审核通过与驳回*/
     function changeStatus(){
         $pass=$this->input->post();
         $pass['token']=$this->user_info['token'];
-        $return=$this->retouch->batchPass($pass);
-        echo json_encode($return);
+        $return=$this->retouch->changeStatus($pass);
+        echo $return;
+      //  echo 123;
+      //  echo json_encode($return);
     }
 }

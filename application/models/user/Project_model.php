@@ -19,7 +19,6 @@ class Project_model extends MY_Model {
         $url=$this->user_api_url.'/user/getProjectAll';
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
-    //    var_dump($datas);
         $count=count($datas['data']);
         $datas=$datas['data'];
         for($i=0;$i<$count;$i++){

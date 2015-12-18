@@ -35,7 +35,7 @@ class Retouch_model extends MY_Model
     function getRetouchDetail($data){
         $url=$this->more_api_url."/lingmall/audit/detail";
         $return=$this->curl($url,$data,'get');
-        var_dump($return);
+
         if(!$return){
             $url="f:/wamp/www/curl/retouch/detail.txt";
             $return=file_get_contents($url);
@@ -50,7 +50,7 @@ class Retouch_model extends MY_Model
     function getRetouchPic($data){
         $orderId=$data['orderId'];
         $url=$this->more_api_url."/lingmall/audit/{$orderId}";
-        $return=$this->curl($url,$data);
+        $return=$this->curl($url,$data,'get');
         if(!$return){
             $url="f:/wamp/www/curl/retouch/pic.txt";
             $return=file_get_contents($url);
@@ -60,9 +60,8 @@ class Retouch_model extends MY_Model
     }
     /*获取图片*/
     function getAllImage($data){
-       // $url=$this->more_api_url."/shoot/getAllImage";
         $data['token']='7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE';
-        $data['xBarcode']='6921168550135';
+        $data['xBarcode']=$data['gtin'];
         $data['xType']=1;
         $url="http://139.196.36.81:8600/lingmall/pictures";
         $return=$this->curl($url,$data,'get');
@@ -70,16 +69,22 @@ class Retouch_model extends MY_Model
         return $list;
     }
     /*单独操作审核（通过和驳回）*/
-    function changStatus($data){
+    function changeStatus($data){
         $orderId=$data['orderId'];
-        $url=$this->more_api_url." /lingmall/audit/$orderId";
-        $return=$this->curl($url,$data);
+        $token=$data['token'];
+        $arr['memo']=$data['memo'];
+        $arr['status']=$data['status'];
+        $arr=json_encode($arr);
+        $url=$this->more_api_url."lingmall/audit/$orderId?token=$token";
+        $return=$this->curl($url,$arr,'put');
         return $return;
     }
     /*批量审核通过*/
     function batchPass($data){
-        $url=$this->more_api_url."/lingmall/audit/checks";
-        $return=$this->curl($url,$data);
+        $token=$data['token'];
+        $arr=json_encode($data);
+        $url=$this->more_api_url."lingmall/audit/checks?token=$token";
+        $return=$this->curl($url,$arr,'put');
         return $return;
     }
 

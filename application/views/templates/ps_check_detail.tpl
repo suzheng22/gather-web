@@ -16,7 +16,7 @@
         	<div class="rose_box cc_box">
             	<h3>修图审核-详情</h3>	
                 <div class="rose_top main_rignt_top clearfix">
-					<form action="{{$root_path}}retouch/psCheckDetail" method="get">
+					<form action="{{$root_path}}retouch/psCheckDetail/{{$u_info.userId}}/{{$no}}/{{$total}}" method="get">
                         <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span><input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{((($total-$no)/$total)|number_format:4)*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>
@@ -38,15 +38,17 @@
 							<div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" id="gtin"/></div>
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="gName" value="{{$gName}}" id="gName"/></div>
 							<div class="clearfix"></div>
-                     	<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/> <label style="width:20px;">-</label><input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/></div>
+                     	<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label>
+							<input type="text" id="datetimepicker_start" name="stime" value="{{$stime}}"/> <label style="width:20px;">-</label>
+							<input type="text" id="datetimepicker_end" name="etime" value="{{$etime}}"/></div>
                        <div class="clearfix"></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
-                                    <select name="catgrory1" id="type" class="select3">
+                                    <select name="catType" id="type" class="select3">
 										<option value="">全部</option>
 									 {{foreach from=$type_list item=list}}
-												<option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+												<option value="{{$list.id}}" {{if $catType==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
 										 {{/foreach}}
 									</select>
                                 </dl>
@@ -68,7 +70,7 @@
                                 <dl class="select">
 								<select name="status" class="select3">
 									<option value="" {{if $status == 'NULL'}}selected="selected"{{/if}}>全部</option>
-									<option value="1" {{if $statu == 1}}selected="selected"{{/if}}>未审核</option>
+									<option value="1" {{if $status == 1}}selected="selected"{{/if}}>未审核</option>
 									<option value="2" {{if $status==2}}selected="selected"{{/if}}>修图已通过</option>
 									<option value="3" {{if $status==3}}selected="selected"{{/if}}>修图已驳回</option>
 								</select>
@@ -77,7 +79,7 @@
                         </div>
                         <div class="clearfix"></div>
                     <div class="cc_top_two">
-                        <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="check(1)" /></span>
+                        <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="shoot_pass()" /></span>
                          <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                          <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
@@ -98,11 +100,11 @@
                       <tr>
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.gName}}</td>
-                        <td>{{$list.catName}}</td>
+                        <td>{{$list.catgroryName}}</td>
                         <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
                         <td>{{if $list.status==2}}通过{{else if $list.status==3}}驳回{{else}}未审核{{/if}}</td>
                         <td>
-                        	<a href="{{$root_path}}retouch/psCheckPic?orderId={{$list.retouchId}}&gtin={{$list.gtin}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}retouch/psCheckPic?orderId={{$list.orderId}}&gtin={{$list.gtin}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
@@ -167,7 +169,7 @@ function shoot_pass(){
 	{{foreach from=$glist item=list}}
 	var gtin={{$list.gtin}};
 	var status={{$list.status}};
-	var shootType={{$list.shootType}};
+	var shootType={{$list.retouchType}};
 	var orderId={{$list.orderId}};
 	if(status===1 && shootType!==1){
 		$(".t_"+gtin).css('color','red');
@@ -187,16 +189,20 @@ function shoot_pass(){
 
 	//如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
 	if(shoot){
-		var data={orderId:data_id,type:2};
+		var data={orderId:data_id};
 		//ajax
 		$.ajax({
-			url:"{{$root_path}}marlboro/shootPass",
+			url:"{{$root_path}}retouch/batchPass",
 			data:data,
 			type:'POST',
 			dataType:'text',
 			success:function(e){
-				//  alert(e);
-				alert('审核成功');
+				if(e){
+					alert("操作成功");
+					window.location.reload();
+				}else{
+					alert("操作失败");
+				}
 			}
 		});
 	}else{
