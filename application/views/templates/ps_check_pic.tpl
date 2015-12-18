@@ -12,27 +12,34 @@
 	<h2>{{$p_info.gtin}}条形码-修图详情
       </h2>
 	<ul class="clearfix" id="nav_info">
-            < <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
+         <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
         <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
-        <li class="black"><em>商品类型:</em><span>{{$p_info.catgrory1}}</span></li>
+        <li class="black"><em>商品类型:</em><span>{{$p_info.catName}}</span></li>
         <!-- 拍摄类型 -->
         <li class="black"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
         <!-- 项目 -->
-        <li class="black"><em>项目:</em><span>{{$p_info.pId}}</span></li>
+        <li class="black"><em>项目:</em><span>{{$p_info.pName}}</span></li>
         <!-- 包装 -->
         <li class="black"><em>包装:</em><span>包装{{$p_info.packet}}</span></li>
         <!-- 批次 -->
         <li class="black"><em>批次:</em><span>批次{{$p_info.batchNo}}</span></li>
-            <li class="black">
-			{{if $status!=1 && $status!=2}}
-            	<div class="ps_top_menu">
-                <a href="#" class="pass" onclick="check(1)"><i class="iconfont">&#xf01b1;</i>通过</a>
-                <a href="javascript:;"  id="new_user" class="back"><i class="iconfont">&#xf0223;</i>驳回</a>
-                </div>
-			{{else}}
-				{{if $status==1}}已通过{{else if $status==2}}已驳回{{/if}}
-			{{/if}}
-            </li>
+        <div class="clearfix"></div>
+        <p class="back_why_info">
+            <!-- {{if $p_info.status==3}}-->
+            最新驳回原因:<span>{{$p_info.memo}}</span>上次驳回原因:<span>{{$p_info.memo}}</span>
+            <!--  {{/if}}-->
+        </p>
+
+        <div class="ps_top_menu">
+            {{if $p_info.status==1}}
+            <a href="" class="pass" onclick="check(2)"><i class="iconfont">&#xf01b1;</i>通过</a>
+            <a href="javascript:;" id="new_user" class="back" ><i class="iconfont">&#xf0223;</i>驳回</a>
+            {{else}}
+            {{if $p_info.status==2}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
+            {{elseif $p_info.status==3}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>
+            {{/if}}
+            {{/if}}
+        </div>
        </ul>
      <div class="clearfix"><a href="javascript:;" id="cc_flex"><i class="iconfont">&#xf01f0;</i>查看原图</a></div>
 	<div class="left_pc_check" id="left">
@@ -56,10 +63,12 @@
                                 <div class="v_content">
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
-										{{foreach from=$plist.a2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
-										{{/foreach}}
-                                         </ul>
+                                            {{foreach from=$plist.1 item =list name=name}}
+
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+                                            {{/foreach}}
+
+                                        </ul>
                                     </div>
                                 </div>
                        		</div>
@@ -94,9 +103,9 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-									{{foreach from=$plist.b2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
-									{{/foreach}}
+                                        {{foreach from=$plist.2 item =list name=name}}
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+                                        {{/foreach}}
                                      </ul>
                                 </div>
                             </div><!--v_content-->
@@ -114,9 +123,9 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.c2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
-									{{/foreach}}
+                                        {{foreach from=$plist.3 item =list name=name}}
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+                                        {{/foreach}}
                                      </ul>
                                 </div>
                             </div><!--v_content-->
@@ -135,9 +144,9 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.d2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50" mm="{{$list}}" /></li>
-									{{/foreach}}
+                                        {{foreach from=$plist.4 item =list name=name}}
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$this->pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+                                        {{/foreach}}
                                      </ul>
                                 </div>
                             </div><!--v_content-->
@@ -156,9 +165,9 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.e2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list}}-thumbnail50"  mm="{{$list}}" /></li>
-									{{/foreach}}
+                                        {{foreach from=$plist.5 item =list name=name}}
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}} " /></li>
+                                        {{/foreach}}
                                      </ul>
                                 </div>
                             </div><!--v_content-->
@@ -289,21 +298,21 @@
 		<div class="login_main">
 			<div class="login_form">
 				<div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.proName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.typeName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.gName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
                 <a href="##" id="confirm_btn" class="confirm_btn" onclick="check(2)">确认</a>
             </div>
 	   </div>
     </div>
-</div>  
+</div>
 
 <script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/record.js"></script> 
+<script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
@@ -326,12 +335,12 @@
 		//实例化
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "{{$plist.a2.0}}-thumbnail500"
+            src: "{{$pic_path}}{{$picList.0.key}}"
 			//?imageView/1/w/500/h/500"
 		});
 		var iv2 = $(".viewer").iviewer(
 		{
-			src: "{{$plist.a1.0}}-thumbnail500"
+            src: "{{$pic_path}}{{$picList.0.key}}"
 			//?imageView/1/w/500/h/500
 		});
 		//驳回
@@ -375,7 +384,7 @@
 });
 
 function check(status){
-//	var gtin={{$p_info.gtin}};
+	var gtin={{$p_info.gtin}};
 	var memo=$("#memo").val();
 
 		$.post("{{$root_path}}retouch/checkStatus",{"gtin":gtin,"type":1,"status":status,"memo":memo,'table':'pic'},

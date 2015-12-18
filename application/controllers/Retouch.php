@@ -8,7 +8,7 @@ class Retouch extends My_Controller
     {
         parent::__construct();
         $this->load->model('user/project_model', 'project');
-        $this->load->model('retouch/retouch_model');
+        $this->load->model('retouch/retouch_model','retouch');
         $this->load->model('sdk/product_model', 'product');
         $this->load->model('ps/marlboro_model', 'marlboro');
         $this->load->model('user/user_model', 'user');
@@ -26,18 +26,24 @@ class Retouch extends My_Controller
         $this->ci_smarty->assign('group_list',$group_list['list']);
         $data['userName']=$this->input->get('userName');
         $data['groupId']=$this->input->get('groupId');
+        $data['pId']=$this->input->get('pId');
         if($data['userName']!=''){
             $this->ci_smarty->assign('userName',$data['userName']);
         }
         if($data['groupId']!=''){
             $this->ci_smarty->assign('groupId',$data['groupId']);
         }
+        if($data['pId']!=''){
+            $this->ci_smarty->assign('pId',$data['pId']);
+        }
+        $data['userId']=$this->user_info['userId'];
         $str=$this->user->getUserIdsByFiled($data);
-        $user_id_list=json_decode($str,true);
+        $user_id_list=json_decode($str,true);;
         $data['userIds']=serialize($user_id_list);
+
         $data['token']=$this->user_info['token'];
-       // var_dump($data);
-        $list=$this->retouch_model->getMarlboroList($data);
+        $data['userId']=$this->user_info['userId'];
+        $list=$this->retouch->getMarlboroList($data);
       //  var_dump($list);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('ps_check_list.tpl');
@@ -45,7 +51,7 @@ class Retouch extends My_Controller
     /*
      * 修图审核详情
      * */
-    function psCheckDetail($userId){
+    function psCheckDetail($userId,$no,$total){
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         $data['upUserId']=$userId;
@@ -64,40 +70,58 @@ class Retouch extends My_Controller
         if(!isset($arr['page'])){
             $arr['page']=1;
         }
-        $arr['rId']=$userId;
+        $arr['retouchUserId']=$userId;
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
-        $list=$this->marlboro->getMarlboroInfo($arr);
+        $arr['token']=$this->user_info['token'];
+        $list=$this->retouch->getRetouchDetail($arr);
         if($arr['s_time']!=''&&$arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
         }
-        //print_r($list);exit;
         $showpage= parent::page($page_url,10,$list['totalCount']);
-        $this->ci_smarty->assign('glist',$list);
+        $this->ci_smarty->assign('no',$no);
+        $this->ci_smarty->assign('total',$total);
+        $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('ps_check_detail.tpl');
     }
     /*
      * 某一商品的修图详情
      * */
-    function psCheckPic($gtin){
-        $arr['gtin']=$gtin;
-        $arr['type']='pic';
-        $list=$this->marlboro->getMarlboroInfoPic($arr);
-        $status=$this->marlboro->getReviewStatus($arr);
-            $str="";
-        foreach ($list['a3'] as $k=>$v){
-            $png=$v;
-            $v=str_replace('a3', 'a2', $v);
-            $jpg=str_replace('png', 'JPG', $v);
-            $str.="<li><img src='".$jpg."?imageView/1/w/50/h/50' mm='".$png."' /></li>";
-        }
-        $this->ci_smarty->assign('png',$str);
-        $product_info=$this->product->getProduct($arr);
+    function psCheckPic(){
+        $arr=$this->input->get();
+        $arr['userId']=$this->user_info['userId'];
+        $arr['token']=$this->user_info['token'];
+        //获取图片
+        $list=$this->retouch->getAllImage($arr);
+        $product_info=$this->retouch->getRetouchPic($arr);
+        $product_info['token']=$this->user_info['token'];
+        $arr['proName']=$product_info['proName'];
+        $arr['catgrory']=$product_info['type'];
         $this->ci_smarty->assign('p_info',$product_info);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('status',$status['status']);
+        $this->ci_smarty->assign('picList',$list[1]);
+        $this->ci_smarty->assign('pic_path',"http://7xny7g.com2.z0.glb.qiniucdn.com/");
         $this->ci_smarty->display('ps_check_pic.tpl');
+    }
+    /*批量审核通过*/
+    function batchPass(){
+        $data['status']=$this->input->post('status');
+        $data['orderId']=$this->input->post('orderId');
+        $data['token']=$this->user_info['token'];
+            //批量通过
+        $orderId=explode(',',$data['orderId']);
+        array_pop($orderId);
+        $data['orderIds']=serialize($orderId);
+        $str=$this->retouch->batchPass($data);
+        echo json_encode($str);
+    }
+    /*修图审核通过与驳回*/
+    function changeStatus(){
+        $pass=$this->input->post();
+        $pass['token']=$this->user_info['token'];
+        $return=$this->retouch->batchPass($pass);
+        echo json_encode($return);
     }
 }

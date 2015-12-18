@@ -171,7 +171,7 @@ class Marlboro extends My_Controller {
         $shootBackManager=$this->marlboro_model->getShootBackManager($arr);
         $showPage= parent::page($page_url,5,$shootBackManager['total']);
         //获取项目标签
-        $this->ci_smarty->assign('slist',$shootBackManager['data']);
+        $this->ci_smarty->assign('slist',$shootBackManager);
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('shoot/shoot_back_manager.tpl');
     }

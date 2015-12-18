@@ -97,34 +97,7 @@
                         <th>反馈人</th>
                        
                       </tr>
-                      <tr>
-                        <td>1</td>
-                        <td>123214125</td>
-                        <td>2222</td>
-                        <td>222</td>
-                        <td>dadas</td>
-                        <td>正常</td>
-                        <td>
-                        	2323
-                        </td>
-                         <td>
-                        	2323
-                        </td>
-                         <td>
-                        	修图反馈
-                        </td>
-                         <td>
-                        	1
-                        </td>
-                        <td>
-                        	2015.12.14
-                        </td>
-                        <td>
-                        	张工
-                        </td>
-                         
-                      </tr>
-                        {{foreach from=$slist item=list }}
+                        {{foreach from=$slist item=list}}
                         <tr>
                             <td>{{$list.lId}}</td>
                             <td>{{$list.gtin}}</td>
@@ -139,13 +112,13 @@
                                 {{$list.back_path}}
                             </td>
                             <td>
-                                {{if $list.status==1}}反馈中{{$list.status==2}}反馈通过{{$list.status==3}}反馈未通过{{/if}}
+                                {{if $list.status==1}}反馈中{{else if $list.status==2}}反馈通过{{else if $list.status==3}}反馈未通过{{/if}}
                             </td>
                             <td>
-                               {{$list.reason}}
+                               {{$list.back_reason}}
                             </td>
                             <td>
-                                {{$list.time|date_format:"Y-m-d H:i:s"}}
+                                {{$list.backTime|date_format:"Y-m-d H:i:s"}}
                             </td>
                             <td>
                                {{$list.backName}}

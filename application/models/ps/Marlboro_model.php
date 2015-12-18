@@ -68,7 +68,6 @@ class Marlboro_model extends MY_Model {
     }
     //获取所有图片
     function getAllImage($data){
-       // var_dump($data);
         $url=$this->more_api_url."/shoot/getAllImage";
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
@@ -272,14 +271,15 @@ class Marlboro_model extends MY_Model {
         $data1['memo']=$datas['memo'];
         return $data1;
     }
+    /*获取拍摄反馈的数据*/
     function getShootBackManager($data){
         $url=$this->more_api_url."/shoot/ShootBackManager";
         $return=$this->curl($url,$data);
+        if(!$return){
+            $return=file_get_contents("f:/wamp/www/curl/marlboro/feedBack.txt");
+        }
         $datas=json_decode($return,true);
         return $datas;
     }
-
-
-
 }
 ?>

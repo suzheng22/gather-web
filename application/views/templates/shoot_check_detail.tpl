@@ -222,13 +222,12 @@ function shoot_pass(){
         alert("请手动操作带有红色标识的条码");
         return false;
     }
-
     //如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
     if(shoot){
-        var data={orderId:data_id,type:2};
+        var data={orderId:data_id};
         //ajax
         $.ajax({
-           url:"{{$root_path}}marlboro/shootPass",
+           url:"{{$root_path}}retouch/batchPass",
             data:data,
             type:'POST',
             dataType:'text',

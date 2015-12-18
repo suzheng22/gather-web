@@ -61,27 +61,16 @@
                         <th>抽查通过率</th>
                         <th>操作</th>
                       </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a href="{{$root_path}}retouch/psCheckDetail/14">详情</a>
-                            </td>
-                        </tr>
 					  {{foreach from =$glist item=list}}
                       <tr>
                           <td>{{$list.userName}}</td>
                           <td>{{$list.groupName}}</td>
                           <td>{{$list.totalCount}}</td>
-                          <td>{{$list.noMarlboroCount}}</td>
-                          <td>{{$list.MarlboroCount}}</td>
-                          <td>{{$list.passCount*100}}%</td>
+                          <td>{{$list.noAuditCount}}</td>
+                          <td>{{$list.totalCount-$list.noAuditCount}}</td>
+                          <td>{{((($list.totalCount-$list.noAuditCount)/$list.totalCount)|number_format:4)*100}}%</td>
                           <td>
-                        	<a href="{{$root_path}}retouch/psCheckDetail/{{$list.userId}}">详情</a>
+                        	<a href="{{$root_path}}retouch/psCheckDetail/{{$list.retouchUserId}}/{{$list.noAuditCount}}/{{$list.totalCount}}">详情</a>
                           </td>
                       </tr>
                        {{/foreach}}

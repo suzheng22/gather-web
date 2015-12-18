@@ -18,8 +18,8 @@
                 <div class="rose_top main_rignt_top clearfix">
 					<form action="{{$root_path}}retouch/psCheckDetail" method="get">
                         <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span><input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
-                        <div class="cc_top_one"><label>抽查通过率:</label><span>{{$glist.passCount*100}}%</span></div>
-                        <div class="cc_top_one"><label>待审核商品数:</label><span>{{$glist.dCount}}</span></div>
+                        <div class="cc_top_one"><label>抽查通过率:</label><span>{{((($total-$no)/$total)|number_format:4)*100}}%</span></div>
+                        <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}" id="myform">
 							<div class="cc_top_one last_show"><label>项目:</label>
@@ -37,6 +37,7 @@
 							<!-- 条形码 -->
 							<div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" id="gtin"/></div>
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="gName" value="{{$gName}}" id="gName"/></div>
+							<div class="clearfix"></div>
                      	<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label><input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/> <label style="width:20px;">-</label><input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/></div>
                        <div class="clearfix"></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
@@ -93,25 +94,15 @@
                         <th>状态</th>
                         <th>操作</th>
                       </tr>
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-								<a href="{{$root_path}}retouch/psCheckPic/" target="_blank">审核详细</a>
-							</td>
-						</tr>
-					  {{foreach from=$glist.gtins item=list}}
+					  {{foreach from=$glist item=list}}
                       <tr>
                         <td>{{$list.gtin}}</td>
-                        <td>{{$list.proName}}</td>
-                        <td>{{$list.typeName}}</td>
+                        <td>{{$list.gName}}</td>
+                        <td>{{$list.catName}}</td>
                         <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
-                        <td>{{if $list.status==1}}通过{{else if $list.status==2}}驳回{{else}}未审核{{/if}}</td>
+                        <td>{{if $list.status==2}}通过{{else if $list.status==3}}驳回{{else}}未审核{{/if}}</td>
                         <td>
-                        	<a href="{{$root_path}}retouch/psCheckPic/{{$list.gtin}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}retouch/psCheckPic?orderId={{$list.retouchId}}&gtin={{$list.gtin}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
@@ -169,31 +160,57 @@ $('#datetimepicker_end').datetimepicker({
 	maxDate:'+1970/01/2',
 	timepicker:false
 });
-function check(){
-	var datetimepicker_start=$("#datetimepicker_start").val();
-	var datetimepicker_end=$("#datetimepicker_end").val();
-	var type=$("#type").val();
-	var rId=$("#rId").val();
-	var proName=$("#proName").val();
-		$.post("{{$root_path}}retouch/batchChangeStatus",{"rId":rId,"type":type,"start_time":datetimepicker_start,"end_time":datetimepicker_end,"proName":proName,'table':'pic'},
-		  	function(data){
-				var dataObj=eval("("+data+")");
-				if(dataObj.msgCode==0){
-					alert('审核成功');
-					window.location.reload();
-				}
-				else{
-					alert(dataObj.msgText);
-					window.location.reload();
-				}
-		  	},"text");
+function shoot_pass(){
+	var num=0;
+	var shoot=0;
+	var data_id="";
+	{{foreach from=$glist item=list}}
+	var gtin={{$list.gtin}};
+	var status={{$list.status}};
+	var shootType={{$list.shootType}};
+	var orderId={{$list.orderId}};
+	if(status===1 && shootType!==1){
+		$(".t_"+gtin).css('color','red');
+		num++;
+	}else{
+		if(status===1 && shootType===1){
+			shoot++;
+			data_id+=orderId+',';
+		}
+	}
+	{{/foreach}}
+	//查询每条数据的拍摄类型，如果拍摄类型是驳回拍摄且状态是未审核状态需要提醒操作人手动操作
+	if(num){
+		alert("请手动操作带有红色标识的条码");
+		return false;
+	}
+
+	//如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
+	if(shoot){
+		var data={orderId:data_id,type:2};
+		//ajax
+		$.ajax({
+			url:"{{$root_path}}marlboro/shootPass",
+			data:data,
+			type:'POST',
+			dataType:'text',
+			success:function(e){
+				//  alert(e);
+				alert('审核成功');
+			}
+		});
+	}else{
+		//其余状态不变
+		alert("无审核操作");
+	}
 }
+
 	//清空
 	function btn_empty(){
 		$("#gtin,#gName").val("");
 		$("#datetimepicker_start").val("");
 		$("#datetimepicker_end").val("");
-		$(".cc_top_one select").val("");
+		$(".cc_top_one select,.select3").val("");
 		$(".uew-select-text").html('全部');
 	}
  
