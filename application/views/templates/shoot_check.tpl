@@ -76,7 +76,8 @@
                         <td>{{$list.totalCount}}</td>
                         <td>{{$list.noMarlboroCount}}</td>
                         <td>{{$list.totalCount-$list.noMarlboroCount}}</td>
-                        <td>{{(($list.totalCount-$list.noMarlboroCount)/$list.totalCount)*100}}%</td>
+                        <td>{{((($list.totalCount-$list.noMarlboroCount)/$list.totalCount)|number_format:4)*100}}%</td>
+
                         <td>
                         	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}/{{$list.totalCount}}/{{$list.noMarlboroCount}}">详情</a>
                         </td>
