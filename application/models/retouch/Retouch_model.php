@@ -12,11 +12,9 @@ class Retouch_model extends MY_Model
      function getMarlboroList($data){
          var_dump($data);
          $url=$this->more_api_url."/lingmall/audit/list";
-         echo $url;
          $return=$this->curl($url,$data,'get');
         var_dump($return);
          $list=json_decode($return,true);
-         var_dump($list);
          foreach($list as $k=>$v){
              $data['upUserId']=$v['retouchUserId'];
              $url=$this->user_api_url."/user/info";
