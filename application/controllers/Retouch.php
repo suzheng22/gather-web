@@ -38,7 +38,6 @@ class Retouch extends My_Controller
         }
         $data['userId']=$this->user_info['userId'];
         $str=$this->user->getUserIdsByFiled($data);
-        echo $str;
         $user_id_list=json_decode($str,true);;
         $data['userIds']=serialize($user_id_list);
 
