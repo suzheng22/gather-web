@@ -38,6 +38,13 @@ class Retouch_model extends MY_Model
         }
         $detail=json_decode($return,true);
         $count=sizeof($detail);
+        foreach($detail as $k=>$v){
+            $data['pId']=$v['pId'];
+            $url=$this->user_api_url."/user/getProjectByFiled";
+            $return =$this->curl($url,$data);
+            $project=json_decode($return,true);
+            $detail[$k]['pName']=$project[0]['pName'];
+        }
         $return_detail['total']=$count;
         $return_detail['data']=$detail;
         return $return_detail;

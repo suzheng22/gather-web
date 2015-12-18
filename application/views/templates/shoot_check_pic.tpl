@@ -216,10 +216,15 @@
 		//延时加载
 		$("img").lazyload();
 		//实例化
-		var iv2 = $("#viewer").iviewer(
-		{
-			src: "{{$pic_path}}{{$picList.0.key}}"
-		});
+        var is="{{$picList.0.key}}";
+        if(is){
+            var iv2 = $("#viewer").iviewer(
+                    {
+
+                        src: "{{$pic_path}}{{$picList.0.key}}"
+                    });
+
+        }
 
 
 		//拍摄详情

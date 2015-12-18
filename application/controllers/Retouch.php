@@ -78,7 +78,7 @@ class Retouch extends My_Controller
             $arr['stime']=strtotime($arr['stime']);
             $arr['etime']=strtotime($arr['etime']);
         }
-        $showpage= parent::page($page_url,10,$list['totalCount']);
+        $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('no',$no);
         $this->ci_smarty->assign('total',$total);
         $this->ci_smarty->assign('glist',$list['data']);

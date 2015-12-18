@@ -237,7 +237,6 @@ class Marlboro_model extends MY_Model {
         }
         $datas=json_decode($return,true);
         $back=$this->back($datas,$data);
-    //    var_dump($back);
         return $back;
     }
     function back($datas,$data){

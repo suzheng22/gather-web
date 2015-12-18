@@ -93,7 +93,11 @@
                         <th>商品名称</th>
                         <th>商品分类</th>
                         <th>修图类型</th>
-                        <th>状态</th>
+						  <th>项目</th>
+						  <th>包装</th>
+						  <th>批次</th>
+						  <th>上传时间</th>
+						  <th>状态</th>
                         <th>操作</th>
                       </tr>
 					  {{foreach from=$glist item=list}}
@@ -101,7 +105,12 @@
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.gName}}</td>
                         <td>{{$list.catgroryName}}</td>
-                        <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
+						  <td>{{if $list.retouchType==1}}正常修图{{else}}驳回修图{{/if}}</td>
+						  <td>{{$list.pName}}</td>
+						  <td>包装{{$list.packet}}</td>
+						  <td>批次{{$list.batchNo}}</td>
+
+						  <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                         <td>{{if $list.status==2}}通过{{else if $list.status==3}}驳回{{else}}未审核{{/if}}</td>
                         <td>
                         	<a href="{{$root_path}}retouch/psCheckPic?orderId={{$list.orderId}}&gtin={{$list.gtin}}" target="_blank">审核详细</a>
