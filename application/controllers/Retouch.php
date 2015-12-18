@@ -40,7 +40,6 @@ class Retouch extends My_Controller
         $str=$this->user->getUserIdsByFiled($data);
         $user_id_list=json_decode($str,true);;
         $data['userIds']=serialize($user_id_list);
-
         $data['token']=$this->user_info['token'];
         $data['userId']=$this->user_info['userId'];
         $list=$this->retouch->getMarlboroList($data);
