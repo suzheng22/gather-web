@@ -96,11 +96,11 @@ class User_model extends MY_Model {
     }
     
     function getUserIdsByFiled($data){
-        var_dump($data);
+        $data['token']=urlencode($data['token']);
         $url=$this->user_api_url."/user/getUserIdsByFiled";
-        echo $url;
+      //  echo $url;
         $return=$this->curl($url,$data);
-        var_dump($return);
+     //   var_dump($return);
         return $return;
     }
     
