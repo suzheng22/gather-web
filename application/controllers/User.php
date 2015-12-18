@@ -28,7 +28,7 @@ class User extends My_Controller {
             else{
                 $user['userId']=$arr['userId'];
                 $user['trueName']=$arr['trueName'];
-                $user['token']=$arr['token'];
+                $user['token']=urlencode($arr['token']);
                 $user['roleId']=$arr['roleId'];
                 $user_str=serialize($user);
                 set_cookie("user",$user_str,3600*24);
