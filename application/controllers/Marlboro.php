@@ -169,6 +169,39 @@ class Marlboro extends My_Controller {
         $arr['token']=$this->user_info['token'];
         //获取拍摄管理列表
         $shootBackManager=$this->marlboro_model->getShootBackManager($arr);
+        if($arr['is_ext']==1){
+            $fileName='拍摄反馈管理';
+            $fields=array('序号','项目名称','商品条形码','商品名称','商品分类','包装','批次','反馈原因','反馈时间','反馈状态','反馈路径','反馈人');
+            $querys =$shootBackManager['data'];
+            $query=array();
+            $i=0;
+            foreach($querys as $key1=>$val){
+                $query[$i]['lId']=$val['lId'];
+                $query[$i]['pName']=$val['pName'];
+                $query[$i]['gtin']=$val['gtin'];
+                $query[$i]['gName']=$val['gName'];
+                $query[$i]['catName']=$val['catName'];
+                $query[$i]['packet']="包装".$val['packet'];
+                $query[$i]['batchNo']="批次".$val['batchNo'];
+                $query[$i]['memo']=$val['memo'];
+                $query[$i]['creatTime']=date("Y-m-d H:i:s",$val['creatTime']);
+                if($val['status']==1){
+                    $query[$i]['status']='反馈中';
+                }else if($val['status']==1){
+                    $query[$i]['status']='反馈通过';
+                }else if($val['status']==3){
+                    $query[$i]['status']='反馈驳回';
+                }
+                if($val['feedPath']==1){
+                    $query[$i]['feedPath']='修图反馈';
+                }else{
+                    $query[$i]['feedPath']='录入反馈';
+                }
+                $query[$i]['measurement']=$val['measurement'];
+                $i++;
+            }
+            echo $this->phpExcel($fileName,$fields, $query,'','15','15');
+        }
         $showPage= parent::page($page_url,5,$shootBackManager['total']);
         //获取项目标签
         $this->ci_smarty->assign('slist',$shootBackManager['data']);

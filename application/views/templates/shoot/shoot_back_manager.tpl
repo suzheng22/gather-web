@@ -74,7 +74,7 @@
                         </div>
                       <div class="clearfix"></div> 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-
+                        <a href="{{$root_path}}marlboro/shootBackManager?is_ext=1"><span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="button" value="导出"></span></a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                         <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
