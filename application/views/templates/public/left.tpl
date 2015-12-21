@@ -29,7 +29,7 @@
              <dl class="menu_base_info system_log">
                  <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                  <dd><a href="{{$root_path}}" title="商品管理">商品管理</a></dd>
-                 <dd><a href="{{$root_path}}information/baseInfoManager" title="基本信息管理">基本信息管理</a></dd>
+                 <dd><a href="{{$root_path}}information/baseInfoManager" title="录入信息管理">基本信息管理</a></dd>
                  <dd><a href="{{$root_path}}information/nutrientInfo" title="营养成风">营养成分</a></dd>
              </dl>
 
