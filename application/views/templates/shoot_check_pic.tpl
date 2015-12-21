@@ -182,7 +182,7 @@
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm gtin1">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.proName}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm typeName1">{{$p_info.typeName}}</span></div>
-                <div class="clearfix one"><label for="user_name">备注:</label><textarea id="remark"></textarea></div>
+                <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memos"></textarea></div>
                 <a href="javascript:;"  class="confirm_btn" onclick="add_miss_figure(2)">确认</a>
             </div>
         </div>
@@ -267,8 +267,6 @@ function check(status){
   //  return false;
 		$.post("{{$root_path}}marlboro/shootPass",data,
 		  	function(data){
-			//	var dataObj=eval("("+data+")");
-              //  alert( dataObj);
 				if(data){
 					if(status==2){
 					   alert('审核成功');
@@ -286,22 +284,36 @@ function check(status){
 		  	},"text");
 }
     function add_miss_figure(){
-        var orderId={{$p_info.orderId}};
         //条形码
-        var gtin=$(".gtin1").html();
-        //商品名称
-        var  proName=$(".proName1").html();
-        //商品类型
-        var typeName=$(".typeName1").html();
-        var remark=$("#remark").val();
-        var data={orderId:orderId,gtin:gtin,proName:proName,typeName:typeName,remark:remark};
+        var gtin="{{$p_info.gtin}}";
+
+        var pId="{{$p_info.pId}}";
+        var packet="{{$p_info.packet}}";
+        var memo=$("#memos").val();
+        var data={gtin:gtin,pId:pId,packet:packet,memo:memo};
         $.ajax({
-            url:'{{$root_path}}marlboro/addMissFigure',
+            url:'{{$root_path}}shoot/addShoot',
             type:"POST",
             dataType:'json',
             data:data,
             success:function(e){
-                alert(e.msg);
+                if(e['msgCode]']!="2000"){
+                    var data={"orderId":{{$p_info.orderId}},"type":1,"status":2,};
+                    //  return false;
+                    $.post("{{$root_path}}marlboro/shootPass",data,
+                            function(data){
+                                if(data){
+                                        alert('审核缺图成功');
+                                    window.location.reload();
+                                }
+                                else{
+                                    alert('审核缺图失败');
+                                    window.location.reload();
+                                }
+                            },"text");
+                }else{
+                    alert('审核缺图失败');
+                }
             }
 
         });

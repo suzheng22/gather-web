@@ -264,7 +264,6 @@ class Shoot extends My_Controller {
         $data=$this->input->post();
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-        $data['id']=1;
         $datas=$this->marlboro->getNewPicInfo($data);
         echo json_encode($datas);
         exit;

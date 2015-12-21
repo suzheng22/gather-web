@@ -49,7 +49,7 @@ class Project_model extends MY_Model {
     //根据条件获取项目
     function getProjectUserByField($data){
         $token=$data['token'];
-        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
+        $url=$this->user_api_url."/user/getProjectUserByFiled?token=".$token;
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
         $count=count($datas);
@@ -90,10 +90,8 @@ class Project_model extends MY_Model {
                 }
             }
         }
-     //   var_dump($datas);
         $data_return['total']=$count;
         $data_return['data']=$datas;
-    //    var_dump($data_return);
         return $data_return;
     }
     //根据条件获取用户信息
@@ -103,12 +101,15 @@ class Project_model extends MY_Model {
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
         $count=count($datas);
+        $s=0;
         for($i=0;$i<$count;$i++){
           if($datas[$i]['pId']==$datas[$i+1]['pId']){
-              unset($datas[$i+1]);
+              unset($datas[$i]);
+          }else{
+              $s++;
           }
             foreach( $datas[$i] as $key=>$val){
-                $datas[$i]['lId']="".($i+1)."";
+                $datas[$i]['lId']="".($s)."";
                 if($key==='userId'){
                     $data['upUserId']=$val;
                     $url=$this->user_api_url."/user/info?token=".$token;
