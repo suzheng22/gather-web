@@ -34,31 +34,6 @@ class Information extends My_Controller{
         $this->ci_smarty->display("information/base_info_manager.tpl");
     }
     /**
-     * 扩冲成分
-     * */
-    public function extendInfo(){
-        $data['token']=$this->user_info['token'];
-        /*获取商品类型*/
-        $type_list=$this->product->getCatgroryList();
-        $this->ci_smarty->assign('type_list',$type_list['data']);
-        $page_url=$this->root_path."information/extendInfo?";
-        /*处理表单数据*/
-        $get=$this->input->get();
-        if(!isset($get['status'])){
-            $arr['status']=null;
-        }
-        if(!isset($get['page'])){
-            $get['page']=1;
-        }
-        $page_url=$this->publicFuc->getUrl( $page_url,$get);
-        /*获取扩充成分列表*/
-        $list=$this->information->getExtendList($get);
-        $showpage= parent::page($page_url,10,$list['total']);
-        $this->ci_smarty->assign('glist',$list['data']);
-        $this->ci_smarty->assign('pages',$showpage['show']);
-        $this->ci_smarty->display("information/extend_info.tpl");
-    }
-    /**
      * 营养成分
      * */
     public function nutrientInfo(){
@@ -89,15 +64,6 @@ class Information extends My_Controller{
         $data=json_encode($return);
         echo $data;
     }
-    /*新增商品扩充信息*/
-    public function addExtendInfo(){
-        $data=$this->input->post();
-        $data['token']=$this->user_info['token'];
-        /**/
-        $return=$this->information->addExtendInfo($data);
-        $data=json_encode($return);
-        echo $data;
-    }
     /*新增营养成分信息*/
     public function addNutrientInfo(){
         $data=$this->input->post();
@@ -113,15 +79,6 @@ class Information extends My_Controller{
         $data['token']=$this->user_info['token'];
         /**/
         $return=$this->information->changeBaseStatus($data);
-        $data=json_encode($return);
-        echo $data;
-    }
-    /*改变扩充信息的状态*/
-    public function changeExtendStatus(){
-        $data=$this->input->post();
-        $data['token']=$this->user_info['token'];
-        /**/
-        $return=$this->information->changeExtendStatus($data);
         $data=json_encode($return);
         echo $data;
     }

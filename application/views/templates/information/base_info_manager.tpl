@@ -27,6 +27,17 @@
                             </dl>
                         </div>
                      </div>
+                        <div class="cc_top_one last_show"><label>录入分类:</label>
+                            <div class="choice_count choice_box vocation">
+                                <dl class="select">
+                                    <select name="catgrory" class="select3">
+                                        <option value="">全部</option>
+                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>基本信息</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>扩展信息</option>
+                                    </select>
+                                </dl>
+                            </div>
+                        </div>
                     <div class="cc_top_one"><label>字段属性:</label><input type="text" value="{{$field}}" name="field"/></div>
                      <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box vocation">            	 			
@@ -52,6 +63,7 @@
                       <tr>
                         <th>序号</th>
                         <th>商品类型</th>
+                          <th>录入分类</th>
                         <th>字段属性</th>
                         <th>数量</th>
                         <th>输入类型</th>
@@ -66,6 +78,7 @@
                         <tr>
                             <td>{{$list.lId}}</td>
                             <td>{{$list.catType}}</td>
+                            <td>{{$list.Classification}}</td>
                             <td>{{$list.field}}</td>
                             <td>{{$list.count}}</td>
                             <td>{{$list_inputType}}</td>

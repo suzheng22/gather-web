@@ -11,14 +11,7 @@ class Information_model extends MY_Model{
         $list=json_decode($return,true);
         return $list;
     }
-    /*获取商品扩充成分信息列表*/
-    function getExtendList($data){
-        $token=$data['token'];
-        $url=$this->more_api_url."/lingmall/information/ExtendList?token=$token";
-        $return=$this->curl($url,$data);
-        $list=json_decode($return,true);
-        return $list;
-    }
+
     /*获取商品营养成分信息列表*/
     function getNutrientList($data){
         $token=$data['token'];
@@ -29,14 +22,6 @@ class Information_model extends MY_Model{
     }
     /*新增商品基本信息*/
     public function addBaseInfo($data){
-        $token=$data['token'];
-        $url=$this->more_api_url."/lingmall/information/NutrientList?token=$token";
-        $return=$this->curl($url,$data);
-        $list=json_decode($return,true);
-        return $list;
-    }
-    /*新增商品扩充信息*/
-    public function addExtendInfo($data){
         $token=$data['token'];
         $url=$this->more_api_url."/lingmall/information/NutrientList?token=$token";
         $return=$this->curl($url,$data);
@@ -59,14 +44,7 @@ class Information_model extends MY_Model{
         $list=json_decode($return,true);
         return $list;
     }
-    /*改变扩充信息的状态*/
-    public function changeExtendStatus($data){
-        $token=$data['token'];
-        $url=$this->more_api_url."/lingmall/information/NutrientList?token=$token";
-        $return=$this->curl($url,$data);
-        $list=json_decode($return,true);
-        return $list;
-    }
+
     /*改变营养成分的状态*/
     public function changeNutrientStatus($data){
         $token=$data['token'];
