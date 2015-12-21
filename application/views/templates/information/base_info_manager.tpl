@@ -118,6 +118,18 @@
                         </dl>
                 </div>
                 </div>
+                <div class="clearfix one"><label for="user_name">录入类型:</label>
+                    <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                            <select class="select1" id="inputType">
+                                <option value="">请选择</option>
+                                <option value="1">基本成分</option>
+                                <option value="2">扩充成分</option>
+
+                            </select>
+                        </dl>
+                    </div>
+                </div>
                 <div class="clearfix one"><label for="user_name">字段属性:</label><input type="text" id="" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">数量:</label>
                  	<div class="choice_count choice_box vocation">
