@@ -10,93 +10,108 @@ class User_model extends MY_Model {
     }
     //登录
     function checkLogin($data){
-        $url=$this->user_api_url."/user/login";	
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/login?token=".$token;
 		$return=$this->curl($url,$data);
         return $return;
     }
     
     function getUserListByGroup($data){
-        $url=$this->user_api_url."/user/userGroupList";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/userGroupList?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }   
     
     
     function getuserRoleList($data){
-        $url=$this->user_api_url."/user/getUserRoleList";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/getUserRoleList?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function getGroupList($data){
-        $url=$this->user_api_url."/user/getUserGroupList";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/getUserGroupList?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function getUserList($data){
-        $url=$this->user_api_url."/user/getUserList";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/getUserList?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     
     function addUser($data){
-        $url=$this->user_api_url."/user/addUser";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/addUser?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function rePwd($data){
-        $url=$this->user_api_url."/user/rePwd";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/rePwd?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function freeze($data){
-        $url=$this->user_api_url."/user/freeze";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/freeze?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function getInfo($data){
-        $url=$this->user_api_url."/user/info";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/info?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function editUser($data){
-        $url=$this->user_api_url."/user/editUser";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/editUser?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function editGroup($data){
-        $url=$this->user_api_url."/user/editGroup";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/editGroup?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function addGroup($data){
-        $url=$this->user_api_url."/user/addGroup";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/addGroup?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function getGroupInfo($data){
-        $url=$this->user_api_url."/user/groupInfo";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/groupInfo?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function editPwd($data){
-        $url=$this->user_api_url."/user/editPwd";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/editPwd?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }
     
     function getUserIdsByFiled($data){
-        $url=$this->user_api_url."/user/getUserIdsByFiled";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/getUserIdsByFiled?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
     }

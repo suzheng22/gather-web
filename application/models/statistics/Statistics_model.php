@@ -11,7 +11,8 @@ class Statistics_model extends MY_Model {
     
     //获取修图统计
     function getPsList($data) {
-        $url=$this->tmore_api_url."/retouch/statistics";
+        $token=$data['token'];
+        $url=$this->tmore_api_url."/retouch/statistics?token=".$token;
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
 
@@ -20,7 +21,7 @@ class Statistics_model extends MY_Model {
         }
 
         $data['ids']=serialize($ids);
-        $url=$this->user_api_url."/user/getUserInfoByIds";
+        $url=$this->user_api_url."/user/getUserInfoByIds?token=".$token;
         $return=$this->curl($url,$data);
         $user_list=json_decode($return,true);
         foreach ($list['list'] as $k => $v){
@@ -36,7 +37,8 @@ class Statistics_model extends MY_Model {
     
     
     function getPsCheckList($data){
-        $url=$this->tmore_api_url."/review/GetCheckList";
+        $token=$data['token'];
+        $url=$this->tmore_api_url."/review/GetCheckList?token=".$token;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
         foreach ($list['list'] as $k => $v){
@@ -44,7 +46,7 @@ class Statistics_model extends MY_Model {
         }
         $data['ids']=serialize($ids);
        
-        $url=$this->user_api_url."/user/getUserInfoByIds";
+        $url=$this->user_api_url."/user/getUserInfoByIds?token=".$token;
        $return=$this->curl($url,$data);
         $user_list=json_decode($return,true);
 

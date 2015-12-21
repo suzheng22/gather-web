@@ -21,7 +21,8 @@ class Product_model extends MY_Model {
     }
     
     function getProduct($data){
-        $url=$this->tmore_api_url."/product/getproductbygtin";
+        $token=$data['token'];
+        $url=$this->tmore_api_url."/product/getproductbygtin?token=".$token;
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
         return $list;

@@ -14,9 +14,8 @@ class Project_model extends MY_Model {
     }
     //获取项目列表
     function getProjectList($data){
-        //先获取userID
-     //   var_dump($data);
-        $url=$this->user_api_url.'/user/getProjectAll';
+        $token=$data['token'];
+        $url=$this->user_api_url.'/user/getProjectAll?token='.$token;
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
         $count=count($datas['data']);
@@ -26,14 +25,14 @@ class Project_model extends MY_Model {
                 $datas[$i]['lId']=$i+1;
                 if($key==='creatUserId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['createName']=$user['trueName'];
                 }
                 else if($key==='upUserId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['updateName']=$user['trueName'];
@@ -49,7 +48,8 @@ class Project_model extends MY_Model {
     }
     //根据条件获取项目
     function getProjectUserByField($data){
-        $url=$this->user_api_url."/user/getProjectByFiled";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
         $count=count($datas);
@@ -58,13 +58,13 @@ class Project_model extends MY_Model {
                 $datas[$i]['lId']=$i+1;
                 if($key==='userId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['userName']=$user['trueName'];
                     $roleId=$user['roleId'];
                     //根据userID获取角色
-                    $url=$this->user_api_url."/user/getUserRoleList";
+                    $url=$this->user_api_url."/user/getUserRoleList?token=".$token;
                     $return=$this->curl($url,$data);
                     $role=json_decode($return,true);
                     $roles=$role['list'];
@@ -76,14 +76,14 @@ class Project_model extends MY_Model {
                     }
                 }else if($key==='creatUserId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['createName']=$user['trueName'];
                 }
                 else if($key==='upUserId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['updateName']=$user['trueName'];
@@ -98,7 +98,8 @@ class Project_model extends MY_Model {
     }
     //根据条件获取用户信息
     function getProjectByField($data){
-        $url=$this->user_api_url."/user/getProjectByFiled";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
         $count=count($datas);
@@ -110,13 +111,13 @@ class Project_model extends MY_Model {
                 $datas[$i]['lId']="".($i+1)."";
                 if($key==='userId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['userName']=$user['trueName'];
                     $roleId=$user['roleId'];
                     //根据userID获取角色
-                    $url=$this->user_api_url."/user/getUserRoleList";
+                    $url=$this->user_api_url."/user/getUserRoleList?token=".$token;
                     $return=$this->curl($url,$data);
                     $role=json_decode($return,true);
                     $roles=$role['list'];
@@ -128,14 +129,14 @@ class Project_model extends MY_Model {
                     }
                 }else if($key==='creatUserId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['createName']=$user['trueName'];
                 }
                 else if($key==='upUserId'){
                     $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info";
+                    $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
                     $user=json_decode($return,true);
                     $datas[$i]['updateName']=$user['trueName'];
@@ -150,19 +151,22 @@ class Project_model extends MY_Model {
     }
     //改变项目状态
     function freezeProject($data){
-        $url=$this->user_api_url."/user/freezeProject";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/freezeProject?token=".$token;
         $return =$this->curl($url,$data);
         return json_decode($return);
     }
     //增加项目
     function addProject($data){
-        $url=$this->user_api_url."/user/addProject";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/addProject?token=".$token;
         $return =$this->curl($url,$data);
         return json_decode($return);
     }
     //增加项目用户
     function addProjectUser($data){
-        $url=$this->user_api_url."/user/addProjectUser";
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/addProjectUser?token=".$token;
         $return =$this->curl($url,$data);
         return $return;
     }
