@@ -177,7 +177,7 @@ function addProject(){
     var data={project:projectName,describe:describe};
     $.post("{{$root_path}}project/addProject",data,
             function(data){
-                alert(data.msgCode);
+                alert(data.msgText);
                 window.location.reload();
             },'json');
 }
