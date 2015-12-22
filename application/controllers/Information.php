@@ -25,7 +25,6 @@ class Information extends My_Controller{
         if(!isset($get['page'])){
             $get['page']=1;
         }
-        var_dump($get['page']);
         $page_url=$this->publicFuc->getUrl( $page_url,$get);
         $get['token']=$this->user_info['token'];
         /*获取基本信息列表*/
