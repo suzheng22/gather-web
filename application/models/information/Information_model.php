@@ -6,7 +6,7 @@ class Information_model extends MY_Model{
     /*获取商品基本信息列表*/
     function getBaseInfoList($data){
         $data['token']=urldecode($data['token']);
-        $url=$this->more_api_url."lingmall/input/list";
+        $url=$this->more_api_url."/lingmall/input/list";
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
         return $list;
@@ -25,7 +25,7 @@ class Information_model extends MY_Model{
         $data=json_encode($arr);
        // echo $data;
     //    return $data;
-        $url=$this->more_api_url."lingmall/input/add?token=$token";
+        $url=$this->more_api_url."/lingmall/input/add?token=$token";
         $return=$this->curl($url,$data,'post');
         $list=json_decode($return,true);
         return $list;
@@ -36,7 +36,7 @@ class Information_model extends MY_Model{
         $token=$data['token'];
         $field=$data['field'];
         $data=json_encode($data);
-        $url=$this->more_api_url."lingmall/input/{$field}?token=$token";
+        $url=$this->more_api_url."/lingmall/input/{$field}?token=$token";
         $return=$this->curl($url,$data,'put');
         $list=json_decode($return,true);
         return $list;
@@ -45,7 +45,7 @@ class Information_model extends MY_Model{
     /*获取商品营养成分信息列表*/
     function getNutrientList($data){
         $data['token']=urldecode($data['token']);
-        $url=$this->more_api_url."lingmall/nutrition/list";
+        $url=$this->more_api_url."/lingmall/nutrition/list";
         $return=$this->curl($url,$data,'get');
         if(!$return){
             $return='{
@@ -77,7 +77,7 @@ class Information_model extends MY_Model{
         $arr['nutritionUnitEn']=$data['nutritionUnitEn'];
         $token=$data['token'];
         $data=json_encode($arr);
-        $url=$this->more_api_url."lingmall/nutrition/add?token=$token";
+        $url=$this->more_api_url."/lingmall/nutrition/add?token=$token";
         $return=$this->curl($url,$data,'post');
         $list=json_decode($return,true);
         return $list;
@@ -88,7 +88,7 @@ class Information_model extends MY_Model{
         $nutritionId=$data['nutritionId'];
         $arr['status']=$data['status'];
         $data=json_encode($arr);
-        $url=$this->more_api_url."lingmall/nutrition/{$nutritionId}?token={$token}";
+        $url=$this->more_api_url."/lingmall/nutrition/{$nutritionId}?token={$token}";
         $return=$this->curl($url,$data,'put');
         $list=json_decode($return,true);
         return $list;

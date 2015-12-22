@@ -9,7 +9,7 @@ class Retouch_model extends MY_Model
     /*获取修图列表*/
      function getMarlboroList($data){
          $data['token']=urldecode($data['token']) ;
-         $url=$this->more_api_url."lingmall/audit/list";
+         $url=$this->more_api_url."/lingmall/audit/list";
          $return=$this->curl($url,$data,'get');
          var_dump($return);
          $list=json_decode($return,true);
@@ -71,7 +71,7 @@ class Retouch_model extends MY_Model
         $arr['memo']=$data['memo'];
         $arr['status']=$data['status'];
         $arr=json_encode($arr);
-        $url=$this->more_api_url."lingmall/audit/$orderId?token=$token";
+        $url=$this->more_api_url."/lingmall/audit/$orderId?token=$token";
         $return=$this->curl($url,$arr,'put');
         return $return;
     }
@@ -79,7 +79,7 @@ class Retouch_model extends MY_Model
     function batchPass($data){
         $token=$data['token'];
         $arr=json_encode($data);
-        $url=$this->more_api_url."lingmall/audit/checks?token=$token";
+        $url=$this->more_api_url."/lingmall/audit/checks?token=$token";
         $return=$this->curl($url,$arr,'put');
         return $return;
     }
