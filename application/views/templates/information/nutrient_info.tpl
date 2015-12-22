@@ -56,7 +56,7 @@
                             <td>{{$list.nutritionUnit}}</td>
                             <td>{{$list.nutritionUnitEn}}</td>
                             <td>{{if $list.status==1}}正常{{else if $list.status==2}}冻结{{/if}}</td>
-                            <td>{{$list.isDefault}}</td>
+                            <td>{{if $list.isDefault}}是{{else}}否{{/if}}</td>
                             <td>{{$list.desc}}</td>
                             <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
                             <td><a href="#" onclick="changeStatus({{$list.nutritionId}},{{$list.status}})">{{if $list.status==1}}冻结{{else if $list.status==2}}解冻{{/if}}</a></td>

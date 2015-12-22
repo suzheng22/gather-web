@@ -5,10 +5,25 @@ class Information_model extends MY_Model{
     }
     /*获取商品基本信息列表*/
     function getBaseInfoList($data){
+
         $data['token']=urldecode($data['token']);
         $url=$this->more_api_url."/lingmall/input/list";
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
+        $i=($data['page']-1)*10;
+        foreach($list['data'] as $key=>$val){
+            $i++;
+            $list['data'][$key]['lId']=$i;
+            $url=$this->more_api_url."/catgrory/catgroryList";
+            $return=$this->curl($url,'','get');
+            $lists=json_decode($return,true);
+            foreach($lists['data'] as $k=>$v){
+                if($val['catId']==$v['id']){
+                    $list['data'][$key]['catName']=$v['name'];
+                }
+            }
+            $data['catId']=$val['catId'];
+        }
         return $list;
     }
 
@@ -23,8 +38,6 @@ class Information_model extends MY_Model{
         $arr['desc']=$data['desc'];
         $arr['filedType']=$data['filedType'];
         $data=json_encode($arr);
-       // echo $data;
-    //    return $data;
         $url=$this->more_api_url."/lingmall/input/add?token=$token";
         $return=$this->curl($url,$data,'post');
         $list=json_decode($return,true);
@@ -47,25 +60,12 @@ class Information_model extends MY_Model{
         $data['token']=urldecode($data['token']);
         $url=$this->more_api_url."/lingmall/nutrition/list";
         $return=$this->curl($url,$data,'get');
-        if(!$return){
-            $return='{
-        "count":20,
-        "data":[{
-         "nutritionId":"213123123",
-         "nutritionName":"213123123",
-         "nutritionUnit":"213123123",
-         "nutritionUnitEn":"213123123",
-         "createTime":"14225638941",
-         "createUserId":"213123123",
-         "status":"2",
-         "updateUserId":"213123123",
-         "updateTime":"213123123",
-         "isDefault":"213123123",
-         "desc":"213123123"
-        }]
-        }';
-        }
         $list=json_decode($return,true);
+        $i=($data['page']-1)*10;
+        foreach($list['data'] as $key=>$val){
+            $i++;
+            $list['data'][$key]['lId']=$i;
+        }
         return $list;
     }
     /*新增营养成分信息*/

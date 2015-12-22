@@ -12,7 +12,6 @@ class Information extends My_Controller{
      * 基本信息管理
      * */
     public function baseInfoManager(){
-
         $data['token']=$this->user_info['token'];
         /*获取商品类型*/
         $type_list=$this->product->getCatgroryList();
@@ -26,11 +25,13 @@ class Information extends My_Controller{
         if(!isset($get['page'])){
             $get['page']=1;
         }
+        var_dump($get['page']);
         $page_url=$this->publicFuc->getUrl( $page_url,$get);
         $get['token']=$this->user_info['token'];
         /*获取基本信息列表*/
         $list=$this->information->getBaseInfoList($get);
         $showpage= parent::page($page_url,10,$list['count']);
+        //开始分页
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display("information/base_info_manager.tpl");

@@ -38,7 +38,7 @@ class MY_Controller extends CI_Controller
 
     function page($url,$pagesize,$nums)
     {
-        $currentPage = $this->input->get('currentPage')?$this->input->get('currentPage'):$this->input->post('post_page');
+        $currentPage = $this->input->get('page')?$this->input->get('page'):$this->input->post('post_page');
         $pages=ceil($nums/$pagesize);
         if($currentPage>$pages){
             $currentPage=$pages;
@@ -63,7 +63,7 @@ class MY_Controller extends CI_Controller
     
         
     
-        $show.= "<a href='$url&currentPage=$pre' class='pageNum'>上一页</a>";
+        $show.= "<a href='$url&page=$pre' class='pageNum'>上一页</a>";
     
         for($i=1;$i<=$pages;$i++)
         {
@@ -72,10 +72,10 @@ class MY_Controller extends CI_Controller
             if($i==$currentPage)
                 $show.= "<a class='pageNum' style='text-decoration:none;color:#CC7700;'>".$i."</a>";
             else
-                $show.= "<a class='pageNum' href='$url&currentPage=$i'>".$i."</a>";
+                $show.= "<a class='pageNum' href='$url&page=$i'>".$i."</a>";
         }
     
-        $show.= "<a href='$url&currentPage=$next' class='pageNum'>下一页</a>
+        $show.= "<a href='$url&page=$next' class='pageNum'>下一页</a>
         <span>共<em>".$pages."</em>页,</span>
         <span>共<em>".$nums."</em>条记录,</span>
         ";

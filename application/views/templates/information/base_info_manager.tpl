@@ -78,12 +78,12 @@
                         <tr>
                             <td>{{$list.lId}}</td>
                             <td>{{$list.catName}}</td>
-                            <td>{{$list.filedType}}</td>
+                            <td>{{if $list.filedType==1}}基本信息{{else}}扩充信息{{/if}}</td>
                             <td>{{$list.fieldName}}</td>
                             <td>{{$list.isNums}}</td>
-                            <td>{{$list.inputType}}</td>
+                            <td>{{if $list.inputType==1}}短文字{{else if $list.inputType==2}}长文字{{else if $list.inputType==3}}下拉{{/if}}</td>
                             <td>{{$list.sort}}</td>
-                            <td>{{$list.status}}</td>
+                            <td>{{if $list.status==1}}正常{{else if $list.status==2}}冻结{{/if}}</td>
                             <td>{{$list.desc}}</td>
                             <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
                             <td><a href="javascript:;" onclick="changeStatus({{$list.field}},{{$list.status}})">{{if $list.status==1}}冻结{{else if $list.status==2}}解冻{{/if}}</a></td>
