@@ -11,6 +11,7 @@ class Retouch_model extends MY_Model
          $data['token']=urldecode($data['token']) ;
          $url=$this->more_api_url."lingmall/audit/list";
          $return=$this->curl($url,$data,'get');
+         var_dump($return);
          $list=json_decode($return,true);
          foreach($list as $k=>$v){
              $data['upUserId']=$v['retouchUserId'];
