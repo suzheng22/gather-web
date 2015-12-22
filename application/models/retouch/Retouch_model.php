@@ -1,8 +1,6 @@
 <?php
 class Retouch_model extends MY_Model
 {
-
-
     public function __construct()
     {
         // Call the CI_Model constructor
@@ -10,18 +8,18 @@ class Retouch_model extends MY_Model
     }
     /*获取修图列表*/
      function getMarlboroList($data){
-         $token=$data['token'];
-         $url=$this->more_api_url."/lingmall/audit/list";
+         $data['token']=urldecode($data['token']) ;
+         $url=$this->more_api_url."lingmall/audit/list";
          $return=$this->curl($url,$data,'get');
          $list=json_decode($return,true);
          foreach($list as $k=>$v){
              $data['upUserId']=$v['retouchUserId'];
-             $url=$this->user_api_url."/user/info";
+             $url=$this->user_api_url."/user/info?token=".$data['token'];
              $return=$this->curl($url,$data);
              $user=json_decode($return,true);
              $list[$k]['userName']=$user['userName'];
              $data['groupId']=$user['groupId'];
-             $url=$this->user_api_url."/user/groupInfo";
+             $url=$this->user_api_url."/user/groupInfo?token=".$data['token'];
              $return=$this->curl($url,$data);
              $group=json_decode($return,true);
              $list[$k]['groupName']=$group['groupName'];
@@ -30,18 +28,14 @@ class Retouch_model extends MY_Model
     }
     /*获取美工的修图审核列表*/
     function getRetouchDetail($data){
+        $data['token']=urldecode($data['token']) ;
         $url=$this->more_api_url."/lingmall/audit/detail";
         $return=$this->curl($url,$data,'get');
-
-        if(!$return){
-            $url="f:/wamp/www/curl/retouch/detail.txt";
-            $return=file_get_contents($url);
-        }
         $detail=json_decode($return,true);
         $count=sizeof($detail);
         foreach($detail as $k=>$v){
             $data['pId']=$v['pId'];
-            $url=$this->user_api_url."/user/getProjectByFiled";
+            $url=$this->user_api_url."/user/getProjectByFiled?token=".$data['token'];
             $return =$this->curl($url,$data);
             $project=json_decode($return,true);
             $detail[$k]['pName']=$project[0]['pName'];
@@ -52,13 +46,10 @@ class Retouch_model extends MY_Model
     }
     /*获取某一个修图详情*/
     function getRetouchPic($data){
+        $data['token']=urldecode($data['token']) ;
         $orderId=$data['orderId'];
         $url=$this->more_api_url."/lingmall/audit/{$orderId}";
         $return=$this->curl($url,$data,'get');
-        if(!$return){
-            $url="f:/wamp/www/curl/retouch/pic.txt";
-            $return=file_get_contents($url);
-        }
         $detail=json_decode($return,true);
         return $detail;
     }

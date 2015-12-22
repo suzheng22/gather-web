@@ -15,7 +15,7 @@
             	<h3>营养成分<a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
                 <div class="rose_top main_rignt_top clearfix">
                 	<form action="{{$root_path}}information/nutrientInfo">
-                    <div class="cc_top_one"><label>成分名称:</label><input type="text" name="elementName" value="{{$elementName}}"/></div>
+                    <div class="cc_top_one"><label>成分名称:</label><input type="text" name="nutritionName" value="{{$nutritionName}}"/></div>
                      <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
@@ -52,14 +52,14 @@
                         {{foreach from=$glist item=list}}
                         <tr>
                             <td>{{$list.lId}}</td>
-                            <td>{{$list.iName}}</td>
-                            <td>{{$list.elementUnit}}</td>
-                            <td>{{$list.elementUnit}}</td>
-                            <td>{{$list.status}}</td>
+                            <td>{{$list.nutritionName}}</td>
+                            <td>{{$list.nutritionUnit}}</td>
+                            <td>{{$list.nutritionUnitEn}}</td>
+                            <td>{{if $list.status==1}}正常{{else if $list.status==2}}冻结{{/if}}</td>
                             <td>{{$list.isDefault}}</td>
                             <td>{{$list.desc}}</td>
-                            <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
-                            <td><a href="#" onclick="changeStatus({{$list.id}},{{$list.status}})">{{if $list.status==1}}冻结{{else if $list.status==2}}解冻{{/if}}</a></td>
+                            <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
+                            <td><a href="#" onclick="changeStatus({{$list.nutritionId}},{{$list.status}})">{{if $list.status==1}}冻结{{else if $list.status==2}}解冻{{/if}}</a></td>
                         </tr>
                         {{/foreach}}
                     </table>
@@ -78,8 +78,9 @@
 	<div class="content">
 		<div class="login_main">
 			<div class="login_form">
-                <div class="clearfix one"><label for="user_name">成分名称:</label><input type="text" id="elementName" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">成分单位:</label><input type="text" id="elementUnit" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">成分名称:</label><input type="text" id="nutritionName" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">成分单位(中):</label><input type="text" id="nutritionUnit" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">成分单位(英):</label><input type="text" id="nutritionUnitEn" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">排序:</label><input type="text" id="sort" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check()">保存</a>
@@ -116,34 +117,46 @@ $(function(){
 });
 function check(){
     var desc=$("#desc").val();
-    var elementName=$("#elementName").val();
-    var elementUnit=$("#elementUnit").val();
+    var nutritionName=$("#nutritionName").val();
+    var nutritionUnit=$("#nutritionUnit").val();
+    var nutritionUnitEn=$("#nutritionUnitEn").val();
     var sort=$("#sort").val();
     //验证
     $.ajax({
         url:'{{$root_path}}information/addNutrient',
-        data:{desc:desc,elementName:elementName,sort:sort,elementUnit:elementUnit},
+        data:{desc:desc,nutritionName:nutritionName,sort:sort,nutritionUnit:nutritionUnit,nutritionUnitEn:nutritionUnitEn},
         dataType:'text',
         type:'post',
         success:function(e){
             alert("添加成功")
+            window.location.reload();
         }
     })
 }
 function changeStatus(id,status){
+    var msg=['','你确定要冻结吗','你确定要解冻吗']
+    if(!confirm(msg[status])){
+        return false;
+    }
+    if(status==1){
+        status=2
+    }else{
+        status=1
+    }
     $.ajax({
         url:'{{$root_path}}information/changeNutrientStatus',
-        data:{id:id,status:status},
-        dataType:'text',
+        data:{nutritionId:id,status:status},
+        dataType:'json',
         type:'post',
         success:function(e){
-            alert("添加成功")
+            alert(e.msg);
+            window.location.reload();
         }
     })
 }
 
 function btn_empty() {
-    $("input[name='elementName']").val("");
+    $("input[name='nutritionName']").val("");
     $(".select3").val("");
     $(".uew-select-text").html('全部');
 }

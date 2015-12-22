@@ -18,10 +18,10 @@
                 	<div class="cc_top_one last_show"><label>商品类型:</label>
                         <div class="choice_count choice_box vocation">
                             <dl class="select">
-                                <select name="catgrory" class="select3">
+                                <select name="catId" class="select3">
                                     <option value="">全部</option>
                                     {{foreach from=$type_list item=list}}
-                                    <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                    <option value="{{$list.id}}" {{if $catId==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
                                     {{/foreach}}
                                 </select>
                             </dl>
@@ -30,15 +30,15 @@
                         <div class="cc_top_one last_show"><label>录入分类:</label>
                             <div class="choice_count choice_box vocation">
                                 <dl class="select">
-                                    <select name="catgrory" class="select3">
+                                    <select name="filedType" class="select3">
                                         <option value="">全部</option>
-                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>基本信息</option>
-                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>扩展信息</option>
+                                        <option value="1" {{if $filedType==1}}selected="selected"{{/if}}>基本信息</option>
+                                        <option value="2" {{if $filedType==2}}selected="selected"{{/if}}>扩展信息</option>
                                     </select>
                                 </dl>
                             </div>
                         </div>
-                    <div class="cc_top_one"><label>字段属性:</label><input type="text" value="{{$field}}" name="field"/></div>
+                    <div class="cc_top_one"><label>字段属性:</label><input type="text" value="{{$fieldName}}" name="fieldName"/></div>
                      <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
@@ -77,16 +77,16 @@
                         {{foreach from= $glist item=list}}
                         <tr>
                             <td>{{$list.lId}}</td>
-                            <td>{{$list.catType}}</td>
-                            <td>{{$list.Classification}}</td>
-                            <td>{{$list.field}}</td>
-                            <td>{{$list.count}}</td>
-                            <td>{{$list_inputType}}</td>
+                            <td>{{$list.catName}}</td>
+                            <td>{{$list.filedType}}</td>
+                            <td>{{$list.fieldName}}</td>
+                            <td>{{$list.isNums}}</td>
+                            <td>{{$list.inputType}}</td>
                             <td>{{$list.sort}}</td>
                             <td>{{$list.status}}</td>
                             <td>{{$list.desc}}</td>
-                            <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
-                            <td><a href="#">{{if $list.status==1}}冻结{{else if $list.status==2}}解冻{{/if}}</a></td>
+                            <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
+                            <td><a href="javascript:;" onclick="changeStatus({{$list.field}},{{$list.status}})">{{if $list.status==1}}冻结{{else if $list.status==2}}解冻{{/if}}</a></td>
                         </tr>
                         {{/foreach}}
                     </table>
@@ -109,10 +109,10 @@
 				<div class="clearfix one"><label for="user_name">商品类型:</label>
                 <div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select name="catgrory" class="select3" id="catgrory">
-                            <option value="">全部</option>
+                            <select id="catId" class="select3" >
+                            <option value="">请选择</option>
                             {{foreach from=$type_list item=list}}
-                            <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                            <option value="{{$list.id}}">{{$list.name}}</option>
                             {{/foreach}}
                             </select>
                         </dl>
@@ -121,7 +121,7 @@
                 <div class="clearfix one"><label for="user_name">录入类型:</label>
                     <div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select class="select1" id="inputType">
+                            <select class="select1" id="fieldType">
                                 <option value="">请选择</option>
                                 <option value="1">基本成分</option>
                                 <option value="2">扩充成分</option>
@@ -130,12 +130,12 @@
                         </dl>
                     </div>
                 </div>
-                <div class="clearfix one"><label for="user_name">字段属性:</label><input type="text" id="" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">字段属性:</label><input type="text" id="fieldName" class="zhmm "></div>
                 <div class="clearfix one"><label for="user_name">数量:</label>
                  	<div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select class="select1" id="count">
-                                <option value="">全部</option>
+                            <select class="select1" id="isNums">
+                                <option value="">请选择</option>
                                 <option value="1">1个</option>
                                 <option value="2">多个</option>
                             </select>
@@ -146,16 +146,17 @@
                 <div class="choice_count choice_box vocation">
                         <dl class="select">
                					 <select class="select1" id="inputType">
-                                   		<option value="">全部</option>
+                                   		<option value="">请选择</option>
                                         <option value="1">短文字</option>
                                         <option value="2">长文字</option>
+                                        <option value="3">下拉</option>
                                    </select>
                         </dl>
                 </div>
                 </div>
                 <div class="clearfix one"><label for="user_name">排序:</label><input type="text" id="sort" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">描述:</label><textarea id="desc"></textarea></div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn">保存</a>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check()">保存</a>
             </div>
 	   </div>
     </div>
@@ -171,8 +172,7 @@ $(function(){
 	 $(".select1").uedSelect({
 		width :250			  
 	});
-	
-	
+
 	//用户列表
      $("#newuser_pop").pop({
         oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
@@ -191,28 +191,40 @@ function check(){
     var desc=$("#desc").val();
     var sort=$("#sort").val();
     var inputType=$("#inputType").val();
-    var count=$("#count").val();
-    var field=$("#field").val();
-    var catgrory=$("#catgrory").val();
+    var isNums=$("#isNums").val();
+    var fieldName=$("#fieldName").val();
+    var catId=$("#catId").val();
+    var filedType=$("#fieldType").val();
     //验证
     $.ajax({
-        url:'{{$root_path}}information/addNutrient',
-        data:{desc:desc,count:count,sort:sort,field:field,catgrory:catgrory,inputType:inputType},
-        dataType:'text',
+        url:'{{$root_path}}information/addBaseInfo',
+        data:{desc:desc,isNums:isNums,sort:sort,filedType:filedType,catId:catId,inputType:inputType,fieldName:fieldName},
+        dataType:'json',
         type:'post',
         success:function(e){
-            alert("添加成功")
+            alert(e['msg']);
+            window.location.reload();
         }
     })
 }
 function changeStatus(id,status){
+    var msg=['','你确定要冻结吗','你确定要解冻吗']
+    if(!confirm(msg[status])){
+        return false;
+    }
+    if(status==1){
+        status=2
+    }else{
+        status=1
+    }
     $.ajax({
         url:'{{$root_path}}information/changeBaseStatus',
-        data:{id:id,status:status},
-        dataType:'text',
+        data:{field:id,status:status},
+        dataType:'json',
         type:'post',
         success:function(e){
-            alert("添加成功")
+            alert(e.msg);
+            window.location.reload();
         }
     })
 }

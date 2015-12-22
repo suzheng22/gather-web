@@ -12,6 +12,7 @@ class Information extends My_Controller{
      * 基本信息管理
      * */
     public function baseInfoManager(){
+
         $data['token']=$this->user_info['token'];
         /*获取商品类型*/
         $type_list=$this->product->getCatgroryList();
@@ -20,15 +21,16 @@ class Information extends My_Controller{
         /*处理表单数据*/
         $get=$this->input->get();
         if(!isset($get['status'])){
-            $arr['status']=null;
+            $get['status']=null;
         }
         if(!isset($get['page'])){
             $get['page']=1;
         }
         $page_url=$this->publicFuc->getUrl( $page_url,$get);
+        $get['token']=$this->user_info['token'];
         /*获取基本信息列表*/
-        $list=$this->information->getBaseInfoList($arr);
-        $showpage= parent::page($page_url,10,$list['total']);
+        $list=$this->information->getBaseInfoList($get);
+        $showpage= parent::page($page_url,10,$list['count']);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display("information/base_info_manager.tpl");
@@ -42,15 +44,16 @@ class Information extends My_Controller{
         /*处理表单数据*/
         $get=$this->input->get();
         if(!isset($get['status'])){
-            $arr['status']=null;
+            $get['status']=null;
         }
         if(!isset($get['page'])){
             $get['page']=1;
         }
         $page_url=$this->publicFuc->getUrl( $page_url,$get);
+        $get['token']=$this->user_info['token'];
         /*获取扩充成分列表*/
         $list=$this->information->getNutrientList($get);
-        $showpage= parent::page($page_url,10,$list['total']);
+        $showpage= parent::page($page_url,10,$list['count']);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display("information/nutrient_info.tpl");
@@ -65,7 +68,7 @@ class Information extends My_Controller{
         echo $data;
     }
     /*新增营养成分信息*/
-    public function addNutrientInfo(){
+    public function addNutrient(){
         $data=$this->input->post();
         $data['token']=$this->user_info['token'];
         /**/
