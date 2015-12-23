@@ -7,6 +7,8 @@ class Goods extends My_Controller {
     {
         parent::__construct();
     }
-
+    public function goodsClassify(){
+        $this->ci_smarty->display("goods/goodsClassify.tpl");
+    }
 
 }

@@ -16,7 +16,7 @@
                  <dt><i class="icon iconfont">&#xf00a9;</i>商品信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                  <dd><a href="up_good_list.html" title="导入商品清单">导入商品清单</a></dd>
                  <dd><a href="good_list_manager.html" title="商品管理">商品管理</a></dd>
-                 <dd><a href="good_classify.html" title="商品分类">商品分类</a></dd>
+                 <dd><a href="{{$root_path}}goods/goodsClassify" title="商品分类">商品分类</a></dd>
             </dl>
             <dl class="menu_shoot_manager system_log">
                  <dt><i class="icon iconfont">&#xf0178;</i>拍摄管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
