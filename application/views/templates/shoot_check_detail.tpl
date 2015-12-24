@@ -50,9 +50,9 @@
                                     <dl class="select">
                                        <select name="category1" id="category1" class="select3">
                                             <option value="">全部</option>
-                                          {{foreach from=$type_list item=list}}
-                                                    <option value="{{$list.id}}" {{if $category1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-                                              {{/foreach}}
+                                           {{foreach from=$type_list item=list}}
+                                                <option value="{{$list.id}}" {{if $category1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                           {{/foreach}}
                                         </select>
                                     </dl>
                                 </div>
@@ -118,7 +118,7 @@
                         <td>{{if $list.status==1}}未审核{{else if $list.status==2}}通过{{else}}驳回{{/if}}</td>
                           <input type="hidden" value="{{$list.status}}">
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetailPic/?orderId={{$list.orderId}}&gtin={{$list.gtin}}" target="_blank">审核详细</a>
+                        	<a href="{{$root_path}}marlboro/shootDetailPic/?orderId={{$list.orderId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">审核详细</a>
                         </td>
                       </tr>
 					  {{/foreach}}
