@@ -10,7 +10,7 @@ class Marlboro extends My_Controller {
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
     }
-    function shootDetailPic($orderId,$gtin){
+    function shootDetailPic($orderId,$gtin,$batchNo){
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
         $arr=$this->input->get();
@@ -18,7 +18,6 @@ class Marlboro extends My_Controller {
         $arr['token']=$this->user_info['token'];
         //获取图片
         $list=$this->marlboro_model->getAllImage($arr);
-
         $product_info=$this->marlboro_model->getMarlboroInfo($arr);
         $product_info['userId']=$this->user_info['userId'];
         $product_info['token']=$this->user_info['token'];

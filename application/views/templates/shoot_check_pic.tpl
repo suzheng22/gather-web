@@ -20,7 +20,7 @@
         <!-- 拍摄类型 -->
             <li class="black"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
         <!-- 项目 -->
-            <li class="black"><em>项目:</em><span>{{$p_info.pId}}</span></li>
+            <li class="black"><em>项目:</em><span>{{$p_info.pName}}</span></li>
         <!-- 包装 -->
             <li class="black"><em>包装:</em><span>包装{{$p_info.packet}}</span></li>
         <!-- 批次 -->

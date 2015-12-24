@@ -64,10 +64,18 @@ class Marlboro_model extends MY_Model {
     //根据orderId获取详细信息
     function getMarlboroInfo($data){
         $token=$data['token'];
-        $token=$data['token'];
         $url=$this->more_api_url."/shoot/getMarboro?token=".$token;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
+        $data['pId']= $list['pId'];
+        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
+        $return =$this->curl($url,$data);
+        $datas=json_decode($return,true);
+        foreach($datas as $key=>$val){
+            if($list['pId']==$val['pId']){
+                $list['pName']=$val['pName'];
+            }
+        }
         return $list;
     }
     //获取所有图片
@@ -75,7 +83,6 @@ class Marlboro_model extends MY_Model {
         $xBatch=$data['batchNo'];
         $xPack=$data['packet'];
         $url="http://139.196.36.81:8600/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xBarcode={$data['gtin']}&xType=1&xBatch=$xBatch&xPack=$xPack";
-       echo $url;
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;
