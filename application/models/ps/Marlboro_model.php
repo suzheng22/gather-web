@@ -76,6 +76,13 @@ class Marlboro_model extends MY_Model {
                 $list['pName']=$val['pName'];
             }
         }
+        //获取商品类型
+       // $token=urldecode($token);
+        $catId= $list['catgrory1'];
+        $url=$this->more_api_url."/lingmall/catgrory/{$catId}?token=".$token;
+        $return =$this->curl($url,'','get');
+        $datas=json_decode($return,true);
+        $list['name']=$datas['name'];
         return $list;
     }
     //获取所有图片

@@ -112,6 +112,7 @@ class Marlboro extends My_Controller {
         $data['orderId']=$this->input->post('orderId');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
+        $data['memo']=$this->input->post('memo');
         //审核通过和驳回
         if($data['type']==1){
             $str=$this->marlboro_model->marlboro($data);

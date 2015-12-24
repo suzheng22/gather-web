@@ -16,7 +16,7 @@
 	<ul class="clearfix" id="nav_info">
             <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
             <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
-            <li class="black"><em>商品类型:</em><span>{{$p_info.catgrory1}}</span></li>
+            <li class="black"><em>商品类型:</em><span>{{$p_info.name}}</span></li>
         <!-- 拍摄类型 -->
             <li class="black"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
         <!-- 项目 -->
@@ -164,8 +164,8 @@
         <div class="login_main">
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.proName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.typeName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.gName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(3)">确认</a>
             </div>
