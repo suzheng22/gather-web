@@ -96,7 +96,6 @@ class Marlboro extends My_Controller {
         }
         $arr['photoId']=$userId;
         $list=$this->marlboro_model->getMarlboroDetail($arr);
-        var_dump($list);
         //项目
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('auto',$auto);

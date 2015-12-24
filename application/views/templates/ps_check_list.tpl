@@ -67,10 +67,10 @@
                           <td>{{$list.groupName}}</td>
                           <td>{{$list.totalCount}}</td>
                           <td>{{$list.noAuditCount}}</td>
-                          <td>{{$list.auditCount}}</td>
-                          <td>{{((($list.auditCount)/$list.totalCount)|number_format:4)*100}}%</td>
+                          <td>{{$list.allAuditCount}}</td>
+                          <td>{{((($list.auditCount)/$list.chouchatotalCount)|number_format:4)*100}}%</td>
                           <td>
-                        	<a href="{{$root_path}}retouch/psCheckDetail/{{$list.retouchUserId}}/{{$list.noAuditCount}}/{{$list.totalCount}}/{{$list.auditCount}}">详情</a>
+                        	<a href="{{$root_path}}retouch/psCheckDetail/{{$list.retouchUserId}}/{{$list.noAuditCount}}/{{$list.chouchatotalCount}}/{{$list.auditCount}}">详情</a>
                           </td>
                       </tr>
                        {{/foreach}}

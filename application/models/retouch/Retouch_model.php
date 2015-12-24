@@ -54,7 +54,7 @@ class Retouch_model extends MY_Model
         $return=$this->curl($url,$data,'get');
         $detail=json_decode($return,true);
         $arr['gtin']=$detail['gtin'];
-        $url=$this->more_api_url.'goods/getGoodsInfo';
+        $url=$this->more_api_url.'/goods/getGoodsInfo';
         $return=$this->curl($url,$arr,'post');
         $return=json_decode($return,true);
         $detail['gName']=$return['data']['gName'];
