@@ -11,8 +11,8 @@ class Retouch_model extends MY_Model
          $data['token']=urldecode($data['token']) ;
          $url=$this->more_api_url."/lingmall/audit/list";
          $return=$this->curl($url,$data,'get');
-         var_dump($return);
          $list=json_decode($return,true);
+         $data['token']=urlencode($data['token']);
          foreach($list as $k=>$v){
              $data['upUserId']=$v['retouchUserId'];
              $url=$this->user_api_url."/user/info?token=".$data['token'];
@@ -34,6 +34,7 @@ class Retouch_model extends MY_Model
         $return=$this->curl($url,$data,'get');
         $detail=json_decode($return,true);
         $count=sizeof($detail);
+        $data['token']=urlencode($data['token']) ;
         foreach($detail as $k=>$v){
             $data['pId']=$v['pId'];
             $url=$this->user_api_url."/user/getProjectByFiled?token=".$data['token'];
@@ -52,12 +53,47 @@ class Retouch_model extends MY_Model
         $url=$this->more_api_url."/lingmall/audit/{$orderId}";
         $return=$this->curl($url,$data,'get');
         $detail=json_decode($return,true);
+        $arr['gtin']=$detail['gtin'];
+        $url=$this->more_api_url.'goods/getGoodsInfo';
+        $return=$this->curl($url,$arr,'post');
+        $return=json_decode($return,true);
+        $detail['gName']=$return['data']['gName'];
+        $arr['pId']= $detail['pId'];
+        $token=(urlencode($data['token']));
+        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
+        $return =$this->curl($url,$arr,'post');
+        $datas=json_decode($return,true);
+        foreach($datas as $key=>$val){
+            if($detail['pId']==$val['pId']){
+                $detail['pName']=$val['pName'];
+            }
+        }
+        //获取商品类型
+        // $token=urldecode($token);
+        $catId= $detail['catgrory1'];
+        if($catId){
+            $url=$this->more_api_url."/lingmall/catgrory/{$catId}?token=".$token;
+            $return =$this->curl($url,'','get');
+            $datas=json_decode($return,true);
+            $detail['name']=$datas['name'];
+        }
+
         return $detail;
     }
-    /*获取图片*/
+    /*获取修图*/
     function getAllImage($data){
-        $url="http://139.196.36.81:8600/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xBarcode={$data['gtin']}&xType=1";
-        echo $url;
+//        $data['gtin']='6946960900582';
+//        $data['batchNo']=3215;
+//        $data['packet']=1;
+        $url="http://139.196.36.81:8600/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xType=2&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}";
+
+        $return=$this->curl($url,'','get');
+        $list=json_decode($return,true);
+        return $list;
+    }
+    //原图，png
+    function getAllImages($data){
+        $url="http://139.196.36.81:8600/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xType={$data['id']}&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;

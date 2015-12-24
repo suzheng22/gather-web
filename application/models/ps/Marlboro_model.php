@@ -250,6 +250,11 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url."/shoot/getNewPicInfo?token=".$token;
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
+        $arr['gtin']=$datas['gtin'];
+        $url=$this->more_api_url.'goods/getGoodsInfo';
+        $returns=$this->curl($url,$arr,'post');
+        $returns=json_decode($returns,true);
+
         $data['gtin']=$datas['gtin'];
         //根据项目获取其他信息
         $data1=$this->getInfoByGtin($data);
@@ -257,6 +262,7 @@ class Marlboro_model extends MY_Model {
         $data1['packet1']=$datas['packet'];
         $data1['pId1']=$datas['pId'];
         $data1['memo']=$datas['memo'];
+        $data1['gName']=$returns['data']['gName'];
         return $data1;
     }
     /*获取拍摄反馈的数据*/

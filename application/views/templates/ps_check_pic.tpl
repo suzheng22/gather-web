@@ -63,11 +63,9 @@
                                 <div class="v_content">
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
-                                            {{foreach from=$plist.1 item =list name=name}}
-
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+                                            {{foreach from=$plists.1 item =list name=name}}
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
                                             {{/foreach}}
-
                                         </ul>
                                     </div>
                                 </div>
@@ -84,8 +82,9 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{$png}}
-                                      
+                                        {{foreach from=$plists.1 item =list name=name}}
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key2}}"/></li>
+                                        {{/foreach}}
                                      </ul>
                                 </div>
                             </div>
@@ -103,7 +102,7 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.2 item =list name=name}}
+                                        {{foreach from=$plists.2 item =list name=name}}
                                         <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
                                         {{/foreach}}
                                      </ul>
@@ -123,7 +122,7 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.3 item =list name=name}}
+                                        {{foreach from=$plists.3 item =list name=name}}
                                         <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
                                         {{/foreach}}
                                      </ul>
@@ -144,7 +143,7 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.4 item =list name=name}}
+                                        {{foreach from=$plists.4 item =list name=name}}
                                         <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$this->pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
                                         {{/foreach}}
                                      </ul>
@@ -165,7 +164,7 @@
                             <div class="v_content">
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
-                                        {{foreach from=$plist.5 item =list name=name}}
+                                        {{foreach from=$plists.5 item =list name=name}}
                                         <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}} " /></li>
                                         {{/foreach}}
                                      </ul>
@@ -340,9 +339,9 @@
 		});
 
 
-		var iv2 = $(".viewer").iviewer(
+		var iv2 = $(" #ps_right .viewer").iviewer(
 		{
-            src: "{{$pic_path}}{{$picList.0.key}}"
+            src: "{{$pic_path}}{{$plistsis.0.key}}"
 			//?imageView/1/w/500/h/500
 		});
 		//驳回

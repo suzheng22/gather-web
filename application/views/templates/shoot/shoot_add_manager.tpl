@@ -15,7 +15,7 @@
         	<div class="rose_box cc_box">
             	<h3>拍摄新增管理<a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
                 <div class="rose_top main_rignt_top clearfix">
-                    <form action="{{$root_path}}marlboro/shootAddManager" id="myform">
+                    <form action="{{$root_path}}shoot/shootAddManager" id="myform">
                     <div class="cc_top_one last_show"><label>项目名称:</label>
                         <div class="choice_count choice_box vocation">
                             <dl class="select">

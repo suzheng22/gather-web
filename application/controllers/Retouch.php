@@ -19,7 +19,6 @@ class Retouch extends My_Controller
     */
     function psCheckList(){
         $data['token']=$this->user_info['token'];
-       // var_dump($data);
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $group_list= $this->user->getGroupListByRole();
@@ -43,14 +42,13 @@ class Retouch extends My_Controller
         $data['token']=$this->user_info['token'];
         $data['userId']=$this->user_info['userId'];
         $list=$this->retouch->getMarlboroList($data);
-      //  var_dump($list);
         $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->display('ps_check_list.tpl');
     }
     /*
      * 修图审核详情
      * */
-    function psCheckDetail($userId,$no,$total){
+    function psCheckDetail($userId,$no,$total,$auto){
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         $data['upUserId']=$userId;
@@ -80,6 +78,7 @@ class Retouch extends My_Controller
         }
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('no',$no);
+        $this->ci_smarty->assign('auto',$auto);
         $this->ci_smarty->assign('total',$total);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
@@ -92,13 +91,31 @@ class Retouch extends My_Controller
         $arr=$this->input->get();
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
+        $arr['id']=1;
+        //原图
+        $list2=$this->retouch->getAllImages($arr);
+        //png图
+        $arr['id']=3;
+        $list3=$this->retouch->getAllImages($arr);
         //获取图片
-        $list=$this->retouch->getAllImage($arr);
         $product_info=$this->retouch->getRetouchPic($arr);
+        $arr['batchNo']=$product_info['retouchId'];
+        //修图
+        $list=$this->retouch->getAllImage($arr);
+        foreach($list2 as $key=>$val){
+            foreach($val as $k=>$v){
+                if($v['xTag']==$list[$key][$k]['xTag']){
+                    $list2[$key][$k]['key1']=$list[$key][$k]['key'];
+                }
+            }
+        }
+
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
         $this->ci_smarty->assign('p_info',$product_info);
+        $this->ci_smarty->assign('plists',$list2);
+        $this->ci_smarty->assign('plistsis',$list2[1]);
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('picList',$list[1]);
         $this->ci_smarty->assign('pic_path',"http://7xny7g.com2.z0.glb.qiniucdn.com/");

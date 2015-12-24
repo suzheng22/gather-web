@@ -75,11 +75,11 @@
                         <td>{{$list.groupName}}</td>
                         <td>{{$list.totalCount}}</td>
                         <td>{{$list.noMarlboroCount}}</td>
-                        <td>{{$list.totalCount-$list.noMarlboroCount}}</td>
-                        <td>{{((($list.totalCount-$list.noMarlboroCount)/$list.totalCount)|number_format:4)*100}}%</td>
+                        <td>{{$list.MarlboroCount}}</td>
+                        <td>{{((($list.MarlboroCount)/$list.totalCount)|number_format:4)*100}}%</td>
 
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}/{{$list.totalCount}}/{{$list.noMarlboroCount}}">详情</a>
+                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}/{{$list.totalCount}}/{{$list.noMarlboroCount}}/{{$list.MarlboroCount}}">详情</a>
                         </td>
                       </tr>
                        {{/foreach}}

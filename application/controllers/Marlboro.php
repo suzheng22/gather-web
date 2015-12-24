@@ -63,7 +63,7 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->display('shoot_check.tpl');
     }
     //拍摄详情
-    function shootDetail($userId,$total,$no){
+    function shootDetail($userId,$total,$no,$auto){
         $this->load->model('user/user_model','user');
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
@@ -96,9 +96,10 @@ class Marlboro extends My_Controller {
         }
         $arr['photoId']=$userId;
         $list=$this->marlboro_model->getMarlboroDetail($arr);
-       // var_dump($list);
+        var_dump($list);
         //项目
         $showpage= parent::page($page_url,10,$list['total']);
+        $this->ci_smarty->assign('auto',$auto);
         $this->ci_smarty->assign('no',$no);
         $this->ci_smarty->assign('total',$total);
         $this->ci_smarty->assign('glist',$list['data']);

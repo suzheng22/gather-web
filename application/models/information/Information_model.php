@@ -14,10 +14,11 @@ class Information_model extends MY_Model{
         foreach($list['data'] as $key=>$val){
             $i++;
             $list['data'][$key]['lId']=$i;
-            $url=$this->more_api_url."/catgrory/catgroryList";
-            $return=$this->curl($url,'','get');
+            $data['no']=1;
+            $url=$this->more_api_url."/lingmall/catgrory/list";
+            $return=$this->curl($url,$data,'get');
             $lists=json_decode($return,true);
-            foreach($lists['data'] as $k=>$v){
+            foreach($lists as $k=>$v){
                 if($val['catId']==$v['id']){
                     $list['data'][$key]['catName']=$v['name'];
                 }
