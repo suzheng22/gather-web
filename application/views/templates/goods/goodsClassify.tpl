@@ -14,60 +14,65 @@
             <div class="rose_box cc_box">
                 <h3>商品分类</h3>
                 <div class="rose_top main_rignt_top clearfix">
-                    <div class="cc_top_one"><label>商品条形码:</label><input type="text" naae="gtin"/></div>
-                    <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName"/></div>
+                    <form action="{{$root_path}}goods/goodsClassify">
+                    <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}"/></div>
+                    <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}"/></div>
                     <div class="cc_top_one last_show"><label>商品类型:</label>
-                        <div class="choice_count choice_box vocation">
+                        <div class="choice_count choice_box">
                             <dl class="select">
-                                <select class="select3" name="catId">
+                                <select name="category1" id="category" class="" style="opacity:1">
                                     <option value="">全部</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
+                                    {{foreach from=$type_list item=list}}
+                                    <option value="{{$list.id}}" {{if $category1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                    {{/foreach}}
                                 </select>
                             </dl>
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="cc_top_one last_show"><label>一级分类:</label>
-                        <div class="choice_count choice_box vocation">
+                        <div class="choice_count choice_box">
                             <dl class="select">
-                                <select class="select3" name="catgrory1">
+                                <select name="catgrory1" id="catgrory1" class="" onchange="change(1,1)" style="opacity:1">
                                     <option value="">全部</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
+                                    {{foreach from=$type_list item=list}}
+                                    <option value="{{$list.id}}" {{if $catgrory1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                    {{/foreach}}
                                 </select>
                             </dl>
                         </div>
                     </div>
                     <div class="cc_top_one last_show"><label>二级分类:</label>
-                        <div class="choice_count choice_box vocation">
+                        <div class="choice_count choice_box">
                             <dl class="select">
-                                <select class="select3" name="catgrory2">
+                                <select name="catgrory2" id="catgrory2" class="" onchange="change(2,1)" style="opacity:1">
                                     <option value="">全部</option>
-                                    <option value="">1</option>
-                                    <option value="">2</option>
+                                    {{foreach from=$type_list2 item=list}}
+                                    <option value="{{$list.id}}" {{if $catgrory2==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                    {{/foreach}}
                                 </select>
                             </dl>
                         </div>
                     </div>
                     <div class="cc_top_one last_show"><label>三级分类:</label>
-                        <div class="choice_count choice_box vocation">
+                        <div class="choice_count choice_box">
                             <dl class="select">
-                                <select class="select3" name="catgrory3">
+                                <select name="catgrory3" id="catgrory3" class="" style="opacity:1">
                                     <option value="">全部</option>
-                                    <option value="">2</option>
-                                    <option value="">1</option>
-
+                                    {{foreach from=$type_list3 item=list}}
+                                    <option value="{{$list.id}}" {{if $catgrory3==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                    {{/foreach}}
                                 </select>
                             </dl>
                         </div>
                     </div>
 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                        <a href="javascript:;" class="query" id="new_user"><i class="icon iconfont">&#xf00ab;</i>批处理结果</a>
-                        <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
-                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <a href="javascript:;" class="query" id="new_user" onclick="batch_pass()"><i class="icon iconfont">&#xf00ab;</i>批处理结果</a>
+                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
+                        <a href="javascript:;"  onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
+                    </form>
                     <div class="clearfix"></div>
                     <div class="tab_box">
                         <table>
@@ -81,20 +86,21 @@
                                 <th>商品三级分类</th>
                                 <th>操作</th>
                             </tr>
+                           {{foreach from=$glist item=list}}
                             <tr>
-                                <td>1</td>
-                                <td>asda</td>
-                                <td>dsad</td>
-                                <td>dasdd</td>
-                                <td>dadas</td>
-                                <td>审核通过</td>
-                                <td>正常</td>
+                                <td>{{$list.lId}}</td>
+                                <td>{{$list.gtin}}</td>
+                                <td>{{$list.gName}}</td>
+                                <td>{{$list.goodsCatgrory}}</td>
+                                <td>{{$list.catgrorys1}}</td>
+                                <td>{{$list.catgrorys2}}</td>
+                                <td>{{$list.catgrorys3}}</td>
                                 <td>
                                     <a href="javascript:;" class="pic_img">图</a>
                                     <a href="javascript:;" class="updata">修改</a>
                                 </td>
                             </tr>
-
+                            {{/foreach}}
                         </table>
                     </div>
                     <div class="page_nav" id="page_nav">
@@ -114,27 +120,22 @@
             <div class="login_form">
                 <div class="clearfix one ">
                     <label for="user_name">一级分类:</label>
-                    <div class="choice_count choice_box vocation">
+                    <div class="choice_count choice_box">
                         <dl class="select">
-                            <select class="select1">
+                            <select  class="catgrory1" style="opacity:1" onchange="change(1,2)">
                                 <option value="">全部</option>
-                                <option value="">2</option>
-                                <option value="">1</option>
-
+                                {{foreach from=$type_list item=list}}
+                                <option value="{{$list.id}}" {{if $category1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                {{/foreach}}
                             </select>
                         </dl>
                     </div>
-
                 </div>
                 <div class="clearfix one">
                     <label for="user_name">二级分类:</label>
                     <div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select class="select1">
-                                <option value="">全部</option>
-                                <option value="">2</option>
-                                <option value="">1</option>
-
+                            <select  class="catgrory2" style="opacity:1" onchange="change(2,2)">
                             </select>
                         </dl>
                     </div>
@@ -144,11 +145,7 @@
                     <label for="user_name">三级分类:</label>
                     <div class="choice_count choice_box vocation">
                         <dl class="select">
-                            <select class="select1">
-                                <option value="">全部</option>
-                                <option value="">2</option>
-                                <option value="">1</option>
-
+                            <select   class="catgrory3" style="opacity:1">
                             </select>
                         </dl>
                     </div>
@@ -185,13 +182,13 @@
                 <div class="clearfix one"><label for="user_name">商品类型:</label><input type="text" id="" class="zhmm"></div>
                 <div class="clearfix one">
                     <label for="user_name">一级分类:</label>
-                    <div class="choice_count choice_box vocation">
+                    <div class="choice_count choice_box">
                         <dl class="select">
-                            <select class="select1">
+                            <select class="select catgrorys1" onchange="change(1,3)" style="opacity:1">
                                 <option value="">全部</option>
-                                <option value="">2</option>
-                                <option value="">1</option>
-
+                                {{foreach from=$type_list item=list}}
+                                <option value="{{$list.id}}" {{if $category1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                {{/foreach}}
                             </select>
                         </dl>
                     </div>
@@ -199,13 +196,10 @@
                 </div>
                 <div class="clearfix one">
                     <label for="user_name">二级分类:</label>
-                    <div class="choice_count choice_box vocation">
+                    <div class="choice_count choice_box">
                         <dl class="select">
-                            <select class="select1">
+                            <select class="select catgrorys2" onchange="change(2,3)" style="opacity:1">
                                 <option value="">全部</option>
-                                <option value="">2</option>
-                                <option value="">1</option>
-
                             </select>
                         </dl>
                     </div>
@@ -213,18 +207,14 @@
                 </div>
                 <div class="clearfix one">
                     <label for="user_name">三级分类:</label>
-                    <div class="choice_count choice_box vocation">
+                    <div class="choice_count choice_box">
                         <dl class="select">
-                            <select class="select1">
+                            <select class="select catgrorys3" style="opacity:1">
                                 <option value="">全部</option>
-                                <option value="">2</option>
-                                <option value="">1</option>
-
                             </select>
                         </dl>
                     </div>
                 </div>
-
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
             </div>
         </div>
@@ -282,6 +272,37 @@
             }
         });
     });
+    function change(e,f){
+        var catgrory;
+        if(f==1)
+            catgrory="#catgrory";
+        else if(f==2)
+           catgrory=".catgrory";
+        else if(f==3)
+            catgrory=".catgrorys";
+        var cat=$(catgrory+e).val();
+        if(e==1){
+            $(catgrory+"2").html("<option value=''>全部</option>");
+            $(catgrory+"3").html("<option value=''>全部</option>");
+        }if(e==2){
+            $(catgrory+"3").html("<option value=''>全部</option>");
+        }
+        $.ajax({
+            url:'{{$root_path}}goods/getNext',
+            type:'post',
+            dataType:'json',
+            data:{catId:cat},
+            success:function(a){
+                var c=e+1;
+                var option="<option value=''>全部</option>";
+                for(var i in a){
+                    option+="<option value=\'"+a[i].id+"\'>"+a[i].name+"</option>";
+                }
+               $(catgrory+c).html(option);
+            }
+        })
+    }
+
 </script>
 
 </body>

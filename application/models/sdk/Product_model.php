@@ -28,9 +28,13 @@ class Product_model extends MY_Model {
         return $list;
     }
     //获取商品分类
-    function getCatgroryList(){
+    function getCatgroryList($no){
         $data['token']=urldecode($this->user_info['token']);
-        $data['no']=1;
+        if(!$no){
+            $data['no']=1;
+        }else{
+            $data['no']=$no;
+        }
         $url=$this->more_api_url."/lingmall/catgrory/list";
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
