@@ -17,17 +17,8 @@
                     <form action="{{$root_path}}goods/goodsClassify">
                     <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}"/></div>
                     <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}"/></div>
-                    <div class="cc_top_one last_show"><label>商品类型:</label>
-                        <div class="choice_count choice_box">
-                            <dl class="select">
-                                <select name="category1" id="category" class="" style="opacity:1">
-                                    <option value="">全部</option>
-                                    {{foreach from=$type_list item=list}}
-                                    <option value="{{$list.id}}" {{if $category1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
-                                    {{/foreach}}
-                                </select>
-                            </dl>
-                        </div>
+                    <div class="cc_top_one"><label>商品类型:</label>
+                        <input type="text" name="goodsCatgrory" value="{{$goodsCatgrory}}"/>
                     </div>
                     <div class="clearfix"></div>
                     <div class="cc_top_one last_show"><label>一级分类:</label>
@@ -68,7 +59,7 @@
                     </div>
 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                        <a href="javascript:;" class="query" id="new_user" onclick="batch_pass()"><i class="icon iconfont">&#xf00ab;</i>批处理结果</a>
+                        <a href="javascript:;" class="query" id="new_user" ><i class="icon iconfont">&#xf00ab;</i>批处理结果</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
                         <a href="javascript:;"  onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
@@ -97,7 +88,7 @@
                                 <td>{{$list.catgrorys3}}</td>
                                 <td>
                                     <a href="javascript:;" class="pic_img">图</a>
-                                    <a href="javascript:;" class="updata">修改</a>
+                                    <a href="javascript:;" class="updata" id="{{$list.id}}">修改</a>
                                 </td>
                             </tr>
                             {{/foreach}}
@@ -151,7 +142,7 @@
                     </div>
                 </div>
 
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="batch_pass()">确认</a>
             </div>
         </div>
     </div>
@@ -177,9 +168,9 @@
     <div class="content">
         <div class="login_main">
             <div class="login_form">
-                <div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><input type="text" id="" class="zhmm"></div>
+                <div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="gtin1" class="zhmm" readonly="readonly"></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="gName1" class="zhmm" readonly="readonly"></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><input type="text" id="goodsCatgrory1" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one">
                     <label for="user_name">一级分类:</label>
                     <div class="choice_count choice_box">
@@ -199,7 +190,7 @@
                     <div class="choice_count choice_box">
                         <dl class="select">
                             <select class="select catgrorys2" onchange="change(2,3)" style="opacity:1">
-                                <option value="">全部</option>
+                                <option value="">请选择</option>
                             </select>
                         </dl>
                     </div>
@@ -210,12 +201,12 @@
                     <div class="choice_count choice_box">
                         <dl class="select">
                             <select class="select catgrorys3" style="opacity:1">
-                                <option value="">全部</option>
+                                <option value="">请选择</option>
                             </select>
                         </dl>
                     </div>
                 </div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn">确认</a>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="updateGoodsInfo()">确认</a>
             </div>
         </div>
     </div>
@@ -224,7 +215,6 @@
 
 <script type="text/javascript">
     $(function(){
-
         //select 表单美化
         $(".select3").uedSelect({
             width : 112
@@ -254,8 +244,26 @@
             iSrc:"",                    //iframe地址
             bShade:true,                //是否有遮罩
             bShadeClose:false,          //是否点遮罩关闭
-            fnAdditional:function(){
-
+            fnAdditional:function(e){
+                  var id= e.id;
+                $.ajax({
+                    url:'{{$root_path}}goods/getCatgroryInfo',
+                    data:{id:id},
+                    type:'post',
+                    dataType:'json',
+                    success:function(f){
+                        alert(id);
+                        localStorage.setItem('id',id);
+                        $("#gtin1").val(f.gtin);
+                        $('#gName1').val(f.gName);
+                        $("#goodsCatgrory1").val(f.goodsCatgrory);
+                        $(".catgrorys1").val(f.catgrory1);
+                        //根据一级分类获取下级分类
+                        change(1,3,f.catgrory1,f.catgrory2);
+                        //根据二级分类获取下级分类
+                        change(2,3,f.catgrory2,f.catgrory3);
+                    }
+                })
             }
         });
 
@@ -272,7 +280,13 @@
             }
         });
     });
-    function change(e,f){
+    //获取下级分类
+
+/*
+* cat为父级ID
+* next为下级ID
+* */
+    function change(e,f,cat,next){
         var catgrory;
         if(f==1)
             catgrory="#catgrory";
@@ -280,12 +294,24 @@
            catgrory=".catgrory";
         else if(f==3)
             catgrory=".catgrorys";
-        var cat=$(catgrory+e).val();
+        if(cat == undefined){
+             cat=$(catgrory+e).val();
+        }
+
         if(e==1){
-            $(catgrory+"2").html("<option value=''>全部</option>");
-            $(catgrory+"3").html("<option value=''>全部</option>");
+            if(f==1){
+                $(catgrory+"2").html("<option value=''>全部</option>");
+                $(catgrory+"3").html("<option value=''>全部</option>");
+            }else{
+                $(catgrory+"2").html("<option value=''>请选择</option>");
+                $(catgrory+"3").html("<option value=''>请选择</option>");
+            }
+
         }if(e==2){
-            $(catgrory+"3").html("<option value=''>全部</option>");
+            if(f==1)
+                $(catgrory+"3").html("<option value=''>全部</option>");
+            else
+                $(catgrory+"3").html("<option value=''>请选择</option>");
         }
         $.ajax({
             url:'{{$root_path}}goods/getNext',
@@ -294,11 +320,68 @@
             data:{catId:cat},
             success:function(a){
                 var c=e+1;
-                var option="<option value=''>全部</option>";
+                var option;
+                if(f==1){
+                    option="<option value=''>全部</option>";
+                } else{
+                    option="<option value=''>请选择</option>";
+                }
                 for(var i in a){
-                    option+="<option value=\'"+a[i].id+"\'>"+a[i].name+"</option>";
+                        if(a[i].id==next){
+                            option+="<option value=\'"+a[i].id+"\' selected='selected'>"+a[i].name+"</option>";
+                        }else{
+                            option+="<option value=\'"+a[i].id+"\'>"+a[i].name+"</option>";
+                        }
                 }
                $(catgrory+c).html(option);
+            }
+        })
+    }
+    //修改
+    function updateGoodsInfo(){
+        var catgrory1=$(".catgrorys1").val();
+        var catgrory2=$(".catgrorys2").val();
+        var catgrory3=$(".catgrorys3").val();
+        var gName=$("#gName1").val();
+        var id=localStorage.getItem('id');
+        var data={catgrory1:catgrory1,catgrory2:catgrory2,catgrory3:catgrory3,gName:gName,id:id};
+        $.ajax({
+            url:'{{$root_path}}goods/updateGoodsInfo',
+            data:data,
+            type:'post',
+            dataType:'json',
+            success:function(e){
+                localStorage.removeItem('id');
+                    alert(e.msg);
+                window.location.reload();
+            }
+        })
+
+    }
+    function batch_pass(){
+        var gtin=$("input[name='gtin']").val();
+        var gName=$("input[name='gName']").val();
+        var goodsCatgrory=$("input[name='goodsCatgrory']").val();
+        var catgrory1=$("input[name='catgrory1']").val();
+        var catgrory2=$("input[name='catgrory2']").val();
+        var catgrory3=$("input[name='catgrory3']").val();
+        var catgrorys1=$(".catgrory1").val();
+        var catgrorys2=$(".catgrory2").val();
+        var catgrorys3=$(".catgrory3").val();
+
+        var data={gtin:gtin,gName:gName,goodsCatgrory:goodsCatgrory,catgrory1:catgrory1,catgrory2:catgrory2,catgrory3:catgrory3,catgrorys1:catgrorys1,catgrorys2:catgrorys2,catgrorys3:catgrorys3};
+        alert(data.catgrorys1);
+        alert(data.catgrorys2);
+        alert(data.catgrorys3);
+        $.ajax({
+            url:'{{$root_path}}goods/getGoodsIds',
+            data:data,
+            type:'POST',
+            dataType:'text',
+            success:function(e){
+                alert(e);
+            },error:function(r){
+                alert(123);
             }
         })
     }

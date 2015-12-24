@@ -56,11 +56,9 @@ class Retouch_model extends MY_Model
     }
     /*获取图片*/
     function getAllImage($data){
-        $data['token']='7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE';
-        $data['xBarcode']=$data['gtin'];
-        $data['xType']=1;
-        $url="http://139.196.36.81:8600/lingmall/pictures";
-        $return=$this->curl($url,$data,'get');
+        $url="http://139.196.36.81:8600/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xBarcode={$data['gtin']}&xType=1";
+        echo $url;
+        $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;
     }

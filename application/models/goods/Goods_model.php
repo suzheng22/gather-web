@@ -12,7 +12,7 @@ class Goods_model extends   MY_Model{
     }
     function getGoodsClassify($data){
         $data['token']=urldecode($data['token']);
-       $data['returnType']=1;
+        $data['returnType']=1;
         $url=$this->more_api_url."/lingmall/catgrory/gtinList";
         $return=$this->curl($url,$data,'get');
         $datas=json_decode($return,true);
@@ -50,6 +50,7 @@ class Goods_model extends   MY_Model{
         $return=$this->curl($url,$data,'get');
         return $return;
     }
+    //修改
     function updateGoodsInfo($data){
         $id=$data['id'];
         $token=$data['token'];
@@ -64,18 +65,58 @@ class Goods_model extends   MY_Model{
     }
     //获取下级商品分类
     function getNext($data){
-        $arr['token']=urldecode($data['token']);
+        if($data['token']){
+            $arr['token']=urldecode($data['token']);
+        }else{
+            $arr['token']=urldecode($this->user_info['token']);
+        }
         $arr['f_id']=$data['catId'];
         $url=$this->more_api_url."/lingmall/catgrory/next";
         $return=$this->curl($url,$arr,'get');
         return $return;
     }
-
+//获取商品分类信息
     function getInfo($catId){
         $data['token']=urldecode($this->user_info['token']);
         $url=$this->more_api_url."/lingmall/catgrory/{$catId}";
         $return=$this->curl($url,$data,'get');
         return json_decode($return,true);
+    }
+    function getCatgroryInfo($id){
+        if(!$id){
+            $id=84;
+        }
+        $data['token']=urldecode($this->user_info['token']);
+        $url=$this->more_api_url."/lingmall/catgrory/catgroryGtin/{$id}";
+        $return=$this->curl($url,$data,'get');
+        return json_decode($return,true);
+    }
+   // 获取批量处理ids
+    function getGoodsIds($data){
+        $data['token']=urldecode($this->user_info['token']);
+        $url=$this->more_api_url."/lingmall/catgrory/gtinList";
+        $return=$this->curl($url,$data,'get');
+        echo $return;
+        return json_decode($return,true);
+    }
+    //获取图片
+    function getAllImage($data){
+        $data['token']='7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE';
+        $data['xBarcode']=$data['gtin'];
+        $data['xType']=1;
+        $url="http://139.196.36.81:8600/lingmall/pictures";
+        $return=$this->curl($url,$data,'get');
+        $list=json_decode($return,true);
+        return $list;
+    }
+    //批量处理商品分类
+    function batchUpdateInfo($data){
+        $token=$this->user_info['token'];
+        $data=json_encode($data);
+
+        $url=$this->more_api_url."/lingmall/catgrory/gtinBatch?token=$token";
+        $return=$this->curl($url,$data,'post');
+        return  $return;
     }
 
 }

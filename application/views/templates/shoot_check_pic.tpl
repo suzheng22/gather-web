@@ -220,7 +220,6 @@
         if(is){
             var iv2 = $("#viewer").iviewer(
                     {
-
                         src: "{{$pic_path}}{{$picList.0.key}}"
                     });
 
