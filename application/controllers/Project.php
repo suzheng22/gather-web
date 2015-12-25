@@ -56,10 +56,12 @@ class Project extends My_Controller {
             $page_url.='pId='.$project."&";
             $this->ci_smarty->assign('project',$project);
         }
-        if(isset($username)){
-            $arr['pUserId']=serialize($username);
+        if(isset($username)&&$username!=""){
+            $arr['pUserIds']=serialize($username);
             $page_url.='username='.$username."&";
             $this->ci_smarty->assign('username',$username);
+        }else{
+
         }
         if(isset($status)){
             $arr['status']=$status;
@@ -80,10 +82,11 @@ class Project extends My_Controller {
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //获取项目列表
-       $project_list=$this->project_model->getProjectUserByField($arr);
-        $showPage= parent::page($page_url,1,$project_list['total']);
+        $project_lists=$this->project_model->getProjectUserByField($arr);
+       // var_dump($project_list);
+        $showPage= parent::page($page_url,1,$project_lists['total']);
         //获取项目标签
-        $this->ci_smarty->assign('plist',$project_list['data']);
+        $this->ci_smarty->assign('plist',$project_lists['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('project_user_manager.tpl');
     }
@@ -123,9 +126,24 @@ class Project extends My_Controller {
         $data['token']=$this->user_info['token'];
         $data['pId']=$this->input->post('projectId');
         $data['status']=$this->input->post('status');
+        $data['upUserId']=$this->input->post('upUserId');
         $str=$this->project_model->freezeProject($data);
-        //echo json_encode($str);
-       // echo "<script>alert($str)</script>";
+        if($str){
+            if($data['status']==1){
+                echo json_encode($str);
+            }
+            else if($data['status']==2){
+                echo json_encode($str);
+            }
+        }
+    }
+    function updateProjectUserStatus(){
+        $data['userId']=$this->user_info['userId'];
+        $data['token']=$this->user_info['token'];
+        $data['pId']=$this->input->post('projectId');
+        $data['status']=$this->input->post('status');
+        $data['upUserId']=$this->input->post('upUserId');
+        $str=$this->project_model->freezeProjectUser($data);
         if($str){
             if($data['status']==1){
                 echo json_encode($str);

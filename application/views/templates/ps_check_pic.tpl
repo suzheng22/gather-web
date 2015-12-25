@@ -382,12 +382,10 @@
 			return false;
 		});			
 });
-
 function check(status){
     var orderId="{{$p_info.orderId}}";
 	var gtin={{$p_info.gtin}};
 	var memo=$("#memo").val();
-    alert(memo);
 		$.post("{{$root_path}}retouch/changeStatus",{'orderId':orderId,"status":status,"memo":memo},
 		  	function(data){
                 alert(data.msg);

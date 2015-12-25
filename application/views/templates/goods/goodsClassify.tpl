@@ -368,20 +368,17 @@
         var catgrorys1=$(".catgrory1").val();
         var catgrorys2=$(".catgrory2").val();
         var catgrorys3=$(".catgrory3").val();
-
         var data={gtin:gtin,gName:gName,goodsCatgrory:goodsCatgrory,catgrory1:catgrory1,catgrory2:catgrory2,catgrory3:catgrory3,catgrorys1:catgrorys1,catgrorys2:catgrorys2,catgrorys3:catgrorys3};
-        alert(data.catgrorys1);
-        alert(data.catgrorys2);
-        alert(data.catgrorys3);
         $.ajax({
             url:'{{$root_path}}goods/getGoodsIds',
             data:data,
             type:'POST',
-            dataType:'text',
+            dataType:'json',
             success:function(e){
-                alert(e);
+                alert(e.msg);
+                window.location.reload();
             },error:function(r){
-                alert(123);
+
             }
         })
     }

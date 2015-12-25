@@ -37,7 +37,7 @@
                                     <select name="username" class="username select3">
                                     		<option value="">请选择</option>
                                      {{foreach from =$userList item=list}}
-                                                <option value="{{$list.userId}}" {{if $list.userId==$username}}selected="selected"{{/if}}>{{$list.userName}}</option>
+                                                <option value="{{$list.userId}}" {{if $list.userId==$username}}selected="selected"{{/if}}>{{$list.trueName}}</option>
                                          {{/foreach}}
 										</select>
                                     </dl>
@@ -83,14 +83,14 @@
                             <td>{{$list.userName}}</td>
                             <td>{{$list.roleName}}</td>
                             <td>{{$list.desc}}</td>
-                            <td class="status_val_{{$list.projectId}}">{{if $list.status==1}}正常{{else}}已冻结{{/if}}</td>
+                            <td class="status_val_{{$list.projectId}}">{{if $list.userStatus==1}}正常{{else}}已冻结{{/if}}</td>
                             <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                             <td>{{$list.createName}}
                                 </td>
                             <td>{{$list.updateTime|date_format:"Y-m-d H:i:s"}}</td>
                             <td>{{$list.updateName}}</td>
                             <td>
-                                <a href="javascript:;" onclick="update_status({{$list.pId}},{{$list.status}})" class="status_{{$list.pId}}">{{if $list.status==1}}冻结{{else}}解冻{{/if}}</a>
+                                <a href="javascript:;" onclick="update_status({{$list.pId}},{{$list.userStatus}},{{$list.userId}})" class="status_{{$list.pId}}">{{if $list.userStatus==1}}冻结{{else}}解冻{{/if}}</a>
                             </td>
                             <input type="hidden" id="project_{{$list.pId}}" value="{{$list.status}}">
                         </tr>
@@ -196,12 +196,12 @@ function role_change(){
         $("#usernames").html(option);
     }
 }
-function update_status(projectId,status){
+function update_status(projectId,status,upUserId){
     if(status==undefined){
         status=2;
     }
     var   status_e;
-    var msg=['','确定要冻结该项目吗','你确定要解冻改用户吗'];
+    var msg=['','确定要冻结该用户吗','你确定要解冻改用户吗'];
     if(confirm(msg[status])){
         if(status==1){
             status_e=2;
@@ -211,9 +211,9 @@ function update_status(projectId,status){
         }else{
             status_e=1;
         }
-        var  data={projectId:projectId,status:status_e};
+        var  data={projectId:projectId,status:status_e,upUserId:upUserId};
         //ajax
-        $.post("{{$root_path}}project/updateProjectStatus",data,function(e){
+        $.post("{{$root_path}}project/updateProjectUserStatus",data,function(e){
             if(e.msgCode==0){
                 alert(e.msgText);
                 window.location.reload();

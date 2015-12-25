@@ -52,6 +52,7 @@ class Project_model extends MY_Model {
         $url=$this->user_api_url."/user/getProjectUserByFiled?token=".$token;
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
+
         $count=count($datas);
         for($i=0;$i<$count;$i++){
             foreach( $datas[$i] as $key=>$val){
@@ -154,6 +155,12 @@ class Project_model extends MY_Model {
     function freezeProject($data){
         $token=$data['token'];
         $url=$this->user_api_url."/user/freezeProject?token=".$token;
+        $return =$this->curl($url,$data);
+        return json_decode($return);
+    }
+    function freezeProjectUser($data){
+        $token=$data['token'];
+        $url=$this->user_api_url."/user/freezeProjectUser?token=".$token;
         $return =$this->curl($url,$data);
         return json_decode($return);
     }

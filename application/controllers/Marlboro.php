@@ -173,6 +173,7 @@ class Marlboro extends My_Controller {
        foreach($shootBackManager['data'] as $k=>$v){
            $shootBackManager['data'][$k]['feedbackInfo']=json_decode($shootBackManager['data'][$k]['feedbackInfo']);
        }
+      //  var_dump($shootBackManager);
         if($arr['is_ext']==1){
             $fileName='拍摄反馈管理';
             $fields=array('序号','项目名称','商品条形码','商品名称','商品分类','包装','批次','反馈原因','反馈时间','反馈状态','反馈路径','反馈人');
@@ -211,6 +212,26 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('slist',$shootBackManager['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('shoot/shoot_back_manager.tpl');
+    }
+    //拍摄反馈详情页面
+    function shootBackPic(){
+        $this->load->model('sdk/product_model','product');
+        $this->load->model('user/project_model','project');
+        $arr=$this->input->get();
+        $arr['userId']=$this->user_info['userId'];
+        $arr['token']=$this->user_info['token'];
+        //获取图片
+        $list=$this->marlboro_model->getAllImage($arr);
+        $product_info=$this->marlboro_model->getMarlboroInfo($arr);
+        $product_info['userId']=$this->user_info['userId'];
+        $product_info['token']=$this->user_info['token'];
+        $arr['proName']=$product_info['proName'];
+        $arr['catgrory']=$product_info['type'];
+        $this->ci_smarty->assign('p_info',$product_info);
+        $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('picList',$list[1]);
+        $this->ci_smarty->assign('pic_path',"http://7xny7g.com2.z0.glb.qiniucdn.com/");
+        $this->ci_smarty->display('shoot/shoot_back_pic.tpl');
     }
 
 
