@@ -89,8 +89,8 @@
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.gName}}</td>
                         <td>{{$list.catName}}</td>
-                        <td>{{$list.packet}}</td>
-                        <td>{{$list.batchNo}}</td>
+                        <td>包装{{$list.packet}}</td>
+                        <td>批次{{$list.batchNo}}</td>
                         <td>{{$list.memo}}</td>
                         <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                         <td>{{$list.status}}</td>
