@@ -95,7 +95,7 @@
                         <th>反馈原因</th>
                         <th>反馈时间</th>
                         <th>反馈人</th>
-                       
+                        <th>操作</th>
                       </tr>
                         {{foreach from=$slist item=list}}
                         <tr>
@@ -122,6 +122,9 @@
                             </td>
                             <td>
                                {{$list.measurement}}
+                            </td>
+                            <td>
+                                <a href="{{$root_path}}marlboro/shootBackPic/?orderId={{$list.fId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">反馈详细</a>
                             </td>
                         </tr>
                     {{/foreach}}

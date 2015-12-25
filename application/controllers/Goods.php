@@ -77,12 +77,9 @@ class Goods extends My_Controller {
         $data['gName']=$this->input->post('gName');
         $data['goodsCatgrory']=$this->input->post('goodsCatgrory');
         $data['returnType']=2;
-        $data['gtin']='6915766003247';
-        echo 123;exit;
         $return=$this->goods->getGoodsIds($data);
-        $arr['ids']=$return['ids'];
+        $arr['ids']=$return['ids'][0];
         $arr['catgrory1']=$this->input->post('catgrorys1');
-        echo $arr['catgrory1']+123;
         $arr['catgrory2']=$this->input->post('catgrorys2');
         $arr['catgrory3']=$this->input->post('catgrorys3');
         //批量处理

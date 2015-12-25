@@ -302,5 +302,14 @@ class Marlboro_model extends MY_Model {
         $shootBack['data']=$datas;
         return $shootBack;
     }
+    //获取反馈详细信息
+    function getFeedInfo($data){
+        $fId=$data['retouchId'];
+        $data['token']=urldecode($data['token']);
+        $url=$this->more_api_url."/lingmall/feed/{$fId}";
+        $return=$this->curl($url,$data,'get');
+        $list=json_decode($return);
+        var_dump($list);
+    }
 }
 ?>

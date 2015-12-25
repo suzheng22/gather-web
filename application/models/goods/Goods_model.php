@@ -96,7 +96,6 @@ class Goods_model extends   MY_Model{
         $data['token']=urldecode($this->user_info['token']);
         $url=$this->more_api_url."/lingmall/catgrory/gtinList";
         $return=$this->curl($url,$data,'get');
-        echo $return;
         return json_decode($return,true);
     }
     //获取图片
@@ -113,7 +112,6 @@ class Goods_model extends   MY_Model{
     function batchUpdateInfo($data){
         $token=$this->user_info['token'];
         $data=json_encode($data);
-
         $url=$this->more_api_url."/lingmall/catgrory/gtinBatch?token=$token";
         $return=$this->curl($url,$data,'post');
         return  $return;
