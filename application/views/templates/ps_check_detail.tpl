@@ -38,10 +38,7 @@
 							<div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" id="gtin"/></div>
                     	<div class="cc_top_one"><label>商品名称:</label><input type="text"  name="gName" value="{{$gName}}" id="gName"/></div>
 							<div class="clearfix"></div>
-                     	<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label>
-							<input type="text" id="datetimepicker_start" name="stime" value="{{$stime}}"/> <label style="width:20px;">-</label>
-							<input type="text" id="datetimepicker_end" name="etime" value="{{$etime}}"/></div>
-                       <div class="clearfix"></div>
+
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
@@ -77,6 +74,10 @@
                                 </dl>
                             </div>
                         </div>
+							<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label>
+								<input type="text" id="datetimepicker_start" name="stime" value="{{$stime}}"/> <label style="width:20px;">-</label>
+								<input type="text" id="datetimepicker_end" name="etime" value="{{$etime}}"/></div>
+							<div class="clearfix"></div>
                         <div class="clearfix"></div>
                     <div class="cc_top_two">
                         <span class="query"><i class="icon iconfont">&#xf0142;</i><input type="button" value="批量审核" onclick="shoot_pass()" /></span>
