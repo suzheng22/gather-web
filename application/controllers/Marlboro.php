@@ -170,6 +170,9 @@ class Marlboro extends My_Controller {
         $arr['token']=$this->user_info['token'];
         //获取拍摄管理列表
         $shootBackManager=$this->marlboro_model->getShootBackManager($arr);
+       foreach($shootBackManager['data'] as $k=>$v){
+           $shootBackManager['data'][$k]['feedbackInfo']=json_decode($shootBackManager['data'][$k]['feedbackInfo']);
+       }
         if($arr['is_ext']==1){
             $fileName='拍摄反馈管理';
             $fields=array('序号','项目名称','商品条形码','商品名称','商品分类','包装','批次','反馈原因','反馈时间','反馈状态','反馈路径','反馈人');

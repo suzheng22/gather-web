@@ -267,8 +267,8 @@ class Marlboro_model extends MY_Model {
     }
     /*获取拍摄反馈的数据*/
     function getShootBackManager($data){
-        $token=$data['token'];
-        $url=$this->more_api_url."/lingmall/feed/list?token=".$token;
+        $data['token']=urldecode($data['token']);
+        $url=$this->more_api_url."/lingmall/feed/list";
         $return=$this->curl($url,$data,'get');
         if(!$return){
             $return=file_get_contents("f:/wamp/www/curl/marlboro/feedBack.txt");
