@@ -113,7 +113,7 @@
                           <td>包装{{$list.packet}}</td>
                           <td>批次{{$list.batchNo}}</td>
                           <!-- 新增字段 -->
-                        <td>{{if $list.type==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
+                        <td>{{if $list.shootType==1}}正常拍摄{{else}}驳回拍摄{{/if}}</td>
 						<td>{{$list.uploadTime|date_format:"Y-m-d H:i:s"}}</td>
                         <td>{{if $list.status==1}}未审核{{else if $list.status==2}}通过{{else}}驳回{{/if}}</td>
                           <input type="hidden" value="{{$list.status}}">

@@ -82,11 +82,7 @@ class Retouch_model extends MY_Model
     }
     /*获取修图*/
     function getAllImage($data){
-//        $data['gtin']='6946960900582';
-//        $data['batchNo']=3215;
-//        $data['packet']=1;
         $url="http://139.196.36.81:8600/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xType=2&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}";
-
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;

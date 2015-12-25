@@ -94,22 +94,22 @@ class Retouch extends My_Controller
         $arr['id']=1;
         //原图
         $list2=$this->retouch->getAllImages($arr);
+        $product_info=$this->retouch->getRetouchPic($arr);
         //png图
+        $arr['batchNo']=$product_info['retouchId'];
         $arr['id']=3;
         $list3=$this->retouch->getAllImages($arr);
-        //获取图片
-        $product_info=$this->retouch->getRetouchPic($arr);
-        $arr['batchNo']=$product_info['retouchId'];
-        //修图
+        //获取修图图片
         $list=$this->retouch->getAllImage($arr);
+        //整合图片资源
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
                 if($v['xTag']==$list[$key][$k]['xTag']){
                     $list2[$key][$k]['key1']=$list[$key][$k]['key'];
+                    $list2[$key][$k]['key2']=$list3[$key][$k]['key'];
                 }
             }
         }
-
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
