@@ -124,7 +124,7 @@
                                {{$list.measurement}}
                             </td>
                             <td>
-                                <a href="{{$root_path}}marlboro/shootBackPic/?orderId={{$list.fId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">反馈详细</a>
+                                <a href="{{$root_path}}marlboro/shootBackPic?orderId={{$list.fId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}&a={{$list|json_encode}}" target="_blank">反馈详细</a>
                             </td>
                         </tr>
                     {{/foreach}}

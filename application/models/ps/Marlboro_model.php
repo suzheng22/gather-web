@@ -67,15 +67,7 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url."/shoot/getMarboro?token=".$token;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
-        $data['pId']= $list['pId'];
-        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-        $return =$this->curl($url,$data);
-        $datas=json_decode($return,true);
-        foreach($datas as $key=>$val){
-            if($list['pId']==$val['pId']){
-                $list['pName']=$val['pName'];
-            }
-        }
+        $list=$this->getPName($list,$data['token'],$list['pId']);
         //获取商品类型
        // $token=urldecode($token);
         $catId= $list['catgrory1'];
@@ -124,28 +116,7 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url."/shoot/noShootList?token=".$token;
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
-        $count=count($datas);
-        for($i=0;$i<$count;$i++){
-            foreach( $datas[$i] as $key=>$val){
-                $datas[$i]['lId']=($i+1);
-                if($key==='userId'){
-                    $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info?token=".$token;
-                    $return=$this->curl($url,$data);
-                    $user=json_decode($return,true);
-                    $datas[$i]['shootName']=$user['trueName'];
-                }else if($key=='pId'){
-                    //根据项目Id获取项目名称
-                    $data[$key]=$val;
-                    $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-                    $return =$this->curl($url,$data);
-                    $project=json_decode($return,true);
-                    $datas[$i]['pName']=$project[0]['pName'];
-                }
-            }
-        }
-        $shoot['total']=$count;
-        $shoot['data']=$datas;
+        $shoot=$this->back($datas,$data);
         return $shoot;
     }
     //获取无法测量数据
@@ -153,36 +124,8 @@ class Marlboro_model extends MY_Model {
         $token=$data['token'];
         $url=$this->more_api_url."/measure/NoMeasureList?token=".$token;
         $return=$this->curl($url,$data);
-    //    var_dump($return);
         $datas=json_decode($return,true);
-        $count=count($datas);
-        for($i=0;$i<$count;$i++){
-            foreach( $datas[$i] as $key=>$val){
-                $datas[$i]['lId']=($i+1);
-                if($key==='userId'){
-                    $data['upUserId']=$val;
-                    $url=$this->user_api_url."/user/info?token=".$token;
-                    $return=$this->curl($url,$data);
-                    $user=json_decode($return,true);
-                    $datas[$i]['measurement']=$user['trueName'];
-                }else if($key=='pId'){
-                    //根据项目Id获取项目名称
-                    $data[$key]=$val;
-                    $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-                    $return =$this->curl($url,$data);
-                    $project=json_decode($return,true);
-                    $datas[$i]['pName']=$project[0]['pName'];
-                }else if($key=='gtin'){
-                    $data[$key]=$val;
-                    $url=$this->more_api_url."/goods/getGoodsInfo?token=".$token;
-                    $return =$this->curl($url,$data);
-                    $goods=json_decode($return,true);
-                 //   var_dump($goods);
-                }
-            }
-        }
-        $measure['total']=$count;
-        $measure['data']=$datas;
+        $measure=$this->back($datas,$data);
         return $measure;
     }
     //获取拍摄新增数据
@@ -211,7 +154,6 @@ class Marlboro_model extends MY_Model {
         $datas=json_decode($return,true);
         //返回数据的容量
         $project_data=array();
-        //获取所有的项目
         //项目的容量
         $project=array();
         foreach($datas as $key=>$val){
@@ -256,7 +198,6 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url.'goods/getGoodsInfo';
         $returns=$this->curl($url,$arr,'post');
         $returns=json_decode($returns,true);
-
         $data['gtin']=$datas['gtin'];
         //根据项目获取其他信息
         $data1=$this->getInfoByGtin($data);
@@ -273,6 +214,8 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/feed/list";
         $return=$this->curl($url,$data,'get');
         $datas=json_decode($return,true);
+        //token 转换
+        $data['token']=urlencode($data['token']);
         $back=$this->back($datas,$data);
         return $back;
     }
@@ -295,6 +238,11 @@ class Marlboro_model extends MY_Model {
                     $return =$this->curl($url,$data);
                     $project=json_decode($return,true);
                     $datas[$i]['pName']=$project[0]['pName'];
+                }else if($key=='gtin'){
+                    $data[$key]=$val;
+                    $url=$this->more_api_url."/goods/getGoodsInfo?token=".$token;
+                    $return =$this->curl($url,$data);
+                    $goods=json_decode($return,true);
                 }
             }
         }
@@ -302,14 +250,43 @@ class Marlboro_model extends MY_Model {
         $shootBack['data']=$datas;
         return $shootBack;
     }
-    //获取反馈详细信息
+    //获取拍摄反馈详细信息
     function getFeedInfo($data){
-        $fId=$data['retouchId'];
-        $data['token']=urldecode($data['token']);
-        $url=$this->more_api_url."/lingmall/feed/{$fId}";
-        $return=$this->curl($url,$data,'get');
-        $list=json_decode($return);
+        //获取拍摄反馈的状态及反馈原因
+        $fId=$data['orderId'];
+        $url=$this->more_api_url."/lingmall/feed/{$fId}?token={$data['token']}";
+        $return=$this->curl($url,'','get');
+        $lis=json_decode($return,true);
+        $data['sId']=$lis['sId'];
+        $url=$this->more_api_url."/shoot/getShootRecordById";
+        $return=$this->curl($url,$data);
+        $list=json_decode($return,true);
+        //获取项目名称
+        $list=$this->getPName($list,$data['token'],$list['pId']);
+        //根据条形码获取商品名，商品分类
+        $urls=$this->more_api_url."/goods/getGoodsInfo?token=".$data['token'];
+        $gtin['token']=$data['token'];
+        $gtin['gtin']=$list['gtin'];
+        $returns=$this->curl($urls,$gtin);
+        $datas=json_decode($returns,true);
+        $list['gName']=$datas['data']['gName'];
+        $list=array_merge($lis,$list);
         var_dump($list);
+        return $list;
+    }
+    //获取项目
+    function getPName($data,$token,$pId){
+        $arr['pId']=$data[$pId];
+        $arr['token']=$data[$token];
+        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
+        $return =$this->curl($url,$data);
+        $datas=json_decode($return,true);
+        foreach($datas as $key=>$val){
+            if($data['pId']==$val['pId']){
+                $data['pName']=$val['pName'];
+            }
+        }
+        return $data;
     }
 }
 ?>

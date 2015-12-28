@@ -76,7 +76,7 @@
                             <!-- 新增字段 -->
                             <td>{{$list.pName}}</td>
                             <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
-                            <td>{{$list.shootName}}</td>
+                            <td>{{$list.measurement}}</td>
                             <!-- 新增字段 -->
                         </tr>
                         {{/foreach}}
