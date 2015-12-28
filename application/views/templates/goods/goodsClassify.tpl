@@ -278,7 +278,7 @@
             bShade:true,                //是否有遮罩
             bShadeClose:false,          //是否点遮罩关闭
             fnAdditional:function(e){
-                    var id=$(e).get(0).id;
+                    var id=e.id;
                     $("#get_gtin").val(id);
                 $.get("{{$root_path}}goods/getImage",{gtin:id},function(e){
                     $("#get_image").attr("src",e);
