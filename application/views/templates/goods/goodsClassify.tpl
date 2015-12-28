@@ -282,7 +282,6 @@
                     $("#get_gtin").val(id);
                 $.get("{{$root_path}}goods/getImage",{gtin:id},function(e){
                     $("#get_image").attr("src",e);
-                    alert(e)
                 },'text')
             }
         });
@@ -381,9 +380,9 @@
             url:'{{$root_path}}goods/getGoodsIds',
             data:data,
             type:'POST',
-            dataType:'text',
+            dataType:'json',
             success:function(e){
-                alert(e)
+                alert(e.msg)
                 //alert(e.msg);
                 window.location.reload();
             },error:function(r){
