@@ -90,7 +90,7 @@ class Goods extends My_Controller {
     function getImage(){
         $data['gtin']='6920177962090';
         $return = $this->goods->getAllImage($data);
-        $url= $this->pic_path."/{$return[1][0]['key']}-thumbnail500";
+        $url= "http://7xny7g.com2.z0.glb.qiniucdn.com/{$return[1][0]['key']}-thumbnail500";
         echo $url;
     }
 }
