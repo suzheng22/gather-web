@@ -219,7 +219,6 @@ class Marlboro extends My_Controller {
         //获取图片
         $list=$this->marlboro_model->getAllImage($arr);
         $product_info=$this->marlboro_model->getFeedInfo($arr);
-        //var_dump($product_info);
         $product_info['userId']=$this->user_info['userId'];
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
@@ -230,6 +229,13 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('pic_path',"http://7xny7g.com2.z0.glb.qiniucdn.com/");
         $this->ci_smarty->display('shoot/shoot_back_pic.tpl');
     }
-
+    function shootBackPass(){
+        $data['status']=$this->input->post('status');
+        $data['fId']=$this->input->post('orderId');
+        $data['token']=$this->user_info['token'];
+        $data['memo']=$this->input->post('memo');
+        $str=$this->marlboro_model->shootBackPass($data);
+        echo $str;
+    }
 
 }

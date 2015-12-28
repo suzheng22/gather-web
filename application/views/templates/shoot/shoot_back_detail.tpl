@@ -93,7 +93,7 @@
                         <td>批次{{$list.batchNo}}</td>
                         <td>{{$list.memo}}</td>
                         <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
-                        <td>{{$list.status}}</td>
+                        <td>{{if $list.status==1}}{{else if $list.status==2}}已处理{{else if $list.status==3}}未处理{{/if}}</td>
                       </tr>
                      {{/foreach}}
                     </table>

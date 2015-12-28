@@ -232,9 +232,7 @@ class Shoot extends My_Controller {
             }
             echo $this->phpExcel($fileName,$fields, $query,'','25','20');
         }
-        //  var_dump($shootAddList);
         $showPage= parent::page($page_url,5,$shootBackList['totalCount']);
-        //获取项目标签
         $this->ci_smarty->assign('slist',$shootBackList['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('shoot/shoot_back_detail.tpl');
@@ -268,6 +266,4 @@ class Shoot extends My_Controller {
         echo json_encode($datas);
         exit;
     }
-
-
 }

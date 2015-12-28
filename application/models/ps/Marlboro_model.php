@@ -6,6 +6,7 @@ class Marlboro_model extends MY_Model {
     {
     // Call the CI_Model constructor
       parent::__construct();
+        $this->load->model('goods/goods_model');
     }
     //获取获取拍摄详情列表
     function getMarlboroList1($data){
@@ -225,7 +226,7 @@ class Marlboro_model extends MY_Model {
         for($i=0;$i<$count;$i++){
             foreach( $datas[$i] as $key=>$val){
                 $datas[$i]['lId']=($i+1);
-                if($key==='userId'){
+                if($key==='userId'||$key==='retouchId'){
                     $data['upUserId']=$val;
                     $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
@@ -243,6 +244,13 @@ class Marlboro_model extends MY_Model {
                     $url=$this->more_api_url."/goods/getGoodsInfo?token=".$token;
                     $return =$this->curl($url,$data);
                     $goods=json_decode($return,true);
+                    $datas[$i]['gName']=$goods['data']['gName'];
+                    //根据商品分类的ID查询商品分类名称
+                    $catId=$goods['data']['catgrory1'];
+                    if($catId!=""){
+                        $re=$this->goods_model->getInfo($catId);
+                        $datas[$i]['catName']=$re['name'];
+                    }
                 }
             }
         }
@@ -271,8 +279,19 @@ class Marlboro_model extends MY_Model {
         $datas=json_decode($returns,true);
         $list['gName']=$datas['data']['gName'];
         $list=array_merge($lis,$list);
-        var_dump($list);
         return $list;
+    }
+    //拍摄反馈的通过与驳回
+    function shootBackPass($data){
+        $fId=$data['fId'];
+        $put['status']=$data['status'];
+        if($put['status'==2]){
+            $put['memo']=$data['memo'];
+        }
+        $put=json_encode($put);
+        $url=$this->more_api_url."/lingmall/feed/{$fId}?token={$data['token']}";
+        $return=$this->curl($url,$put,'put');
+        return $return;
     }
     //获取项目
     function getPName($data,$token,$pId){

@@ -15,10 +15,10 @@
                 <h3>商品分类</h3>
                 <div class="rose_top main_rignt_top clearfix">
                     <form action="{{$root_path}}goods/goodsClassify">
-                    <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}"/></div>
-                    <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}"/></div>
+                    <div class="cc_top_one"><label>商品条形码:</label><input type="text" id="gtins" name="gtin" value="{{$gtin}}"/></div>
+                    <div class="cc_top_one"><label>商品名称:</label><input type="text" id="gName" name="gName" value="{{$gName}}"/></div>
                     <div class="cc_top_one"><label>商品类型:</label>
-                        <input type="text" name="goodsCatgrory" value="{{$goodsCatgrory}}"/>
+                        <input type="text" name="goodsCatgrory" value="{{$goodsCatgrory}}" id="goodsCatgrorys"/>
                     </div>
                     <div class="clearfix"></div>
                     <div class="cc_top_one last_show"><label>一级分类:</label>
@@ -87,7 +87,7 @@
                                 <td>{{$list.catgrorys2}}</td>
                                 <td>{{$list.catgrorys3}}</td>
                                 <td>
-                                    <a href="javascript:;" class="pic_img">图</a>
+                                    <a href="javascript:;" class="pic_img" id="{{$list.gtin}}">图</a>
                                     <a href="javascript:;" class="updata" id="{{$list.id}}">修改</a>
                                 </td>
                             </tr>
@@ -127,6 +127,7 @@
                     <div class="choice_count choice_box vocation">
                         <dl class="select">
                             <select  class="catgrory2" style="opacity:1" onchange="change(2,2)">
+                                <option value="">请选择</option>
                             </select>
                         </dl>
                     </div>
@@ -137,6 +138,7 @@
                     <div class="choice_count choice_box vocation">
                         <dl class="select">
                             <select   class="catgrory3" style="opacity:1">
+                                <option value="">请选择</option>
                             </select>
                         </dl>
                     </div>
@@ -154,8 +156,8 @@
     <div class="content">
         <div class="login_main">
             <div class="login_form">
-                <div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="" class="zhmm"></div>
-                <div class="clearfix one"><img src="images/photos/4.jpg"/ style="width:300px; height:300px;"></div>
+                <div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="get_gtin" class="zhmm"></div>
+                <div class="clearfix one"><img src="#" id="get_image"  style="width:300px; height:300px;"></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" style="margin:0px auto;">确认</a>
             </div>
         </div>
@@ -275,8 +277,13 @@
             iSrc:"",                    //iframe地址
             bShade:true,                //是否有遮罩
             bShadeClose:false,          //是否点遮罩关闭
-            fnAdditional:function(){
-
+            fnAdditional:function(e){
+                    var id=$(e).get(0).id;
+                    $("#get_gtin").val(id);
+                $.get("{{$root_path}}goods/getImage",{gtin:id},function(e){
+                    $("#get_image").attr("src",e);
+                    alert(e)
+                },'text')
             }
         });
     });
@@ -359,23 +366,25 @@
 
     }
     function batch_pass(){
-        var gtin=$("input[name='gtin']").val();
-        var gName=$("input[name='gName']").val();
-        var goodsCatgrory=$("input[name='goodsCatgrory']").val();
-        var catgrory1=$("input[name='catgrory1']").val();
-        var catgrory2=$("input[name='catgrory2']").val();
-        var catgrory3=$("input[name='catgrory3']").val();
+        var gtin=$("#gtins").val();
+        var gName=$("#gNames").val();
+        var goodsCatgrory=$("#goodsCatgrorys").val();
+        var catgrory1=$("#catgrory1").val();
+        var catgrory2=$("#catgrory2").val();
+        var catgrory3=$("#catgrory3").val();
         var catgrorys1=$(".catgrory1").val();
         var catgrorys2=$(".catgrory2").val();
         var catgrorys3=$(".catgrory3").val();
+
         var data={gtin:gtin,gName:gName,goodsCatgrory:goodsCatgrory,catgrory1:catgrory1,catgrory2:catgrory2,catgrory3:catgrory3,catgrorys1:catgrorys1,catgrorys2:catgrorys2,catgrorys3:catgrorys3};
         $.ajax({
             url:'{{$root_path}}goods/getGoodsIds',
             data:data,
             type:'POST',
-            dataType:'json',
+            dataType:'text',
             success:function(e){
-                alert(e.msg);
+                alert(e)
+                //alert(e.msg);
                 window.location.reload();
             },error:function(r){
 

@@ -69,7 +69,7 @@ class Goods extends My_Controller {
         echo ($return);
     }
     //获取批量信息
-    function getGoodsIds(){
+   public function getGoodsIds(){
         $data['catgrory1']=$this->input->post('catgrory1');
         $data['catgrory2']=$this->input->post('catgrory2');
         $data['catgrory3']=$this->input->post('catgrory3');
@@ -78,20 +78,19 @@ class Goods extends My_Controller {
         $data['goodsCatgrory']=$this->input->post('goodsCatgrory');
         $data['returnType']=2;
         $return=$this->goods->getGoodsIds($data);
-        $arr['ids']=$return['ids'][0];
+        $arr['ids']=($return['ids']);
         $arr['catgrory1']=$this->input->post('catgrorys1');
         $arr['catgrory2']=$this->input->post('catgrorys2');
         $arr['catgrory3']=$this->input->post('catgrorys3');
-        //批量处理
+        $arr['catgrory3']=$this->input->post('catgrorys3');
         $return1=$this->goods->batchUpdateInfo($arr);
-        //执行更新语句
         echo $return1;
     }
     //获取图片
     function getImage(){
-        $data['gtin']=$this->input->get['gtin']='6901209212215';
+        $data['gtin']='6920177962090';
         $return = $this->goods->getAllImage($data);
-        var_dump($return);
+        $url= $this->pic_path."/{$return[1][0]['key']}-thumbnail500";
+        echo $url;
     }
-
 }

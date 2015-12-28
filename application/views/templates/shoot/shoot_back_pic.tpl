@@ -18,7 +18,7 @@
         <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
         <li class="black"><em>商品类型:</em><span>{{$p_info.goodsCatgrory}}</span></li>
         <!-- 拍摄类型 -->
-        <li class="black"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
+        <li class="black"><em>反馈路径:</em><span>{{if $p_info.feedPath ==1}}修图反馈{{else}}录入反馈{{/if}}</span></li>
         <!-- 项目 -->
         <li class="black"><em>项目:</em><span>{{$p_info.pName}}</span></li>
         <!-- 包装 -->
@@ -27,25 +27,20 @@
         <li class="black"><em>批次:</em><span>批次{{$p_info.batchNo}}</span></li>
         <div class="clearfix"></div>
         <p class="back_why_info">
-            <!-- {{if $p_info.status==3}}-->
 
+            反馈描述:<span>{{$p_info.feedbackInfo}}</span>
 
-
-
-                
-            最新驳回原因:<span>{{$p_info.memo}}</span>上次驳回原因:<span>{{$p_info.memo}}</span>
-            <!--  {{/if}}-->
         </p>
 
         <div class="ps_top_menu">
             {{if $p_info.status==1}}
-            <a href="" class="pass" onclick="check(2)"><i class="iconfont">&#xf01b1;</i>通过</a>
-            <a href="javascript:;" id="shoot_new_user" class="back" ><i class="iconfont">&#xf0223;</i>驳回</a>
-            <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>
+            <a href="javascript:;" class="pass" id="shoot_new_user" ><i class="iconfont">&#xf01b1;</i>反馈通过</a>
+            <a href="javascript:;"  class="back" onclick="check(3)"><i class="iconfont">&#xf0223;</i>反馈驳回</a>
+            <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>反馈缺图</a>
             {{else}}
             {{if $p_info.status==2}} <a href="javascript:;" class="pass"><i class="iconfont">&#xf01b1;</i>已通过</a>
             {{elseif $p_info.status==3}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>已驳回</a>
-            {{elseif $p_info.status==4}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>{{/if}}
+            {{elseif $p_info.status==4}} <a href="javascript:;" class="back"><i class="iconfont">&#xf0223;</i>反馈缺图</a>{{/if}}
             {{/if}}
         </div>
     </ul>
@@ -164,15 +159,15 @@
 </div>
 <!-- 驳回弹出层 开始-->
 <div class="newuser_pop" id="shoot_newuser_pop">
-    <div class="tit clearfix"><h4>xxxx-拍摄驳回</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="tit clearfix"><h4>{{$p_info.gtin}}-反馈通过</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
     <div class="content">
         <div class="login_main">
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.gName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.goodsCatgrory}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
-                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(3)">确认</a>
+                <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(2)">确认</a>
             </div>
         </div>
     </div>
@@ -180,13 +175,13 @@
 
 <!-- 通过缺图  开始-->
 <div class="newuser_pop" id="shoot_pass_less">
-    <div class="tit clearfix"><h4>xxxx-缺图</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="tit clearfix"><h4>{{$p_info.gtin}}-反馈缺图</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
     <div class="content">
         <div class="login_main">
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm gtin1">{{$p_info.gtin}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.proName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm typeName1">{{$p_info.typeName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.gName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm typeName1">{{$p_info.goodsCatgrory}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memos"></textarea></div>
                 <a href="javascript:;"  class="confirm_btn" onclick="add_miss_figure(2)">确认</a>
             </div>
@@ -240,7 +235,7 @@
             iSrc:"",                    //iframe地址
             bShade:true,                //是否有遮罩
             bShadeClose:false,          //是否点遮罩关闭
-            fnAdditional:function(){
+            fnAdditional:function(e){
 
             }
         });
@@ -267,24 +262,12 @@
             return false;
         }
         var memo=$("#memo").val();
-        var data={"orderId":{{$p_info.orderId}},"type":1,"status":status,"memo":memo};
+        var data={"orderId":{{$p_info.fId}},"type":1,"status":status,"memo":memo};
         //  return false;
-        $.post("{{$root_path}}marlboro/shootPass",data,
+        $.post("{{$root_path}}marlboro/shootBackPass",data,
                 function(data){
-                    if(data){
-                        if(status==2){
-                            alert('审核成功');
-                        }
-                        else if(status==3){
-                            alert('驳回成功');
-                        }
-                        window.location.reload();
-                    }
-                    else{
-                        alert('审核失败');
-                        //alert(dataObj.msgText);
-                        window.location.reload();
-                    }
+                    alert(data);
+
                 },"text");
     }
     function add_miss_figure(){
@@ -302,21 +285,14 @@
             data:data,
             success:function(e){
                 if(e['msgCode]']!="2000"){
-                    var data={"orderId":{{$p_info.orderId}},"type":1,"status":2,};
-                    //  return false;
-                    $.post("{{$root_path}}marlboro/shootPass",data,
+                    var data={"orderId":{{$p_info.fId}},"status":2,};
+                    $.post("{{$root_path}}marlboro/shootBackPass",data,
                             function(data){
-                                if(data){
-                                    alert('审核缺图成功');
-                                    window.location.reload();
-                                }
-                                else{
-                                    alert('审核缺图失败');
-                                    window.location.reload();
-                                }
+                                alert(e);
+                                alert("审核通过成功");
                             },"text");
                 }else{
-                    alert('审核缺图失败');
+                    alert(e['msgText]']);
                 }
             }
 
