@@ -260,8 +260,9 @@ $(function(){
                             }
                             $("#describe_2").val(data.memo);
                             $("#project_22").html(option1);
-
-                        }
+                        },error:function(e,f,g){
+                                alert(e);
+                         }
                     })
                 }
     });
