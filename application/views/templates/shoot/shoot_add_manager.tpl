@@ -226,7 +226,7 @@ $(function(){
                     $.ajax({
                         url:'{{$root_path}}shoot/getNewPicInfo',
                         data:{'id':id},
-                        dataType:'json',
+                        dataType:'text',
                         type:'POST',
                         success:function(data){
                             alert(data);
