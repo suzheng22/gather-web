@@ -23,6 +23,7 @@ class Marlboro_model extends MY_Model {
         $count=$list['count'];
         $list=$list['data'];
         $num=0;
+
         foreach ($list as $k => $v){
             foreach ($user_list as $k1=>$v1){
                 if($v['photoId']==$v1['userId']){
@@ -30,10 +31,11 @@ class Marlboro_model extends MY_Model {
                     $list[$k]['num']=$num;
                     $list[$k]['userName']=$v1['userName'];
                     $list[$k]['groupName']=$v1['groupName'];
-                    $list[$k]['passCount']=$list[$k]['MarlboroCount']/$list[$k]['totalCount'];
+                    $list[$k]['passCount']=round($list[$k]['MarlboroCount']/$list[$k]['chouchatotalCount'],4);
                 }
             }
         }
+        var_dump($list);
         $return_list['data']=$list;
         $return_list['total']=$count;
         return $return_list;
