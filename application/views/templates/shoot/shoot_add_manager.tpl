@@ -226,16 +226,14 @@ $(function(){
                     $.ajax({
                         url:'{{$root_path}}shoot/getNewPicInfo',
                         data:{'id':id},
-                        dataType:'text',
+                        dataType:'json',
                         type:'POST',
                         success:function(data){
-                            alert(data);
                             localStorage.setItem("id",id);
                             $("#gtin_2").val(data['gtin']);
                             $("#proName_2").val(data['gName']);
                             var packArr=data.packet;
                             var len=packArr.length;
-                            alert(packArr);
                             var option="";
                             for (var i=0;i<len;i++){
                                 if(data.packet1==packArr[i]){
@@ -248,7 +246,6 @@ $(function(){
                            // alert(option);
                             var option1="";
                             var project=data.project;
-                            alert(project);
                             for(var i in project){
                                 var pId=project[i].pId;
                                 var pName=project[i].pName;
@@ -301,7 +298,7 @@ function get_gtin_detail(){
         dataType:'json',
         success:function(data){
            // alert(data.gtin);
-            if(data['packet']==''||data['packet']==null||data['packet']=='undefined'){
+            if(data.gName==""){
                 $(".show_msg").html('该商品编码不存在');
                 $("#project_1").html('');
                 $("#pack_1").html( '');
