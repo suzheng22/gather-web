@@ -226,7 +226,7 @@ $(function(){
                     $.ajax({
                         url:'{{$root_path}}shoot/getNewPicInfo',
                         data:{'id':id},
-                        dataType:'text',
+                        dataType:'json',
                         type:'POST',
                         success:function(data){
                            // alert(data);
@@ -259,9 +259,7 @@ $(function(){
                             }
                             $("#describe_2").val(data.memo);
                             $("#project_22").html(option1);
-                        },error:function(e,f,g){
-                                alert(e);
-                         }
+                        }
                     })
                 }
     });

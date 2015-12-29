@@ -205,7 +205,7 @@ class Marlboro_model extends MY_Model {
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
         $arr['gtin']=$datas['gtin'];
-        $url=$this->more_api_url.'goods/getGoodsInfo';
+        $url=$this->more_api_url.'/goods/getGoodsInfo';
         $returns=$this->curl($url,$arr,'post');
         $returns=json_decode($returns,true);
         $data['gtin']=$datas['gtin'];
