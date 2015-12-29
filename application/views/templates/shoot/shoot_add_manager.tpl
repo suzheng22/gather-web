@@ -223,11 +223,10 @@ $(function(){
                 bShadeClose:false,          //是否点遮罩关闭
                 fnAdditional:function(e){
                     var id=$(e).get(0).id;
-                    alert(id);
                     $.ajax({
                         url:'{{$root_path}}shoot/getNewPicInfo',
                         data:{'id':id},
-                        dataType:'json',
+                        dataType:'text',
                         type:'POST',
                         success:function(data){
                             alert(data);
@@ -245,7 +244,7 @@ $(function(){
                                 }
                             }
                             $("#pack_22").html(option);
-                           // alert(option);
+                            alert(option);
                             var option1="";
                             var project=data.project;
                             for(var i in project){
