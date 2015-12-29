@@ -229,7 +229,7 @@ $(function(){
                         dataType:'text',
                         type:'POST',
                         success:function(data){
-                            alert(data);
+                            //alert(data);
                             localStorage.setItem("id",id);
                             $("#gtin_2").val(data['gtin']);
                             $("#proName_2").val(data['gName']);
