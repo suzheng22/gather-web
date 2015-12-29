@@ -154,14 +154,14 @@
                 <div class="clearfix one"><label for="user_name">项目:</label>
                 <div class="choice_count choice_box ">
                         <dl class="select">
-                    <select id="project_2" class="" name="project" style="opacity: 1">
+                    <select id="project_22" class="" name="project" style="opacity: 1">
                     </select>
                     </dl></div>
                  </div>
                 <div class="clearfix one"><label for="user_name">包装:</label>
                 	<div class="choice_count choice_box ">
                         <dl class="select">
-                        <select id="pack_2" class="" style="opacity: 1">
+                        <select id="pack_22" class="" style="opacity: 1">
                         </select>
                         </dl></div>
                     </div>
@@ -226,14 +226,16 @@ $(function(){
                     $.ajax({
                         url:'{{$root_path}}shoot/getNewPicInfo',
                         data:{'id':id},
-                        dataType:'json',
+                        dataType:'text',
                         type:'POST',
                         success:function(data){
+                            alert(data);
                             localStorage.setItem("id",id);
                             $("#gtin_2").val(data['gtin']);
                             $("#proName_2").val(data['gName']);
                             var packArr=data.packet;
                             var len=packArr.length;
+                            alert(packArr);
                             var option="";
                             for (var i=0;i<len;i++){
                                 if(data.packet1==packArr[i]){
@@ -242,8 +244,11 @@ $(function(){
                                     option+="<option value=\'"+packArr[i]+"\'>包装"+packArr[i]+"</option>";
                                 }
                             }
+                            $("#pack_22").html(option);
+                           // alert(option);
                             var option1="";
                             var project=data.project;
+                            alert(project);
                             for(var i in project){
                                 var pId=project[i].pId;
                                 var pName=project[i].pName;
@@ -255,8 +260,8 @@ $(function(){
                                 }
                             }
                             $("#describe_2").val(data.memo);
-                            $("#project_2").append($(option1));
-                            $("#pack_2").append( option);
+                            $("#project_22").html(option1);
+
                         }
                     })
                 }
@@ -375,7 +380,7 @@ function add_shoot(status){
         },
     });
 }
-//清空
+
 function get_info(group){
     $.post("{{$root_path}}user/groupInfo",{"groupId":groupId},
             function(data){
@@ -391,6 +396,7 @@ function get_info(group){
             },
             "text");
 }
+//清空
 function btn_empty(){
     $(".proName,.gtin").val("");
     $("#datetimepicker_start").val("");

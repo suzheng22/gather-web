@@ -23,26 +23,19 @@ class Retouch extends My_Controller
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $group_list= $this->user->getGroupListByRole();
         $this->ci_smarty->assign('group_list',$group_list['list']);
-        $data['userName']=$this->input->get('userName');
-        $data['groupId']=$this->input->get('groupId');
-        $data['pId']=$this->input->get('pId');
-        if($data['userName']!=''){
-            $this->ci_smarty->assign('userName',$data['userName']);
-        }
-        if($data['groupId']!=''){
-            $this->ci_smarty->assign('groupId',$data['groupId']);
-        }
-        if($data['pId']!=''){
-            $this->ci_smarty->assign('pId',$data['pId']);
-        }
+        $page_url=$this->root_path."Retouch/psCheckList?";
+        $arr=$this->input->get();
         $data['userId']=$this->user_info['userId'];
         $str=$this->user->getUserIdsByFiled($data);
-        $user_id_list=json_decode($str,true);;
+        $user_id_list=json_decode($str,true);
+        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
         $data['userIds']=serialize($user_id_list);
         $data['token']=$this->user_info['token'];
         $data['userId']=$this->user_info['userId'];
         $list=$this->retouch->getMarlboroList($data);
-        $this->ci_smarty->assign('glist',$list);
+        $showpage= parent::page($page_url,10,$list['total']);
+        $this->ci_smarty->assign('glist',$list['data']);
+        $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('ps_check_list.tpl');
     }
     /*
@@ -59,7 +52,7 @@ class Retouch extends My_Controller
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $page_url=$this->root_path.'Retouch/psCheckDetail/'.$userId.'?';
+        $page_url=$this->root_path."Retouch/psCheckDetail/{$userId}/{$no}/{$total}/{$auto}?";
         $arr=$this->input->get();
         if(!isset($arr['status'])){
             $arr['status']=null;

@@ -59,7 +59,9 @@ class Marlboro extends My_Controller {
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
         $list=$this->marlboro_model->getMarlboroList1($arr);
-        $this->ci_smarty->assign('glist',$list);
+        $showpage= parent::page($page_url,10,$list['total']);
+        $this->ci_smarty->assign('glist',$list['data']);
+        $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check.tpl');
     }
     //拍摄详情
@@ -78,7 +80,7 @@ class Marlboro extends My_Controller {
         //获取项目
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $page_url=$this->root_path.'Marlboro/shootDetail/'.$userId.'?';
+        $page_url=$this->root_path."Marlboro/shootDetail/{$userId}/{$total}/{$no}/{$auto}?";
         $arr=$this->input->get();
         if(!isset($arr['status'])){
             $arr['status']=null;

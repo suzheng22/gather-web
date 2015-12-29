@@ -16,7 +16,7 @@
         	<div class="rose_box cc_box">
             	<h3>修图审核-详情</h3>	
                 <div class="rose_top main_rignt_top clearfix">
-					<form action="{{$root_path}}retouch/psCheckDetail/{{$u_info.userId}}/{{$no}}/{{$total}}" method="get">
+					<form action="{{$root_path}}retouch/psCheckDetail/{{$u_info.userId}}/{{$no}}/{{$total}}/{{$auto}}" method="get">
                         <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span><input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{((($auto)/$total)|number_format:4)*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>

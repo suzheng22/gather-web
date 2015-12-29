@@ -6,9 +6,10 @@ class Goods_model extends   MY_Model{
         parent::__construct();
     }
     function getGoodsByGtin($data){
-        $url=$this->tmore_api_url."/goods/getGoodsByGtin";
+        $url=$this->more_api_url."/goods/getGoodsInfo?token={$data['token']}";
         $return=$this->curl($url,$data);
-        return $return;
+        $data=json_decode($return,true);
+         return $data['data'];
     }
     function getGoodsClassify($data){
         $data['token']=urldecode($data['token']);

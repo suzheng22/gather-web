@@ -12,6 +12,8 @@ class Retouch_model extends MY_Model
          $url=$this->more_api_url."/lingmall/audit/list";
          $return=$this->curl($url,$data,'get');
          $list=json_decode($return,true);
+         $count=$list['count'];
+         $list=$list['data'];
          $data['token']=urlencode($data['token']);
          foreach($list as $k=>$v){
              $data['upUserId']=$v['retouchUserId'];
@@ -25,7 +27,9 @@ class Retouch_model extends MY_Model
              $group=json_decode($return,true);
              $list[$k]['groupName']=$group['groupName'];
          }
-         return $list;
+         $return_detail['total']=$count;
+         $return_detail['data']=$list;
+         return $return_detail;
     }
     /*获取美工的修图审核列表*/
     function getRetouchDetail($data){
@@ -33,14 +37,15 @@ class Retouch_model extends MY_Model
         $url=$this->more_api_url."/lingmall/audit/detail";
         $return=$this->curl($url,$data,'get');
         $detail=json_decode($return,true);
-        $count=sizeof($detail);
+        $count=($detail['count']);
+        $detail=$detail['data'];
         $data['token']=urlencode($data['token']) ;
         foreach($detail as $k=>$v){
             $data['pId']=$v['pId'];
             $url=$this->user_api_url."/user/getProjectByFiled?token=".$data['token'];
             $return =$this->curl($url,$data);
             $project=json_decode($return,true);
-            $detail[$k]['pName']=$project[0]['pName'];
+            $detail[$k]['pName']=$project['data'][0]['pName'];
         }
         $return_detail['total']=$count;
         $return_detail['data']=$detail;

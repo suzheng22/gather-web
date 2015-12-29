@@ -21,7 +21,7 @@
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{((($auto)/$total)|number_format:4)*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>
                         <div class="clearfix"></div>
-						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}" id="myform">
+						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}/{{$total}}/{{$no}}/{{$auto}}" id="myform">
                             <!-- 项目 -->
                             <div class="cc_top_one last_show"><label>项目:</label>
                                 <div class="choice_count choice_box vocation">

@@ -19,7 +19,7 @@ class Shoot extends My_Controller {
         //商品分类的查询
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
-        $page_url=$this->root_path.'marlboro/noMeasure?';
+        $page_url=$this->root_path.'shoot/noMeasure?';
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         //加入项目
@@ -59,7 +59,7 @@ class Shoot extends My_Controller {
             //var_dump($query);
             echo $this->phpExcel($fileName,$fields, $query,'','25','20');
         }
-        $showPage= parent::page($page_url,5,$noMeasureList['totalCount']);
+        $showPage= parent::page($page_url,10,$noMeasureList['total']);
         //获取项目标签
         $this->ci_smarty->assign('mlist',$noMeasureList['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
@@ -74,7 +74,7 @@ class Shoot extends My_Controller {
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $page_url=$this->root_path.'shoot/noMeasure?';
+        $page_url=$this->root_path.'shoot/noShoot?';
         //加入项目
         $arr=$this->input->get();
         if(!isset($arr['status'])){
@@ -112,7 +112,7 @@ class Shoot extends My_Controller {
            }
             echo $this->phpExcel($fileName,$fields, $query,'','25','20');
         }
-        $showPage= parent::page($page_url,5,$noMeasureList['total']);
+        $showPage= parent::page($page_url,10,$noMeasureList['total']);
         //获取项目标签
         $this->ci_smarty->assign('slist',$noMeasureList['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
@@ -127,7 +127,7 @@ class Shoot extends My_Controller {
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $page_url=$this->root_path.'shoot/noMeasure?';
+        $page_url=$this->root_path.'shoot/shootAddManager?';
         //加入项目
         $arr=$this->input->get();
         if(!isset($arr['status'])){
@@ -174,7 +174,7 @@ class Shoot extends My_Controller {
             echo $this->phpExcel($fileName,$fields, $query,'','25','20');
         }
         //  var_dump($shootAddList);
-        $showPage= parent::page($page_url,5,$shootAddList['totalCount']);
+        $showPage= parent::page($page_url,10,$shootAddList['total']);
         //获取项目标签
         $this->ci_smarty->assign('slist',$shootAddList['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
@@ -189,7 +189,7 @@ class Shoot extends My_Controller {
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $project_list=$this->project->getProjectList($arr);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $page_url=$this->root_path.'marlboro/noMeasure?';
+        $page_url=$this->root_path.'marlboro/shootBackDetail?';
         //获取传递参数并转为page_yrl
         $arr=$this->input->get();
         if(!isset($arr['status'])){
@@ -232,7 +232,7 @@ class Shoot extends My_Controller {
             }
             echo $this->phpExcel($fileName,$fields, $query,'','25','20');
         }
-        $showPage= parent::page($page_url,5,$shootBackList['totalCount']);
+        $showPage= parent::page($page_url,10,$shootBackList['total']);
         $this->ci_smarty->assign('slist',$shootBackList['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('shoot/shoot_back_detail.tpl');
@@ -242,7 +242,7 @@ class Shoot extends My_Controller {
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         $arr['gtin']=$this->input->post('gtin');
-     //   $arr['gtin']='6939649908917';
+        //$arr['gtin']='6920177962076';
         $data=$this->marlboro->getInfoByGtin($arr);
         //获取所有的项目
         echo $data;

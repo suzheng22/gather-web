@@ -20,6 +20,8 @@ class Marlboro_model extends MY_Model {
         $url=$this->user_api_url."/user/getUserInfoByIds?token=".$token;
         $return=$this->curl($url,$data);
         $user_list=json_decode($return,true);
+        $count=$list['count'];
+        $list=$list['data'];
         $num=0;
         foreach ($list as $k => $v){
             foreach ($user_list as $k1=>$v1){
@@ -32,7 +34,9 @@ class Marlboro_model extends MY_Model {
                 }
             }
         }
-        return $list;
+        $return_list['data']=$list;
+        $return_list['total']=$count;
+        return $return_list;
     }
     //获取拍摄详情
     function getMarlboroDetail($data){
@@ -40,7 +44,8 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url.'/shoot/MarlboroDetail?token='.$token;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
-        $count=count($list['data']);
+        $count=count($list['data']['data']);
+        $total=$list['data']['count'];
         $datas=$list['data'];
         for ($i=0;$i<$count;$i++){
             foreach ($datas[$i] as $key=>$val){
@@ -57,8 +62,8 @@ class Marlboro_model extends MY_Model {
                 }
             }
         }
-        $return_data['total']=$count;
-        $return_data['data']=$datas;
+        $return_data=$datas;
+        $return_data['total']=$total;
         return $return_data;
     }
 
@@ -153,6 +158,7 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url."/shoot/getShootOrderList?token=".$token;
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
+        $goodsName=$this->goods_model->getGoodsByGtin($data);
         //返回数据的容量
         $project_data=array();
         //项目的容量
@@ -171,13 +177,14 @@ class Marlboro_model extends MY_Model {
         $packet=array_values($packet);
         $project_data['packet']=$packet;
         $project_data['gtin']=$data['gtin'];
+        $project_data['gName']=$goodsName['gName'];
        foreach($project as $key=>$val){
             $data['pId']=$project[$key];
             //根据pId去获取所有的项目名称
             $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
             $return=$this->curl($url,$data);
             $projects=json_decode($return,true);
-            $project_data['project'][]=$projects[0];
+            $project_data['project'][]=$projects['data'][0];
         }
         //获取包装
         return json_encode($project_data);
@@ -222,8 +229,10 @@ class Marlboro_model extends MY_Model {
     }
     function back($datas,$data){
         $token=$data['token'];
-        $count=count($datas);
-        for($i=0;$i<$count;$i++){
+        $count=$datas['count'];
+        $datas=$datas['data'];
+        $total=count($datas);
+        for($i=0;$i<$total;$i++){
             foreach( $datas[$i] as $key=>$val){
                 $datas[$i]['lId']=($i+1);
                 if($key==='userId'||$key==='retouchId'){
@@ -238,7 +247,7 @@ class Marlboro_model extends MY_Model {
                     $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
                     $return =$this->curl($url,$data);
                     $project=json_decode($return,true);
-                    $datas[$i]['pName']=$project[0]['pName'];
+                    $datas[$i]['pName']=$project['data'][0]['pName'];
                 }else if($key=='gtin'){
                     $data[$key]=$val;
                     $url=$this->more_api_url."/goods/getGoodsInfo?token=".$token;

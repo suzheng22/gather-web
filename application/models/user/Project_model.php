@@ -46,13 +46,14 @@ class Project_model extends MY_Model {
         $project['data']=$datas;
         return $project;
     }
-    //根据条件获取项目
+    //根据条件获取项目用户
     function getProjectUserByField($data){
         $token=$data['token'];
         $url=$this->user_api_url."/user/getProjectUserByFiled?token=".$token;
         $return =$this->curl($url,$data);
         $datas=json_decode($return,true);
-
+        $total=$datas['count'];
+        $datas=$datas['data'];
         $count=count($datas);
         for($i=0;$i<$count;$i++){
             foreach( $datas[$i] as $key=>$val){
@@ -91,16 +92,21 @@ class Project_model extends MY_Model {
                 }
             }
         }
-        $data_return['total']=$count;
+        $data_return['total']=$total;
         $data_return['data']=$datas;
         return $data_return;
     }
-    //根据条件获取用户信息
+    //根据条件获取项目
     function getProjectByField($data){
-        $token=$data['token'];
-        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-        $return =$this->curl($url,$data);
+        $token=($data['token']);
+        if($data['page']==""){
+            $data['page']=1;
+        }
+        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token."&page={$data['page']}";
+        $return =$this->curl($url,$data,'get');
         $datas=json_decode($return,true);
+        $total=$data['count'];
+        $datas=$datas['data'];
         $count=count($datas);
         $s=0;
         for($i=0;$i<$count;$i++){
@@ -146,7 +152,7 @@ class Project_model extends MY_Model {
             }
         }
         //   var_dump($datas);
-        $data_return['total']=$count;
+        $data_return['total']= $total;
         $data_return['data']=$datas;
         //    var_dump($data_return);
         return $data_return;
