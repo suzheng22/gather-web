@@ -244,7 +244,7 @@ $(function(){
                                 }
                             }
                             $("#pack_22").html(option);
-                            alert(option);
+                            //alert(option);
                             var option1="";
                             var project=data.project;
                             for(var i in project){
