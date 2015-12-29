@@ -70,7 +70,7 @@
                           <td>{{$list.allAuditCount}}</td>
                           <td>{{((($list.auditCount)/$list.chouchatotalCount)|number_format:4)*100}}%</td>
                           <td>
-                        	<a href="{{$root_path}}retouch/psCheckDetail/{{$list.retouchUserId}}/{{$list.noAuditCount}}/{{$list.chouchatotalCount}}/{{$list.auditCount}}">详情</a>
+                        	<a href="{{$root_path}}retouch/psCheckDetail/{{$list.retouchUserId}}/{{$list.noAuditCount}}/{{$list.passCount}}/{{$list.auditCount}}">详情</a>
                           </td>
                       </tr>
                        {{/foreach}}

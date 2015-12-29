@@ -36,7 +36,6 @@ class Marlboro_model extends MY_Model {
                 }
             }
         }
-        var_dump($list);
         $return_list['data']=$list;
         $return_list['total']=$count;
         return $return_list;

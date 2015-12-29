@@ -25,13 +25,14 @@ class Retouch extends My_Controller
         $this->ci_smarty->assign('group_list',$group_list['list']);
         $page_url=$this->root_path."Retouch/psCheckList?";
         $arr=$this->input->get();
-        $data['userId']=$this->user_info['userId'];
-        $str=$this->user->getUserIdsByFiled($data);
-        $user_id_list=json_decode($str,true);
+        //$data['userId']=$this->user_info['userId'];
+        if($arr['groupId']!=""||$arr['username']!=""){
+            $str=$this->user->getUserIdsByFiled($data);
+            $user_id_list=json_decode($str,true);
+            $data['userIds']=serialize($user_id_list);
+        }
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
-        $data['userIds']=serialize($user_id_list);
-        $data['token']=$this->user_info['token'];
-        $data['userId']=$this->user_info['userId'];
+       // $data['userId']=$this->user_info['userId'];
         $list=$this->retouch->getMarlboroList($data);
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('glist',$list['data']);

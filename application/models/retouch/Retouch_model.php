@@ -26,6 +26,8 @@ class Retouch_model extends MY_Model
              $return=$this->curl($url,$data);
              $group=json_decode($return,true);
              $list[$k]['groupName']=$group['groupName'];
+             $list[$k]['passCount']=round(($list[$k]['auditCount']/$list[$k]['chouchatotalCount']),4);
+             $list[$k]['passCount']=mb_substr($list[$k]['passCount'],0,6);
          }
          $return_detail['total']=$count;
          $return_detail['data']=$list;
