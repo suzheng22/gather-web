@@ -79,7 +79,7 @@
                         <td>{{((($list.MarlboroCount)/$list.chouchatotalCount)|number_format:4)*100}}%</td>
 
                         <td>
-                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}/{{$list.passCount}}/{{$list.noMarlboroCount}}/{{$list.MarlboroCount}}">详情</a>
+                        	<a href="{{$root_path}}marlboro/shootDetail/{{$list.photoId}}/{{$list.chouchatotalCount}}/{{$list.noMarlboroCount}}/{{$list.MarlboroCount}}">详情</a>
                         </td>
                       </tr>
                        {{/foreach}}
