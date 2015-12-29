@@ -223,12 +223,14 @@ $(function(){
                 bShadeClose:false,          //是否点遮罩关闭
                 fnAdditional:function(e){
                     var id=$(e).get(0).id;
+                    alert(id);
                     $.ajax({
                         url:'{{$root_path}}shoot/getNewPicInfo',
                         data:{'id':id},
                         dataType:'json',
                         type:'POST',
                         success:function(data){
+                            alert(data);
                             localStorage.setItem("id",id);
                             $("#gtin_2").val(data['gtin']);
                             $("#proName_2").val(data['gName']);
