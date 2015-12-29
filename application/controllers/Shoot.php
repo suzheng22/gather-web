@@ -189,7 +189,7 @@ class Shoot extends My_Controller {
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $project_list=$this->project->getProjectList($arr);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $page_url=$this->root_path.'marlboro/shootBackDetail?';
+        $page_url=$this->root_path.'shoot/shootBackDetail?';
         //获取传递参数并转为page_yrl
         $arr=$this->input->get();
         if(!isset($arr['status'])){
