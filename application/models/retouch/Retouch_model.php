@@ -40,6 +40,7 @@ class Retouch_model extends MY_Model
         $url=$this->more_api_url."/lingmall/audit/detail";
         $return=$this->curl($url,$data,'get');
         $detail=json_decode($return,true);
+        $orderIds=$detail['orderIds'];
         $count=($detail['count']);
         $detail=$detail['data'];
         $data['token']=urlencode($data['token']) ;
@@ -49,6 +50,7 @@ class Retouch_model extends MY_Model
         }
         $return_detail['total']=$count;
         $return_detail['data']=$detail;
+        $return_detail['orderIds']=$orderIds;
         return $return_detail;
     }
     /*获取某一个修图详情*/
@@ -107,7 +109,8 @@ class Retouch_model extends MY_Model
     /*批量审核通过*/
     function batchPass($data){
         $token=$data['token'];
-        $arr=json_encode($data);
+        $arr['orderIds']=$data['orderIds'];
+        $arr=json_encode($arr);
         $url=$this->more_api_url."/lingmall/audit/checks?token=$token";
         $return=$this->curl($url,$arr,'put');
         return $return;

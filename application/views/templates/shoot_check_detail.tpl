@@ -191,10 +191,30 @@ function check(){
 
 //查询内通过
 function shoot_pass(){
-    var orderIds='{{$glist.orderIds}}';
+    var num=0;
+    var shoot=0;
+    var data_id="";
+    {{foreach from=$glist.orderIds item=list}}
+        var status={{$list.status}};
+        var shootType={{$list.shootType}};
+        var orderId={{$list.orderId}};
+        if(status===1 && shootType!==1){
+            num++;
+        }else{
+            if(status===1 && shootType===1){
+                shoot++;
+                data_id+=orderId+',';
+            }
+        }
+    {{/foreach}}
+    //查询每条数据的拍摄类型，如果拍摄类型是驳回拍摄且状态是未审核状态需要提醒操作人手动操作
+    if(num){
+        alert("你有驳回拍摄的未处理，不能批量操作");
+        return false;
+    }
     //如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
-    if(orderIds!='[]'){
-        var data={orderId:{{$glist.orderIds}}};
+    if(shoot){
+        var data={orderId:data_id};
         //ajax
         $.ajax({
            url:"{{$root_path}}marlboro/shootPass",
@@ -203,6 +223,7 @@ function shoot_pass(){
             dataType:'json',
             success:function(e){
                 alert(e.msgText);
+               window.location.reload();
             }
         });
     }else{

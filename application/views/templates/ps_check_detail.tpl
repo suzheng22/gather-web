@@ -18,7 +18,7 @@
                 <div class="rose_top main_rignt_top clearfix">
 					<form action="{{$root_path}}retouch/psCheckDetail/{{$u_info.userId}}/{{$no}}/{{$total}}/{{$auto}}" method="get">
                         <div class="cc_top_one"><label>修图人:</label><span>{{$u_info.trueName}}</span><input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
-                        <div class="cc_top_one"><label>抽查通过率:</label><span>{{((($auto)/$total)|number_format:4)*100}}%</span></div>
+                        <div class="cc_top_one"><label>抽查通过率:</label><span>{{$total*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/psDetail/{{$u_info.userId}}" id="myform">
@@ -101,7 +101,7 @@
 						  <th>状态</th>
                         <th>操作</th>
                       </tr>
-					  {{foreach from=$glist item=list}}
+					  {{foreach from=$glist.data item=list}}
                       <tr>
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.gName}}</td>
@@ -165,13 +165,11 @@ function shoot_pass(){
 	var num=0;
 	var shoot=0;
 	var data_id="";
-	{{foreach from=$glist item=list}}
-	var gtin={{$list.gtin}};
+	{{foreach from=$glist.orderIds item=list}}
 	var status={{$list.status}};
 	var shootType={{$list.retouchType}};
 	var orderId={{$list.orderId}};
 	if(status===1 && shootType!==1){
-		$(".t_"+gtin).css('color','red');
 		num++;
 	}else{
 		if(status===1 && shootType===1){
@@ -182,10 +180,9 @@ function shoot_pass(){
 	{{/foreach}}
 	//查询每条数据的拍摄类型，如果拍摄类型是驳回拍摄且状态是未审核状态需要提醒操作人手动操作
 	if(num){
-		alert("请手动操作带有红色标识的条码");
+		alert("你的驳回修图未处理，不能批量操作");
 		return false;
 	}
-
 	//如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
 	if(shoot){
 		var data={orderId:data_id};

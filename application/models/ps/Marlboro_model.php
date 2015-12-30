@@ -61,7 +61,7 @@ class Marlboro_model extends MY_Model {
             $project_data['token']=$data['token'];
             $datas[$key]['pName']=$this->project_model->getPNameByPId($project_data);
         }
-        $return_data['orderIds']=json_encode($orderIds);
+        $return_data['orderIds']=($orderIds);
         $return_data['data']=$datas;
         $return_data['total']=$total;
         return $return_data;
@@ -103,6 +103,7 @@ class Marlboro_model extends MY_Model {
     //批量审核通过
     function batchMarlboro($data){
         $token=$data['token'];
+        $data['orderIds']=json_encode($data['orderIds']);
         $url=$this->more_api_url."/shoot/batchMarboro?token=".$token;
         $return=$this->curl($url,$data);
         return json_decode($return);

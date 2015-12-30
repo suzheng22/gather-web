@@ -74,7 +74,7 @@ class Retouch extends My_Controller
         $this->ci_smarty->assign('no',$no);
         $this->ci_smarty->assign('auto',$auto);
         $this->ci_smarty->assign('total',$total);
-        $this->ci_smarty->assign('glist',$list['data']);
+        $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('ps_check_detail.tpl');
     }
@@ -120,10 +120,10 @@ class Retouch extends My_Controller
         $data['status']=$this->input->post('status');
         $data['orderId']=$this->input->post('orderId');
         $data['token']=$this->user_info['token'];
-            //批量通过
+        //批量通过
         $orderId=explode(',',$data['orderId']);
         array_pop($orderId);
-        $data['orderIds']=serialize($orderId);
+        $data['orderIds']=json_encode($orderId);
         $str=$this->retouch->batchPass($data);
         echo $str;
     }

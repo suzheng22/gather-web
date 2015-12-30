@@ -120,9 +120,9 @@ class Marlboro extends My_Controller {
             echo json_encode($str);
         }else{
             //批量通过
-            $orderId=explode(',',$data['orderId']);
-            array_pop($orderId);
-            $data['orderIds']=serialize($orderId);
+            $data['orderIds']=$data['orderId'];
+            $data['orderIds']=explode(",",$data['orderIds']);
+            array_pop($data['orderIds']);
             $str=$this->marlboro_model->batchMarlboro($data);
             echo json_encode($str);
         }
