@@ -150,26 +150,15 @@ $(function(){
 	$(".leftsidebar_box .check_manager dd").show();
 	
 });
-$('#datetimepicker_start').datetimepicker({
+$('#datetimepicker_start,#datetimepicker_end').datetimepicker({
 	onGenerate:function( ct ){
 		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
+				.toggleClass('xdsoft_disabled');
 	},
-		format:'Y/m/d',
-	formatDate:'Y/m/d',
-	minDate:'-1970/01/2',
-	maxDate:'+1970/01/2',
-	timepicker:false
-});
-$('#datetimepicker_end').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
-	},
-		format:'Y/m/d',
-	formatDate:'Y/m/d',
-	minDate:'-1970/01/2',
-	maxDate:'+1970/01/2',
+	format:'Y-m-d',
+	formatDate:'Y-m-d',
+	minDate:'-1970-01-2',
+	maxDate:'+1970-01-2',
 	timepicker:false
 });
 function shoot_pass(){

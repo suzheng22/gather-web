@@ -103,28 +103,17 @@
 	$(".select3").uedSelect({
 		width : 100
 	});
-$('#datetimepicker_start').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
-	},
-		format:'d/m/Y',
-	formatDate:'Y/m/d',
-	minDate:'-1970/01/2',
-	maxDate:'+1970/01/2',
-	timepicker:false
-});
-$('#datetimepicker_end').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
-	},
-		format:'d/m/Y',
-	formatDate:'Y/m/d',
-	minDate:'-1970/01/2',
-	maxDate:'+1970/01/2',
-	timepicker:false
-});
+    $('#datetimepicker_start,#datetimepicker_end').datetimepicker({
+        onGenerate:function( ct ){
+            $(this).find('.xdsoft_date')
+                    .toggleClass('xdsoft_disabled');
+        },
+        format:'Y-m-d',
+        formatDate:'Y-m-d',
+        minDate:'-1970-01-2',
+        maxDate:'+1970-01-2',
+        timepicker:false
+    });
 function btn_empty(){
     $(".proName,.gtin").val(" ");
     $("#datetimepicker_start").val(" ");
