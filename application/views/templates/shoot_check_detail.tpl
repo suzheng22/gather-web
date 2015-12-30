@@ -106,7 +106,7 @@
                         <th>状态</th>
                         <th>操作</th>
                       </tr>
-                      {{foreach from=$glist item=list}}
+                      {{foreach from=$glist.data item=list}}
                       <tr class="t_{{$list.gtin}}">
                         <td>{{$list.gtin}}</td>
                         <td>{{$list.gName}}</td>
@@ -191,42 +191,18 @@ function check(){
 
 //查询内通过
 function shoot_pass(){
-    var num=0;
-    var shoot=0;
-    var data_id="";
-    {{foreach from=$glist item=list}}
-        var gtin={{$list.gtin}};
-        var status={{$list.status}};
-        var shootType={{$list.shootType}};
-        var orderId={{$list.orderId}};
-        if(status===1 && shootType!==1){
-            $(".t_"+gtin).css('color','red');
-            num++;
-        }else{
-            if(status===1 && shootType===1){
-                shoot++;
-                data_id+=orderId+',';
-            }
-        }
-    {{/foreach}}
-    //查询每条数据的拍摄类型，如果拍摄类型是驳回拍摄且状态是未审核状态需要提醒操作人手动操作
-    if(num){
-        alert("请手动操作带有红色标识的条码");
-        return false;
-    }
-    alert(data_id);
+    var orderIds='{{$glist.orderIds}}';
     //如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
-    if(shoot){
-        var data={orderId:data_id};
+    if(orderIds!='[]'){
+        var data={orderId:{{$glist.orderIds}}};
         //ajax
         $.ajax({
            url:"{{$root_path}}marlboro/shootPass",
             data:data,
             type:'POST',
-            dataType:'text',
+            dataType:'json',
             success:function(e){
-              //  alert(e);
-                alert('审核成功');
+                alert(e.msgText);
             }
         });
     }else{

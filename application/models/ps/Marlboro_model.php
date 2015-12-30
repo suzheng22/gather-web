@@ -105,7 +105,7 @@ class Marlboro_model extends MY_Model {
         $token=$data['token'];
         $url=$this->more_api_url."/shoot/batchMarboro?token=".$token;
         $return=$this->curl($url,$data);
-        return $return;
+        return json_decode($return);
     }
     //增加通过缺图
     function addMissFigure($data){

@@ -102,7 +102,7 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('auto',$auto);
         $this->ci_smarty->assign('no',$no);
         $this->ci_smarty->assign('total',$total);
-        $this->ci_smarty->assign('glist',$list['data']);
+        $this->ci_smarty->assign('glist',$list);
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('shoot_check_detail.tpl');
     }
