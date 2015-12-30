@@ -132,8 +132,8 @@ function check(){
                 alert("营养成分名称重复，不能添加");
             }else{
                 alert(e.msg);
+                window.location.reload();
             }
-            window.location.reload();
         }
     })
 }

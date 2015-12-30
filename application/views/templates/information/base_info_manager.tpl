@@ -206,8 +206,9 @@ function check(){
                 alert("\'"+fieldName+"\'已存在,不能重复添加")
             }else{
                 alert(e['msg']);
+                window.location.reload();
             }
-            window.location.reload();
+
         }
     })
 }
