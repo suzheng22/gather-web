@@ -125,10 +125,14 @@ function check(){
     $.ajax({
         url:'{{$root_path}}information/addNutrient',
         data:{desc:desc,nutritionName:nutritionName,sort:sort,nutritionUnit:nutritionUnit,nutritionUnitEn:nutritionUnitEn},
-        dataType:'text',
+        dataType:'json',
         type:'post',
         success:function(e){
-            alert("添加成功")
+            if(e.msg=="nutritionName重复"){
+                alert("营养成分名称重复，不能添加");
+            }else{
+                alert(e.msg);
+            }
             window.location.reload();
         }
     })
@@ -139,9 +143,9 @@ function changeStatus(id,status){
         return false;
     }
     if(status==1){
-        status=2
+        status=2;
     }else{
-        status=1
+        status=1;
     }
     $.ajax({
         url:'{{$root_path}}information/changeNutrientStatus',

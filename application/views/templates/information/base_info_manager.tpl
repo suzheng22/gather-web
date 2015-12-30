@@ -202,7 +202,11 @@ function check(){
         dataType:'json',
         type:'post',
         success:function(e){
-            alert(e['msg']);
+            if(e.msg=="fieldName重复"){
+                alert("\'"+fieldName+"\'已存在,不能重复添加")
+            }else{
+                alert(e['msg']);
+            }
             window.location.reload();
         }
     })
@@ -223,6 +227,7 @@ function changeStatus(id,status){
         dataType:'json',
         type:'post',
         success:function(e){
+
             alert(e.msg);
             window.location.reload();
         }
