@@ -19,8 +19,12 @@ class Goods extends My_Controller {
         if(!isset($get['status'])){
             $get['status']=null;
         }
-        if(!isset($get['page'])){
-            $get['page']=1;
+        if($this->input->post('page')==""){
+            if($get['page']==""){
+                $get['page']=1;
+            }
+        }else{
+            $get['page']=$this->input->post('page');
         }
         $page_url=$this->publicFuc->getUrl($page_url,$get);
         //显示搜索条件的二级分类

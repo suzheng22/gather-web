@@ -390,7 +390,11 @@
             }
         })
     }
-
+    function btn_empty() {
+        $("input[type='text']").val("");
+        $(".select3,.cc_top_one select").val("");
+        $(".uew-select-text").html('全部');
+    }
 </script>
 
 </body>

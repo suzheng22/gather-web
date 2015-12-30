@@ -38,7 +38,10 @@ class MY_Controller extends CI_Controller
 
     function page($url,$pagesize,$nums)
     {
-        $currentPage = $this->input->get('page')?$this->input->get('page'):$this->input->post('post_page');
+        $currentPage = $this->input->get('page')?$this->input->get('page'):$this->input->post('page');
+        if($this->input->post('page')){
+            $currentPage=$this->input->post('page');
+        }
         $pages=ceil($nums/$pagesize);
         if($currentPage>$pages){
             $currentPage=$pages;
@@ -58,10 +61,8 @@ class MY_Controller extends CI_Controller
         {
             $next=$pages;
         }
-    
-        $show ="<form method='post' action=$url><div class='page_nav' id='page_nav'>";
-    
-        
+        $show ="<form method='post' action=$url&page=$currentPage><div class='page_nav' id='page_nav'>";
+
     
         $show.= "<a href='$url&page=$pre' class='pageNum'>上一页</a>";
     
@@ -80,12 +81,12 @@ class MY_Controller extends CI_Controller
         <span>共<em>".$nums."</em>条记录,</span>
         ";
     
-        $show.= "<span>跳转到第<input type='text' name='post_page'  value='$currentPage'>页</span>
+        $show.= "<span>跳转到第<input type='text' name='page'  value='$currentPage'>页</span>
         <input type='submit' value='跳转'>
         </div></form>";
     
-        $showpage[limit]=$limit;
-        $showpage[show]=$show;
+        $showpage['limit']=$limit;
+        $showpage['show']=$show;
         return $showpage;
     }
     

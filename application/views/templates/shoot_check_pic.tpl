@@ -159,7 +159,7 @@
 </div>
 <!-- 驳回弹出层 开始-->
 <div class="newuser_pop" id="shoot_newuser_pop">
-    <div class="tit clearfix"><h4>xxxx-拍摄驳回</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="tit clearfix"><h4>{{$p_info.gtin}}-拍摄驳回</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
     <div class="content">
         <div class="login_main">
             <div class="login_form">
@@ -175,7 +175,7 @@
 
 <!-- 通过缺图  开始-->
 <div class="newuser_pop" id="shoot_pass_less">
-    <div class="tit clearfix"><h4>xxxx-缺图</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="tit clearfix"><h4>{{$p_info.gtin}}-缺图</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
     <div class="content">
         <div class="login_main">
             <div class="login_form">
