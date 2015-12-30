@@ -7,6 +7,7 @@ class Marlboro_model extends MY_Model {
     // Call the CI_Model constructor
       parent::__construct();
         $this->load->model('goods/goods_model');
+        $this->load->model('user/project_model');
     }
     //获取获取拍摄详情列表
     function getMarlboroList1($data){
@@ -52,29 +53,19 @@ class Marlboro_model extends MY_Model {
         $url=$this->more_api_url.'/shoot/MarlboroDetail?token='.$token;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
-        $count=count($list['data']['data']);
+        $orderIds=($list['data']['orderIds']);
         $total=$list['data']['count'];
-        $datas=$list['data'];
-        for ($i=0;$i<$count;$i++){
-            foreach ($datas[$i] as $key=>$val){
-                if($key==='pId'){
-                    $data['pId']=$val;
-                    $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-                    $return =$this->curl($url,$data);
-                    $project=json_decode($return,true);
-                    foreach($project as $k=>$v){
-                        if($data['pId']==$v['pId']){
-                            $datas[$i]['pName']=$v['pName'];
-                        }
-                    }
-                }
-            }
+        $datas=$list['data']['data'];
+        foreach ($datas as $key=>$val){
+            $project_data['pId']=$val['pId'];
+            $project_data['token']=$data['token'];
+            $datas[$key]['pName']=$this->project_model->getPNameByPId($project_data);
         }
-        $return_data=$datas;
+        $return_data['orderIds']=json_encode($orderIds);
+        $return_data['data']=$datas;
         $return_data['total']=$total;
         return $return_data;
     }
-
     //根据orderId获取详细信息
     function getMarlboroInfo($data){
         $token=$data['token'];
@@ -116,7 +107,6 @@ class Marlboro_model extends MY_Model {
         $return=$this->curl($url,$data);
         return $return;
     }
-
     //增加通过缺图
     function addMissFigure($data){
         $token=$data['token'];
@@ -252,10 +242,7 @@ class Marlboro_model extends MY_Model {
                 }else if($key=='pId'){
                     //根据项目Id获取项目名称
                     $data[$key]=$val;
-                    $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-                    $return =$this->curl($url,$data);
-                    $project=json_decode($return,true);
-                    $datas[$i]['pName']=$project['data'][0]['pName'];
+                    $datas[$i]['pName']=  $this->project_model->getPNameByPId($data);
                 }else if($key=='gtin'){
                     $data[$key]=$val;
                     $url=$this->more_api_url."/goods/getGoodsInfo?token=".$token;
@@ -314,14 +301,7 @@ class Marlboro_model extends MY_Model {
     function getPName($data,$token,$pId){
         $arr['pId']=$pId;
         $arr['token']=$token;
-        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-        $return =$this->curl($url,$arr);
-        $datas=json_decode($return,true);
-        foreach($datas['data'] as $key=>$val){
-            if($data['pId']==$val['pId']){
-                $data['pName']=$val['pName'];
-            }
-        }
+        $data['pName']=  $this->project_model->getPNameByPId($arr);
         return $data;
     }
 }

@@ -21,7 +21,7 @@
                         <div class="cc_top_one"><label>抽查通过率:</label><span>{{$total*100}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>
                         <div class="clearfix"></div>
-						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}" id="myform">
+						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}/{{$total}}/{{$no}}/{{$auto}}" id="myform">
                             <!-- 项目 -->
                             <div class="cc_top_one last_show"><label>项目:</label>
                                 <div class="choice_count choice_box vocation">
@@ -214,12 +214,13 @@ function shoot_pass(){
         alert("请手动操作带有红色标识的条码");
         return false;
     }
+    alert(data_id);
     //如果拍摄类型是正常拍摄，且状态是未审核状态则将状态修改为审核状态
     if(shoot){
         var data={orderId:data_id};
         //ajax
         $.ajax({
-           url:"{{$root_path}}retouch/batchPass",
+           url:"{{$root_path}}marlboro/shootPass",
             data:data,
             type:'POST',
             dataType:'text',

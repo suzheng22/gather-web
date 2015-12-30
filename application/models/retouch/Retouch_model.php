@@ -5,6 +5,7 @@ class Retouch_model extends MY_Model
     {
         // Call the CI_Model constructor
         parent::__construct();
+        $this->load->model('user/project_model');
     }
     /*获取修图列表*/
      function getMarlboroList($data){
@@ -44,10 +45,7 @@ class Retouch_model extends MY_Model
         $data['token']=urlencode($data['token']) ;
         foreach($detail as $k=>$v){
             $data['pId']=$v['pId'];
-            $url=$this->user_api_url."/user/getProjectByFiled?token=".$data['token'];
-            $return =$this->curl($url,$data);
-            $project=json_decode($return,true);
-            $detail[$k]['pName']=$project['data'][0]['pName'];
+            $detail[$k]['pName']=$this->project_model->getPNameByPId($data);
         }
         $return_detail['total']=$count;
         $return_detail['data']=$detail;
@@ -67,14 +65,8 @@ class Retouch_model extends MY_Model
         $detail['gName']=$return['data']['gName'];
         $arr['pId']= $detail['pId'];
         $token=(urlencode($data['token']));
-        $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-        $return =$this->curl($url,$arr,'post');
-        $datas=json_decode($return,true);
-        foreach($datas as $key=>$val){
-            if($detail['pId']==$val['pId']){
-                $detail['pName']=$val['pName'];
-            }
-        }
+        $arr['token']=$token;
+        $detail['pName']=$this->project_model->getPNameByPId($arr);
         //获取商品类型
         // $token=urldecode($token);
         $catId= $detail['catgrory1'];

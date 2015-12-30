@@ -126,7 +126,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plist.4 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$this->pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+                                            <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
 									    {{/foreach}}
                                      </ul>
                                 </div>

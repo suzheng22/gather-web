@@ -38,9 +38,9 @@ class Information_model extends MY_Model{
         $arr['sort']=$data['sort'];
         $arr['desc']=$data['desc'];
         $arr['filedType']=$data['filedType'];
-        $data=json_encode($arr);
+        $datas=json_encode($arr);
         $url=$this->more_api_url."/lingmall/input/add?token=$token";
-        $return=$this->curl($url,$data,'post');
+        $return=$this->curl($url,$datas,'post');
         $list=json_decode($return,true);
         return $list;
     }
