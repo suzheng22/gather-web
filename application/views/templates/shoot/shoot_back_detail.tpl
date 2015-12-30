@@ -34,10 +34,10 @@
                     <div class="cc_top_one last_show"><label>商品分类:</label>
                         <div class="choice_count choice_box vocation">
                             <dl class="select">
-                                <select name="type" class="select3">
+                                <select name="catgrory1" class="select3">
                                     <option value="">全部</option>
                                   {{foreach from=$type_list item=list}}
-                                    <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                    <option value="{{$list.id}}" {{if $catgrory1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
                                   {{/foreach}}
                                 </select>
                             </dl>
@@ -45,17 +45,17 @@
                     </div>
                      <div class="cc_top_one" style="width:50%">
                             <label>驳回时间:</label>
-                         <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
+                         <input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/>
                          <label style="width:20px;">-</label>
-                         <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
+                         <input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/>
                         </div>
                     <div class="cc_top_one last_show"><label>状态:</label>
                         <div class="choice_count choice_box vocation">
                             <dl class="select">
-                                <select name="status" class="select3">
+                                <select name="chuliStatus" class="select3">
                                     <option value="">全部</option>
-                                    <option value="1" {{if $status==1}}selected="selected"{{/if}}>已处理</option>
-                                    <option value="2" {{if $status==2}}selected="selected"{{/if}}>未处理</option>
+                                    <option value="1" {{if $chuliStatus==1}}selected="selected"{{/if}}>未处理</option>
+                                    <option value="2" {{if $chuliStatus==2}}selected="selected"{{/if}}>已处理</option>
                                 </select>
                             </dl>
                         </div>

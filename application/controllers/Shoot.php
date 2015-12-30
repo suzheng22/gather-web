@@ -138,12 +138,13 @@ class Shoot extends My_Controller {
         }
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
-        if($arr['s_time']!=''&&$arr['e_time']!=''){
+        if($arr['s_time']!='' && $arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
         }
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
+
         //获取拍摄管理列表
         $shootAddList=$this->marlboro->getShootAddList($arr);
         if($arr['is_ext']==1){

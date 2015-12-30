@@ -45,9 +45,9 @@
                     </div>
                      <div class="cc_top_one" style="width:50%">
                             <label>反馈时间:</label>
-                         <input type="text" id="datetimepicker_start" name="s_Time" value="{{$s_Time}}"/>
+                         <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
                          <label style="width:20px;">-</label>
-                         <input type="text" id="datetimepicker_end" name="e_Time" value="{{$e_Time}}"/>
+                         <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
                      </div>
                     <div class="cc_top_one last_show"><label>状态:</label>
                         <div class="choice_count choice_box vocation">

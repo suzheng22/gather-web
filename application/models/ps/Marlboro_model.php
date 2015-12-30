@@ -11,19 +11,25 @@ class Marlboro_model extends MY_Model {
     //获取获取拍摄详情列表
     function getMarlboroList1($data){
         $token=$data['token'];
+        $photoIds= $data['photoIds'];
+        if($data['userNmae']==""&&$data['groupId']==""){
+            $data['photoIds']="";
+        }
         $url=$this->more_api_url.'/shoot/MarlboroList?token='.$token;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
         //根据获取得到的userID获取数据
-        $data['ids']=$data['photoIds'];
+        $data['ids']=$photoIds;
+        $user_list=array();
+        if($data['ids']!="N;"){
+            $url=$this->user_api_url."/user/getUserInfoByIds?token=".$token;
+            $return=$this->curl($url,$data);
+            $user_list=json_decode($return,true);
+        }
         //根据每个用户的ID去查找项目的数据
-        $url=$this->user_api_url."/user/getUserInfoByIds?token=".$token;
-        $return=$this->curl($url,$data);
-        $user_list=json_decode($return,true);
         $count=$list['count'];
         $list=$list['data'];
         $num=0;
-
         foreach ($list as $k => $v){
             foreach ($user_list as $k1=>$v1){
                 if($v['photoId']==$v1['userId']){
@@ -56,9 +62,9 @@ class Marlboro_model extends MY_Model {
                     $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
                     $return =$this->curl($url,$data);
                     $project=json_decode($return,true);
-                    foreach($project as $key=>$val){
-                        if($data['pId']==$val['pId']){
-                            $datas[$i]['pName']=$val['pName'];
+                    foreach($project as $k=>$v){
+                        if($data['pId']==$v['pId']){
+                            $datas[$i]['pName']=$v['pName'];
                         }
                     }
                 }
@@ -306,12 +312,12 @@ class Marlboro_model extends MY_Model {
     }
     //获取项目
     function getPName($data,$token,$pId){
-        $arr['pId']=$data[$pId];
-        $arr['token']=$data[$token];
+        $arr['pId']=$pId;
+        $arr['token']=$token;
         $url=$this->user_api_url."/user/getProjectByFiled?token=".$token;
-        $return =$this->curl($url,$data);
+        $return =$this->curl($url,$arr);
         $datas=json_decode($return,true);
-        foreach($datas as $key=>$val){
+        foreach($datas['data'] as $key=>$val){
             if($data['pId']==$val['pId']){
                 $data['pName']=$val['pName'];
             }

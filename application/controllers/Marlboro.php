@@ -39,7 +39,7 @@ class Marlboro extends My_Controller {
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         $page_url=$this->root_path.'/marlboro/shoot?';
-        $group_list=$this->user_model->getGroupListByRole(3);
+        $group_list=$this->user_model->getGroupListByRole();
         $this->ci_smarty->assign('group_list',$group_list['list']);
         //获取项目
         $project_list=$this->project->getProjectList($data);
@@ -48,14 +48,13 @@ class Marlboro extends My_Controller {
         if(!isset($arr['page'])){
             $post['page']=1;
         }
-        $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //根据用户名和用户组确定userId
-        $str=$this->user->getUserIdsByFiled($arr);
-        if($str){
-            $user_id_list=json_decode($str,true);
-           $arr['photoIds']=serialize($user_id_list);
-        };
+            $str=$this->user->getUserIdsByFiled($arr);
+            if($str){
+                $user_id_list=json_decode($str,true);
+                $arr['photoIds']=serialize($user_id_list);
+            };
         //增加参数
         $page_url=$this->publicFuc->getUrl( $page_url,$arr);
         $list=$this->marlboro_model->getMarlboroList1($arr);
@@ -169,6 +168,7 @@ class Marlboro extends My_Controller {
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
         }
+       // var_dump($arr);
         $arr['token']=$this->user_info['token'];
         //获取拍摄管理列表
         $shootBackManager=$this->marlboro_model->getShootBackManager($arr);

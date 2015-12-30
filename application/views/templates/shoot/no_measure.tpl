@@ -30,14 +30,14 @@
                             </div>
                         </div>
                         <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" class="gtin"/></div>
-                        <div class="cc_top_one"><label>商品名称:</label><input type="text" name="proName" value="{{$gName}}" class="proName"/></div>
+                        <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}" class="proName"/></div>
                     <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box vocation">
                                 <dl class="select">
-                                    <select name="type" class="select3">
+                                    <select name="catgrory1" class="select3">
                                         <option value="">全部</option>
                                       {{foreach from=$type_list item=list}}
-                                        <option value="{{$list.id}}" {{if $type==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                        <option value="{{$list.id}}" {{if $catgrory1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
                                       {{/foreach}}
                                     </select>
                                 </dl>
@@ -45,9 +45,9 @@
                         </div>
                      <div class="cc_top_one" style="width:50%">
                             <label>加入时间:</label>
-                         <input type="text" id="datetimepicker_start" name="start_time" value="{{$start_time}}"/>
+                         <input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/>
                          <label style="width:20px;">-</label>
-                         <input type="text" id="datetimepicker_end" name="end_time" value="{{$end_time}}"/>
+                         <input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/>
                         </div>
                       <div class="clearfix"></div> 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
