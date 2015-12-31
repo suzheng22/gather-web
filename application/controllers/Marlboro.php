@@ -39,15 +39,17 @@ class Marlboro extends My_Controller {
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         $page_url=$this->root_path.'/marlboro/shoot?';
-        $group_list=$this->user_model->getGroupListByRole();
+        $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         //获取项目
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $arr=$this->input->get();
-        if(!isset($arr['page'])){
-            $post['page']=1;
-        }
+        $page=$this->input->get('page');
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         $arr['token']=$this->user_info['token'];
         //根据用户名和用户组确定userId
             $str=$this->user->getUserIdsByFiled($arr);
@@ -56,7 +58,6 @@ class Marlboro extends My_Controller {
                 $arr['photoIds']=serialize($user_id_list);
             };
         //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
         $list=$this->marlboro_model->getMarlboroList1($arr);
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('glist',$list['data']);
@@ -71,26 +72,29 @@ class Marlboro extends My_Controller {
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
         $data['upUserId']=$userId;
+        //获取个人信息
         $str=$this->user->getInfo($data);
         $u_info=json_decode($str,true);
         $this->ci_smarty->assign('u_info',$u_info);
+        //商品分类列表
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
         //获取项目
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path."Marlboro/shootDetail/{$userId}/{$total}/{$no}/{$auto}?";
-        $arr=$this->input->get();
-        if(!isset($arr['status'])){
-            $arr['status']=null;
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(!isset($arr['page'])){
-            $arr['page']=1;
-        }
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //增加参数
-        $page_url=$this->publicFuc->getUrl($page_url,$arr);
         if($arr['s_time']!=''&&$arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
@@ -154,20 +158,19 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'marlboro/shootBackManager?';
         //获取传递参数并转为page_yrl
-        $arr=$this->input->get();
-        if(!isset($arr['status'])){
-            $arr['status']=null;
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(!isset($arr['page'])){
-            $arr['page']=1;
-        }
-        //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         if($arr['s_time']!=''&&$arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
         }
-       // var_dump($arr);
         $arr['token']=$this->user_info['token'];
         //获取拍摄管理列表
         $shootBackManager=$this->marlboro_model->getShootBackManager($arr);

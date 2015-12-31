@@ -23,15 +23,15 @@ class Shoot extends My_Controller {
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         //加入项目
-        $arr=$this->input->get();
-        if(!isset($arr['status'])){
-            $arr['status']=null;
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(!isset($arr['page'])){
-            $arr['page']=1;
-        }
-        //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         if($arr['s_time']!=''&&$arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
@@ -76,15 +76,15 @@ class Shoot extends My_Controller {
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'shoot/noShoot?';
         //加入项目
-        $arr=$this->input->get();
-        if(!isset($arr['status'])){
-            $arr['status']=null;
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(!isset($arr['page'])){
-            $arr['page']=1;
-        }
-        //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         if($arr['s_time']!=''&&$arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
@@ -129,15 +129,15 @@ class Shoot extends My_Controller {
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'shoot/shootAddManager?';
         //加入项目
-        $arr=$this->input->get();
-        if(!isset($arr['status'])){
-            $arr['status']=null;
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(!isset($arr['page'])){
-            $arr['page']=1;
-        }
-        //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         if($arr['s_time']!='' && $arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);
@@ -192,15 +192,15 @@ class Shoot extends My_Controller {
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'shoot/shootBackDetail?';
         //获取传递参数并转为page_yrl
-        $arr=$this->input->get();
-        if(!isset($arr['status'])){
-            $arr['status']=null;
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(!isset($arr['page'])){
-            $arr['page']=1;
-        }
-        //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         if($arr['s_time']!=''&&$arr['e_time']!=''){
             $arr['s_time']=strtotime($arr['s_time']);
             $arr['e_time']=strtotime($arr['e_time']);

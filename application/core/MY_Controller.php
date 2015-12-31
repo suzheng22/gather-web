@@ -61,11 +61,11 @@ class MY_Controller extends CI_Controller
         {
             $next=$pages;
         }
-        $show ="<form method='post' action=$url&page=$currentPage><div class='page_nav' id='page_nav'>";
+        $show ="<form method='post' action=$url id='form'><div class='page_nav' id='page_nav'>";
 
-    
+
         $show.= "<a href='$url&page=$pre' class='pageNum'>上一页</a>";
-    
+
         for($i=1;$i<=$pages;$i++)
         {
             if($i>$currentPage+2 || $i<$currentPage-2)
@@ -75,22 +75,36 @@ class MY_Controller extends CI_Controller
             else
                 $show.= "<a class='pageNum' href='$url&page=$i'>".$i."</a>";
         }
-    
+
         $show.= "<a href='$url&page=$next' class='pageNum'>下一页</a>
         <span>共<em>".$pages."</em>页,</span>
         <span>共<em>".$nums."</em>条记录,</span>
         ";
-    
+
         $show.= "<span>跳转到第<input type='text' name='page'  value='$currentPage'>页</span>
-        <input type='submit' value='跳转'>
+
+      <input type='button' value='跳转' id='submits'>
         </div></form>";
-    
+
         $showpage['limit']=$limit;
         $showpage['show']=$show;
         return $showpage;
     }
-    
-   
+    function getPage($get,$page){
+        if($this->input->post('page')==""){
+            if($page==""){
+                $get['page']=1;
+            }else{
+                $get['page']=$page;
+                unset($page);
+            }
+        }else{
+            $get['page']=$this->input->post('page');
+        }
+        return $get;
+    }
+
+
     
 
     function export_csv($filename,$data)

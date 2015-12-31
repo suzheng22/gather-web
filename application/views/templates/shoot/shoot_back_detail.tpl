@@ -144,7 +144,12 @@
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 
-	
+    //分页表单提交
+    $("#submits").on("click",function(){
+        var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
+        $("#form").attr("action",action);
+        $("#form").submit();
+    });
 	//select 表单美化
 	$(".select3").uedSelect({
 		width : 100

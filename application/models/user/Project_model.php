@@ -152,7 +152,7 @@ class Project_model extends MY_Model {
             }
         }
         //   var_dump($datas);
-        $data_return['total']= $total;
+        $data_return['total']= $count;
         $data_return['data']=$datas;
         //    var_dump($data_return);
         return $data_return;

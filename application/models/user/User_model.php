@@ -11,8 +11,13 @@ class User_model extends MY_Model {
     //登录
     function checkLogin($data){
         $token=$data['token'];
+        $post['userName']=$data['userName'];
+        $post['pwd']=$data['pwd'];
+        $post['loginType']=1;
+        $data=json_encode($post);
         $url=$this->user_api_url."/user/login?token=".$token;
-		$return=$this->curl($url,$data);
+		$return=$this->curl($url,$data,'post');
+      //  var_dump($return);
         return $return;
     }
     

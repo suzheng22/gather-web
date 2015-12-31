@@ -7,6 +7,7 @@ class Project extends My_Controller {
     {
         parent::__construct();
         $this->load->model('user/project_model');
+        $this->load->model('publicFuc/publicFuc_model','publicFuc');
     }
     //商品管理
     function projectManager(){
@@ -17,23 +18,20 @@ class Project extends My_Controller {
         $project_list=$this->project_model->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'project/projectManager?';
-        $project=$this->input->get('pId');
-        $status=$this->input->get('status');
-        if(isset($project)){
-            $arr['pId']=$project;
-            $page_url.='project='.$project."&";
-            $this->ci_smarty->assign('project',$project);
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(isset($status)){
-            $arr['status']=$status;
-            $page_url.='status='.$status."&";
-            $this->ci_smarty->assign('status',$status);
-        }
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         //获取项目列表
         $p_list=$this->project_model->getProjectByField($arr);
-        $showPage= parent::page($page_url,3,$p_list['total']);
+        $showPage= parent::page($page_url,10,$p_list['total']);
         //获取项目标签
         $this->ci_smarty->assign('plist',$p_list['data']);
 
@@ -48,25 +46,17 @@ class Project extends My_Controller {
         $project_list=$this->project_model->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path.'project/projectUserManager?';
-        $project=$this->input->get('pId');
-        $status=$this->input->get('status');
-        $username=$this->input->get('username');
-        if(isset($project)){
-            $arr['pId']=$project;
-            $page_url.='pId='.$project."&";
-            $this->ci_smarty->assign('project',$project);
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(isset($username)&&$username!=""){
-            $arr['pUserIds']=serialize($username);
-            $page_url.='username='.$username."&";
-            $this->ci_smarty->assign('username',$username);
-        }else{
-
-        }
-        if(isset($status)){
-            $arr['status']=$status;
-            $page_url.='status='.$status."&";
-            $this->ci_smarty->assign('status',$status);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
+        if(isset($arr['username'])&&$arr['username']!=""){
+            $arr['pUserIds']=serialize($arr['username']);
         }
         //获取用户角色
         $no_master['userId']=$this->user_info['userId'];
@@ -84,7 +74,7 @@ class Project extends My_Controller {
         //获取项目列表
         $project_lists=$this->project_model->getProjectUserByField($arr);
        // var_dump($project_list);
-        $showPage= parent::page($page_url,1,$project_lists['total']);
+        $showPage= parent::page($page_url,10,$project_lists['total']);
         //获取项目标签
         $this->ci_smarty->assign('plist',$project_lists['data']);
         $this->ci_smarty->assign('pages',$showPage['show']);

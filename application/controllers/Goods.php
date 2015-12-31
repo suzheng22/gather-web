@@ -15,18 +15,12 @@ class Goods extends My_Controller {
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path."goods/goodsClassify?";
+        $page=$this->input->get('page');
         $get=$this->input->get();
-        if(!isset($get['status'])){
-            $get['status']=null;
-        }
-        if($this->input->post('page')==""){
-            if($get['page']==""){
-                $get['page']=1;
-            }
-        }else{
-            $get['page']=$this->input->post('page');
-        }
+        //去掉page重新匹配
+        unset($get['page']);
         $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $get=$this->getPage($get,$page);
         //显示搜索条件的二级分类
         if(isset($get['catgrory1'])&&$get['catgrory1']!=''){
             $a['catId']=$get['catgrory1'];

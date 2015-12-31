@@ -75,8 +75,8 @@
                             </div>
                         </div>
 							<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label>
-								<input type="text" id="datetimepicker_start" name="stime" value="{{$stime}}"/> <label style="width:20px;">-</label>
-								<input type="text" id="datetimepicker_end" name="etime" value="{{$etime}}"/></div>
+								<input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/> <label style="width:20px;">-</label>
+								<input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/></div>
 							<div class="clearfix"></div>
                         <div class="clearfix"></div>
                     <div class="cc_top_two">
@@ -134,7 +134,12 @@
 <script type="text/javascript">
 
 $(function(){
-	
+	//分页表单提交
+	$("#submits").on("click",function(){
+		var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
+		$("#form").attr("action",action);
+		$("#form").submit();
+	});
 	
 	//select 表单美化
 	$(".select3").uedSelect({

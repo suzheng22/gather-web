@@ -148,7 +148,12 @@
 
 <script type="text/javascript">
 $(function(){
-
+//分页表单提交
+    $("#submits").on("click",function(){
+        var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
+        $("#form").attr("action",action);
+        $("#form").submit();
+    });
 	//select 表单美化
 	$(".select3").uedSelect({
 		width : 112

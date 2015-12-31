@@ -21,19 +21,28 @@ class Retouch extends My_Controller
         $data['token']=$this->user_info['token'];
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $group_list= $this->user->getGroupListByRole();
+        $group_list= $this->user->getGroupListByRole(4);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         $page_url=$this->root_path."Retouch/psCheckList?";
-        $arr=$this->input->get();
+        $page=$this->input->get('page');
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         //$data['userId']=$this->user_info['userId'];
         if($arr['groupId']!=""||$arr['username']!=""){
-            $str=$this->user->getUserIdsByFiled($data);
+            $user['groupId']=$arr['groupId'];
+            var_dump($user['groupId']);
+            $user['username']=$arr['username'];
+            $user['token']=$data['token'];
+            $str=$this->user->getUserIdsByFiled($user);
+            var_dump($str);
             $user_id_list=json_decode($str,true);
-            $data['userIds']=serialize($user_id_list);
+            $arr['userIds']=serialize($user_id_list);
         }
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
        // $data['userId']=$this->user_info['userId'];
-        $list=$this->retouch->getMarlboroList($data);
+        $list=$this->retouch->getMarlboroList($arr);
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
@@ -54,22 +63,24 @@ class Retouch extends My_Controller
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
         $page_url=$this->root_path."Retouch/psCheckDetail/{$userId}/{$no}/{$total}/{$auto}?";
-        $arr=$this->input->get();
-        if(!isset($arr['status'])){
-            $arr['status']=null;
+        //分页
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
         }
-        if(!isset($arr['page'])){
-            $arr['page']=1;
-        }
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $arr=$this->getPage($get,$page);
         $arr['retouchUserId']=$userId;
         //增加参数
-        $page_url=$this->publicFuc->getUrl( $page_url,$arr);
         $arr['token']=$this->user_info['token'];
-        $list=$this->retouch->getRetouchDetail($arr);
-        if($arr['stime']!=''&&$arr['etime']!=''){
-            $arr['stime']=strtotime($arr['stime']);
-            $arr['etime']=strtotime($arr['etime']);
+        if($arr['s_time']!=''&& $arr['e_time']!=''){
+            $arr['s_time']=strtotime($arr['s_time']);
+            $arr['e_time']=strtotime($arr['e_time']);
         }
+        $list=$this->retouch->getRetouchDetail($arr);
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('no',$no);
         $this->ci_smarty->assign('auto',$auto);

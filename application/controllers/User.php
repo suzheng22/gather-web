@@ -15,11 +15,9 @@ class User extends My_Controller {
           
             $data['userName']=$this->input->post('userName');
 			$data['pwd']=$this->input->post('pwd');
-			
 			$json=$this->user_model->checkLogin($data);
 			//echo $json;exit;
 			$arr=json_decode($json,'true');
-
             if($arr['msgCode']>0){
                 $msg=$arr['msg'];
                echo "<script>alert('".$msg."');window.location.href='".$this->root_path."user/login'</script>";
@@ -82,7 +80,7 @@ class User extends My_Controller {
             if($data['currentPage']==''){
                 $data['currentPage']=1;
             }
-            
+
             
             $data['userId']=$this->user_info['userId'];
             $data['token']=$this->user_info['token'];

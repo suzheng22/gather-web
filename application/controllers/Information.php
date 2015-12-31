@@ -18,14 +18,15 @@ class Information extends My_Controller{
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path."information/baseInfoManager?";
         /*处理表单数据*/
-        $get=$this->input->get();
+        $page=$this->input->get('page');
         if(!isset($get['status'])){
             $get['status']=null;
         }
-        if(!isset($get['page'])){
-            $get['page']=1;
-        }
-        $page_url=$this->publicFuc->getUrl( $page_url,$get);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $get=$this->getPage($get,$page);
         $get['token']=$this->user_info['token'];
         /*获取基本信息列表*/
         $list=$this->information->getBaseInfoList($get);
@@ -42,14 +43,15 @@ class Information extends My_Controller{
         $data['token']=$this->user_info['token'];
         $page_url=$this->root_path."information/nutrientInfo?";
         /*处理表单数据*/
-        $get=$this->input->get();
+        $page=$this->input->get('page');
         if(!isset($get['status'])){
             $get['status']=null;
         }
-        if(!isset($get['page'])){
-            $get['page']=1;
-        }
-        $page_url=$this->publicFuc->getUrl( $page_url,$get);
+        $get=$this->input->get();
+        //去掉page重新匹配
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $get=$this->getPage($get,$page);
         $get['token']=$this->user_info['token'];
         /*获取扩充成分列表*/
         $list=$this->information->getNutrientList($get);
