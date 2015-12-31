@@ -11,10 +11,13 @@ class Marlboro_model extends MY_Model {
     }
     //获取获取拍摄详情列表
     function getMarlboroList1($data){
+
         $token=$data['token'];
         $photoIds= $data['photoIds'];
-        if($data['userNmae']==""&&$data['groupId']==""){
+        if($data['userName']==""&&$data['groupId']==""){
             $data['photoIds']="";
+        }if($data['photoIds']=="N;"){
+            $data['photoIds']=5;
         }
         $url=$this->more_api_url.'/shoot/MarlboroList?token='.$token;
         $return=$this->curl($url,$data);
