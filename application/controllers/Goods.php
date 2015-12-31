@@ -86,7 +86,7 @@ class Goods extends My_Controller {
     }
     //获取图片
     function getImage(){
-        $data['gtin']='6920177962090';
+        $data['gtin']=$this->input->get('gtin');
         $return = $this->goods->getAllImage($data);
         $url= "http://7xny7g.com2.z0.glb.qiniucdn.com/{$return[1][0]['key']}-thumbnail500";
         echo $url;

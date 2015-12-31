@@ -361,7 +361,7 @@ class Curl {
 
 			curl_close($this->session);
 			$this->set_defaults();
-			$this->debug();
+		//	$this->debug();
 			return FALSE;
 		}
 
