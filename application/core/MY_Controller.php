@@ -31,7 +31,7 @@ class MY_Controller extends CI_Controller
         $this->root_path=ROOTPATH;
 
         $resource_url=RESOURCE;
-
+        $this->ci_smarty->assign('pic_path','http://7xny7g.com2.z0.glb.qiniucdn.com/');
         $this->ci_smarty->assign('root_path', $this->root_path);
         $this->ci_smarty->assign('resource_url', $resource_url);
     }
