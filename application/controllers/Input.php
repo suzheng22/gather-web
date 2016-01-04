@@ -7,25 +7,22 @@ class Input extends My_Controller {
     {
         parent::__construct();
         $this->load->model('input/input_model');
+        $this->load->model('ps/marlboro_model');
     }
-    
+    function inputManager(){
+        $this->ci_smarty->display('input/inputManager.tpl');
+    }
     function index(){
-        $data['uid']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-        $skuInfo=$this->input_model->getSkuInfo($data);
-        foreach ($skuInfo['type']['basic_info'] as $k=>$v){
-            if($v[field]=='field14'&& $v['type']==2){
-                $skuInfo['goods']['typeBasicInfo']['field14'];
-                $temp_arr=unserialize($skuInfo['goods']['typeBasicInfo']['field14']);
-                if(is_array($temp_arr)){
-                    $skuInfo['Nutrient']=$temp_arr;
-                }
-            }
-        }
-        //exit;
-       //print_r($skuInfo['Nutrient']);exit;
-        $this->ci_smarty->assign('skuInfo', $skuInfo);
-        $this->ci_smarty->display('input.tpl');
+        $data['orderId']=$this->input->get("orderId");
+        $data['gtin']=$this->input->get("gtin");
+        $data['batchNo']=1;
+        $data['packet']=1;
+        $list=$this->marlboro_model->getAllImage($data);
+        //获取图片
+        $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('picList',$list[1]);
+        $this->ci_smarty->display('input/record.tpl');
     }
     
     function saveBaseInfo(){
