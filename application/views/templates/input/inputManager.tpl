@@ -85,7 +85,7 @@
                                 <td>{{$list.type}}</td>
                                 <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                                 <td>{{if $list.status==1}}未处理{{else if $list.status==2}}已处理 {{/if}}</td>
-                                <td><a href="{{$root_path}}input/index?orderId=1&gtin=6901333110746" target="_blank">编辑</a></td>
+                                <td><a href="{{$root_path}}input/index?orderId=1&gtin=6901333110746&packet=1&batchNo=1" target="_blank">编辑</a></td>
                                 <!-- 新增字段 -->
                             </tr>
 
@@ -101,7 +101,7 @@
                                 <td>{{$list.type}}</td>
                                 <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                                 <td>{{if $list.status==1}}未处理{{else if $list.status==2}}已处理 {{/if}}</td>
-                                <td><a href="{{$root_path}}input/index?orderId={{$root_path.orderId}}&gtin={{$list.gtin}}" target="_blank">详细</a></td>
+                                <td><a href="{{$root_path}}input/index?orderId={{$root_path.orderId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">详细</a></td>
                                 <!-- 新增字段 -->
                             </tr>
                             {{/foreach}}

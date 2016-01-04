@@ -7,7 +7,20 @@
 </head>
 <body>
 <!------------------------顶部j-top------------------------------------->
-{{include file='public/top.tpl'}}
+<div class="j-top">
+    <div class="j-top-warp">
+        <div class="j-top-warp">
+            <h3>数据采集系统</h3>
+            <div class="top_right"><span>RingKing</span><em>,欢迎你</em><a href="#">退出</a></div>
+        </div>
+        <ul class="clearfix" id="nav_info">
+            <li class="black"><em>商品条形码:</em><span>121211212</span></li>
+            <li class="black"><em>可录入商品总数:</em><span>12321312</span></li>
+            <li class="black"><em>今录入商品总数:</em><span>321312321312321</span></li>
+            <li class="black"><em>今录入字数:</em><span>32312312312</span></li>
+        </ul>
+    </div>
+</div>
 <!------------------------顶部结束--------------------------------------->
 <!--------------------------- 录入信息------------------------------------> 
 <div class="record_info_warp">
@@ -352,7 +365,7 @@ $(function(){
 
 		var iv2 = $("#viewer").iviewer(
 		{
-			src: "{{$pic_path}}{{$picList.0.key}}"
+			src: "{{$pic_path}}{{$picList.0.key}}",
 		});
 		//分类-组合包装
 		$("#sku_cf_01").click(function(){
@@ -375,6 +388,7 @@ $(function(){
         	});
 			
 		});
+
 		//营养成分表
 			var tabCounter_zz = 0;
 			$(".add_nutrient").click(function(){
