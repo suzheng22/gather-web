@@ -34,7 +34,7 @@ class User extends My_Controller {
                 if($user['userId']==58){
                     header("Location: ".site_url('shoot/shootAddManager'));
                 }else{
-                    header("Location: ".site_url('user/info'));
+                    header("Location: ".site_url('user/index'));
                 }
 
             }
