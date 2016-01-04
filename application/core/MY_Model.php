@@ -5,12 +5,16 @@ class MY_Model extends CI_Model
     {
         parent::__construct();
          $this->load->library('Curl');
-	     
          $this->user_api_url=USERAPI;
 	     //线上$this->user_api_url="http://121.40.241.156:8000";
 	     $this->tmore_api_url=CONTROL;
-	     $this->more_api_url=MOREAPI;
-        $this->pic_path=PICPATH;
+        if($this->user_info['userId']=="58"){
+            $this->more_api_url="http://139.196.36.81:8008/";
+        }else{
+            $this->more_api_url=MOREAPI;
+        }
+
+         $this->pic_path=PICPATH;
     }
     
     function curl($url,$data,$m='post'){
