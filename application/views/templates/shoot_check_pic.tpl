@@ -289,6 +289,10 @@ function check(status){
         var pId="{{$p_info.pId}}";
         var packet="{{$p_info.packet}}";
         var memo=$("#memos").val();
+        if(memo==""){
+            alert("驳回原因不能为空");
+            return false;
+        }
         var data={gtin:gtin,pId:pId,packet:packet,memo:memo};
         $.ajax({
             url:'{{$root_path}}shoot/addShoot',
