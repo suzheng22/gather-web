@@ -4,6 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>数据采集系统</title>
     {{include file='public/css.tpl'}}
+    <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
+    <style type="text/css">
+        select{opacity:1;}
+    </style>
 </head>
 <body>
 <!------------------------顶部j-top------------------------------------->
@@ -25,7 +29,7 @@
 <!--------------------------- 录入信息------------------------------------> 
 <div class="record_info_warp">
 	<div class="left record_left">
-			<div class="pageContent record_pageContent">
+			<div class="pageContent record_pageContent ps_check_pic">
                 <div class="wrapper">
                     <div id="viewer" class="viewer"></div>
                 </div>
@@ -352,21 +356,24 @@
 <script type="text/javascript">  
 $(function(){ 
 		//预加载
-		$('body').fadeloader({
-			mode: 'class',
-			fadeSpeed : 500,
-			displayType : 'inline-block',
-			easeLoad : 'swing',
-			onComplete : ''
-		});
-		//延时加载
-		$("img").lazyload();
-		//实例化
+    $('body').fadeloader({
+        mode: 'class',
+        fadeSpeed : 500,
+        displayType : 'inline-block',
+        easeLoad : 'swing',
+        onComplete : ''
+    });
+    //延时加载
+    $("img").lazyload();
+    //实例化
+    var is="{{$picList.0.key}}";
+    if(is){
+        var iv2 = $("#viewer").iviewer(
+                {
+                    src: "{{$pic_path}}{{$picList.0.key}}"
+                });
 
-		var iv2 = $("#viewer").iviewer(
-		{
-			src: "{{$pic_path}}{{$picList.0.key}}",
-		});
+    }
 		//分类-组合包装
 		$("#sku_cf_01").click(function(){
 			$("#multiple_sku").hide();
@@ -380,7 +387,7 @@ $(function(){
 			  			  '<label>产品名称：</label>'+
 			  			  '<input type="text"/>'+
 						  '<span class="cf_del">删除</span>'+
-						  '</p>'  
+						  '</p>';
                          multiple_sku_add.append(cf_temp);
 						 $("#multiple_sku .multiple_sku_add").on('click','span.cf_del',function(){ 
 							$(this).parent().remove(); 
