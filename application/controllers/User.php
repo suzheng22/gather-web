@@ -31,7 +31,12 @@ class User extends My_Controller {
                 $user['roleId']=$arr['roleId'];
                 $user_str=serialize($user);
                 set_cookie("user",$user_str,3600*24);
-                header("Location: ".site_url('user/index')); 
+                if($user['userId']==58){
+                    header("Location: ".site_url('shoot/shootAddManager'));
+                }else{
+                    header("Location: ".site_url('user/info'));
+                }
+
             }
             
         }
