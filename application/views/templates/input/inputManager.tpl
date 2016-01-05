@@ -54,7 +54,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                            <a href="{{$root_path}}input/inputAdd" class="query"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
+                            <a href="{{$root_path}}input/inputAdd" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
