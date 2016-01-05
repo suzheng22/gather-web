@@ -90,7 +90,6 @@
 </div>
 {{include file='public/js.tpl'}}
 <script type="text/javascript">
-
 $(function(){
     //分页表单提交
     $("#submits").on("click",function(){
@@ -100,25 +99,25 @@ $(function(){
     });
 	
 	//select 表单美化
-	$(".select3").uedSelect({
+	/*$(".select3").uedSelect({
 		width : 100
-	});
+	});*/
 	
 	//菜单高亮显示和地址栏比对
-	var url = window.location;
+	/*var url = window.location;
     $('.check_manager dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;
     })
     .parents('dd').addClass('active').siblings().removeClass('active');
-	$(".leftsidebar_box .check_manager dd").show();
+	$(".leftsidebar_box .check_manager dd").show();*/
 	
 });
 		//清空
-		function btn_empty(){
+		/*function btn_empty(){
 			$("#user_name").val("");
 			$(".cc_top_one select").val("");
             $(".uew-select-text").html('全部');
-		}
+		}*/
 
 </script>
 

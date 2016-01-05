@@ -173,20 +173,20 @@
 $(function(){
 	
 	//select 表单美化
-	$(".select3").uedSelect({
+	/*$(".select3").uedSelect({
 		width : 100
 	});
 	 $(".select1").uedSelect({
 		width :250			  
-	});
+	});*/
 	
 	//左侧菜单	
-	var url = window.location;
+	/*var url = window.location;
     $('.system_log dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;
     })
     .parents('dd').addClass('active').siblings().removeClass('active');
-	$(".leftsidebar_box .user_manager dd").show();
+	$(".leftsidebar_box .user_manager dd").show();*/
 });
 	function addUser(){
 		var userName=$("#userName").val();
@@ -313,11 +313,11 @@ $(function(){
 	}
 	
 		//清空
-	function btn_empty(){
+	/*function btn_empty(){
 		$("#count_user").val("");
 		$("#user").val("");
 		$(".cc_top_one select").val("");
-	}
+	}*/
 </script>
 
 </body>
