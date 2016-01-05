@@ -6,7 +6,7 @@
 {{include file='public/css.tpl'}}
 
 <script type="text/javascript"  src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	
