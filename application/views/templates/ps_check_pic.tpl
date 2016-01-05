@@ -317,8 +317,11 @@
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
 <!--图片延时加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
-<script type="text/javascript"> 
- 
+<script type="text/javascript">
+    var iv2 = $(" #ps_right .viewer").iviewer(
+            {
+                src: "{{$pic_path}}{{$plistsis.0.key}}"
+            });
 	$(function(){ 
 	
 	//预加载
@@ -336,13 +339,6 @@
 		{
             src: "{{$pic_path}}{{$picList.0.key}}"
 			//?imageView/1/w/500/h/500"
-		});
-
-
-		var iv2 = $(" #ps_right .viewer").iviewer(
-		{
-            src: "{{$pic_path}}{{$plistsis.0.key}}"
-			//?imageView/1/w/500/h/500
 		});
 		//驳回
 		 $("#ps_newuser_pop").pop({
