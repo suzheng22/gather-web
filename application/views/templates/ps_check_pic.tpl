@@ -317,8 +317,12 @@
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
 <!--图片延时加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
-<script type="text/javascript"> 
- 
+<script type="text/javascript">
+    var iv2 = $(" #ps_right .viewer").iviewer(
+            {
+                src: "{{$pic_path}}{{$plistsis.0.key}}"
+                //?imageView/1/w/500/h/500
+            });
 	$(function(){ 
 	
 	//预加载
@@ -339,11 +343,7 @@
 		});
 
 
-		var iv2 = $(" #ps_right .viewer").iviewer(
-		{
-            src: "{{$pic_path}}{{$plistsis.0.key}}"
-			//?imageView/1/w/500/h/500
-		});
+	
 		//驳回
 		 $("#ps_newuser_pop").pop({
 			oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
@@ -355,7 +355,6 @@
 			bShadeClose:false,          //是否点遮罩关闭
 			fnAdditional:function(e){
 
-123
 			}
 		}); 
 		

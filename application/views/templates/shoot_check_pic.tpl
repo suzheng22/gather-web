@@ -225,7 +225,6 @@
 
         }
 
-123
 		//拍摄详情
 		 $("#shoot_newuser_pop").pop({
 			oMain:"#shoot_new_user",         //触发弹出层的元素。为空时直接弹出
