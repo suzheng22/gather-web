@@ -336,14 +336,7 @@
 		//延时加载
 		$("img").lazyload();
 		//实例化
-		var iv2 = $("#viewer").iviewer(
-		{
-            src: "{{$pic_path}}{{$picList.0.key}}"
-			//?imageView/1/w/500/h/500"
-		});
 
-
-	
 		//驳回
 		 $("#ps_newuser_pop").pop({
 			oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
