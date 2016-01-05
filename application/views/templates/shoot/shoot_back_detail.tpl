@@ -143,7 +143,7 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-
+$(function(){
     //分页表单提交
     $("#submits").on("click",function(){
         var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
@@ -161,16 +161,18 @@
     console.log(node.attr('href'));
     node.parents('dd').addClass('active').siblings().removeClass('active');
     $(".leftsidebar_box .menu_shoot_manager dd").show();
-$('#datetimepicker_start,#datetimepicker_end').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
-	},
-		format:'Y-m-d',
-	formatDate:'Y-m-d',
-	minDate:'-1970-01-2',
-	maxDate:'+1970-01-2',
-	timepicker:false
+    
+    $('#datetimepicker_start,#datetimepicker_end').datetimepicker({
+    	onGenerate:function( ct ){
+    		$(this).find('.xdsoft_date')
+    			.toggleClass('xdsoft_disabled');
+    	},
+    		format:'Y-m-d',
+    	formatDate:'Y-m-d',
+    	minDate:'-1970-01-2',
+    	maxDate:'+1970-01-2',
+    	timepicker:false
+    });
 });
 function btn_empty(){
     $(".proName,.gtin").val("");
