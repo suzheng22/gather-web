@@ -260,7 +260,6 @@
                     type:'post',
                     dataType:'json',
                     success:function(f){
-                        alert(id);
                         localStorage.setItem('id',id);
                         $("#gtin1").val(f.gtin);
                         $('#gName1').val(f.gName);
