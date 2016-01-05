@@ -172,19 +172,11 @@
 
 $(function(){
 	
-	/*select 表单美化
-	$(".select3").uedSelect({
-		width : 100
-	});
-	 $(".select1").uedSelect({
-		width :250			  
-	});*/
-	
-	//左侧菜单	
 	var url = window.location;
 	$('.user_manager dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;
-    }).parents('dd').addClass('active').siblings().removeClass('active');
+    })
+	.parents('dd').addClass('active').siblings().removeClass('active');
 	$(".leftsidebar_box .user_manager dd").show();
 });
 	function addUser(){

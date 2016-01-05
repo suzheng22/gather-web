@@ -17,14 +17,14 @@
                 <div class="rose_top main_rignt_top clearfix">
                     <form action="{{$root_path}}shoot/shootAddManager" id="myform">
                         <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" class="gtin"/></div>
-                        <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}" class="proName"/></div>
+                        <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$goodsName}}" class="proName"/></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box vocation">
                                 <dl class="select">
-                                    <select name="catgrory1" class="select3">
+                                    <select name="topCatId" class="select3">
                                         <option value="">全部</option>
                                         {{foreach from=$type_list item=list}}
-                                        <option value="{{$list.id}}" {{if $catgrory1==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
+                                        <option value="{{$list.id}}" {{if $topCatId==$list.id}}selected="selected"{{/if}}>{{$list.name}}</option>
                                         {{/foreach}}
                                     </select>
                                 </dl>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                            <a href="{{$root_path}}shoot/shootAddManager?is_ext=1" class="query"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
+                            <a href="{{$root_path}}input/inputAdd" class="query"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
@@ -85,11 +85,11 @@
                                 <td>{{$list.type}}</td>
                                 <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                                 <td>{{if $list.status==1}}未处理{{else if $list.status==2}}已处理 {{/if}}</td>
-                                <td><a href="{{$root_path}}input/index?orderId=1&gtin=6901333110746&packet=1&batchNo=1" target="_blank">编辑</a></td>
+                                <td><a href="{{$root_path}}input/index?inputId=1&gtin=6901333110746&packet=1&batchNo=1" target="_blank">编辑</a></td>
                                 <!-- 新增字段 -->
                             </tr>
 
-                            {{foreach from=$slist item=list}}
+                            {{foreach from=$glist item=list}}
                             <tr class="t_{{$list.gtin}}">
                                 <td>{{$list.lId}}</td>
                                 <td>{{$list.gtin}}</td>
@@ -101,7 +101,7 @@
                                 <td>{{$list.type}}</td>
                                 <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                                 <td>{{if $list.status==1}}未处理{{else if $list.status==2}}已处理 {{/if}}</td>
-                                <td><a href="{{$root_path}}input/index?orderId={{$root_path.orderId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">详细</a></td>
+                                <td><a href="{{$root_path}}input/index?inputId={{$root_path.inputId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">详细</a></td>
                                 <!-- 新增字段 -->
                             </tr>
                             {{/foreach}}

@@ -236,6 +236,8 @@ class User extends My_Controller {
         }
         
         function editPwd(){
+            var_dump($this->user_info['token']);
+
             $this->ci_smarty->display('usdate_pws.tpl');
         }
         

@@ -8,23 +8,54 @@ class Input extends My_Controller {
         parent::__construct();
         $this->load->model('input/input_model');
         $this->load->model('ps/marlboro_model');
+        $this->load->model('publicFuc/publicFuc_model', 'publicFuc');
     }
     function inputManager(){
+        $page_url=$this->root_path."input/inputManager?";
+        /*处理表单数据*/
+        $page=$this->input->get('page');
+        if(!isset($get['status'])){
+            $get['status']=null;
+        }
+        $get=$this->input->get();
+        unset($get['page']);
+        $page_url=$this->publicFuc->getUrl($page_url,$get);
+        $get=$this->getPage($get,$page);
+        $get['token']=$this->user_info['token'];
+        $list=$this->input_model->getInputList($get);
+        $showpage= parent::page($page_url,10,$list['count']);
+        $this->ci_smarty->assign('glist',$list['data']);
+        $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('input/inputManager.tpl');
     }
     function index(){
+        $data=$this->input->get();
         $data['token']=$this->user_info['token'];
-        $data['orderId']=$this->input->get("orderId");
-        $data['gtin']=$this->input->get("gtin");
-        $data['batchNo']=1;
-        $data['packet']=1;
+        $data['orderId']=$data['inputId'];
         $list=$this->marlboro_model->getAllImage($data);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('picList',$list[1]);
+        //根据orderId获取相关信息
+        $inputInfo=$this->input_model->getInputInfo($data);
+        var_dump($inputInfo);
+        $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->display('input/record.tpl');
     }
-    
+    function inputAdd(){
+        $data['token']=$this->user_info['token'];
+        //根据orderId获取相关信息
+        $inputInfo=$this->input_model->getInputSend($data);
+        var_dump($inputInfo);
+        $data['gtin']=$inputInfo['gtin'];
+        $data['packet']=$inputInfo['packet'];
+        $data['batchNo']=$inputInfo['batchNo'];
+        $this->ci_smarty->assign('p_info',$inputInfo);
+    //    $this->ci_smarty->display('input/record.tpl');
+    }
+
+
+
     function saveBaseInfo(){
         $data['name']=$this->input->post('name');
         $data['brand']=$this->input->post('brand');
