@@ -133,13 +133,12 @@ $(function(){
 	});*/
 	
 	//左侧菜单显示
-	/*var url = window.location;
-    $('.system_log dd a').filter(function (){
+	
+	var url = window.location;
+	$('.user_manager dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;
-    })
-    .parents('dd').addClass('active').siblings().removeClass('active');
+    }).parents('dd').addClass('active').siblings().removeClass('active');
 	$(".leftsidebar_box .user_manager dd").show();
-	*/
 });
 	function addUserGroup(){
 		var groupName=$("#groupName").val();

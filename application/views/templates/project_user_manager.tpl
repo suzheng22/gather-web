@@ -157,6 +157,14 @@ $(function(){
         $("#form").attr("action",action);
         $("#form").submit();
     });
+	
+	
+	//系统管理
+	var url = window.location;
+	$('.user_manager dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    }).parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .user_manager dd").show();
 
 	//用户列表
      $("#newuser_pop").pop({

@@ -70,18 +70,13 @@
 <script type="text/javascript">
 $(function(){
 	
-	
-	//select 表单美化
-	/*$(".select3").uedSelect({
-		width : 100
-	});*/
 	//侧栏菜单美化
-	/*var url = window.location;
-    $('.system_log dd a').filter(function (){
+	var url = window.location;
+	
+	$('.user_manager dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;
-    })
-    .parents('dd').addClass('active').siblings().removeClass('active');
-	$(".leftsidebar_box .user_manager dd").show();*/
+    }).parents('dd').addClass('active').siblings().removeClass('active');
+	$(".leftsidebar_box .user_manager dd").show();
 	
 });
 	function addRole(){
