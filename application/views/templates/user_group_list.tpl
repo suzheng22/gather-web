@@ -123,14 +123,6 @@
 <script  type="text/javascript">
 $(function(){	
 
-
-	//select 表单美化
-	/*$(".select3").uedSelect({
-		width : 100
-	});
-	 $(".select1").uedSelect({
-		width :250			  
-	});*/
 	
 	//左侧菜单显示
 	
