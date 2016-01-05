@@ -12,17 +12,17 @@
 	<h2>{{$p_info.gtin}}条形码-修图详情
       </h2>
 	<ul class="clearfix" id="nav_info">
-         <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
-        <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
-        <li class="black"><em>商品类型:</em><span>{{$p_info.catName}}</span></li>
+         <li class="black clearfix"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
+        <li class="black clearfix"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
+        <li class="black clearfix"><em>商品类型:</em><span>{{$p_info.catName}}</span></li>
         <!-- 拍摄类型 -->
-        <li class="black"><em>拍摄类型:</em><span>{{if $p_info.retouchType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
+        <li class="black clearfix"><em>拍摄类型:</em><span>{{if $p_info.retouchType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
         <!-- 项目 -->
-        <li class="black"><em>项目:</em><span>{{$p_info.pName}}</span></li>
+        <li class="black clearfix"><em>项目:</em><span>{{$p_info.pName}}</span></li>
         <!-- 包装 -->
-        <li class="black"><em>包装:</em><span>包装{{$p_info.packet}}</span></li>
+        <li class="black clearfix"><em>包装:</em><span>包装{{$p_info.packet}}</span></li>
         <!-- 批次 -->
-        <li class="black"><em>批次:</em><span>批次{{$p_info.batchNo}}</span></li>
+        <li class="black clearfix"><em>批次:</em><span>批次{{$p_info.batchNo}}</span></li>
         <div class="clearfix"></div>
         <p class="back_why_info">
             <!-- {{if $p_info.status==3}}-->
