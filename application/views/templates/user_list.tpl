@@ -303,12 +303,14 @@ $(function(){
 		  "text");
 	}
 	
-	/*清空
+	//清空
 	function btn_empty(){
 		$("#count_user").val("");
 		$("#user").val("");
 		$(".cc_top_one select").val("");
-	}*/
+        $(".cc_top_one select,.select3").val("");
+        $(".uew-select-text").html('全部');
+	}
 </script>
 
 </body>
