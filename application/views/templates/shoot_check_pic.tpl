@@ -15,7 +15,7 @@
 	<h2>{{$p_info.gtin}}-拍摄详情</h2>
 	<ul class="clearfix" id="nav_info">
             <li class="black clearfix"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
-            <li class="black clearfix"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
+            <li class="black clearfix"><em>商品名称:</em><span title="{{$p_info.gName}}">{{$p_info.gName}}</span></li>
             <li class="black clearfix"><em>商品类型:</em><span>{{$p_info.name}}</span></li>
         <!-- 拍摄类型 -->
             <li class="black clearfix"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
