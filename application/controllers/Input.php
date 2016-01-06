@@ -62,7 +62,11 @@ class Input extends My_Controller {
     function saveType(){
         $data=$this->input->post();
         //转为数组
+//        $data['info']="1,2,3";
+//        $data['inputId']="1";
+//        $data['filed']="1";
         $data['info']=explode(',',$data['type']);
+       var_dump($data['info']) ;
         //转为json
         $return=$this->input_model->saveType($data);
         echo json_encode($return);

@@ -344,10 +344,10 @@
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{type:v,filed:1,inputId:{{$p_info.inputId}}},
-            dataType:'json',
+            dataType:'text',
             type:'POST',
             success:function(e){
-                alert(e.msg);
+                alert(e);
             }
         });
     }
