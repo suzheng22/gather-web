@@ -93,9 +93,10 @@
 $(function(){
 	//左侧菜单显示
     var url = window.location;
-    $('.menu_base_info dd a').filter(function (){
+    var node=$('.menu_base_info dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;
-    }).parents('dd').addClass('active').siblings().removeClass('active');
+    });
+    node.parents('dd').addClass('active').siblings().removeClass('active');
     $(".leftsidebar_box .menu_base_info dd").show();
 	//用户列表
      $("#newuser_pop").pop({
