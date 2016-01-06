@@ -123,14 +123,6 @@
 <script  type="text/javascript">
 $(function(){	
 
-
-	//select 表单美化
-	/*$(".select3").uedSelect({
-		width : 100
-	});
-	 $(".select1").uedSelect({
-		width :250			  
-	});*/
 	
 	//左侧菜单显示
 	
@@ -195,10 +187,13 @@ $(function(){
 		  	},"text");
 	}
 	//清空
-	/*function btn_empty(){
+	function btn_empty(){
 		$("#user_group_name").val("");
 		$(".cc_top_one select").val("");
-	}*/
+
+        $(".cc_top_one select,.select3").val("");
+        $(".uew-select-text").html('全部');
+	}
 </script>
 
 </body>

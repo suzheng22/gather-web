@@ -114,18 +114,14 @@
 <script type="text/javascript">
 $(function(){
 	
-	//select 表单美化
-	$(".select3").uedSelect({
-		width : 100
-	});
+	
 	
 	//菜单高亮显示和地址栏比对
 	var url = window.location;
-    $('.system_log dd a').filter(function (){
+    $('.counts dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;
-    })
-    .parents('dd').addClass('active').siblings().removeClass('active');
-	$(".leftsidebar_box .counts dd").show();
+    }).parents('dd').addClass('active').siblings().removeClass('active');
+    $(".leftsidebar_box .counts dd").show();
 	
 });
 

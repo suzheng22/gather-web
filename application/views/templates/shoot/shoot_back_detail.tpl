@@ -143,31 +143,36 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-
+$(function(){
     //分页表单提交
     $("#submits").on("click",function(){
         var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
         $("#form").attr("action",action);
         $("#form").submit();
     });
-	//select 表单美化
-	$(".select3").uedSelect({
-		width : 100
-	});
-	
-	$(".select1").uedSelect({
-		width :250			  
-	});
-$('#datetimepicker_start,#datetimepicker_end').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-			.toggleClass('xdsoft_disabled');
-	},
-		format:'Y-m-d',
-	formatDate:'Y-m-d',
-	minDate:'-1970-01-2',
-	maxDate:'+1970-01-2',
-	timepicker:false
+	//左侧菜单显示
+    var url = window.location;
+    var node = $('.menu_shoot_manager dd a')
+        .filter(function (){
+            return this.href == url || url.href.indexOf(this.href) == 0;
+        });
+    console.log(node);
+    console.log(url);
+    console.log(node.attr('href'));
+    node.parents('dd').addClass('active').siblings().removeClass('active');
+    $(".leftsidebar_box .menu_shoot_manager dd").show();
+    
+    $('#datetimepicker_start,#datetimepicker_end').datetimepicker({
+    	onGenerate:function( ct ){
+    		$(this).find('.xdsoft_date')
+    			.toggleClass('xdsoft_disabled');
+    	},
+    		format:'Y-m-d',
+    	formatDate:'Y-m-d',
+    	minDate:'-1970-01-2',
+    	maxDate:'+1970-01-2',
+    	timepicker:false
+    });
 });
 function btn_empty(){
     $(".proName,.gtin").val("");

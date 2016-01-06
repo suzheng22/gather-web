@@ -91,16 +91,12 @@
 {{include file='public/js.tpl'}}
 <script type="text/javascript">
 $(function(){
-//    $(".clear_all").on("click",function(){
-//        alert(1234);
-//    });
-		//select 表单美化
-	$(".select3").uedSelect({
-		width : 100
-	});
-	 $(".select1").uedSelect({
-		width :250			  
-	});
+	//左侧菜单显示
+    var url = window.location;
+    $('.menu_base_info dd a').filter(function (){
+        return this.href == url || url.href.indexOf(this.href) == 0;
+    }).parents('dd').addClass('active').siblings().removeClass('active');
+    $(".leftsidebar_box .menu_base_info dd").show();
 	//用户列表
      $("#newuser_pop").pop({
         oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
