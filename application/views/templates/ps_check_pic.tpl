@@ -45,7 +45,7 @@
 	<div class="left_pc_check" id="left">
 			<div class="pageContent ps_check_pic" >
                 <div class="wrapper">
-                    <div id="viewer" class="viewer"></div>
+                    <div id="viewer1" class="viewer"></div>
                 </div>
                 <h5>修图</h5>
 			</div>
@@ -181,113 +181,12 @@
   	<div class="right ps_right" style="display:none;" id="ps_right">
 		<div class="pageContent ps_check_pic">
                  <div class="wrapper">
-                    <div id="viewer" class="viewer"></div>
+                    <div id="viewer2" class="viewer"></div>
                 </div>
                 <h5>原图</h5>
                <!--	<h3><i class="iconfont">&#xf004c;</i></h3>-->
 		</div>
-	    <!--<div class="detail_zoom_right" style="margin-left:0px;">	
-    			<div class="popup_box" style="margin-top:10px;">
-                 <div class="show_a_01">
-                   	  <div class="pic_box clearfix">
-                            <div class="pic_box_left">
-                                <p>主图jpg</p>
-                            </div>
-                        	<div style="float:left" class="v_show">
-                                <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
-                                <span class="next"><i class="icon iconfont">&#x3464;</i></span>
-                                <div class="v_content">
-                                    <div  class="v_content_list">
-                                        <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.a1 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
-									{{/foreach}}
-                                         </ul>
-                                    </div>
-                                </div>
-                       		</div>
-                    	</div>
-                        <div class="pic_box clearfix">
-                            <div class="pic_box_left">
-                                <p>细节图</p>
-                            </div>
-                           <div style="float:left" class="v_show">
-                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
-                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
-                            <div class="v_content">
-                                <div  class="v_content_list">
-                                    <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.b1 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
-									{{/foreach}}
-                                     </ul>
-                                </div>
-                            </div>
-                       </div>
-                    	</div>
-                        <div class="pic_box clearfix">
-                            <div class="pic_box_left">
-                                <p>标签图</p>
-                            </div>
-                           <div style="float:left" class="v_show">
-                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
-                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
-                            <div class="v_content">
-                                <div  class="v_content_list">
-                                    <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.c1 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
-									{{/foreach}}
-                                     </ul>
-                                </div>
-                            </div>
-                       </div>
-                    	</div>
-                        <div class="pic_box clearfix">
-                            <div class="pic_box_left">
-                                <p>组合图</p>
-                            </div>
-                           <div style="float:left" class="v_show">
-                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
-                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
-                            <div class="v_content">
-                                <div  class="v_content_list">
-                                    <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.d1 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
-									{{/foreach}}
-                                     </ul>
-                                </div>
-                            </div>
-                       </div>
-                    	</div>
-                        <div class="pic_box clearfix">
-                            <div class="pic_box_left">
-                                <p>箱装图</p>
-                            </div>
-                           <div style="float:left" class="v_show">
-                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
-                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
-                            <div class="v_content">
-                                <div  class="v_content_list">
-                                    <ul class="con-FangDa-ImgList">
-                                    {{foreach from=$plist.e2 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list}}?imageView/1/w/200/h/200" mm="{{$list}}" /></li>
-									{{/foreach}}
-                                     </ul>
-                                </div>
-                            </div>
-                       </div>
-                    	</div>
-                   
-                   
-                   
-                   
-            	</div>
-    		</div>
-		</div>--><!--detail_zoom_right-->
-		
-  	</div><!--ps_right-->
+    </div>
   	
 </div>
 <!-- 驳回弹出层 开始-->
@@ -318,11 +217,6 @@
 <!--图片延时加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript">
-    var iv2 = $(" #ps_right .viewer").iviewer(
-            {
-                src: "{{$pic_path}}{{$plistsis.0.key}}"
-                //?imageView/1/w/500/h/500
-            });
 	$(function(){ 
 	
 	//预加载
@@ -336,7 +230,18 @@
 		//延时加载
 		$("img").lazyload();
 		//实例化
-
+        //原图
+        var iv2 = $(" #ps_right #viewer2").iviewer(
+                {
+                    src: "{{$pic_path}}{{$plistsis.0.key}}"
+                    //?imageView/1/w/500/h/500
+                });
+        //修图
+        var iv2 = $(".left_pc_check #viewer1").iviewer(
+                {
+                    src: "{{$pic_path}}{{$picList.0.key}}"
+                    //?imageView/1/w/500/h/500
+                });
 		//驳回
 		 $("#ps_newuser_pop").pop({
 			oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出

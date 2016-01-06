@@ -203,14 +203,7 @@
 <!--图片延时加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript">
-    var is="{{$picList.0.key}}";
-    if(is){
-        var iv2 = $("#viewer").iviewer(
-                {
-                    src: "{{$pic_path}}{{$picList.0.key}}"
-                });
 
-    }
     $(function(){
 		//预加载
 		$('body').fadeloader({
@@ -223,7 +216,14 @@
 		//延时加载
 		$("img").lazyload();
 		//实例化
+        var is="{{$picList.0.key}}";
+        if(is){
+            var iv2 = $("#viewer").iviewer(
+                    {
+                        src: "{{$pic_path}}{{$picList.0.key}}"
+                    });
 
+        }
 		//拍摄详情
 		 $("#shoot_newuser_pop").pop({
 			oMain:"#shoot_new_user",         //触发弹出层的元素。为空时直接弹出
