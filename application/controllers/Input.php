@@ -42,23 +42,31 @@ class Input extends My_Controller {
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->display('input/record.tpl');
     }
+    //录入领取
     function inputAdd(){
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputSend($data);
+        $inputInfo['isGroup']=2;
+       // var_dump($inputInfo['groupGoodsNames']);
        // var_dump($inputInfo['baseFiled']);
         $data['gtin']=$inputInfo['gtin'];
         $data['packet']=$inputInfo['packet'];
         $list=$this->input_model->getAllImage($data);
-
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('picList',$list[1]);
-       $this->ci_smarty->display('input/record.tpl');
+        $this->ci_smarty->display('input/record.tpl');
     }
-
-
-
+    //分类保存
+    function saveType(){
+        $data=$this->input->post();
+        //转为数组
+        $data['info']=explode(',',$data['type']);
+        //转为json
+        $return=$this->input_model->saveType($data);
+        echo json_encode($return);
+    }
     function saveBaseInfo(){
         $data['name']=$this->input->post('name');
         $data['brand']=$this->input->post('brand');

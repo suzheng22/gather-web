@@ -97,22 +97,40 @@
         	<!--分类-->
         	<div class="cf">
                 <div class="cf_Category clearfix">
-                    <span><label for="sku_cf_01">单品</label><input type="radio" id="sku_cf_01" name="sku_cf_01" checked="checked"></span>
-                    <span><label for="sku_cf_02">组合包装</label><input type="radio"/ id="sku_cf_02" name="sku_cf_02"></span>
+                    <span><label for="sku_cf_01">单品</label><input type="radio" id="sku_cf_01" name="sku_cf_01"  {{if $p_info.isGroup==1}}checked="checked"{{/if}}></span>
+                    <span><label for="sku_cf_02">组合包装</label><input type="radio"  {{if $p_info.isGroup==2}} checked="checked" {{/if}}/ id="sku_cf_02" name="sku_cf_02"></span>
                 </div>
-                <div style="display:none;" id="multiple_sku">
+                <div  id="multiple_sku">
+                    {{if $p_info.isGroup==2}}
+
+                    <div class="clearfix multiple_sku_add">
+                        {{foreach from=$p_info.extFiled.data item=list}}
+
+                        <P class="clearfix">
+                            <label>产品名称：</label>
+                            <input type="text" class="product" value="{{$list.type}}"/>
+                            {{if $list.lId!=1}}
+                            <span class="cf_del">删除</span>
+                            {{/if}}
+                        </P>
+                        {{/foreach}}
+                    </div>
+
+                    {{else}}
                     <div class="clearfix multiple_sku_add">
                         <P class="clearfix">
                             <label>产品名称：</label>
-                            <input type="text" />
+                            <input type="text" class="product"/>
                         </P>
                     </div>
+                    {{/if}}
                     <div class="save_box clearfix">
                       <a href="javascript:;" id="cf_add" class="clearfix"><i class="iconfont">&#xf018b;</i>增加</a>
-                      <a href="javascript:;">保存</a>
+                      <a href="javascript:;" onclick="save_product()">保存</a>
                     </div>
-                    
                 </div>
+
+
             </div>
             <!--基本信息-->
         	<div style="display:none;" class="cf">
@@ -311,7 +329,48 @@
                 {
                     src: "{{$pic_path}}{{$picList.0.key}}"
                 });
-
+    }
+    //分类保存
+    function save_product(){
+        var a=$("#multiple_sku input").size();
+        var v="";
+        for (var i=0;i<a;i++){
+            if(i==a-1){
+                v+=$("#multiple_sku input:eq("+i+")").val();
+            }else{
+                v+=$("#multiple_sku input:eq("+i+")").val()+",";
+            }
+        }
+        $.ajax({
+            url:'{{$root_path}}input/saveType',
+            data:{type:v,filed:1,inputId:{{$p_info.inputId}}},
+            dataType:'json',
+            type:'POST',
+            success:function(e){
+                alert(e.msg);
+            }
+        });
+    }
+    //基本信息的保存
+    function save_baseInfo(){
+        var a=$("#multiple_sku input").size();
+        var v="";
+        for (var i=0;i<a;i++){
+            if(i==a-1){
+                v+=$("#multiple_sku input:eq("+i+")").val();
+            }else{
+                v+=$("#multiple_sku input:eq("+i+")").val()+",";
+            }
+        }
+        $.ajax({
+            url:'{{$root_path}}input/saveType',
+            data:{type:v,filed:1,inputId:{{$p_info.inputId}}},
+            dataType:'json',
+            type:'POST',
+            success:function(e){
+                alert(e.msg);
+            }
+        });
     }
 $(function(){
 		//预加载
@@ -333,20 +392,21 @@ $(function(){
 		$("#sku_cf_02").click(function(){
 			$("#multiple_sku").show();
 			//增加分类下的产品名称
-			$("#cf_add").click(function(){
-              var multiple_sku_add = $(".multiple_sku_add");    
-              var cf_temp ='<p class="clearfix">'+
-			  			  '<label>产品名称：</label>'+
-			  			  '<input type="text"/>'+
-						  '<span class="cf_del">删除</span>'+
-						  '</p>';
-                         multiple_sku_add.append(cf_temp);
-						 $("#multiple_sku .multiple_sku_add").on('click','span.cf_del',function(){ 
-							$(this).parent().remove(); 
-						 });	 
-        	});
-			
 		});
+    $("#cf_add").click(function(){
+        var multiple_sku_add = $(".multiple_sku_add");
+        var cf_temp ='<p class="clearfix">'+
+                '<label>产品名称：</label>'+
+                '<input type="text" class="product"/>'+
+                '<span class="cf_del">删除</span>'+
+                '</p>';
+        multiple_sku_add.append(cf_temp);
+
+    });
+    //组合包装的删除
+    $("#multiple_sku .multiple_sku_add").on('click','span.cf_del',function(){
+        $(this).parent().remove();
+    });
 
 		//营养成分表
 			var tabCounter_zz = 0;

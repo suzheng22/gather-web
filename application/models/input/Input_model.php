@@ -45,6 +45,19 @@ class Input_model extends MY_Model {
         $list=json_decode($return,true);
         return $list;
     }
+    //分类保存
+    function saveType($data){
+        $token=$this->user_info['token'];
+        $inputId=$data['inputId'];
+        $arr['filed']=$data['filed'];
+        $arr['info']=$data['info'];
+        $arr['inputCount']=$data['inputCount'];
+        $url=$this->more_api_url."/lingmall/input/{$inputId}?token={$token}";
+        $data=json_encode($arr);
+        $return=$this->curl($url,$data,'put');
+        $return=json_decode($return,true);
+        return $return;
+    }
 
 
 
