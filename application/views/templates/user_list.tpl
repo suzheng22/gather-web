@@ -169,9 +169,7 @@
 </div>
 {{include file='public/js.tpl'}}
 <script  type="text/javascript">
-
-$(function(){
-	
+$(function(){	
 	var url = window.location;
 	$('.user_manager dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;

@@ -97,7 +97,7 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
 <script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-
+$(function(){
     //分页表单提交
     $("#submits").on("click",function(){
         var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
@@ -121,6 +121,8 @@
         maxDate:'+1970-01-2',
         timepicker:false
     });
+
+});
 function btn_empty(){
     $(".proName,.gtin").val(" ");
     $("#datetimepicker_start").val(" ");
