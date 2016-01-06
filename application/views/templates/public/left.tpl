@@ -6,8 +6,7 @@
                 <dt><i class="icon iconfont">&#xf0178;</i>拍摄管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
                 <dd><a href="{{$root_path}}shoot/shootAddManager" title="拍摄审核">拍摄新增管理</a></dd>
                 <dd><a href="{{$root_path}}shoot/shootBackDetail" title="拍摄驳回管理">拍摄驳回管理</a></dd>
-                <dd><a href="{{$root_path}}marlboro/shoot" title="拍摄审核">拍摄审核</a></dd>
-                <dd><a href="{{$root_path}}retouch/psCheckList" title="修图审核">修图审核</a></dd>
+
             </dl>
 
             <dl class="check_manager system_log">
