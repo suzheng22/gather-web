@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
     <style type="text/css">
         select{opacity:1;}
+        #nav_info li span{width:150px}
+        #nav_info li em{width:140px}
+        .right_mid .cf p select{width:120px}
     </style>
 </head>
 <body>
@@ -18,7 +21,7 @@
             <div class="top_right"><span>RingKing</span><em>,欢迎你</em><a href="#">退出</a></div>
         </div>
         <ul class="clearfix" id="nav_info">
-            <li class="black"><em>商品条形码:</em><span>{{$p_info.gtin}}</span></li>
+            <li class="black"><em>商品条形码:</em><span >{{$p_info.gtin}}</span></li>
             <li class="black"><em>可录入商品总数:</em><span>{{$p_info.inputGoodsCount}}</span></li>
             <li class="black"><em>今录入商品总数:</em><span>{{$p_info.inputGoodsCountToday}}</span></li>
             <li class="black"><em>今录入字数:</em><span>{{$p_info.inputCountToday}}</span></li>
@@ -114,20 +117,20 @@
             <!--基本信息-->
         	<div style="display:none;" class="cf">
                 <div class="base_info">
-                    {{foreach from= $p_info.baseInfo item=list}}
+                    {{foreach from= $p_info.baseFiled.data item=list}}
                         {{if $list.isNums==1 && $list.inputType==1}}
                             <p class="clearfix">
-                                <label>商品名称：</label>
-                                <input type="text" name="fieldName" value="{{$list.fieldName}}"/>
+                                <label>{{$list.fieldName}}：</label>
+                                <input type="text" name="fieldName" value=""/>
                             </p>
                         {{else if $list.isNums==1 && $list.inputType==2}}
                             <p class="clearfix">
-                                <label>卖点：</label>
-                                <textarea name="fieldName">{{$list.fieldName}}</textarea>
+                                <label>{{$list.fieldName}}：</label>
+                                <textarea name="fieldName"></textarea>
                             </p>
                         {{else  if $list.isNums==2 && $list.inputType==1}}
                              <p class="clearfix">
-                                 <label>配料：</label>
+                                 <label>{{$list.fieldName}}：</label>
                                 <select>
                                     <option>====请选择====</option>
                                     <option>1</option>
@@ -136,7 +139,7 @@
                                     <option>4</option>
                                     <option>5</option>
                                     </select>
-                                    <input type="text" name="fieldName" value="{{$list.field}}"/>
+                                    <input type="text" name="fieldName" value=""/>
                             </p>
                             <div class="save_box">
                                 <a href="javascript:;" id="bese_info_add">增加</a>
@@ -144,7 +147,7 @@
                         {{/if}}
                         {{if $list.isNums==2  && $list.inputType==2}}
                              <p class="clearfix">
-                                <label>配料：</label>
+                                <label>{{$list.fieldName}}：</label>
                                 <select>
                                     <option>====请选择====</option>
                                     <option>1</option>
@@ -153,7 +156,7 @@
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
-                                <textarea name="fieldName">{{$list.fieldName}}</textarea>
+                                <textarea name="fieldName"></textarea>
                              </p>
                             <div class="save_box">
                                 <a href="javascript:;" id="bese_info_add">增加</a>
@@ -161,63 +164,7 @@
                         {{/if}}
                     {{/foreach}}
 
-                    <p class="clearfix">
-                        <label>商品名称：</label>
-                        <input type="text" />
-                    </p>
-                    <p class="clearfix">
-                        <label>商品类型：</label>
-                        <select>
-                        	<option>====请选择====</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </p>
-                    <p class="clearfix">
-                        <label>品牌/中：</label>
-                        <input type="text" />
-                    </p>
-                    <p class="clearfix">
-                        <label>产品类型：</label>
-                         <select>
-                        	<option>====请选择====</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        
-                        </select>
-                    </p>
-                    <p class="clearfix">
-                        <label>产地/原产国：</label>
-                        <input type="text" />
-                    </p>
-                    <p class="clearfix">
-                        <label>卖点：</label>
-                        <textarea></textarea>
-                    </p>
-                </div>
-                <div class="base_info_two" id="base_info_two">
-                	 <p class="clearfix">
-                        <label>配料：</label>
-                         <select>
-                        	<option>====请选择====</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        
-                        </select>
-                         <input type="text" />
-                    </p>
-                    <div class="save_box">
-                           <a href="javascript:;" id="bese_info_add">增加</a>
-                    </div>
+
                 </div>
                  <div class="base_info_two" id="base_info_three">
                 	 <p class="clearfix">
@@ -286,7 +233,7 @@
             <!--扩充信息-->
             <div style="display:none;" class="cf">
             	<div class="extend_info">
-                    {{foreach from= $p_info.extendInfo item=list}}
+                    {{foreach from= $p_info.extFiled.data item=list}}
                     {{if $list.isNums==1 && $list.inputType==1}}
                     <p class="clearfix">
                         <label>商品名称：</label>
@@ -445,8 +392,16 @@
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
-<script type="text/javascript">  
-$(function(){ 
+<script type="text/javascript">
+    var is="{{$picList.0.key}}";
+    if(is){
+        var iv2 = $("#viewer").iviewer(
+                {
+                    src: "{{$pic_path}}{{$picList.0.key}}"
+                });
+
+    }
+$(function(){
 		//预加载
     $('body').fadeloader({
         mode: 'class',
@@ -458,14 +413,7 @@ $(function(){
     //延时加载
     $("img").lazyload();
     //实例化
-    var is="{{$picList.0.key}}";
-    if(is){
-        var iv2 = $("#viewer").iviewer(
-                {
-                    src: "{{$pic_path}}{{$picList.0.key}}"
-                });
 
-    }
 		//分类-组合包装
 		$("#sku_cf_01").click(function(){
 			$("#multiple_sku").hide();

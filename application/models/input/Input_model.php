@@ -19,7 +19,6 @@ class Input_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/input/list";
         $return=$this->curl($url,$data,'get');
         $return=json_decode($return,true);
-        var_dump($return);
         return $return;
     }
     /*
@@ -27,17 +26,24 @@ class Input_model extends MY_Model {
      */
     function getInputSend($data){
         $url=$this->more_api_url."/lingmall/input/send?token={$data['token']}";
-        $return=$this->curl($url,$data,'put');
-        var_dump($return);
+        $return=$this->curl($url,$data,'post');
         $return=json_decode($return,true);
+           // var_dump($return['extFiled']);
         return $return;
     }
     function getInputInfo($data){
         $url=$this->more_api_url."/lingmall/input/{$data['inputId']}?token={$data['token']}";
         $return=$this->curl($url,'','get');
-        var_dump($return);
         $return=json_decode($return,true);
         return $return;
+    }
+    //获取录入图片的接口
+    function getAllImage($data){
+        $xPack=$data['packet'];
+        $url="http://139.196.36.81:8600/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xBarcode={$data['gtin']}&xType=1&xPack=$xPack";
+        $return=$this->curl($url,'','get');
+        $list=json_decode($return,true);
+        return $list;
     }
 
 

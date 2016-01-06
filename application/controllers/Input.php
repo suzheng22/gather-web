@@ -46,12 +46,13 @@ class Input extends My_Controller {
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputSend($data);
-        var_dump($inputInfo);
         $data['gtin']=$inputInfo['gtin'];
         $data['packet']=$inputInfo['packet'];
-        $data['batchNo']=$inputInfo['batchNo'];
+        $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
-    //    $this->ci_smarty->display('input/record.tpl');
+        $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('picList',$list[1]);
+       $this->ci_smarty->display('input/record.tpl');
     }
 
 

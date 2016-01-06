@@ -211,9 +211,7 @@
                 });
 
     }
-
     $(function(){
-
 		//预加载
 		$('body').fadeloader({
 			mode: 'class',
