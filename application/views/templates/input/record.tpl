@@ -107,7 +107,7 @@
                             <input type="text" />
                         </P>
                     </div>
-                     <div class="save_box clearfix">
+                    <div class="save_box clearfix">
                       <a href="javascript:;" id="cf_add" class="clearfix"><i class="iconfont">&#xf018b;</i>增加</a>
                       <a href="javascript:;">保存</a>
                     </div>
@@ -128,61 +128,28 @@
                                 <label>{{$list.fieldName}}：</label>
                                 <textarea name="fieldName"></textarea>
                             </p>
-                        {{else  if $list.isNums==2 && $list.inputType==1}}
-                             <p class="clearfix">
-                                 <label>{{$list.fieldName}}：</label>
-                                <select>
-                                    <option>====请选择====</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    </select>
-                                    <input type="text" name="fieldName" value=""/>
-                            </p>
-                            <div class="save_box">
-                                <a href="javascript:;" id="bese_info_add">增加</a>
+                        {{else  if $list.isNums==2 && $list.inputType==2}}
+                            <div class="base_info_two" {{if {{$list.fieldName}}=='配料'}} id="base_info_two" {{else}} id="base_info_three" {{/if}}>
+                                <p class="clearfix">
+                                    <label>{{$list.fieldName}}：</label>
+                                    <select>
+                                        <option>====请选择====</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        </select>
+                                    <textarea name="fieldName"></textarea>
+                                 </p>
+
+                                <div class="save_box" {{if {{$list.fieldName}}=='配料'}}  {{else}} id="save_box03" {{/if}}>
+                                    <a href="javascript:;" {{if {{$list.fieldName}}=='配料'}} id="bese_info_add" {{else}} id="bese_info_add03" {{/if}}>增加</a>
+                                </div>
                             </div>
                         {{/if}}
-                        {{if $list.isNums==2  && $list.inputType==2}}
-                             <p class="clearfix">
-                                <label>{{$list.fieldName}}：</label>
-                                <select>
-                                    <option>====请选择====</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <textarea name="fieldName"></textarea>
-                             </p>
-                            <div class="save_box">
-                                <a href="javascript:;" id="bese_info_add">增加</a>
-                            </div>
-                        {{/if}}
+
                     {{/foreach}}
-
-
-                </div>
-                 <div class="base_info_two" id="base_info_three">
-                	 <p class="clearfix">
-                        <label>原料：</label>
-                         <select>
-                        	<option>====请选择====</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        
-                        </select>
-                        <textarea ></textarea>
-                    </p>
-                    <div class="save_box" id="save_box03">
-                           <a href="javascript:;" id="bese_info_add03">增加</a>
-                    </div>
                 </div>
                 <div class="save_box"><a href="javascript:;">保存</a></div>
             </div>
@@ -202,7 +169,6 @@
                                         <option>6：分装商</option>
                                         <option>7：总代理商</option>
                                         <option>8：总经销商</option>
-                  
                                     </select>
                                 </p>
                                 <p class="clearfix">
@@ -249,11 +215,6 @@
                         <label>配料：</label>
                         <select>
                             <option>====请选择====</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
                         </select>
                         <input type="text" />
                     </p>
@@ -266,11 +227,6 @@
                         <label>配料：</label>
                         <select>
                             <option>====请选择====</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
                         </select>
                         <textarea></textarea>
                     </p>
@@ -279,50 +235,6 @@
                     </div>
                     {{/if}}
                     {{/foreach}}
-            		<p class="clearfix">
-                	<label>口味：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>货号：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>品牌/商标：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>网址：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>服务热线：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>卫生标准：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>其它证号：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>生产工艺：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>质量等级：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>原料品种：</label>
-					<input type="text" />
-                </p>
-                <p class="clearfix">
-                	<label>原料产地：</label>
-					<input type="text" />
-                </p>
                 </div>
                  <div class="save_box">
                      <a href="javascript:;">保存</a>
@@ -522,7 +434,7 @@ $(function(){
 			
 			//基本信息 增加配料
 			$("#bese_info_add").click(function(){
-              var base_info =$("#base_info_two");    
+              var base_info =$("#base_info_two");
               var base_temp ='<P class="clearfix">'+
 			  				'<label>配料</label>'+
 			  			  	'<select><option>==请选择==</option><option>1223B</option><option>e323c</option></select>'+

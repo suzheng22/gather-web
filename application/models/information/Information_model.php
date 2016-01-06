@@ -7,7 +7,7 @@ class Information_model extends MY_Model{
     function getBaseInfoList($data){
 
         $data['token']=urldecode($data['token']);
-        $url=$this->more_api_url."/lingmall/input/list";
+        $url=$this->more_api_url."/lingmall/input/filedList";
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
         $i=($data['page']-1)*10;
@@ -39,7 +39,7 @@ class Information_model extends MY_Model{
         $arr['desc']=$data['desc'];
         $arr['filedType']=$data['filedType'];
         $datas=json_encode($arr);
-        $url=$this->more_api_url."/lingmall/input/add?token=$token";
+        $url=$this->more_api_url."/lingmall/inputFiled/add?token=$token";
         $return=$this->curl($url,$datas,'post');
         $list=json_decode($return,true);
         return $list;
@@ -50,7 +50,7 @@ class Information_model extends MY_Model{
         $token=$data['token'];
         $field=$data['field'];
         $data=json_encode($data);
-        $url=$this->more_api_url."/lingmall/input/{$field}?token=$token";
+        $url=$this->more_api_url."/lingmall/inputFiled/{$field}?token=$token";
         $return=$this->curl($url,$data,'put');
         $list=json_decode($return,true);
         return $list;
