@@ -284,8 +284,10 @@ function check(status){
 	var gtin={{$p_info.gtin}};
 	var memo=$("#memo").val();
     if(memo==""){
-        alert("驳回原因不能为空");
-        return false;
+        if(status==3){
+            alert("驳回原因不能为空");
+            return false;
+        }
     }
 		$.post("{{$root_path}}retouch/changeStatus",{'orderId':orderId,"status":status,"memo":memo},
 		  	function(data){
