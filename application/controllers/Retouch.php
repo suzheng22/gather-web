@@ -33,7 +33,6 @@ class Retouch extends My_Controller
         //$data['userId']=$this->user_info['userId'];
         if($arr['groupId']!=""||$arr['username']!=""){
             $user['groupId']=$arr['groupId'];
-            var_dump($user['groupId']);
             $user['username']=$arr['username'];
             $user['token']=$data['token'];
             $str=$this->user->getUserIdsByFiled($user);
@@ -108,12 +107,25 @@ class Retouch extends My_Controller
         //整合图片资源
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
-                if($v['xTag']==$list[$key][$k]['xTag']){
-                    $list2[$key][$k]['key1']=$list[$key][$k]['key'];
-                    $list2[$key][$k]['key2']=$list3[$key][$k]['key'];
+                    foreach($list[$key] as $k1=>$v1){
+                        if($v['xTag']==$v1['xTag']){
+                            $list2[$key][$k]['key1']=$list[$key][$k1]['key'];
+                        }
+
+                    }
+            }
+        }
+        foreach($list2 as $key=>$val){
+            foreach($val as $k=>$v){
+                foreach($list3[$key] as $k1=>$v1){
+                    if($v['xTag']==$v1['xTag']){
+                        $list2[$key][$k]['key2']=$list3[$key][$k1]['key'];
+                    }
                 }
             }
         }
+
+      //  var_dump($list2);
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
