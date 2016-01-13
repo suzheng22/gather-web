@@ -13,9 +13,9 @@
         {{include file='public/left.tpl'}}
         <div class="viewport_main">
             <div class="rose_box cc_box">
-                <h3>拍摄新增管理<a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
+                <h3>录入审核</h3>
                 <div class="rose_top main_rignt_top clearfix">
-                    <form action="{{$root_path}}input/inputManager" id="myform">
+                    <form action="{{$root_path}}input/inputList" id="myform">
                         <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" class="gtin"/></div>
                         <div class="cc_top_one"><label>商品名称:</label><input type="text" name="goodsName" value="{{$goodsName}}" class="proName"/></div>
                         <div class="cc_top_one last_show"><label>商品分类:</label>
@@ -41,20 +41,17 @@
                                 <dl class="select">
                                     <select name="status" class="select3">
                                         <option value="">全部</option>
-                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>录入中</option>
-                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>已录入</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>录入已提交</option>
                                         <option value="3" {{if $status==3}}selected="selected"{{/if}}>录入审核通过</option>
                                         <option value="4" {{if $status==4}}selected="selected"{{/if}}>录入驳回</option>
-                                        <option value="5" {{if $status==5}}selected="selected"{{/if}}>拍摄反馈</option>
-                                        <option value="6" {{if $status==6}}selected="selected"{{/if}}>拍摄反馈通过</option>
-                                        <option value="7" {{if $status==7}}selected="selected"{{/if}}>拍摄反馈驳回</option>
+
                                     </select>
                                 </dl>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                            <a href="{{$root_path}}input/inputAdd" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
+                            <a href="{{$root_path}}input/inputAudit" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>录入审核</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
@@ -74,8 +71,6 @@
                                 <th>状态</th>
                                 <th>操作</th>
                             </tr>
-
-
                             {{foreach from=$glist item=list}}
                             <tr class="t_{{$list.gtin}}">
                                 <td>{{$list.lId}}</td>
@@ -87,10 +82,8 @@
                                 <td>包装{{$list.packet}}</td>
                                 <td>{{$list.inputType}}</td>
                                 <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
-                                <td>{{if $list.status==1}}录入中{{else if $list.status==2}}已录入
+                                <td>{{if $list.status==2}}已录入
                                     {{else if $list.status==3}}录入审核通过{{else if $list.status==4}}录入驳回
-                                    {{else if $list.status==5}}拍摄反馈{{else if $list.status==6}}拍摄反馈通过
-                                    {{else if $list.status==7}}拍摄反馈驳回
                                     {{/if}}</td>
                                 <td><a href="{{$root_path}}input/index?inputId={{$list.inputId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">详细</a></td>
                                 <!-- 新增字段 -->

@@ -5,6 +5,9 @@ class Input_model extends MY_Model {
     public function __construct()
     {
     // Call the CI_Model constructor
+        $this->load->model('user/project_model');
+        $this->load->model('goods/goods_model');
+        $this->load->model('sdk/product_model');
       parent::__construct();
 
     }
@@ -19,6 +22,24 @@ class Input_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/input/list";
         $return=$this->curl($url,$data,'get');
         $return=json_decode($return,true);
+        $data['token']=urlencode($data['token']);
+        $n=0;
+        foreach($return['data'] as $key=>$val){
+            $n++;
+            $return['data'][$key]['lId']=$n;
+            //根据条形码获取条码名称
+            $gtin['gtin']=$val['gtin'];
+            $gtin['token']=$data['token'];
+            //  var_dump($goods);
+            $goods=$this->goods_model->getGoodsByGtin($gtin);
+          //  var_dump($goods);
+           $return['data'][$key]['goodsName']=$goods['gName'];
+            //根据pId获取项目名称
+            $pId['pId']=$val['pId'];
+            $pId['token']=$data['token'];
+            $return['data'][$key]['pName']=  $this->project_model->getPNameByPId($pId);
+        }
+      // var_dump($return);
         return $return;
     }
     /*
@@ -28,13 +49,46 @@ class Input_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/input/send?token={$data['token']}";
         $return=$this->curl($url,$data,'post');
         $return=json_decode($return,true);
-           // var_dump($return['extFiled']);
+        $gtin['gtin']=$return['gtin'];
+        $gtin['token']=$data['token'];
+        //  var_dump($goods);
+        $goods=$this->goods_model->getGoodsByGtin($gtin);
+        //  var_dump($goods);
+        $return['goodsName']=$goods['gName'];
+        $return['catName']=$goods['catgrory1'];
+        //根据catId获取分类名称
+        $cat=$this->product_model->getCatgroryList();
+        foreach($cat['data'] as $key=>$val){
+            // var_dump($val);
+            if($return['catName']==$val['id']){
+                $return['catName']=$val['name'];
+            }
+        }
         return $return;
     }
+
+    //根据inputId获取相关信息
     function getInputInfo($data){
+        $data['token']=$this->user_info['token'];
         $url=$this->more_api_url."/lingmall/input/{$data['inputId']}?token={$data['token']}";
         $return=$this->curl($url,'','get');
         $return=json_decode($return,true);
+        $gtin['gtin']=$return['gtin'];
+        $gtin['token']=$data['token'];
+        //  var_dump($goods);
+        $goods=$this->goods_model->getGoodsByGtin($gtin);
+        $return['goodsName']=$goods['gName'];
+        $return['catName']=$goods['catgrory1'];
+        //根据catId获取分类名称
+        $cat=$this->product_model->getCatgroryList();
+        foreach($cat['data'] as $key=>$val){
+           // var_dump($val);
+            if($return['catName']==$val['id']){
+                $return['catName']=$val['name'];
+            }
+        }
+     //   var_dump($return);
+        //根据pId获取项目名称
         return $return;
     }
     //获取录入图片的接口
@@ -45,7 +99,7 @@ class Input_model extends MY_Model {
         $list=json_decode($return,true);
         return $list;
     }
-    //分类保存
+    //录入分类保存
     function saveType($data){
         $token=$this->user_info['token'];
         $inputId=$data['inputId'];
@@ -54,8 +108,53 @@ class Input_model extends MY_Model {
         $arr['inputCount']=$data['inputCount'];
         $url=$this->more_api_url."/lingmall/input/{$inputId}?token={$token}";
         $data=json_encode($arr);
-        echo $data;
         $return=$this->curl($url,$data,'put');
+        $return=json_decode($return,true);
+        return $return;
+    }
+    //录入审核操作
+    function audit($data){
+        $url=$this->more_api_url."/lingmall/input/audit/{$data['inputId']}?token={$data['token']}";
+        $return=$this->curl($url,$data,'put');
+        return json_encode($return);
+    }
+    //录入审核列别奥
+    function getAuditList($data){
+        $data['token']=urldecode($data['token']);
+        $url=$this->more_api_url."/lingmall/input/auditList";
+        $return=$this->curl($url,$data,'get');
+        $return=json_decode($return,true);
+        $data['token']=urlencode($data['token']);
+        $n=0;
+        foreach($return['data'] as $key=>$val){
+            $n++;
+            $return['data'][$key]['lId']=$n;
+            //根据inputId获取详细信息
+            $input['inputId']=$val['inputId'];
+            $input=$this->getInputInfo($input);
+            //添加条形码
+            $return['data'][$key]['gtin']=$input['gtin'];
+            //添加项目
+            $pId['pId']=$input['pId'];
+            $pId['token']=$data['token'];
+            $return['data'][$key]['pName']=  $this->project_model->getPNameByPId($pId);
+            //根据条形码获取条码的商品名称
+            $return['data'][$key]['goodsName']=$input['goodsName'];
+            //获取录入类型
+            $return['data'][$key]['inputType']=$input['inputType'];
+            //添加提交时间
+            //$return['data'][$key]['createTime']=$input['createTime'];
+            //获取当前状态
+            $return['data'][$key]['status']=$input['status'];
+        }
+        return $return;
+    }
+    //分配进入录入审核详细
+    function getInputAudit($data){
+        $token=$this->user_info['token'];
+        $auditId=$data['auditId'];
+        $url=$this->more_api_url."/lingmall/input/audit/{$auditId}?token={$token}";
+        $return=$this->curl($url,$data,'post');
         $return=json_decode($return,true);
         return $return;
     }

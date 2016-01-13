@@ -4,6 +4,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>数据采集系统</title>
     {{include file='public/css.tpl'}}
+    <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
+    <style type="text/css">
+
+    </style>
 </head>
 <body>
 <!------------------------顶部j-top------------------------------------->
@@ -12,10 +16,11 @@
 <!--------------------------- 录入信息------------------------------------>
 <div class="record_info_warp">
     <div class="left record_left">
-        <div class="pageContent record_pageContent">
+        <div class="pageContent record_pageContent ps_check_pic">
             <div class="wrapper">
                 <div id="viewer" class="viewer"></div>
             </div>
+            <h5>原图</h5>
         </div>
         <div class="detail_zoom_right" style="margin-left:0px;">
             <div class="popup_box" style="margin-top:10px;">
@@ -78,34 +83,30 @@
             <div class="cf">
                 <div class="cf_Category clearfix">
                     <div class="clearfix multiple_sku_add">
+                        {{foreach from=$p_info.baseInfo key=key item=list}}
+                        {{foreach from=$p_info.baseFiled.data key=k item=val}}
+                        {{if $key==$val.field}}
                         <P class="clearfix">
-                            <label>商品名称：</label>
-                            <span>xxxxxxx</span>
+                            <label>
+                                {{$val.fieldName}}：
+                            </label>
+                                {{if $list|is_array==false}}
+                                 <span>
+                                {{$list}}
+                                  </span>
+                                {{else}}
+                                    {{foreach from=$list key=k item=v}}
+                                        <span>{{$v.0}}:{{$v.1}}<span>
+                                    {{/foreach}}
+                                {{/if}}
                         </P>
-                        <P class="clearfix">
-                            <label>商品类型：</label>
-                            <span>xxxxxxx</span>
-                        </P>
-                        <P class="clearfix">
-                            <label>品牌(中)：</label>
-                            <span>xxxxxxx</span>
-                        </P>
-                        <P class="clearfix">
-                            <label>品牌(英)：</label>
-                            <span>xxxxxxx</span>
-                        </P>
-                        <P class="clearfix">
-                            <label>产地/原产国：</label>
-                            <span>xxxxxxx</span>
-                        </P>
-                        <P class="clearfix">
-                            <label>生产执行标准号：</label>
-                            <span>xxxxxxx</span>
-                        </P>
-                        <P class="clearfix">
-                            <label>配料：</label>
-                            <span>xxxxxxx</span>
-                        </P>
+                        {{else}}
+
+                        {{/if}}
+                        {{/foreach}}
+                        {{/foreach}}
+
+
                     </div>
 
                 </div>
@@ -154,124 +155,86 @@
             </div>
             <!--厂商信息-->
             <div style="display:none;" class="cf clearfix">
+                {{foreach from=$p_info.shop key=key item=list}}
                 <div class="bus_info">
-                    <P>分销商</P>
-                    <P>xxxx有限公司</P>
-                    <P>中国广东省xxxx路</P>
-                    <p>13738292770</p>
-                    <p>许可证</p>
-                    <p>许可证</p>
+                    <P class="clearfix"><span>厂商类别:</span>{{$list.shopType}}</P>
+                    <P class="clearfix"><span>厂商名称:</span>{{$list.shopName}}</P>
+                    <P  class="clearfix"><span>厂商地址:</span>{{$list.province}}{{$list.city}}{{$list.region}}{{$list.town}}{{$list.address}}</P>
+                    <p  class="clearfix"><span>厂商电话:</span>{{$list.phone}}</p>
+                    <p  class="clearfix"><span>卫生许可证:</span>{{$list.sanitaryCertificateNO}}</p>
+                    <p  class="clearfix"><span>生产许可证:</span>{{$list.productionCertificateNO}}</p>
                 </div>
-                <div class="bus_info">
-                    <P>分销商</P>
-                    <P>xxxx有限公司</P>
-                    <P>中国广东省xxxx路</P>
-                    <p>13738292770</p>
-                    <p>许可证</p>
-                    <p>许可证</p>
-                </div>
-                <div class="bus_info">
-                    <P>分销商</P>
-                    <P>xxxx有限公司</P>
-                    <P>中国广东省xxxx路</P>
-                    <p>13738292770</p>
-                    <p>许可证</p>
-                    <p>许可证</p>
-                </div>
-                <div class="bus_info">
-                    <P>分销商</P>
-                    <P>xxxx有限公司</P>
-                    <P>中国广东省xxxx路</P>
-                    <p>13738292770</p>
-                    <p>许可证</p>
-                    <p>许可证</p>
-                </div>
+                {{/foreach}}
+
             </div>
             <!--扩充信息-->
             <div style="display:none;" class="cf">
                 <div class="extend_info">
+                    {{foreach from=$p_info.extInfo key=key item=list}}
+                    {{foreach from=$p_info.extFiled.data key=k item=val}}
+                    {{if $key==$val.field}}
                     <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
+                        <label>{{$val.fieldName}}：</label>
+                        <span>{{$list}}</span>
                     </P>
-                    <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P><P class="clearfix">
-                        <label>xx：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-
+                    {{/if}}
+                    {{/foreach}}
+                    {{/foreach}}
                 </div>
 
             </div>
             <!--营养成分-->
             <div style="display:none;" class="cf">
+                {{foreach from=$p_info.nutritionInfo key=key item=list}}
                 <div class="dic_info">
-                    <h3 class="clearfix">商品名称:xxxxx</h3>
+                    <h3 class="clearfix">产品名称:{{$list.proName}}</h3>
                     <h4 class="clearfix">
                         <span>成分名称</span>
-                        <span>含量:</span>
+                        <span>{{$list.names}}:</span>
                         <span>NVR%</span>
                     </h4>
+                    {{foreach from=$list key=key1 item=vals}}
+                    {{foreach from=$p_info.nutritionFiled.data key=key2 item=val}}
+                    {{if $key1==$val.nutritionId}}
                     <P class="clearfix">
-                        <span>能量:</span>
-                        <span>100kj</span>
-                        <span>200%</span>
+                        <span>{{$val.nutritionName}}:</span>
+                        <span>{{$vals.shuzi}}{{$vals.danwei}}</span>
+                        <span>{{$vals.value}}</span>
                     </P>
-                    <P class="clearfix">
-                        <span>能量:</span>
-                        <span>100kj</span>
-                        <span>200%</span>
-                    </P>
+                    {{/if}}
+                    {{/foreach}}
+                    {{/foreach}}
                 </div>
-                <div class="dic_info">
-                    <h3 class="clearfix">商品名称:xxxxx</h3>
-                    <h4 class="clearfix">
-                        <span>成分名称</span>
-                        <span>含量:</span>
-                        <span>NVR%</span>
-                    </h4>
-                    <P class="clearfix">
-                        <span>能量:</span>
-                        <span>100kj</span>
-                        <span>200%</span>
-                    </P>
-                    <P class="clearfix">
-                        <span>能量:</span>
-                        <span>100kj</span>
-                        <span>200%</span>
-                    </P>
-                </div>
-
+                {{/foreach}}
             </div>
+            {{if $p_info.u_status!=""}}
+            <div class="zz_conforim"><a href="javascript:;" onclick="check(3)">通过</a><a href="javascript:;" id="record_reject">驳回</a></div>
+            {{/if}}
+        </div>
+    </div>
+    <div class="newuser_pop" id="ps_newuser_pop">
+        <div class="tit clearfix"><h4>{{$p_info.gtin}}条形码-审核</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+        <div class="content">
+            <div class="login_main">
+                <div class="login_form">
+                    <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
+                    <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.goodsName}}</span></div>
+                    <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
+                    <div class="clearfix one"><label for="user_name">驳回类型: </label>
+                        <p>
+                            <input type="checkbox" name="radio" id="aa"/><label for="aa" class="num">文字错误
+                            </label>
+                            <input type="checkbox" name="radio" id="aa"/><label for="aa" class="num">信息缺失
+                            </label>
+                            <input type="checkbox" name="radio" id="aa"/><label for="aa" class="num">信息不符
+                            </label>
+                        </p>
+                    </div>
 
-
-
+                    <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
+                    <a href="##" id="confirm_btn" class="confirm_btn" onclick="check(4)">确认</a>
+                </div>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
@@ -282,12 +245,14 @@
     <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
     <script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
     <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
+    <script type="text/javascript" src="{{$resource_url}}js/province_res.js"></script>
     <!--dom预加载-->
     <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
     <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
-    {{include file='public/js.tpl'}}
+
     <!--时间控件-->
     <script type="text/javascript">
+        var inputId="{{$p_info.inputId}}";
         $(function(){
             //预加载
             $('body').fadeloader({
@@ -300,12 +265,43 @@
             //延时加载
             $("img").lazyload();
             //实例化
-            var iv2 = $("#viewer").iviewer(
-                    {
-                        src: "{{$pic_path}}{{$picList.0.key}}"
-                    });
+            var is="{{$picList.0.key}}";
+            var storage;
+            if(is){
+                var iv2 = $("#viewer").iviewer(
+                        {
+                            src: "{{$pic_path}}{{$picList.0.key}}"
+                        });
+            }
+
+            $("#ps_newuser_pop").pop({
+                oMain:"#record_reject",         //触发弹出层的元素。为空时直接弹出
+                sEvent:"click",             //触发事件
+                oClose:"#ps_newuser_pop .close", //关闭按钮
+                bIframe:false,              //是否有iframe
+                iSrc:"",                    //iframe地址
+                bShade:true,                //是否有遮罩
+                bShadeClose:false,          //是否点遮罩关闭
+                fnAdditional:function(e){
+
+                }
+            });
 
         }); //end
+        //通过事件
+
+        //驳回
+        function check(status){
+            $.ajax({
+                url:'{{$root_path}}input/inputPass',
+                data:{inputId:inputId,status:status},
+                dataType:"text",
+                type:'post',
+                success:function(e){
+                    alert(e)
+                }
+            })
+        }
     </script>
 </body>
 </html>
