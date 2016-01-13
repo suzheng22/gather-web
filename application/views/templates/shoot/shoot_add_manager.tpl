@@ -6,8 +6,7 @@
     {{include file='public/css.tpl'}}
 </head>
 <body>
-{{include file='public/top.tpl'}}
-  
+{{include file='public/top.tpl'}}     
 <div id="warp_box">
      <div class="main">
          {{include file='public/left.tpl'}}
