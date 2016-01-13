@@ -51,7 +51,9 @@ class Project_model extends MY_Model {
     function getProjectUserByField($data){
         $token=$data['token'];
         $url=$this->user_api_url."/user/getProjectUserByFiled?token=".$token;
-        $return =$this->curl($url,$data);
+        $data['token']=urldecode($data['token']);
+        $return =$this->curl($url,$data,'get');
+        $data['token']=urlencode($data['token']);
         $datas=json_decode($return,true);
         $total=$datas['count'];
         $datas=$datas['data'];
