@@ -71,16 +71,29 @@
     <div class="right">
         <div class="choice_count">
             <h3>
-                <a href="javascript:;" class="selected">基本信息</a>
-                <a href="javascript:;">尺寸信息</a>
+                <a href="javascript:;" class="selected">分类</a>
+                <a href="javascript:;" >基本信息</a>
                 <a href="javascript:;">厂商信息</a>
                 <a href="javascript:;">扩充信息</a>
                 <a href="javascript:;" class="last">营养成分</a>
             </h3>
         </div>
         <div class="right_mid">
-            <!--基本信息-->
-            <div class="cf">
+            <!--基本信息-->   <!--尺寸信息-->
+            <div  class="cf" >
+                {{if $p_info.isGroup==1}}单品
+                {{else}}
+                    组合包装
+                {{foreach from=$p_info.groupGoodsNames key=key item=list}}
+                <P class="clearfix">
+                    <label>产品名称：</label>
+                    <span>{{$list}}</span>
+                </P>
+                {{/foreach}}
+                {{/if}}
+            </div>
+
+            <div class="cf clearfix" style="display:none;">
                 <div class="cf_Category clearfix">
                     <div class="clearfix multiple_sku_add">
                         {{foreach from=$p_info.baseInfo key=key item=list}}
@@ -101,58 +114,14 @@
                                 {{/if}}
                         </P>
                         {{else}}
-
                         {{/if}}
                         {{/foreach}}
                         {{/foreach}}
-
-
                     </div>
-
                 </div>
 
             </div>
-            <!--尺寸信息-->
-            <div style="display:none;" class="cf">
-                <div style="width:280px; float:left;">
-                    <h3>商品尺寸</h3>
-                    <P class="clearfix">
-                        <label>宽：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>高：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>深：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>重量：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                </div>
-                <div style="width:280px; float:left;">
-                    <h3>商品箱装尺寸</h3>
-                    <P class="clearfix">
-                        <label>宽：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>高：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>深：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                    <P class="clearfix">
-                        <label>重量：</label>
-                        <span>xxxxxxx</span>
-                    </P>
-                </div>
-            </div>
+
             <!--厂商信息-->
             <div style="display:none;" class="cf clearfix">
                 {{foreach from=$p_info.shop key=key item=list}}

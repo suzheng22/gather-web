@@ -106,6 +106,9 @@ class Input_model extends MY_Model {
         $arr['filed']=$data['filed'];
         $arr['info']=$data['info'];
         $arr['inputCount']=$data['inputCount'];
+        if($arr['filed']==2){
+            $arr['goodsName']=$data['goodsName'];
+        }
         $url=$this->more_api_url."/lingmall/input/{$inputId}?token={$token}";
         $data=json_encode($arr);
         $return=$this->curl($url,$data,'put');
@@ -158,8 +161,25 @@ class Input_model extends MY_Model {
         $return=json_decode($return,true);
         return $return;
     }
-
-
+    //录入反馈
+    function feed($data){
+        $token=$this->user_info['token'];
+        $inputId=$data['inputId'];
+        $feed['feedbackInfo']=$data['feedbackInfo'];
+        $url=$this->more_api_url."/lingmall/input/feed/{$inputId}?token={$token}";
+        $return=$this->curl($url,$feed,'put');
+        $return=json_decode($return,true);
+        return $return;
+    }
+    //录入厂商的
+    function delShop($data){
+        $token=$this->user_info['token'];
+        $shopId=$data['shopId'];
+        $url=$this->more_api_url."/lingmall/input/delShop/{$shopId}?token={$token}";
+        $return=$this->curl($url,'','delete');
+        $return=json_decode($return,true);
+        return $return;
+    }
 
 }
 ?>

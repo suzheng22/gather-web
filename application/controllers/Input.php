@@ -136,6 +136,7 @@ class Input extends My_Controller {
         $this->ci_smarty->assign('pages',$showpage['show']);
         $this->ci_smarty->display('input/inputList.tpl');
     }
+    //录入审核
     function inputAudit(){
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
@@ -151,7 +152,20 @@ class Input extends My_Controller {
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('picList',$list[1]);
-        $this->ci_smarty->display('input/index.tpl');
+        $this->ci_smarty->display('input/info.tpl');
+    }
+    //录入反馈
+    function feed(){
+        $data['feedBackInfo']=$this->input->post("feedbackInfo");
+        $data['inputId']=$this->input->post('inputId');
+        $return=$this->input_model->feed($data);
+        echo json_encode($return);
+    }
+    //录入厂商删除
+    function delShop(){
+        $data=$this->input->post();
+        $return=$this->input_model->delShop($data);
+        echo json_encode($return);
     }
 
   function sac(){

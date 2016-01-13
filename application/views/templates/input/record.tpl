@@ -517,6 +517,7 @@
     //全局变量
         var inputId='{{$p_info.inputId}}';
         var count=0;
+        var goodsName='{{$p_info.goodsName}}';
         //删除的厂商信息的Id
         var shopIds="";
     //城市三级联动
@@ -536,7 +537,7 @@
                     src: "{{$pic_path}}{{$picList.0.key}}"
                 });
     }
-    function checks(){
+    function check(){
         var memo=$("#memo").val();
         var data={feedbackInfo:memo,inputId:inputId}
             //进行保存验证
@@ -547,6 +548,7 @@
                     dataType:'json',
                     success:function(e){
                         alert(e.msg);
+                        window.location.reload();
                     }
                 })
     }
@@ -710,7 +712,6 @@
            val+="]"
        }
        val+="]";
-       var goodsName="{{$p_info.goodsName}}";
        $.ajax({
            url:'{{$root_path}}input/saveType',
            data:{info:val,filed:2,inputId:inputId,goodsName:goodsName},
@@ -762,7 +763,7 @@
     }
     //保存产商
     //营养成分的保存
-    function save_nutrient(){
+    function save_nutrient(f){
         /*先获取几个营养成分*/
         var nutrition_l=$("#nutrition_inform .nutrition_child").size();
         var num1="[";
@@ -823,10 +824,14 @@
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:num1,filed:4,inputId:inputId},
-            dataType:'text',
+            dataType:'json',
             type:'POST',
             success:function(e){
-                alert(e);
+                if(f==1){
+                    alert("营养成分删除成功");
+                 }else{
+                    alert(e.msg);
+                }
             }
         });
     }
@@ -949,6 +954,7 @@
                     $(".nutrition .nutrition_child").eq(index).show();
                     $(this).parent().remove();
                     $(".bus_info_01 a").eq(index).addClass("selected").siblings().removeClass("selected");
+                    save_nutrient(1)
                 });
 			});
         //营养成分的删除
@@ -962,7 +968,7 @@
             $(this).parent().remove();
             $(".bus_info_01 a").eq(index).addClass("selected").siblings().removeClass("selected");
             //掉营养成分保存接口
-            save_nutrient()
+            save_nutrient(1)
         });
 			//营养成分增加参数
         $(".add_param").click(function(){
@@ -1069,16 +1075,27 @@
                     $(".business_choice .business_add").eq(index).show().stop(true, true).siblings().hide();
                 });
                 //删除厂商
-                $("#bus_info  .bus_del").unbind().on('click',function(){
-                    var index=0;
-                    index=$("#bus_info .bus_del").index(this);
-                    $(".business_choice .business_add").eq(index+1).remove();
+                $("#bus_info  .bus_del").unbind().on('click',function() {
+                    var index = 0;
+                    index = $("#bus_info .bus_del").index(this);
+                    var shopId = $(".business_choice .business_add:eq(" + (index + 1) + ") .shopId").val();
+                    $(".business_choice .business_add").eq(index + 1).remove();
                     $(".business_choice .business_add").eq(index).show();
                     $("#bus_info a").eq(index).addClass("selected").siblings().removeClass("selected");
                     $(this).parent().remove();
                     //将删除的厂商Id存进全局变量shopIds
-
-                });
+                    $.ajax({
+                        url:'{{$root_path}}input/delShop',
+                        data:{shopId:shopId},
+                        dataType:'text',
+                        type:'POST',
+                        success:function(e){
+                            if(e=="null"){
+                                alert("删除成功")
+                            }
+                        }
+                    })
+                })
 			});
         //厂商删除选项卡
         $("#bus_info  .bus_del").unbind().on('click',function(){
@@ -1086,17 +1103,23 @@
             index=$("#bus_info .bus_del").index(this);
             var shopId=	$(".business_choice .business_add:eq("+(index+1)+") .shopId").val();
             //将删除的厂商Id存进全局变量shopIds
-            if(shopIds==""){
-               shopIds+=shopId;
-            }else{
-                shopIds+=","+shopId;
-            }
             //移除当前厂商
             $(".business_choice .business_add").eq(index+1).remove();
             //显示前一个厂商
             $(".business_choice .business_add").eq(index).show();
             $(this).parent().remove();
             $("#bus_info a").eq(index).addClass("selected").siblings().removeClass("selected");
+            $.ajax({
+                url:'{{$root_path}}input/delShop',
+                data:{shopId:shopId},
+                dataType:'text',
+                type:'POST',
+                success:function(e){
+                    if(e=="null"){
+                        alert("删除成功")
+                    }
+                }
+            })
         });
             //最后的提交
             $("#record_confirm").on("click",function(){
@@ -1116,14 +1139,13 @@
                     url:'{{$root_path}}input/saveType',
                     data:{inputCount:len,inputId:inputId,filed:5},
                     type:'POST',
-                    dataType:'text',
+                    dataType:'json',
                     success:function(e){
-                        alert(e);
+                        alert(e.msg);
+                        window.location.reload();
                     }
                 })
             })
-
-
 }); //end           	
 </script>
 </body>
