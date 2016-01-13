@@ -18,6 +18,7 @@ class Project_model extends MY_Model {
         $url=$this->user_api_url.'/user/getProjectAll?token='.$token;
         $return=$this->curl($url,$data);
         $datas=json_decode($return,true);
+        //var_dump($datas);
         $count=count($datas['data']);
         $datas=$datas['data'];
         for($i=0;$i<$count;$i++){
@@ -103,7 +104,9 @@ class Project_model extends MY_Model {
             $data['page']=1;
         }
         $url=$this->user_api_url."/user/getProjectByFiled?token=".$token."&page={$data['page']}";
+        $data['token']=urldecode($data['token']);
         $return =$this->curl($url,$data,'get');
+        $data['token']=urlencode($data['token']);
         $datas=json_decode($return,true);
         $total=$data['count'];
         $datas=$datas['data'];
