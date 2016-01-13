@@ -106,6 +106,8 @@
         </div>
      </div><!--main end-->  		
 </div>
+{{include file='public/js.tpl'}}
+
 <!-- 新建用户弹出层 开始-->
 <div class="newuser_pop" id="newuser_pop">
 	<div class="tit clearfix"><h4>新增用户</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
@@ -167,7 +169,6 @@
 	   </div>
     </div>
 </div>
-{{include file='public/js.tpl'}}
 <script  type="text/javascript">
 $(function(){	
 	var url = window.location;
