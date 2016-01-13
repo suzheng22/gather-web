@@ -101,9 +101,11 @@ class Retouch extends My_Controller
         //png图
         $arr['batchNo']=$product_info['retouchId'];
         $arr['id']=3;
+        $arr['gtin']=6920771611554;
         $list3=$this->retouch->getAllImages($arr);
         //获取修图图片
         $list=$this->retouch->getAllImage($arr);
+        var_dump($list3);
         //整合图片资源
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){

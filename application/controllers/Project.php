@@ -34,7 +34,6 @@ class Project extends My_Controller {
         $showPage= parent::page($page_url,10,$p_list['total']);
         //获取项目标签
         $this->ci_smarty->assign('plist',$p_list['data']);
-
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('project_manager.tpl');
     }
@@ -55,6 +54,7 @@ class Project extends My_Controller {
         unset($get['page']);
         $page_url=$this->publicFuc->getUrl($page_url,$get);
         $arr=$this->getPage($get,$page);
+
         if(isset($arr['username'])&&$arr['username']!=""){
             $arr['pUserIds']=serialize($arr['username']);
         }

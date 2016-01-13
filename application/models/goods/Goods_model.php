@@ -11,6 +11,7 @@ class Goods_model extends   MY_Model{
         $data=json_decode($return,true);
          return $data['data'];
     }
+    //获取商品分类列表
     function getGoodsClassify($data){
         $data['token']=urldecode($data['token']);
         $data['returnType']=1;
@@ -40,11 +41,13 @@ class Goods_model extends   MY_Model{
         $return=$this->curl($url,$data,'put');
         return $return;
     }
+    //获取商品图片
     function getGoodsImage($data){
         $url=$this->more_api_url."/lingmall/catgrory/list?token=".$data['token'];
         $return=$this->curl($url,$data,'put');
         return $return;
     }
+    //
     function getGooodsInfo($data){
         $data['token']=urldecode($data['token']);
         $id=$data['id'];
