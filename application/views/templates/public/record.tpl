@@ -672,12 +672,16 @@
             var index=$(".choice_count h3 a").index(this);
             $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
 
-             var Hleft=$(".right_mid").height();
-                if(Hleft>420)
-                {
-                    $(".right_mid").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px;"})
+             $(".right_mid .cf").each(function(){
+                    var hright=$(this).height();
+                     if(hright>420)
+                    {
+                        $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px;"})
 
-                }
+                    }
+
+             });
+               
         });
         //厂商选项卡
         $("#bus_info a").click(function(){
