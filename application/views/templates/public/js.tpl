@@ -33,3 +33,30 @@ $(function(){
 		});
 });	
 </script>	
+
+<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
+<script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
+<script type="text/javascript">
+$('#datetimepicker_start').datetimepicker({
+	onGenerate:function( ct ){
+		$(this).find('.xdsoft_date')
+			.toggleClass('xdsoft_disabled');
+	},
+		format:'d-m-Y',
+	formatDate:'Y-m-d',
+	minDate:'-1970-01-2',
+	maxDate:'+1970-01-2',
+	timepicker:false
+});
+$('#datetimepicker_end').datetimepicker({
+	onGenerate:function( ct ){
+		$(this).find('.xdsoft_date')
+			.toggleClass('xdsoft_disabled');
+	},
+		format:'d-m-Y',
+	formatDate:'Y-m-d',
+	minDate:'-1970-01-2',
+	maxDate:'+1970-01-2',
+	timepicker:false
+});
+</script>
