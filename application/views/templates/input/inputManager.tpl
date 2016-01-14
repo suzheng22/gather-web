@@ -13,7 +13,7 @@
         {{include file='public/left.tpl'}}
         <div class="viewport_main">
             <div class="rose_box cc_box">
-                <h3>拍摄新增管理<a href="javascript:;" id="new_user" class="new_user"><i class="iconfont">&#xf018b;</i>新增</a></h3>
+                <h3>录入管理</h3>
                 <div class="rose_top main_rignt_top clearfix">
                     <form action="{{$root_path}}input/inputManager" id="myform">
                         <div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin" value="{{$gtin}}" class="gtin"/></div>
@@ -30,12 +30,8 @@
                                 </dl>
                             </div>
                         </div>
-                        <div class="cc_top_one" style="width:50%">
-                            <label>提交时间:</label>
-                            <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
-                            <label style="width:20px;">-</label>
-                            <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
-                        </div>
+
+                        <div class="clearfix"></div>
                         <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box vocation">
                                 <dl class="select">
@@ -52,6 +48,13 @@
                                 </dl>
                             </div>
                         </div>
+                        <div class="cc_top_one" style="width:50%">
+                            <label>提交时间:</label>
+                            <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
+                            <label style="width:20px;">-</label>
+                            <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
+                        </div>
+
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
                             <a href="{{$root_path}}input/inputAdd" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
