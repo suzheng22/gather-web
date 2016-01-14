@@ -142,7 +142,6 @@ class Input extends My_Controller {
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
-        // var_dump($inputInfo);
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
@@ -150,6 +149,7 @@ class Input extends My_Controller {
         $data['gtin']=$inputInfo['gtin'];
         $data['packet']=$inputInfo['packet'];
         $list=$this->input_model->getAllImage($data);
+        //var_dump($list);exit;
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('picList',$list[1]);

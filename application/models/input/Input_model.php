@@ -69,12 +69,12 @@ class Input_model extends MY_Model {
 
     //根据inputId获取相关信息
     function getInputInfo($data){
-        $data['token']=$this->user_info['token'];
-        $url=$this->more_api_url."/lingmall/input/{$data['inputId']}?token={$data['token']}";
+        $token=$this->user_info['token'];
+        $url=$this->more_api_url."/lingmall/input/{$data['inputId']}?token={$token}";
         $return=$this->curl($url,'','get');
         $return=json_decode($return,true);
         $gtin['gtin']=$return['gtin'];
-        $gtin['token']=$data['token'];
+        $gtin['token']=$token;
         //  var_dump($goods);
         $goods=$this->goods_model->getGoodsByGtin($gtin);
         $return['goodsName']=$goods['gName'];
@@ -155,11 +155,15 @@ class Input_model extends MY_Model {
     //分配进入录入审核详细
     function getInputAudit($data){
         $token=$this->user_info['token'];
-        $auditId=$data['auditId'];
-        $url=$this->more_api_url."/lingmall/input/audit/{$auditId}?token={$token}";
+        $url=$this->more_api_url."/lingmall/input/sendAudit?token={$token}";
         $return=$this->curl($url,$data,'post');
+        //根据inputId获取录入信息
         $return=json_decode($return,true);
-        return $return;
+        $input['inputId']=$return['inputId'];
+        $input=$this->getInputInfo($input);
+        $input['orderGoodsToday']=$data['orderGoodsToday'];
+        $input['inputGoodsCount']=$data['inputGoodsCount'];
+        return $input;
     }
     //录入反馈
     function feed($data){

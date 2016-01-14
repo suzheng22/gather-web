@@ -211,7 +211,6 @@
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
 <!--图片延时加载-->

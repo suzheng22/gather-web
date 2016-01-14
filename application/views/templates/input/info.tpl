@@ -213,7 +213,6 @@
     <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
     <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
     <script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
-    <script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
     <script type="text/javascript" src="{{$resource_url}}js/province_res.js"></script>
     <!--dom预加载-->
     <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
@@ -255,6 +254,15 @@
 
                 }
             });
+            //选项卡
+            $(".choice_count h3 a").click(function(){
+                //alert("aa");
+                var index = 0;
+                $(this).addClass("selected").siblings().removeClass("selected");
+                var index=$(".choice_count h3 a").index(this);
+                $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
+            });
+
 
         }); //end
         //通过事件
