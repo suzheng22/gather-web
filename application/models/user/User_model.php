@@ -17,7 +17,6 @@ class User_model extends MY_Model {
         $data=json_encode($post);
         $url=$this->user_api_url."/user/login?token=".$token;
 		$return=$this->curl->_simple_call('post',$url,$data);
-        var_dump($return);exit;
         return $return;
     }
     
