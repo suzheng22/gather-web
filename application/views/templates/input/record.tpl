@@ -14,7 +14,7 @@
 
 </style>
 </head>
-<body>
+<body style="overflow-y:hidden">
 
 
 <div class="j-top">
@@ -505,7 +505,6 @@
 <script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
-
     var Hleft=$(".right_mid").height();
     if(Hleft>600)
     {
