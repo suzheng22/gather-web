@@ -360,8 +360,8 @@ class Curl {
 			$this->error_string = curl_error($this->session);
 			curl_close($this->session);
 			$this->set_defaults();
-			$this->debug();
-			return FALSE;
+			//$this->debug();
+			return $this->info;
 		}
 		else
 		{
