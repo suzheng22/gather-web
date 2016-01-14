@@ -44,7 +44,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[1]);
+        $this->ci_smarty->assign('picList',$list[3]);
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputInfo($data);
         //var_dump($inputInfo);
@@ -70,7 +70,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[1]);
+        $this->ci_smarty->assign('picList',$list[3]);
         $this->ci_smarty->display('input/record.tpl');
     }
     //分类保存
@@ -130,6 +130,7 @@ class Input extends My_Controller {
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
+       // var_dump($inputInfo);
         $inputInfo['p_status']=2;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
@@ -140,7 +141,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[1]);
+        $this->ci_smarty->assign('picList',$list[3]);
         $this->ci_smarty->display('input/info.tpl');
     }
     //录入反馈
@@ -165,7 +166,7 @@ class Input extends My_Controller {
         //  var_dump($list);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[1]);
+        $this->ci_smarty->assign('picList',$list[3]);
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputInfo($data);
         // var_dump($inputInfo);

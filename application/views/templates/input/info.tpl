@@ -30,7 +30,6 @@
             </li>
         <li><p class="clearfix">
                 驳回原因:{{$p_info.memoPoint}}</p></li>
-
     </ul>
     {{/if}}
 </div>
@@ -206,7 +205,7 @@
     </div>
     {{if $p_info.status==4 && $p_info.p_status==1}}
     <div class="zz_conforim"><a href="{{$root_path}}input/inputChange?inputId={{$p_info.inputId}}&gtin={{$p_info.gtin}}&packet={{$p_info.packet}}&batchNo={{$p_info.batchNo}}" onclick="checkw(1)">编辑</a></div>
-    {{elseif $p_info.status==2 && $p_info.p_status==2}}
+    {{else if  $p_info.p_status==2}}
     <div class="zz_conforim"><a href="javascript:;" onclick="check(2)">通过</a><a href="javascript:;" id="record_reject">驳回</a></div>
     {{/if}}
     <div class="newuser_pop" id="ps_newuser_pop">
