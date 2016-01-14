@@ -47,6 +47,7 @@ class Input extends My_Controller {
         $this->ci_smarty->assign('picList',$list[1]);
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputInfo($data);
+        //var_dump($inputInfo);
         $inputInfo['p_status']=$p_status;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);

@@ -56,8 +56,6 @@
         <dl class="record system_log">
             <dt><i class="icon iconfont">&#x346a;</i>录入管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
             <dd><a href="{{$root_path}}input/inputManager" title="录入管理">录入管理</a></dd>
-
-            <dd><a href="{{$root_path}}input/index" title="录入">录入</a></dd>
         </dl>     
 
          <dl class="check_manager system_log">

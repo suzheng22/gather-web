@@ -86,6 +86,17 @@ class Input_model extends MY_Model {
                 $return['catName']=$val['name'];
             }
         }
+        //根据inputId获取驳回原因
+        if($return['status']==4){
+            $url=$this->more_api_url."lingmall/inputAudit/{$data['inputId']}?token={$token}";
+            $returns=$this->curl($url,'','get');
+          //  var_dump($returns);
+            $returns=json_decode($returns);
+          //  var_dump($returns);
+            $return['memo']=$returns['memo'];
+            $return['memoPoint']=$returns['memoPoint'];
+        }
+     //   var_dump($return);
         //根据pId获取项目名称
         return $return;
     }
