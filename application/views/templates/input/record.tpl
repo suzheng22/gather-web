@@ -520,7 +520,7 @@
         var hh= $(".record_info_warp .right").height();
        if(hh>700)
        {
-        $(".right").css({"overflow-y": "scroll",""});
+        $(".right").css({"overflow-y":"scroll"})
        }
 
     });
