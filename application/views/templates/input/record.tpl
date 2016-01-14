@@ -522,6 +522,7 @@
         alert(hh);
        if(hh>600)
        {
+        alert(hh);
         $(".right_mid").css({"overflow-y":"scroll"});
        }
 
