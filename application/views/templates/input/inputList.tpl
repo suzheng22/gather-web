@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="cc_top_one" style="width:50%">
-                            <label>提交时间:</label>
+                            <label>审核时间:</label>
                             <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
                             <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
@@ -67,7 +67,7 @@
                                 <th>项目名称</th>
                                 <th>包装</th>
                                 <th>录入类型</th>
-                                <th>提交时间</th>
+                                <th>审核时间</th>
                                 <th>状态</th>
                                 <th>操作</th>
                             </tr>

@@ -645,10 +645,11 @@
         $(e).parent().remove();
     }
     //分类保存
-    function save_product(e){
+    /*f==1，单品保存；f==2,多产品保存；f==3时最后的提交*/
+    function save_product(f){
             var a = $("#multiple_sku p").size();
             var v = "";
-        if(e==2) {
+        if(f==2) {
             for (var i = 0; i < a; i++) {
                 if (i == a - 1) {
                     v += $("#multiple_sku input:eq(" + i + ")").val();
@@ -660,15 +661,23 @@
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:v,filed:1,inputId:inputId},
-            dataType:'text',
+            dataType:'json',
             type:'POST',
             success:function(e){
-                alert(e);
+                if(f==3){
+                    if(e.msg!="保存成功"){
+                        alert("分类提交失败")
+                    }
+                }else{
+                    alert(e.msg);
+                }
+
             }
         });
     }
     //基本信息的保存
-   function save_baseInfo(){
+    /*f==3,最后的提交保存*/
+   function save_baseInfo(f){
        var len=$(".base_info .p").size();
        var val="[";
        for(var i=0;i<len;i++){
@@ -757,7 +766,13 @@
             dataType:'json',
             type:'POST',
             success:function(e){
-                alert(e.msg);
+                if(f==3){
+                    if(e.msg!="保存成功"){
+                        alert("分类提交失败")
+                    }
+                }else{
+                    alert(e.msg);
+                }
             }
         });
     }
@@ -829,7 +844,12 @@
             success:function(e){
                 if(f==1){
                     alert("营养成分删除成功");
-                 }else{
+                 }else if(f==3){
+                    if(e.msg!="保存成功"){
+                        alert("分类提交失败")
+                    }
+                }
+                else{
                     alert(e.msg);
                 }
             }
@@ -1135,6 +1155,17 @@
                 }
                 var len=input_len+select_len;
                 //进行保存验证
+               // 所有的项目重新进行保存
+                //1保存分类
+                save_product(3);
+                //保存基本信息
+                save_baseInfo(3);
+                //保存厂商
+                save_business(3);
+                //保存扩充信息
+                save_extendInfo(3);
+                //保存营养成分
+                save_nutrient(3);
                 $.ajax({
                     url:'{{$root_path}}input/saveType',
                     data:{inputCount:len,inputId:inputId,filed:5},
