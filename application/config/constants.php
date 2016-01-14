@@ -87,5 +87,5 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('USERAPI', 'http://192.168.1.241:8000');
 define('MOREAPI', 'http://192.168.1.241:8005');
 define('CONTROL', 'http://apics.greensea.com.cn/api.php');
-define('RESOURCE', 'http:/192.168.1.241:8004/collect_web/');
+define('RESOURCE', 'http://192.168.1.241:8004/collect_web/');
 define('ROOTPATH', 'http://192.168.1.241:8002/');
