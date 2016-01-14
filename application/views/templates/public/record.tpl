@@ -670,8 +670,8 @@
             var index = 0;
             $(this).addClass("selected").siblings().removeClass("selected");
             var index=$(".choice_count h3 a").index(this);
-            $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).height().siblings().hide();
-            var hright=$(".right_mid .cf").eq(index).height();
+            $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide().height();
+            var hright=$(".right_mid ul,.right_mid .cf").eq(index).height();
              if(hright>420)
             {
             $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px;"})
