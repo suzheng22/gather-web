@@ -69,7 +69,8 @@
         </dl>
         <dl class="counts system_log">
             <dt><i class="icon iconfont">&#xf0226;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-            <dd><a href="#" title="商品统计">商品统计</a></dd>
+            <dd><a href="{{$root_path}}statistics/project" title="商品统计">商品统计</a></dd>
+            <dd><a href="#" title="商品统计">项目统计</a></dd>
             <dd><a href="{{$root_path}}statistics/shoot" title="拍摄统计">拍摄统计</a></dd>
             <dd><a href="shoot_check_count.html" title="拍摄审核统计">拍摄审核统计</a></dd>
             <dd><a href="record_count.html" title="录入统计">录入统计</a></dd>

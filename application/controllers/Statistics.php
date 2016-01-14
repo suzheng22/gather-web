@@ -45,6 +45,11 @@ class Statistics extends My_Controller {
         $this->ci_smarty->display('statistics/ps_count.tpl');
     }
     
+    function project(){
+        $this->ci_smarty->display('statistics/project_count.tpl');
+    }
+    
+    
     function psCheck() {
         $page_url=$this->root_path.'statistics/psCheck/?';
         $group_list= $this->user_model->getGroupListByRole(4);
