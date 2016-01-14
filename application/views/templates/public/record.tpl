@@ -666,11 +666,18 @@
         //点击选项卡
         //选项卡
         $(".choice_count h3 a").click(function(){
-            //alert("aa");
+           
             var index = 0;
             $(this).addClass("selected").siblings().removeClass("selected");
             var index=$(".choice_count h3 a").index(this);
             $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
+
+             var Hleft=$(".right_mid").height();
+                if(Hleft>500)
+                {
+                    $(".right_mid").css({"overflow-y":"scroll"})
+
+                }
         });
         //厂商选项卡
         $("#bus_info a").click(function(){

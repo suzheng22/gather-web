@@ -503,17 +503,6 @@
     </div>
 </div>
 <script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript">
-$(function(){
-    var Hleft=$(".right_mid").height();
-        alert(Hleft);
-    if(Hleft>500)
-    {
-        $(".right_mid").css({"overflow-y":"scroll"})
-
-    }
-});
-</script>
 <script src="{{$resource_url}}js/ui_tab.js" type="text/javascript"></script>
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.mousewheel.min.js"></script>
