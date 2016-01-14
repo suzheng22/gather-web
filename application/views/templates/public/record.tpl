@@ -218,7 +218,7 @@
         });
     }
     //扩充信息的保存
-    function save_extendInfo(){
+    function save_extendInfo(f){
         var len=$(".extend_info p").size();
         var val="[";
         for(var i=0;i<len;i++) {
