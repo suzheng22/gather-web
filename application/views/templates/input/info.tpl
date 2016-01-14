@@ -6,12 +6,36 @@
     {{include file='public/css.tpl'}}
     <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
     <style type="text/css">
-
+        select{opacity:1;}
+        #nav_info li span{width:150px}
+        #nav_info li em{width:140px}
+        .right_mid .cf p select{width:120px}
     </style>
 </head>
 <body>
 <!------------------------顶部j-top------------------------------------->
 {{include file='public/top.tpl'}}
+
+
+<div class="j-top-warp">
+    <ul class="clearfix" id="nav_info">
+        <li class="black"><em>商品条形码:</em><span >{{$p_info.gtin}}</span></li>
+        <li class="black"><em>可录入商品总数:</em><span>{{$p_info.orderGoodsToday}}</span></li>
+        <li class="black"><em>今录入商品总数:</em><span>{{$p_info.inputGoodsCount}}</span></li>
+    </ul>
+    {{if $p_info.status==4}}
+    <ul>
+        <li>
+            <p class="clearfix">驳回点:{{$p_info.memo}}</p>
+            </li>
+        <li><p class="clearfix">
+                驳回原因:{{$p_info.memoPoint}}</p></li>
+
+    </ul>
+    {{/if}}
+</div>
+
+
 <!------------------------顶部结束--------------------------------------->
 <!--------------------------- 录入信息------------------------------------>
 <div class="record_info_warp">
@@ -176,11 +200,15 @@
                 </div>
                 {{/foreach}}
             </div>
-            {{if $p_info.u_status!=""}}
-            <div class="zz_conforim"><a href="javascript:;" onclick="check(3)">通过</a><a href="javascript:;" id="record_reject">驳回</a></div>
-            {{/if}}
+
+
         </div>
     </div>
+    {{if $p_info.status==4 && $p_info.p_status==1}}
+    <div class="zz_conforim"><a href="{{$root_path}}input/inputChange?inputId={{$p_info.inputId}}&gtin={{$p_info.gtin}}&packet={{$p_info.packet}}&batchNo={{$p_info.batchNo}}" onclick="checkw(1)">编辑</a></div>
+    {{elseif $p_info.status==2 && $p_info.p_status==2}}
+    <div class="zz_conforim"><a href="javascript:;" onclick="check(2)">通过</a><a href="javascript:;" id="record_reject">驳回</a></div>
+    {{/if}}
     <div class="newuser_pop" id="ps_newuser_pop">
         <div class="tit clearfix"><h4>{{$p_info.gtin}}条形码-审核</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
         <div class="content">
@@ -191,21 +219,22 @@
                     <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
                     <div class="clearfix one"><label for="user_name">驳回类型: </label>
                         <p>
-                            <input type="checkbox" name="radio" id="aa"/><label for="aa" class="num">文字错误
+                            <input type="checkbox" name="radio" id="1"/><label for="1" class="num">文字错误
                             </label>
-                            <input type="checkbox" name="radio" id="aa"/><label for="aa" class="num">信息缺失
+                            <input type="checkbox" name="radio" id="2"/><label for="2" class="num">信息缺失
                             </label>
-                            <input type="checkbox" name="radio" id="aa"/><label for="aa" class="num">信息不符
+                            <input type="checkbox" name="radio" id="3"/><label for="3" class="num">信息不符
                             </label>
                         </p>
                     </div>
-
                     <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
-                    <a href="##" id="confirm_btn" class="confirm_btn" onclick="check(4)">确认</a>
+                    <a href="##" id="confirm_btn" class="confirm_btn" onclick="check(3)">确认</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <div></div>
     <script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
     <script src="{{$resource_url}}js/ui_tab.js" type="text/javascript"></script>
     <script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script>
@@ -221,6 +250,7 @@
     <!--时间控件-->
     <script type="text/javascript">
         var inputId="{{$p_info.inputId}}";
+        var orderId="{{$p_info.orderId}}";
         $(function(){
             //预加载
             $('body').fadeloader({
@@ -266,16 +296,55 @@
 
         }); //end
         //通过事件
-
         //驳回
         function check(status){
+            alert(status)
+            var data="";
+            if(status==3){
+                var memo=$("#memo").val();
+                var len=$("input[type='checkbox']:checked").length;
+                if(len==0){
+                    alert("请选择错误类型");
+                    return false;
+                }
+                var memoPoint="";
+                for(var i=0;i<len;i++){
+                    var check=$("input[type='checkbox']:eq("+i+")").get(0).checked;
+                        var value=$("input[type='checkbox']:eq("+i+")").attr("id");
+                        if(i==len-1){
+                            if(value==1){
+                                memoPoint+="文字错误";
+                            } if(value==2){
+                                memoPoint+="信息缺失";
+                            }if(value==3){
+                                memoPoint+="信息不符";
+                            }
+                        }else{
+                            if(value==1){
+                                memoPoint+="文字错误,";
+                            } if(value==2){
+                                memoPoint+="信息缺失,";
+                            } if(value==3){
+                                memoPoint+="信息不符,";
+                            }
+                        }
+                }
+                data={orderId:orderId,status:status,memo:memo,memoPoint:memoPoint};
+            }else if (status==2){
+                data={orderId:orderId,status:status}
+            }
             $.ajax({
                 url:'{{$root_path}}input/inputPass',
-                data:{inputId:inputId,status:status},
+                data:data,
                 dataType:"text",
                 type:'post',
                 success:function(e){
-                    alert(e)
+                    alert(e);
+                    console.log(e);
+                    alert(e.msg);
+                    if(e.msg){
+
+                    }
                 }
             })
         }

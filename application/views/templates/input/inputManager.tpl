@@ -95,7 +95,7 @@
                                     {{else if $list.status==5}}拍摄反馈{{else if $list.status==6}}拍摄反馈通过
                                     {{else if $list.status==7}}拍摄反馈驳回
                                     {{/if}}</td>
-                                <td><a href="{{$root_path}}input/index?inputId={{$list.inputId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">详细</a></td>
+                                <td><a href="{{$root_path}}input/index/1?inputId={{$list.inputId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">详细</a></td>
                                 <!-- 新增字段 -->
                             </tr>
                             {{/foreach}}

@@ -75,7 +75,6 @@ class Input_model extends MY_Model {
         $return=json_decode($return,true);
         $gtin['gtin']=$return['gtin'];
         $gtin['token']=$token;
-        //  var_dump($goods);
         $goods=$this->goods_model->getGoodsByGtin($gtin);
         $return['goodsName']=$goods['gName'];
         $return['catName']=$goods['catgrory1'];
@@ -87,7 +86,6 @@ class Input_model extends MY_Model {
                 $return['catName']=$val['name'];
             }
         }
-     //   var_dump($return);
         //根据pId获取项目名称
         return $return;
     }
@@ -117,9 +115,14 @@ class Input_model extends MY_Model {
     }
     //录入审核操作
     function audit($data){
-        $url=$this->more_api_url."/lingmall/input/audit/{$data['inputId']}?token={$data['token']}";
+        $url=$this->more_api_url."/lingmall/input/audit/{$data['orderId']}?token={$data['token']}";
+        $arr['memo']=$data['memo'];
+        $arr['status']=$data['status'];
+        $arr['memoPoint']=$data['memoPoint'];
+        $data=json_encode($arr);
+        //unset($data['inputId']);
         $return=$this->curl($url,$data,'put');
-        return json_encode($return);
+        return json_decode($return);
     }
     //录入审核列别奥
     function getAuditList($data){
@@ -145,8 +148,8 @@ class Input_model extends MY_Model {
             $return['data'][$key]['goodsName']=$input['goodsName'];
             //获取录入类型
             $return['data'][$key]['inputType']=$input['inputType'];
-            //添加提交时间
-            //$return['data'][$key]['createTime']=$input['createTime'];
+            //添加包装
+            $return['data'][$key]['packet']=$input['packet'];
             //获取当前状态
             $return['data'][$key]['status']=$input['status'];
         }
@@ -161,8 +164,9 @@ class Input_model extends MY_Model {
         $return=json_decode($return,true);
         $input['inputId']=$return['inputId'];
         $input=$this->getInputInfo($input);
-        $input['orderGoodsToday']=$data['orderGoodsToday'];
-        $input['inputGoodsCount']=$data['inputGoodsCount'];
+        $input['orderId']=$return['orderId'];
+        $input['orderGoodsToday']=$return['orderGoodsToday'];
+        $input['inputGoodsCount']=$return['inputGoodsCount'];
         return $input;
     }
     //录入反馈
@@ -170,12 +174,13 @@ class Input_model extends MY_Model {
         $token=$this->user_info['token'];
         $inputId=$data['inputId'];
         $feed['feedbackInfo']=$data['feedbackInfo'];
+        $feed=json_encode($feed);
         $url=$this->more_api_url."/lingmall/input/feed/{$inputId}?token={$token}";
         $return=$this->curl($url,$feed,'put');
         $return=json_decode($return,true);
         return $return;
     }
-    //录入厂商的
+    //录入厂商的删除
     function delShop($data){
         $token=$this->user_info['token'];
         $shopId=$data['shopId'];
