@@ -515,19 +515,15 @@
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 {{include file='public/record.tpl'}}
 <script type="text/javascript">
-   $(function(){
+$(function(){
 
-        //添加滚动条
-        var hh= $(".right_mid").height();
-        alert(hh);
-       if(hh>600)
-       {
-        alert(hh);
-        $(".right_mid").css({"overflow-y":"scroll"});
-       }
+    var Hleft=$(".right_mid").height();
+    if(Hleft>600)
+    {
+        $(".right_mid").css({"overflow-y":"scroll"})
 
-    });
-
+    }
+});
 </script>
 </body>
 </html>
