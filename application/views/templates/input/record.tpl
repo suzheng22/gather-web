@@ -519,9 +519,10 @@
 
         //添加滚动条
         var hh= $(".right_mid").height();
-       if(hh>700)
+        alert(hh);
+       if(hh>600)
        {
-        $(".right_mid").css({"overflow-y":"scroll","min-height":"700px"})
+        $(".right_mid").css({"overflow-y":"scroll"});
        }
 
     });
