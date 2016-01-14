@@ -514,16 +514,17 @@
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 {{include file='public/record.tpl'}}
 <script type="text/javascript">
-    $(functioN(){
+   $(function(){
 
-       var hh= $(".record_info_warp .right").height();
+        //添加滚动条
+        var hh= $(".record_info_warp .right").height();
        if(hh>700)
        {
         $(".right").css({"overflow-y": "scroll",""});
        }
 
-
     });
+
 </script>
 </body>
 </html>
