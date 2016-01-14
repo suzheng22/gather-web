@@ -3,116 +3,221 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>用户管理系统</title>
-{{include file='public/css.tpl'}}
+<link rel="stylesheet" type="text/css" href="style/global.css"/>
+<link rel="stylesheet" type="text/css" href="style/head.css" />
+<link rel="stylesheet" type="text/css" href="style/public.css"/>
+<link rel="stylesheet" type="text/css" href="style/iconfont.css"/>
 </head>
 <body>
 
-{{include file='public/top.tpl'}}
-  
+<div class="j-top">
+    <div class="j-top-warp">
+        <h3>用户管理系统<span>v1.0</span></h3>
+        <div class="top_right"><span id="user_name_show"></span><em>,欢迎你</em><a href="index.html">退出</a></div>
+    </div>
+</div>
+
 <div id="warp_box">
      <div class="main">
-     	{{include file='public/left.tpl'}}
+     	<div class="aside_nav">
+        	<div class="aside_menu">
+                <div class="slimScrollDiv leftsidebar_box">
+
+
+               <dl class="user_manager system_log">
+                <dt><i class="icon iconfont">&#xf0226;</i>系统管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                <dd><a href="first_index.html" title="首页管理">首页管理</a></dd>
+                <dd><a href="user_manager.html" title="用户管理">用户管理</a></dd>
+                <dd><a href="user_rose.html" title="角色管理">角色管理</a></dd>
+                <dd><a href="user_group_manger.html" title="用户组管理">用户组管理</a></dd>
+                <dd><a href="project_manager.html" title="项目管理">项目管理</a></dd>
+                <dd><a href="project_mem_manager.html" title="项目成员管理">项目成员管理</a></dd>
+            </dl>
+             <dl class="business_base_info system_log">
+                 <dt><i class="icon iconfont">&#xf00a9;</i>商品信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                 <dd><a href="up_good_list.html" title="导入商品清单">导入商品清单</a></dd>
+                 <dd><a href="good_list_manager.html" title="商品管理">商品管理</a></dd>
+                 <dd><a href="good_classify.html" title="商品分类">商品分类</a></dd>
+            </dl>
+            <dl class="menu_shoot_manager system_log">
+                 <dt><i class="icon iconfont">&#xf0178;</i>拍摄管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                 <dd><a href="noShoot.html" title="无法拍摄">无法拍摄</a></dd>
+                 <dd><a href="noMeasure.html" title="无法测量">无法测量</a></dd>
+                 <dd><a href="shoot_add_manager.html" title="拍摄审核">拍摄新增管理</a></dd>
+                 <dd><a href="shoot_back_detail.html" title="拍摄驳回管理">拍摄驳回管理</a></dd>
+                <dd><a href="shoot_back_manager.html" title="拍摄反馈管理">拍摄反馈管理</a></dd>
+             </dl>
+             <dl class="menu_base_info system_log">
+                 <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                 <dd><a href="good_list_manager.html" title="商品管理">商品管理</a></dd>
+                 <dd><a href="base_info_manager.html" title="录入信息管理">基本信息管理</a></dd>
+                 <dd><a href="nutrient_info.html" title="营养成风">营养成分</a></dd>
+             </dl>
+            <dl class="record system_log">
+                <dt><i class="icon iconfont">&#x346a;</i>录入管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+                <dd><a href="{{$root_path}}input/inputManager" title="录入管理">录入管理</a></dd>
+
+                <dd><a href="{{$root_path}}input/index" title="录入">录入</a></dd>
+            </dl>
+
+
+                <dl class="check_manager system_log">
+                            <dt><i class="icon iconfont">&#xf01d8;</i>审核管理<img src="images/left/select_xl01.png"></dt>
+                             <dd><a href="shoot_check.html">拍摄审核</a></dd>
+                             <dd><a href="ps_check.html">修图审核</a></dd>
+                             <dd><a href="record_check.html">录入审核</a></dd>
+                             <dd><a href="shoot_back_count.html">拍摄反馈审核</a></dd>
+                        </dl>
+
+             <dl class="counts system_log">
+                            <dt><i class="icon iconfont">&#xf0141;</i>统计管理<img src="images/left/select_xl01.png"></dt>
+                             <dd><a href="sku_count.html" title="商品统计">商品统计</a></dd>
+                            <dd><a href="shoot_count .html" title="拍摄统计">拍摄统计</a></dd>
+                            <dd><a href="shoot_check_count.html" title="拍摄审核统计">拍摄审核统计</a></dd>
+                            <dd><a href="record_count.html" title="录入统计">录入统计</a></dd>
+                            <dd><a href="record_check_count.html" title="录入审核统计">录入审核统计</a></dd>
+                            <dd><a href="ps_count.html" title="修图统计">修图统计</a></dd>
+                            <dd><a href="ps_check_count.html" title="修图审核统计">修图审核统计</a></dd>
+                            <dd><a href="shoot_back_count.html" title="拍摄驳回统计">拍摄驳回统计</a></dd>
+
+                        </dl>
+
+                </div>
+                <div class="projectAction"><!--<span><i class="icon iconfont">&#xf01b5;</i>增加</span><span><i class="icon iconfont">&#xf018f;</i>设置</span>--></div>
+            </div>
+        </div>
         <div class="viewport_main">
         	<div class="rose_box cc_box">
             	<h3>修图统计</h3>
                 <div class="rose_top main_rignt_top clearfix">
-				<form action="{{$root_path}}statistics/ps" method="get">
-                    <div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" id="user_name" value="{{$userName}}"/></div>
+                  <div class="cc_top_one last_show"><label>项目名称:</label>
+                    <div class="choice_count choice_box vocation">
+                        <dl class="select">
+                            <select class="select3">
+                              <option value="">全部</option>
+                                <option value="">1</option>
+                                <option value="">2</option>
+                                <option value="">3</option>
+                           </select>
+                        </dl>
+                    </div>
+                  </div>
+                    <div class="cc_top_one"><label>用户名:</label><input type="text"/></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
-                    	<div class="choice_count choice_box vocation">            	 			
-							<dl class="select">
-									<select name="groupId" class="select3"> 
-										<option value="">全部</option>
-										{{foreach from=$group_list item=list}}
-												<option value="{{$list.groupId}}" {{if $groupId==$list.groupId}}selected="selected"{{/if}}>{{$list.groupName}}</option>
-											{{/foreach}}
-									</select>
-								</dl>
-	            	 	</div>
-                     </div>
+                      <div class="choice_count choice_box vocation">
+                          <dl class="select">
+                              <select class="select3">
+                                <option value="">全部</option>
+                                  <option value="">1</option>
+                                  <option value="">2</option>
+                                  <option value="">3</option>
+                             </select>
+                          </dl>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
                      <div class="cc_top_one" style="width:50%;">
                          <label>提交时间:</label>
-                         <input type="text" class="datetimepicker" name="startTime" value="{{$startTime}}"/>
+                         <input type="text" class="datetimepicker"/>
                          <label style="width:20px;">-</label>
-                         <input type="text" class="datetimepicker" name="endTime" value="{{$endTime}}"/>
+                         <input type="text" class="datetimepicker"/>
                      </div>
+                     <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
-                    	
-                        <a href="{{$page_url}}&is_ext=1" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>导出</a>
-                        <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                        <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
+                    	<a href="javascript:;" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
+                        <a href="javascript:;" class="query"><i class="icon iconfont">&#xf00a8;</i>查询</a>
+                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
-					</form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
                       <tr style="background:#333;">
+                        <th>序号</th>
                         <th>用户名</th>
                         <th>用户组</th>
-                        <th>修图商品数</th>
-                        <th>已审核商品数</th>
-                        <th>待上传商品数</th>
-                        <th>待审核商品数</th>
-                        <th>已驳回商品数</th>
-                        
-                        
+                        <th>修图总数</th>
+                        <th>审核通过数</th>
+                        <th>待上传数</th>
+                        <th>待审核数</th>
+                        <th>审核驳回数</th>
+                        <th>抽查通过率</th>
+                        <th>审核通过照片数</th>
+                        <th>修图照片数</th>
+                        <th>操作</th>
                       </tr>
-					  {{foreach from =$glist item=list}}
                       <tr>
-                        <td>{{$list.userName}}</td>
-                        <td>{{$list.groupName}}</td>
-                        <td>{{$list.totalCount}}</td>
-                        <td>{{$list.passCount}}</td>
-                        <td>{{$list.re_uplodeCount}}</td>
-                        <td>{{$list.re_passCount}}</td>
-                        <td>待定</td>
+                        <td>1</td>
+                        <td>asda</td>
+                        <td>dsad</td>
+                        <td>dasdd</td>
+                        <td>dadas</td>
+                        <td>dasda</td>
+                        <td>dasda</td>
+                        <td>dassa</td>
+                        <td>dassa</td>
+                        <td>dassa</td>
+                        <td>dassa</td>
+                        <td><a href="ps_count_detail.html">详细</a></td>
+
                       </tr>
-					  {{/foreach}}
-                      
-                      
                     </table>
                 </div>
-                	{{$pages}}
-                	
+                	<div class="page_nav" id="page_nav">
+                	<a href="javascript:;" class="pageNum">上一页</a>
+                    <a href="javascript:;" class="pageNum">1</a>
+                    <a href="javascript:;" class="pageNum">2</a>
+                    <a href="javascript:;" class="pageNum">3</a>
+                    <a href="javascript:;" class="pageNum">4</a>
+                    <a href="javascript:;" class="pageNum">5</a>
+                    <a href="javascript:;" class="pageNum">6</a>
+                    <a href="javascript:;" class="pageNum">7</a>
+                    <a href="javascript:;" class="pageNum">8</a>
+                    <a href="javascript:;" class="pageNum">9</a>
+                    <a href="javascript:;" class="pageNum">下一页</a>
+                    <span>共<em>100</em>页,</span>
+                    <span>共<em>66</em>条记录,</span>
+                    <span>跳转到第<input type="text"/>页</span>
+                    <a href="javascript:;" class="pageNum">确定</a>
+                </div>
+
                 </div>
             </div>
         </div>
-     </div><!--main end-->  
+     </div><!--main end-->
 </div>
-{{include file='public/js.tpl'}}	
+<script type="text/javascript"  src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/defined.js"></script>
+<script type="text/javascript" src="js/full_screen.js"></script>
+<script type="text/javascript" src="style/select2/select-ui.min.js"></script>
 <!--时间控件-->
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="js/time/jquery.datetimepicker.css"/>
+<script type="text/javascript" src="js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
-$(function(){
-	
-  //菜单高亮显示和地址栏比对
-  var url = window.location;
-    $('.counts dd a').filter(function (){
-        return this.href == url || url.href.indexOf(this.href) == 0;
-    }).parents('dd').addClass('active').siblings().removeClass('active');
-    $(".leftsidebar_box .counts dd").show();
-	
-});
-$('.datetimepicker').datetimepicker({
+$('#datetimepicker_start').datetimepicker({
 	onGenerate:function( ct ){
 		$(this).find('.xdsoft_date')
 			.toggleClass('xdsoft_disabled');
 	},
-		format:'Y/m/d',
-	formatDate:'Y/m/d',
-	minDate:'-1970/01/2',
-	maxDate:'+1970/01/2',
+		format:'d-m-Y',
+	formatDate:'Y-m-d',
+	minDate:'-1970-01-2',
+	maxDate:'+1970-01-2',
 	timepicker:false
 });
+$('#datetimepicker_end').datetimepicker({
+	onGenerate:function( ct ){
+		$(this).find('.xdsoft_date')
+			.toggleClass('xdsoft_disabled');
+	},
+		format:'d-m-Y',
+	formatDate:'Y-m-d',
+	minDate:'-1970-01-2',
+	maxDate:'+1970-01-2',
+	timepicker:false
+});
+</script>
 
-//清空
-	function btn_empty(){
-		$("#user_name").val("");
-		$(".datetimepicker").val("");
-		$(".cc_top_one select").val("");
-	}
-</script> 
+
 
 </body>
 </html>
