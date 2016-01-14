@@ -518,10 +518,10 @@
    $(function(){
 
         //添加滚动条
-        var hh= $("#right").height();
+        var hh= $(".right_mid").height();
        if(hh>700)
        {
-        $("#right").css({"overflow-y":"scroll","min-height":"700px"})
+        $(".right_mid").css({"overflow-y":"scroll","min-height":"700px"})
        }
 
     });
