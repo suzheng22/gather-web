@@ -5,20 +5,23 @@
 <title>数据采集系统</title>
     {{include file='public/css.tpl'}}
     <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
-    <style type="text/css">
+
+<style type="text/css">
         select{opacity:1;}
-        #nav_info li span{width:150px}
-        #nav_info li em{width:140px}
-        .right_mid .cf p select{width:120px}
-    </style>
+        #nav_info li span{width:150px;}
+        #nav_info li em{width:140px;}
+        .right_mid .cf p select{width:120px;}
+
+</style>
 </head>
 <body>
-<!------------------------顶部j-top------------------------------------->
+
+
 <div class="j-top">
     <div class="j-top-warp">
-        <div class="j-top-warp">
-            <h3>数据采集系统</h3>
-            <div class="top_right"><span>RingKing</span><em>,欢迎你</em><a href="#">退出</a></div>
+         <div class="j-top-warp">
+        <h3><img src="{{$resource_url}}images/logo.png"/></h3>
+        <div class="top_right"><span id="user_name_show">{{$userInfo.trueName}}</span><em>,欢迎你</em><a href="{{$root_path}}user/editPwd">修改密码</a><a href="{{$root_path}}user/logout">退出</a></div>
         </div>
         <ul class="clearfix" id="nav_info">
             <li class="black"><em>商品条形码:</em><span >{{$p_info.gtin}}</span></li>
@@ -28,8 +31,7 @@
         </ul>
     </div>
 </div>
-<!------------------------顶部结束--------------------------------------->
-<!--------------------------- 录入信息------------------------------------> 
+
 <div class="record_info_warp">
 	<div class="left record_left">
 			<div class="pageContent record_pageContent ps_check_pic">
