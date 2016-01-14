@@ -88,4 +88,4 @@ define('USERAPI', 'http://192.168.1.241:8000');
 define('MOREAPI', 'http://192.168.1.241:8005');
 define('CONTROL', 'http://apics.greensea.com.cn/api.php');
 define('RESOURCE', 'http://192.168.1.241:8004/collect_web/');
-define('ROOTPATH', 'http://192.168.1.241:8002/');
+define('ROOTPATH', 'http://'.$_SERVER['HTTP_HOST'].':8002/');
