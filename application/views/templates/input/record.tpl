@@ -508,7 +508,6 @@
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/province_res.js"></script>
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
@@ -1177,6 +1176,30 @@
                     }
                 })
             })
+        //点击选项卡
+        //选项卡
+        $(".choice_count h3 a").click(function(){
+            //alert("aa");
+            var index = 0;
+            $(this).addClass("selected").siblings().removeClass("selected");
+            var index=$(".choice_count h3 a").index(this);
+            $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
+        });
+        //厂商选项卡
+        $("#bus_info a").click(function(){
+            //alert("aa");
+            var index = 0;
+            $(this).addClass("selected").siblings().removeClass("selected");
+            var index=$("#bus_info a").index(this);
+            $(".business_choice .business_add").eq(index).show().stop(true, true).siblings().hide();
+        });
+        //营养成分选项卡
+        $("#bus_info_01 a").click(function(){
+            var index = 0;
+            $(this).addClass("selected").siblings().removeClass("selected");
+            var index=$("#bus_info_01 a").index(this);
+            $(".nutrition .nutrition_child").eq(index).show().stop(true, true).siblings().hide();
+        });
 }); //end           	
 </script>
 </body>
