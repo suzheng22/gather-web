@@ -14,7 +14,7 @@
 
 </style>
 </head>
-<body style="overflow-y:hidden">
+<body ><!--style="overflow-y:hidden"-->
 
 
 <div class="j-top">
@@ -506,7 +506,8 @@
 <script type="text/javascript">
 $(function(){
     var Hleft=$(".right_mid").height();
-    if(Hleft>600)
+        alert(Hleft);
+    if(Hleft>500)
     {
         $(".right_mid").css({"overflow-y":"scroll"})
 
