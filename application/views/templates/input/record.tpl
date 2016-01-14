@@ -85,7 +85,7 @@
     		</div>
 		</div>
   	</div><!--left-->	
-  	<div class="right">
+  	<div class="right" id="right">
   		<div class="choice_count">
         	<h3>
             <a href="javascript:;" class="selected">分类</a>
@@ -518,10 +518,10 @@
    $(function(){
 
         //添加滚动条
-        var hh= $(".record_info_warp .right").height();
+        var hh= $("#right").height();
        if(hh>700)
        {
-        $(".right").css({"overflow-y":"scroll","min-height":"700px"})
+        $("#right").css({"overflow-y":"scroll","min-height":"700px"})
        }
 
     });
