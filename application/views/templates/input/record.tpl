@@ -503,17 +503,6 @@
     </div>
 </div>
 <script type="text/javascript" src="{{$resource_url}}js/jquery-1.9.1.min.js"></script>
-<script src="{{$resource_url}}js/ui_tab.js" type="text/javascript"></script>
-<script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/province_res.js"></script>
-<!--dom预加载-->
-<script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
-{{include file='public/record.tpl'}}
 <script type="text/javascript">
 $(function(){
 
@@ -525,5 +514,17 @@ $(function(){
     }
 });
 </script>
+<script src="{{$resource_url}}js/ui_tab.js" type="text/javascript"></script>
+<script type="text/javascript" src="{{$resource_url}}js/rotate/jqueryui.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/province_res.js"></script>
+<!--dom预加载-->
+<script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
+<script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
+{{include file='public/record.tpl'}}
+
 </body>
 </html>
