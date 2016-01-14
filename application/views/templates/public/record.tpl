@@ -672,15 +672,15 @@
             var index=$(".choice_count h3 a").index(this);
             $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
 
-             $(".right_mid .cf").each(function(){
-                    var hright=$(this).height();
+             
+                    var hright=$(".right_mid ul,.right_mid .cf").eq(index).height();
                      if(hright>420)
                     {
-                        $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px;"})
+                    $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px;"})
 
                     }
 
-             });
+             
                
         });
         //厂商选项卡
