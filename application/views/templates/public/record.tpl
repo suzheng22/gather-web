@@ -673,9 +673,9 @@
             $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
 
              var Hleft=$(".right_mid").height();
-                if(Hleft>500)
+                if(Hleft>420)
                 {
-                    $(".right_mid").css({"overflow-y":"scroll","overflow-x":"hidden"})
+                    $(".right_mid").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px;"})
 
                 }
         });
