@@ -902,7 +902,7 @@
 
     });
     //组合包装的删除
-    $("#multiple_sku .multiple_sku_add").on('click','span.cf_del',function(){
+    $("#multiple_sku").on('click','span.cf_del',function(){
         $(this).parent().remove();
     });
 		//营养成分表
