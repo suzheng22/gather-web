@@ -675,7 +675,7 @@
              var Hleft=$(".right_mid").height();
                 if(Hleft>500)
                 {
-                    $(".right_mid").css({"overflow-y":"scroll"})
+                    $(".right_mid").css({"overflow-y":"scroll","overflow-x":"hidden"})
 
                 }
         });
