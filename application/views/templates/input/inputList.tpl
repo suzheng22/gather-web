@@ -41,8 +41,8 @@
                                 <dl class="select">
                                     <select name="status" class="select3">
                                         <option value="">全部</option>
-                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>录入已提交</option>
-                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>录入审核通过</option>
+                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>录入审核中</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>录入审核通过</option>
                                         <option value="3" {{if $status==3}}selected="selected"{{/if}}>录入驳回</option>
 
                                     </select>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                            <a href="{{$root_path}}input/inputAudit" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>录入审核</a>
+                            <a href="javascript:void(0);" class="query"  onclick="inputAdd()"><i class="icon iconfont">&#xf0220;</i>录入审核</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
@@ -155,6 +155,20 @@
         $("#datetimepicker_end").val("");
         $(".cc_top_one ,.select1").val("");
         $(".uew-select-text").html('全部');
+    }
+    function inputAdd(){
+        $.ajax({
+            url:'{{$root_path}}input/inputAudit/verify',
+            dataType:'text',
+            success:function(e){
+              if(e!=""){
+                  var newTab=window.open('about:blank');
+                 newTab.location.href='{{$root_path}}input/inputAudit';
+              }else{
+                  alert("无录入条码可审核")
+              }
+            }
+        })
     }
 </script>
 </body>
