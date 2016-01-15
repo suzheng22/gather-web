@@ -141,7 +141,7 @@ class Input_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/input/auditList";
         $return=$this->curl($url,$data,'get');
         $return=json_decode($return,true);
-        var_dump($return);die();
+
         $data['token']=urlencode($data['token']);
         $n=0;
         foreach($return['data'] as $key=>$val){
@@ -150,6 +150,7 @@ class Input_model extends MY_Model {
             //根据inputId获取详细信息
             $input['inputId']=$val['inputId'];
             $input=$this->getInputInfo($input);
+            var_dump($input);die();
             //添加条形码
             $return['data'][$key]['gtin']=$input['gtin'];
             //添加项目
