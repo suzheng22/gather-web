@@ -103,7 +103,7 @@ class Input extends My_Controller {
     function inputList(){
         //商品分类
         $type_list=$this->product->getCatgroryList();
-        var_dump($type_list);die();
+
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path."input/inputList?";
         /*处理表单数据*/
@@ -121,6 +121,7 @@ class Input extends My_Controller {
             $get['eTime']=strtotime($get['eTime']);
         }
         $list=$this->input_model->getAuditList($get);
+        var_dump($list);die();
         $showpage= parent::page($page_url,10,$list['count']);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
