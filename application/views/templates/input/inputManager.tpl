@@ -88,7 +88,7 @@
                                 <!-- 新增字段 -->
                                 <td>{{$list.pName}}</td>
                                 <td>包装{{$list.packet}}</td>
-                                <td>{{$list.inputType}}</td>
+                                <td>{{if $list.inputType==1}}正常录入{{else}}驳回录入{{/if}}</td>
                                 <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
                                 <td>{{if $list.status==1}}录入中{{else if $list.status==2}}已录入
                                     {{else if $list.status==3}}录入审核通过{{else if $list.status==4}}录入驳回

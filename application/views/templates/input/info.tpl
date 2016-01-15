@@ -1,3 +1,4 @@
+{{if $p_info.status==""}}无录入审核{{else}}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -297,7 +298,6 @@
         //通过事件
         //驳回
         function check(status){
-            alert(status)
             var data="";
             if(status==3){
                 var memo=$("#memo").val();
@@ -335,12 +335,11 @@
             $.ajax({
                 url:'{{$root_path}}input/inputPass',
                 data:data,
-                dataType:"text",
+                dataType:"json",
                 type:'post',
                 success:function(e){
-                    alert(e);
-                    console.log(e);
                     alert(e.msg);
+                    window.location.reload();
                     if(e.msg){
 
                     }
@@ -350,3 +349,4 @@
     </script>
 </body>
 </html>
+{{/if}}

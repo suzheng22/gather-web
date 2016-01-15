@@ -103,6 +103,7 @@ class Input extends My_Controller {
     function inputList(){
         //商品分类
         $type_list=$this->product->getCatgroryList();
+
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path."input/inputList?";
         /*处理表单数据*/
@@ -130,7 +131,6 @@ class Input extends My_Controller {
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
-       // var_dump($inputInfo);
         $inputInfo['p_status']=2;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
