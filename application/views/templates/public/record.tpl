@@ -688,7 +688,7 @@
             var hh=$(".right_mid .cf").eq(index).height();
             if(hh>420)
             {
-                 $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px"});
+            $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px});
             }
         });
         //厂商选项卡
