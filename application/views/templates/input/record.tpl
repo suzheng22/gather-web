@@ -11,6 +11,7 @@
         #nav_info li span{width:150px;}
         #nav_info li em{width:140px;}
         .right_mid .cf p select{width:120px;}
+        .v_show{ padding-left:0px;}
 
 </style>
 </head>
@@ -486,8 +487,8 @@
                 <!--<div style="margin:10px 2px;"><a href="javascript:;" id="add_nutrient">增加营养成分</a></div>-->
             </div>
   		</div>
-        <div class="zz_conforim"><a href="javascript:;" id="record_confirm">提交</a></div>
-        <div class="zz_conforim"><a href="javascript:;" id="record_confirms">反馈</a></div>
+        <div class="zz_conforim"><a href="javascript:;" id="record_confirm">提交</a><a href="javascript:;" id="record_confirms">反馈</a></div>
+      
 	</div> 
 </div>
 <div class="newuser_pop" id="ps_newuser_pop">
