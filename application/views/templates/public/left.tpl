@@ -26,7 +26,7 @@
 		<div class="slimScrollDiv leftsidebar_box">
         <dl class="user_manager system_log">
             <dt><i class="icon iconfont">&#xf0226;</i>系统管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-            <dd><a href="first_index.html" title="首页管理">首页管理</a></dd>
+            <!-- <dd><a href="first_index.html" title="首页管理">首页管理</a></dd> -->
             <dd><a href="{{$root_path}}user/index" title="用户管理">用户管理</a></dd>
             <dd><a href="{{$root_path}}role/index" title="角色管理">角色管理</a></dd>
             <dd><a href="{{$root_path}}user/userGroupList" title="用户组管理">用户组管理</a></dd>
@@ -36,7 +36,7 @@
          <dl class="business_base_info system_log">
              <dt><i class="icon iconfont">&#xf00a9;</i>商品信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
              <dd><a href="up_good_list.html" title="导入商品清单">导入商品清单</a></dd>
-             <dd><a href="{{$root_path}}" title="商品管理">商品管理</a></dd>
+             <!-- <dd><a href="{{$root_path}}" title="商品管理">商品管理</a></dd> -->
              <dd><a href="{{$root_path}}goods/goodsClassify" title="商品分类">商品分类</a></dd>
         </dl>
         <dl class="menu_shoot_manager system_log">
@@ -67,7 +67,7 @@
         </dl>
         <dl class="counts system_log">
             <dt><i class="icon iconfont">&#xf0226;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-            <dd><a href="" title="商品统计">商品统计</a></dd>
+            <!-- <dd><a href="" title="商品统计">商品统计</a></dd> -->
             <dd><a href="{{$root_path}}statistics/project" title="商品统计">项目统计</a></dd>
             <dd><a href="{{$root_path}}statistics/shoot" title="拍摄统计">拍摄统计</a></dd>
             <dd><a href="shoot_check_count.html" title="拍摄审核统计">拍摄审核统计</a></dd>
@@ -75,7 +75,7 @@
             <dd><a href="record_check_count.html" title="录入审核统计">录入审核统计</a></dd>
             <dd><a href="{{$root_path}}statistics/ps" title="修图统计">修图统计</a></dd>
             <dd><a href="{{$root_path}}statistics/psCheck" title="修图审核统计">修图审核统计</a></dd>
-            <dd><a href="#" title="拍摄驳回统计">拍摄驳回统计</a></dd>
+            <!-- <dd><a href="#" title="拍摄驳回统计">拍摄驳回统计</a></dd> -->
         </dl>
 		</div>
 		<div class="projectAction"></div>
