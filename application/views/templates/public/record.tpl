@@ -670,12 +670,13 @@
             var index = 0;
             $(this).addClass("selected").siblings().removeClass("selected");
             var index=$(".choice_count h3 a").index(this);
-            $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide().height();
-            var hright=$(".right_mid ul,.right_mid .cf").eq(index).height();
-             if(hright>420)
+            $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
+           
+           //获取索引高度，超出500PX，出现滚动条
+            var hh=$(".right_mid .cf").eq(index).height();
+            if(hh>500)
             {
-            $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px;"})
-
+                 $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden"});
             }
         });
         //厂商选项卡
