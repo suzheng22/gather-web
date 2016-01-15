@@ -136,12 +136,11 @@ class Input extends My_Controller {
     }
     //录入审核
     function inputAudit($verify){
-
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
         if($verify=="verify"){
-            echo $inputInfo['orderId'];
+            echo $inputInfo['inputId'];
             exit;
         }
         $inputInfo['p_status']=2;
