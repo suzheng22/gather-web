@@ -57,10 +57,14 @@ class Input extends My_Controller {
         $this->ci_smarty->display('input/info.tpl');
     }
     //录入领取
-    function inputAdd(){
+    function inputAdd($verify){
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputSend($data);
+        if($verify=="verify"){
+            echo $inputInfo['status'];
+            exit;
+        }
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
@@ -127,10 +131,15 @@ class Input extends My_Controller {
         $this->ci_smarty->display('input/inputList.tpl');
     }
     //录入审核
-    function inputAudit(){
+    function inputAudit($verify){
+
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
+        if($verify=="verify"){
+            echo $inputInfo['inputId'];
+            exit;
+        }
         $inputInfo['p_status']=2;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);

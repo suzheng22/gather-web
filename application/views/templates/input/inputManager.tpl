@@ -57,7 +57,7 @@
 
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                            <a href="{{$root_path}}input/inputAdd" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
+                            <a href="javascript:void(0);" onclick="inputAdd()" class="query"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
@@ -164,6 +164,21 @@
         $("#datetimepicker_end").val("");
         $(".cc_top_one ,.select1").val("");
         $(".uew-select-text").html('全部');
+    }
+    function inputAdd(){
+
+        $.ajax({
+            url:'{{$root_path}}input/inputAdd/verify',
+            dataType:'text',
+            success:function(e){
+                if(e!=""){
+                    var newTab=window.open('about:blank');
+                    newTab.location.href='{{$root_path}}input/inputAdd';
+                }else{
+                    alert("无录入条码可审核")
+                }
+            }
+        })
     }
 </script>
 </body>
