@@ -76,11 +76,12 @@ class Input_model extends MY_Model {
         $gtin['gtin']=$return['gtin'];
         $gtin['token']=$token;
         $goods=$this->goods_model->getGoodsByGtin($gtin);
-        var_dump($goods);die();
+
         $return['goodsName']=$goods['gName'];
         $return['catName']=$goods['catgrory1'];
         //根据catId获取分类名称
         $cat=$this->product_model->getCatgroryList();
+        var_dump($cat);die();
         foreach($cat['data'] as $key=>$val){
            // var_dump($val);
             if($return['catName']==$val['id']){
