@@ -366,16 +366,20 @@
                     {{else  if $list.isNums==2 && $list.inputType==2}}
                     <p class="clearfix">
                         <label>{{$list.fieldName}}：</label>
+                        {{if $p_info.isGroup==2}}
                         <select class="fieldName">
                             <option>==请选择==</option>
                         </select>
+                        {{/if}}
                         <input type="text" class="fieldName"/>
                         <textarea class="fieldName">{{$p_info.extInfo.{{$list.field}}}}</textarea>
                         <input type="hidden" value="{{$list.field}}" class="hidden">
                     </p>
+                    {{if $p_info.isGroup==2}}
                     <div class="save_box">
                         <a href="javascript:;" id="bese_info_add">增加</a>
                     </div>
+                    {{/if}}
                     {{/if}}
                     {{/foreach}}
                 </div>
