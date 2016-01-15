@@ -51,8 +51,10 @@ class Input extends My_Controller {
         $inputInfo['p_status']=$p_status;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
+
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
+       // var_dump($inputInfo['baseInfo']);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->display('input/info.tpl');
     }
@@ -139,7 +141,7 @@ class Input extends My_Controller {
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
         if($verify=="verify"){
-            echo $inputInfo['inputId'];
+            echo $inputInfo['orderId'];
             exit;
         }
         $inputInfo['p_status']=2;
