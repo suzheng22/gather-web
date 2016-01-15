@@ -170,7 +170,7 @@
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
                                     <select data-name="{{$list.field}}" class="fieldName" onchange="check_proName(this)">
-                                        <option>====请选择====</option>
+                                        <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames key=key item=name}}
                                         <option value="{{$name}}" {{if $name==$value.0}}selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}
@@ -186,7 +186,7 @@
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
                                     <select data-name="{{$list.field}}" class="fieldName" onchange="check_proName(this)">
-                                        <option>====请选择====</option>
+                                        <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames key=key item=name}}
                                         <option value="{{$name}}" {{if $name==$value.0}}selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}
@@ -213,9 +213,11 @@
                                 </p>
                                 {{/if}}
                                 {{/if}}
+                                {{if $p_info.isGroup==2}}
                                 <div class="save_box"  id="save_{{$list.field}}">
                                     <a href="javascript:;" onclick="add_base('{{$list.field}}','{{$list.fieldName}}')">增加</a>
                                 </div>
+                                {{/if}}
                             </div>
                         {{/if}}
                     <!--多产品 -->
@@ -245,7 +247,7 @@
                                 <p class="clearfix">
                                     <label>厂商类别：</label>
                                     <select  class="business">
-                                        <option value="">===请选择===</option>
+                                        <option value="">==请选择==</option>
                                         <option value="委托商" {{if $list.shopType=="委托商"}}selected="selected"{{/if}}>1：委托商</option>
                                         <option value="生产商" {{if $list.shopType=="生产商"}}selected="selected"{{/if}}>2：生产商</option>
                                         <option value="制造商" {{if $list.shopType=="制造商"}}selected="selected"{{/if}}>3：制造商</option>
@@ -297,7 +299,7 @@
                          <p class="clearfix">
                              <label>厂商类别：</label>
                              <select id="inputId" class="business">
-                                 <option value="">===请选择===</option>
+                                 <option value="">==请选择==</option>
                                  <option value="委托商">1：委托商</option>
                                  <option value="生产商">2：生产商</option>
                                  <option value="制造商">3：制造商</option>
@@ -365,7 +367,7 @@
                     <p class="clearfix">
                         <label>{{$list.fieldName}}：</label>
                         <select class="fieldName">
-                            <option>====请选择====</option>
+                            <option>==请选择==</option>
                         </select>
                         <input type="text" class="fieldName"/>
                         <textarea class="fieldName">{{$p_info.extInfo.{{$list.field}}}}</textarea>
@@ -439,7 +441,7 @@
                             {{if $p_info.isGroup==2}}
                             <h3 class="clearfix"><span>产品名称:</span>
                                 <select class="nutrition_name">
-                                        <option>请选择</option>
+                                        <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames item=name}}
                                         <option value="{{$name}}" {{if $name==$list.proName}} selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}

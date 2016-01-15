@@ -122,7 +122,11 @@
         var base_info =$("#"+e);
         var base_temp ='<P class="clearfix">'+
                 '<label>'+f+'</label>'+
-                '<select class="fieldName"><option>==请选择==</option><option value="1223B">1223B</option><option value="e323c">e323c</option></select>'+
+                '<select class="fieldName"><option>==请选择==</option>' +
+                {{foreach from =$p_info.groupGoodsNames item=name}}
+                '<option value="{{$name}}">{{$name}}</option>'+
+                {{/foreach}}
+                '</select>'+
                 '<textarea class="fieldName"></textarea>'+
                 '<em class="base_info_del base_info_del'+e+'" onclick="del_base(this)">删除</em>'+
                 '</p>'
@@ -417,6 +421,7 @@
                     '<div class="nutrition_child">'+
                     '  <h3 class="clearfix"><span>产品名称:</span>'+
                     '<select class="nutrition_name" nutrition_value>'+
+                            '<option>==请选择==</option>'+
                     {{foreach from =$p_info.groupGoodsNames item=name}}
                     '<option value="{{$name}}">{{$name}}</option>'+
                     {{/foreach}}
@@ -529,7 +534,7 @@
                     '<p class="clearfix">'+
                     '<label>厂商类别：</label>'+
                     '<select id="inputId" class="business">'+
-                    '<option value="">===请选择===</option>'+
+                    '<option value="">==请选择==</option>'+
                     '<option value="委托商">1：委托商</option>'+
                     '<option value="生产商">2：生产商</option>'+
                     '<option value="制造商">3：制造商</option>'+
