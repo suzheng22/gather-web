@@ -33,12 +33,12 @@ class Marlboro extends My_Controller {
         $this->ci_smarty->display('shoot_check_pic.tpl');
     }
     //拍摄审核
-    function shoot(){
+    function shootCheck(){
         $this->load->model('user/user_model','user');
         $this->load->model('user/project_model','project');
         $data['userId']=$this->user_info['userId'];
         $data['token']=$this->user_info['token'];
-        $page_url=$this->root_path.'/marlboro/shoot?';
+        $page_url=$this->root_path.'/marlboro/shootCheck?';
         $group_list=$this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         //获取项目
