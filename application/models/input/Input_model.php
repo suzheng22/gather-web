@@ -76,7 +76,6 @@ class Input_model extends MY_Model {
         $gtin['gtin']=$return['gtin'];
         $gtin['token']=$token;
         $goods=$this->goods_model->getGoodsByGtin($gtin);
-
         $return['goodsName']=$goods['gName'];
         $return['catName']=$goods['catgrory1'];
         //根据catId获取分类名称
@@ -91,6 +90,7 @@ class Input_model extends MY_Model {
         if($return['status']==4){
             $url=$this->more_api_url."/lingmall/inputAudit/{$data['inputId']}?token={$token}";
             $returns=$this->curl($url,'','get');
+          //  var_dump($returns);
             $returns=json_decode($returns);
           //  var_dump($returns);
             $return['memo']=$returns['memo'];
@@ -141,7 +141,6 @@ class Input_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/input/auditList";
         $return=$this->curl($url,$data,'get');
         $return=json_decode($return,true);
-
         $data['token']=urlencode($data['token']);
         $n=0;
         foreach($return['data'] as $key=>$val){
@@ -156,7 +155,6 @@ class Input_model extends MY_Model {
             $pId['pId']=$input['pId'];
             $pId['token']=$data['token'];
             $return['data'][$key]['pName']=  $this->project_model->getPNameByPId($pId);
-
             //根据条形码获取条码的商品名称
             $return['data'][$key]['goodsName']=$input['goodsName'];
             //获取录入类型
