@@ -42,8 +42,8 @@
                                     <select name="status" class="select3">
                                         <option value="">全部</option>
                                         <option value="2" {{if $status==2}}selected="selected"{{/if}}>录入已提交</option>
-                                        <option value="3" {{if $status==3}}selected="selected"{{/if}}>录入审核通过</option>
-                                        <option value="4" {{if $status==4}}selected="selected"{{/if}}>录入驳回</option>
+                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>录入审核通过</option>
+                                        <option value="3" {{if $status==3}}selected="selected"{{/if}}>录入驳回</option>
 
                                     </select>
                                 </dl>

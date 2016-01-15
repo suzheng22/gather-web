@@ -107,7 +107,13 @@
                         value_shopId.val(e.shopIds);
                     }
                 }
-                alert(e.msg);
+                if(f==3){
+                    if(e.msg!="保存成功"){
+                        alert("厂商保存失败")
+                    }
+                }else{
+                    alert(e.msg);
+                }
             }
         });
     }
@@ -213,7 +219,13 @@
             dataType:'json',
             type:'POST',
             success:function(e){
-                alert(e.msg);
+                if(f==3){
+                    if(e.msg!="保存成功"){
+                        alert("分类提交失败")
+                    }
+                }else{
+                    alert(e.msg);
+                }
             }
         });
     }

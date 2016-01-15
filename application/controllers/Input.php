@@ -130,7 +130,6 @@ class Input extends My_Controller {
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
-       // var_dump($inputInfo);
         $inputInfo['p_status']=2;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
