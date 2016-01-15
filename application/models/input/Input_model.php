@@ -89,10 +89,8 @@ class Input_model extends MY_Model {
         }
         //根据inputId获取驳回原因
         if($return['status']==4){
-            $url=$this->more_api_url."lingmall/inputAudit/{$data['inputId']}?token={$token}";
-
+            $url=$this->more_api_url."/lingmall/inputAudit/{$data['inputId']}?token={$token}";
             $returns=$this->curl($url,'','get');
-            var_dump($returns);die();
           //  var_dump($returns);
             $returns=json_decode($returns);
           //  var_dump($returns);
