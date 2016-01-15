@@ -61,6 +61,7 @@ class Input extends My_Controller {
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputSend($data);
+        //进行验证
         if($verify=="verify"){
             echo $inputInfo['status'];
             exit;
