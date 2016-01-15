@@ -103,6 +103,7 @@ class Input extends My_Controller {
     function inputList(){
         //商品分类
         $type_list=$this->product->getCatgroryList();
+        var_dump($type_list);die();
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path."input/inputList?";
         /*处理表单数据*/
