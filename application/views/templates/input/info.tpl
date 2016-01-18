@@ -134,7 +134,7 @@
                                   </span>
                                 {{else}}
                                     {{foreach from=$list key=k item=v}}
-                                        <span>{{$v.0}}:{{$v.1}}<span>
+                                        <span>{{$v}}<span>
                                     {{/foreach}}
                                 {{/if}}
                         </P>

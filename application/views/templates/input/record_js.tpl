@@ -69,7 +69,7 @@
         //去检验其他原料配料
     }
     //厂商的保存
-    function save_business(){
+    function save_business(f){
         //获取几个厂商
         var a=$(" .business_add").size();
         //添加删除的厂商的ID
@@ -99,11 +99,15 @@
             dataType:'json',
             type:'POST',
             success:function(e){
+               if(e==null){
+                   alert("厂商保存失败");
+                   return false;
+               }
                 //将对应的shopId添加到对应的
                 var len_shopId=$(".shopId").size();
                 for(var i=0; i<len_shopId;i++){
                     var value_shopId=$(".shopId:eq("+i+")");
-                    if(value_shopId.val()==""){
+                    if(value_shopId.val()=="" && e!="null"){
                         value_shopId.val(e.shopIds);
                     }
                 }
@@ -194,29 +198,31 @@
             //获取每个ID下的P的个数
             var len_base2=$(".base_info #"+id+" p").size();
             //循环遍历每个ID的P
-            val +=",\""+id+"\":[";
+            val +=",\""+id+"\":";
             for(var i=0;i<len_base2;i++){
-                var val1="";
+                var val1="\"";
                 //获取每个P下的fieldName的个数
                 var len1=$(".base_info #"+id+" p:eq("+i+") .fieldName").size();
                 for(var j=0;j<len1;j++){
                     //获取每个P下的fieldName下的值
                     var name1=$(".base_info #"+id+" p:eq("+i+") .fieldName:eq("+j+")").val();
                     if(j==len1-1){
-                        val1 +="\""+j+"\":\""+name1+"\"";
+                        val1 +=""+name1+"\"";
                     }else{
-                        val1 +="\""+j+"\":\""+name1+"\",";
+                        val1 +=""+name1+"：";
                     }
                 }
                 if(i==len_base2-1){
-                    val+="\""+ i+"\":["+val1+"]";
+                    val+=""+val1+"";
                 }else{
-                    val+="\""+ i+"\":["+val1+"],";
+                    val+=""+val1+",";
                 }
             }
-            val+="]"
+            val+=""
         }
         val+="]";
+       // console.log(val);
+     //  return false;
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:val,filed:2,inputId:inputId,goodsName:goodsName},

@@ -167,31 +167,40 @@
                                 <!-- 基本信息存在时start -->
                                 {{if $p_info.baseInfo.{{$list.field}} !=""}}
                                 {{foreach from=$p_info.baseInfo.{{$list.field}} key=keys item=value}}
+                                <!--将$value解析 start-->
+                                <!-- 将第一个-->
+                                {{$v="$value"|strpos:"："}}
+                                {{$value1=$value|substr:0:$v}}
+                                {{$value2=$value|substr:($v+3):718}}
+                                <!--将$value解析 end--->
+                                <!--判断是否存在数组 -->
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
                                     <select data-name="{{$list.field}}" class="fieldName" onchange="check_proName(this)">
                                         <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames key=key item=name}}
-                                        <option value="{{$name}}" {{if $name==$value.0}}selected="selected"{{/if}}>{{$name}}</option>
+                                        <option value="{{$name}}" {{if $name==$value1}}selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}
                                         </select>
-                                    <textarea name="fieldName" class="fieldName">{{$value.1}}</textarea>
+                                    <textarea name="fieldName" class="fieldName"> {{$value2}}</textarea>
+
                                     <input type="hidden" value="{{$list.field}}" class="hidden">
                                     {{if $keys!=0}}
                                     <em class="base_info_del base_info_del{{$list.field}}" onclick="del_base(this)">删除</em>
                                     {{/if}}
                                  </p>
                                 {{/foreach}}
+
                                 {{else}}
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
                                     <select data-name="{{$list.field}}" class="fieldName" onchange="check_proName(this)">
                                         <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames key=key item=name}}
-                                        <option value="{{$name}}" {{if $name==$value.0}}selected="selected"{{/if}}>{{$name}}</option>
+                                        <option value="{{$name}}" {{if $name==$value1}}selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}
                                     </select>
-                                    <textarea name="fieldName" class="fieldName">{{$value.1}}</textarea>
+                                    <textarea name="fieldName" class="fieldName">{{$value2}}</textarea>
                                     <input type="hidden" value="{{$list.field}}" class="hidden">
                                 </p>
                                 {{/if}}
@@ -201,7 +210,7 @@
                                 {{foreach from=$p_info.baseInfo.{{$list.field}} item=value}}
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
-                                    <textarea name="fieldName" class="fieldName">{{$value.1}}</textarea>
+                                    <textarea name="fieldName" class="fieldName">{{$value}}</textarea>
                                     <input type="hidden" value="{{$list.field}}" class="hidden">
                                 </p>
                                 {{/foreach}}
@@ -520,7 +529,7 @@
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
-{{include file='public/record.tpl'}}
+{{include file='./record_js.tpl'}}
 
 </body>
 </html>
