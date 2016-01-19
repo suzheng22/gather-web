@@ -259,6 +259,10 @@ function check(status){
         return false;
     }
 	var memo=$("#memo").val();
+    if(memo==""){
+        alert("驳回原因不能为空");
+        return false;
+    }
     var data={"orderId":{{$p_info.orderId}},"type":1,"status":status,"memo":memo};
   //  return false;
 		$.post("{{$root_path}}marlboro/shootPass",data,
@@ -287,7 +291,7 @@ function check(status){
         var packet="{{$p_info.packet}}";
         var memo=$("#memos").val();
         if(memo==""){
-            alert("驳回原因不能为空");
+            alert("缺图原因不能为空");
             return false;
         }
         var data={gtin:gtin,pId:pId,packet:packet,memo:memo};
