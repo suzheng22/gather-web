@@ -51,10 +51,9 @@ class Input extends My_Controller {
         $inputInfo['p_status']=$p_status;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
-
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
-       // var_dump($inputInfo['baseInfo']);
+       // var_dump($inputInfo['nutritionInfo']);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->display('input/info.tpl');
     }

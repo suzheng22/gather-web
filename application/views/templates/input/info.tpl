@@ -181,7 +181,7 @@
             <div style="display:none;" class="cf">
                 {{foreach from=$p_info.nutritionInfo key=key item=list}}
                 <div class="dic_info">
-                    {{if $list.proName}}
+                    {{if $list.proName!="" and $list.proName!="undefined"}}
                     <h3 class="clearfix">产品名称:{{$list.proName}}</h3>
                     {{/if}}
                     <h4 class="clearfix">

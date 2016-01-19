@@ -207,10 +207,13 @@
                                 <!-- 基本信息存在时end-->
                                 {{else}}
                                 {{if $p_info.baseInfo.{{$list.field}} !=""}}
-                                {{foreach from=$p_info.baseInfo.{{$list.field}} item=value}}
+                                {{foreach from=$p_info.baseInfo.{{$list.field}} key=keyss  item=value}}
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
                                     <textarea name="fieldName" class="fieldName">{{$value}}</textarea>
+                                    {{if $keyss!=0}}
+                                    <em class="base_info_del base_info_del{{$list.field}}" onclick="del_base(this)">删除</em>
+                                    {{/if}}
                                     <input type="hidden" value="{{$list.field}}" class="hidden">
                                 </p>
                                 {{/foreach}}
@@ -248,7 +251,7 @@
                          </h3>
                      </div>
                      <div class="business_choice">
-                     {{if ($p_info.shop.0)!=""}}
+                     {{if ($p_info.shop)|count!="0"}}
                      {{foreach from=$p_info.shop key=key item=list}}
                      <div class="business_add" {{if $key==0}} {{else}} style="display:none" {{/if}}>
                          <input type="hidden" class="business shopId" value="{{$list.shopId}}">
@@ -302,7 +305,7 @@
                        </div>
                      {{/foreach}}
                      {{else}}
-                     <div class="business_add" {{if $key==0}} {{else}} style="display:none" {{/if}}>
+                     <div class="business_add" >
                          <input type="hidden" class="business shopId" value="{{$list.shopId}}">
                          <input type="hidden" class="business inputIds" value="{{$p_info.inputId}}">
                          <p class="clearfix">
@@ -378,6 +381,9 @@
                         {{if $p_info.isGroup==2}}
                         <select class="fieldName">
                             <option>==请选择==</option>
+                            {{foreach from =$p_info.groupGoodsNames key=key item=name}}
+                            <option value="{{$name}}" {{if $name==$value1}}selected="selected"{{/if}}>{{$name}}</option>
+                            {{/foreach}}
                         </select>
                         {{/if}}
                         <input type="text" class="fieldName"/>
@@ -450,6 +456,7 @@
                         </div>
                         <div class="nutrition">
                             {{foreach from=$p_info.nutritionInfo key=k item=list}}
+
                         <div class="nutrition_child" {{if $k!=0}}style="display:none"{{/if}}>
                             {{if $p_info.isGroup==2}}
                             <h3 class="clearfix"><span>产品名称:</span>
@@ -461,7 +468,7 @@
                                     </select>
                             </h3>
                             {{/if}}
-                            <h4 class="clearfix">
+                            <h3 class="clearfix">
                                     <span>成分名称</span>
                                     <select name="component" class="nutrition_names">
                                         <option value="含量" {{if $list.names=='含量'}}selected="selected"{{/if}}>含量</option>
@@ -470,21 +477,53 @@
                                         <option value="每一枚" {{if $list.names=='每一枚'}}selected="selected"{{/if}}>每一枚</option>
                                     </select>
                                     <span>NVR%</span>
-                            </h4>
+                            </h3>
                            {{foreach from=$list key=key item=value}}
                             {{if $key>1}}
-
                             <P class="clearfix p">
-                                <input type="hidden" class="nutrition_value" value="{{$key}}">
-                                <span>{{foreach from=$p_info.nutritionFiled.data key=keys item=lists}}
-                                    {{if $lists.nutritionId==$key}}{{$lists.nutritionName}}{{$value.nutritionName}}{{/if}}
-                                    {{/foreach}}:</span>
+                                {{foreach from=$p_info.nutritionFiled.data key=keys item=lists}}
+                                    {{if $lists.nutritionId==$key and $lists.isDefault==1}}
+                                <input type="hidden" class="nutrition_value" value="{{$key}}"><span>{{$lists.nutritionName}}{{$value.nutritionName}}:</span>
+                                {{else if $lists.nutritionId==$key and $lists.isDefault!=1}}
+                                 <select style="margin-left:2px; margin-right:10px;" class="nutrition_value nutritionUnitEn" onchange="nutritionUnitEn(this)">
+                                     <option>==请选择==</option>
+                                     {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                     {{if $lists1.isDefault!=1}}
+                                 <option value="{{$lists1.nutritionId}}" class="{{$lists1.nutritionUnitEn}}" {{if  $lists1.nutritionId==$key}}selected="selected"{{/if}}>{{$lists1.nutritionName}}--{{$lists1.nutritionUnitEn}}</option>
+                                     {{/if}}
+                                     {{/foreach}}
+                                 </select>
+                                    {{/if}}
+                                {{/foreach}}
                                 <input type="text"   class="nutrition_value" value="{{$value.shuzi}}"/>
-                                <input type="hidden"   class="nutrition_value" value="{{$value.danwei}}"/>
+                                <!--判断是否是默认参数单位显示-->
+                                {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key}}
+                                <label class="nutritionUnitEns">
+                                    {{$value.danwei}}
+                                </label>
+                                {{else if $lists1.isDefault==1 and $lists1.nutritionId==$key}}
                                 <label>
                                     {{$value.danwei}}
                                 </label>
+                                {{/if}}
+                                {{/foreach}}
+                                <!---->
+                                <!--判断是否是默认参数单位隐形显示-->
+                                {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key}}
+                                <input type="hidden"   class="nutrition_value nutrition_info" value="{{$value.danwei}}"/>
+                                {{else if $lists1.isDefault==1 and $lists1.nutritionId==$key}}
+                                <input type="hidden"   class="nutrition_value" value="{{$value.danwei}}"/>
+                                {{/if}}
+                                {{/foreach}}
+                                <!---->
                                 <input type="text"   class="nutrition_value" value="{{$value.value}}"/><label>%</label>
+                                {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key}}
+                                <em class="nutrition_inform_del" style="display:block;cursor:pointer">删除</em>
+                                {{/if}}
+                                {{/foreach}}
                             </P>
                             {{/if}}
                             {{/foreach}}
@@ -492,10 +531,12 @@
                             {{/foreach}}
                         </div>
                         {{/if}}
+                        <div class="save_box ">
+                            <a href="javascript:;" id="" class="add_nutrient">添加营养成分</a> <a href="javascript:;" id="" class="add_param">添加参数</a> <a href="javascript:;" onclick="save_nutrient()">保存</a>
+                        </div>
+
                     </div>
-                <div class="save_box">
-                  <a href="javascript:;" id="" class="add_nutrient">添加营养成分</a> <a href="javascript:;" id="" class="add_param">添加参数</a> <a href="javascript:;" onclick="save_nutrient()">保存</a>
-                </div>
+
                 </div>
                 <!--<div style="margin:10px 2px;"><a href="javascript:;" id="add_nutrient">增加营养成分</a></div>-->
             </div>

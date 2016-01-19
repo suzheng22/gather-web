@@ -157,14 +157,16 @@
         $(".uew-select-text").html('全部');
     }
     function inputAdd(){
+        var newTab=window.open('about:blank');
         $.ajax({
             url:'{{$root_path}}input/inputAudit/verify',
             dataType:'text',
             success:function(e){
               if(e!=""){
-                  var newTab=window.open('about:blank');
+
                  newTab.location.href='{{$root_path}}input/inputAudit';
               }else{
+                  newTab.close();
                   alert("无录入条码可审核")
               }
             }
