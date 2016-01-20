@@ -259,7 +259,7 @@ function check(status){
         return false;
     }
 	var memo=$("#memo").val();
-    if(memo==""){
+    if(memo=="" && status==3){
         alert("驳回原因不能为空");
         return false;
     }

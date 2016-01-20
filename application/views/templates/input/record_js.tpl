@@ -57,7 +57,7 @@
         var a=  $(".base_info select").size();
         var n=0;
         for(var i=0;i<a;i++){
-            var proName1= $(".base_info select:eq("+i+")").val()
+            var proName1= $(".base_info select:eq("+i+")").val();
             if(proName1==proName){
                 n++
             }
@@ -290,7 +290,7 @@
     //营养成分的保存
     function save_nutrient(f){
         /*先获取几个营养成分*/
-        var nutrition_l=$("#nutrition_inform .nutrition_child").size();
+        var nutrition_l=$('.nutrition_child').size();
         var num1="[";
         for(var j=0;j<nutrition_l;j++) {
             var a = $(".nutrition_child:eq(" + j + ") p").size();
