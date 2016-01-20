@@ -9,7 +9,7 @@ class Project extends My_Controller {
         $this->load->model('user/project_model');
         $this->load->model('publicFuc/publicFuc_model','publicFuc');
     }
-    //商品管理
+    //项目管理列表
     function projectManager(){
         $this->load->model('user/project_model','user');
         $data['userId']=$this->user_info['userId'];
@@ -37,7 +37,7 @@ class Project extends My_Controller {
         $this->ci_smarty->assign('pages',$showPage['show']);
         $this->ci_smarty->display('project_manager.tpl');
     }
-  //商品用户管理
+  //项目用户管理列表
     function projectUserManager(){
         $this->load->model('user/user_model','user');
         $data['userId']=$this->user_info['userId'];

@@ -20,32 +20,35 @@ class MY_Model extends CI_Model
     function curl($url,$data,$m='post'){
         $return=$this->curl->_simple_call($m,$url,$data);
         $return_str=json_decode($return,true);
-                if($return_str['msgCode']>0){
-//                    if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest"){
-//                        // ajax 请求的处理方式
-//                        echo $return;exit;
-//                    }else{
-//                        $c=$this->uri->segment(1, 0);
-//                        $m=$this->uri->segment(2, 0);
-//                        $acction=$c.'/'.$m;
-//                        $noLoginArray=array('user/login','user/doLogin');
-//
-//                        if(!in_array($acction,$noLoginArray)){
-//                            // 正常请求的处理方式
-//
-//                            header("Location: ".site_url('user/logout'));
-//                        }
-//                        else{
-//                            return $return;
-//                        }
-//                    }
-                    return $return;
-
-
-        }
-        else{
+        $array=array();
+        if(preg_match("/^[20][0-9]/",$return_str['http_code'])){
+            $array['url']=$return_str['url'];
+            $array['code']=$return_str['http_code'];
+            //如果无法匹配成功说明返回错误
+            if($return['http_code']==400){
+                $array['msgCode']="参数错误";
+            }elseif($return['http_code']==401){
+                $array['msgCode']="认证授权失败";
+            }elseif($return['http_code']==403){
+                $array['msgCode']="无权限";
+            } elseif($return['http_code']==404){
+                $array['msgCode']="资源不存在";
+            }elseif($return['http_code']==405){
+                $array['msgCode']="请求方式错误";
+            }elseif($return['http_code']==412){
+                $array['msgCode']="请求不满足条件";
+            }elseif($return['http_code']==500){
+                $array['msgCode']="服务器错误(sql)";
+            }elseif($return['http_code']==503){
+                $array['msgCode']="服务端不可用";
+            }elseif($return['http_code']==504){
+                $array['msgCode']="服务端操作超时";
+            }
+            return $array;
+        }else{
             return $return;
         }
+
     }
 }
 ?>

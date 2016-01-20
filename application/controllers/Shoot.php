@@ -93,7 +93,6 @@ class Shoot extends My_Controller {
         $arr['token']=$this->user_info['token'];
         //获取无法测量管理列表
         $noMeasureList=$this->marlboro->getNoShootList($arr);
-     // var_dump($noMeasureList['data']);
         if($arr['is_ext']==1){
             $fileName='无法拍摄统计';
             $fields=array('序号','商品条形码','商品名称','商品分类','项目名称','加入时间','拍摄人');
@@ -107,7 +106,7 @@ class Shoot extends My_Controller {
                    $query[$i]['catName']=$val['catName'];
                    $query[$i]['pName']=$val['pName'];
                    $query[$i]['creatTime']=date("Y-m-d H:i:s",$val['creatTime']);;
-                   $query[$i]['shootName']=$val['shootName'];
+                   $query[$i]['shootName']=$val['measurement'];
                $i++;
            }
             echo $this->phpExcel($fileName,$fields, $query,'','25','20');

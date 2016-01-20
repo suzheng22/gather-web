@@ -33,7 +33,7 @@
                                     <select name="filedType" class="select3">
                                         <option value="">全部</option>
                                         <option value="1" {{if $filedType==1}}selected="selected"{{/if}}>基本信息</option>
-                                        <option value="2" {{if $filedType==2}}selected="selected"{{/if}}>扩展信息</option>
+                                        <option value="2" {{if $filedType==2}}selected="selected"{{/if}}>扩充信息</option>
                                     </select>
                                 </dl>
                             </div>
