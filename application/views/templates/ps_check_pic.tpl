@@ -26,7 +26,7 @@
         <div class="clearfix"></div>
         <p class="back_why_info">
             <!-- {{if $p_info.status==3}}-->
-            最新驳回原因:<span>{{$p_info.memo}}</span>上次驳回原因:<span>{{$p_info.memo}}</span>
+            最新驳回原因:<span>{{$p_info.memo}}</span>
             <!--  {{/if}}-->
         </p>
 
