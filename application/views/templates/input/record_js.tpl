@@ -224,6 +224,7 @@
         val+="]";
         console.log(val);
      // return false;
+        goodsName=$("#goodsName").val();
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:val,filed:2,inputId:inputId,goodsName:goodsName},
@@ -377,7 +378,10 @@
     }
     //选择营养成分参数时
     function nutritionUnitEn(e){
-        var $nutritionUnitEn=$(".nutritionUnitEn");
+        //获取当前几个营养成分；
+      var size=  $(".nutrition_child").size();
+        for(var j=0;j<size;j++){
+        var $nutritionUnitEn=$(".nutrition_child:eq("+j+") .nutritionUnitEn");
         //当前选中
         var index=0;
         index=$nutritionUnitEn.index(e);
@@ -386,7 +390,7 @@
         //判断当前选中的ID，是否已存在
         var size=$nutritionUnitEn.size();
         for(var i=0;i<size;i++ ){
-            if(index!=i){
+            if(index!=i && index!="-1"){
                 //获取其它Id值
                 var nutritionId=$nutritionUnitEn.eq(i).val();
                 if(id==nutritionId){
@@ -395,10 +399,10 @@
                 }
             }
         }
-        var c= $(".nutritionUnitEn:eq("+index+") option:selected").attr("class");
-        $(".nutritionUnitEns").eq(index).html(c);
-        $(".nutrition_info").eq(index).val(c);
-
+        var c= $(".nutrition_child:eq("+i+") .nutritionUnitEn:eq("+index+") option:selected").attr("class");
+        $(".nutrition_child:eq("+i+") .nutritionUnitEns").eq(index).html(c);
+        $(".nutrition_child:eq("+i+") .nutrition_info").eq(index).val(c);
+        }
     }
     $(function(){
         //预加载

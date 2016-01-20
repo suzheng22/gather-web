@@ -23,23 +23,24 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,$data,'get');
         $return=json_decode($return,true);
         $data['token']=urlencode($data['token']);
-        $n=0;
+        if($data['page']==1){
+            $n=0;
+        }else{
+            $n=($data['page']-1)*10;
+        }
         foreach($return['data'] as $key=>$val){
             $n++;
             $return['data'][$key]['lId']=$n;
             //根据条形码获取条码名称
             $gtin['gtin']=$val['gtin'];
             $gtin['token']=$data['token'];
-            //  var_dump($goods);
             $goods=$this->goods_model->getGoodsByGtin($gtin);
-          //  var_dump($goods);
-           $return['data'][$key]['goodsName']=$goods['gName'];
+            $return['data'][$key]['goodsName']=$goods['gName'];
             //根据pId获取项目名称
             $pId['pId']=$val['pId'];
             $pId['token']=$data['token'];
             $return['data'][$key]['pName']=  $this->project_model->getPNameByPId($pId);
         }
-      // var_dump($return);
         return $return;
     }
     /*
@@ -51,15 +52,12 @@ class Input_model extends MY_Model {
         $return=json_decode($return,true);
         $gtin['gtin']=$return['gtin'];
         $gtin['token']=$data['token'];
-        //  var_dump($goods);
         $goods=$this->goods_model->getGoodsByGtin($gtin);
-        //  var_dump($goods);
         $return['goodsName']=$goods['gName'];
         $return['catName']=$goods['catgrory1'];
         //根据catId获取分类名称
         $cat=$this->product_model->getCatgroryList();
         foreach($cat['data'] as $key=>$val){
-            // var_dump($val);
             if($return['catName']==$val['id']){
                 $return['catName']=$val['name'];
             }
@@ -81,7 +79,6 @@ class Input_model extends MY_Model {
         //根据catId获取分类名称
         $cat=$this->product_model->getCatgroryList();
         foreach($cat['data'] as $key=>$val){
-           // var_dump($val);
             if($return['catName']==$val['id']){
                 $return['catName']=$val['name'];
             }
@@ -90,14 +87,10 @@ class Input_model extends MY_Model {
         if($return['status']==4){
             $url=$this->more_api_url."/lingmall/inputAudit/{$data['inputId']}?token={$token}";
             $returns=$this->curl($url,'','get');
-          //  var_dump($returns);
             $returns=json_decode($returns,true);
-          //  var_dump($returns);
             $return['memo']=$returns['memo'];
             $return['memoPoint']=$returns['memoPoint'];
         }
-     //   var_dump($return);
-        //根据pId获取项目名称
         return $return;
     }
     //获取录入图片的接口
@@ -142,14 +135,17 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,$data,'get');
         $return=json_decode($return,true);
         $data['token']=urlencode($data['token']);
-        $n=0;
+        if($data['page']==1){
+            $n=0;
+        }else{
+            $n=($data['page']-1)*10;
+        }
         foreach($return['data'] as $key=>$val){
             $n++;
             $return['data'][$key]['lId']=$n;
             //根据inputId获取详细信息
             $input['inputId']=$val['inputId'];
             $input=$this->getInputInfo($input);
-
             //添加条形码
             $return['data'][$key]['gtin']=$input['gtin'];
             //添加项目
