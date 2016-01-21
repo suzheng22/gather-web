@@ -225,6 +225,7 @@
         console.log(val);
      // return false;
         goodsName=$("#goodsName").val();
+        console.log(goodsName);
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:val,filed:2,inputId:inputId,goodsName:goodsName},
@@ -302,7 +303,11 @@
                 var p_val = "\"proName\":\""+b+"\",\"names\":\""+c+"\",";
             }
             if(b==""||c==""||b=="==请选择=="){
-                alert("营养成分参数不能为空");
+                if(c==""){
+                    alert("请选择含量");
+                }else{
+                    alert("请选择产品名称");
+                }
                 return false;
             }
             //获取所有某一个营养分类的值p标签的值
@@ -434,11 +439,13 @@
             $(".multiple_sku_add").show();
             //增加分类下的产品名称
         });
-        $("#cf_add").click(function(){
+
+        $("#cf_add").unbind().click(function(){
+            var size=$(".product").size();
             var multiple_sku_add = $(".multiple_sku_add");
             // multiple_sku_add.show();
             var cf_temp ='<p class="clearfix">'+
-                    '<label>产品名称：</label>'+
+                    '<label>产品名称'+size+'：</label>'+
                     '<input type="text" class="product"/>'+
                     '<span class="cf_del">删除</span>'+
                     '</p>';
@@ -471,7 +478,7 @@
                     '<h4 class="clearfix">'+
                     '<span>成分名称</span>'+
                     '<select>'+
-                    '<option value="">含量</option>'+
+                    '<option value="">请选择含量</option>'+
                     '<option value="">每100ml</option>'+
                     '<option value="">每100g</option>'+
                     '<option value="">每一枚</option>'+

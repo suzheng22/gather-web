@@ -113,7 +113,7 @@
                     <div class="clearfix multiple_sku_add">
                         {{foreach from=$p_info.groupGoodsNames key=key item=list}}
                         <P class="clearfix">
-                            <label>产品名称：</label>
+                            <label>产品名称{{if $key!=0}}{{$key}}{{/if}}：</label>
                             <input type="text" class="product" value="{{$list}}"/>
                             {{if $key!=0}}
                             <span class="cf_del">删除</span>
@@ -156,7 +156,7 @@
                         {{if $list.isNums==1 && $list.inputType==1}}
                             <p class="clearfix p" >
                                 <label>{{$list.fieldName}}：</label>
-                                <input type="text" name="fieldName" class="fieldName" value="{{if $list.fieldName=="产品名称" and $p_info.baseInfo.{{$list.field}}==""}}{{$p_info.goodsName}}{{else}}{{$p_info.baseInfo.{{$list.field}}}}{{/if}}"/>
+                                <input type="text" name="fieldName" class="fieldName" {{if $list.fieldName=="产品名称"}}id="goodsName"{{/if}} value="{{if $list.fieldName=="产品名称" and $p_info.baseInfo.{{$list.field}}==""}}{{$p_info.goodsName}}{{else}}{{$p_info.baseInfo.{{$list.field}}}}{{/if}}"/>
                                 <input type="hidden" value="{{$list.field}}" class="hidden">
                             </p>
                         {{else if $list.isNums==1 && $list.inputType==2}}
@@ -429,7 +429,7 @@
                             <h4 class="clearfix">
                                     <span>成分名称</span>
                                     <select name="component" class="nutrition_names">
-                                        <option value="含量">含量</option>
+                                        <option value="">请选择含量</option>
                                         <option value="每100ml">每100ml</option>
                                         <option value="每100g">每100g</option>
                                         <option value="每一枚">每一枚</option>
@@ -476,7 +476,7 @@
                             <h3 class="clearfix">
                                     <span>成分名称</span>
                                     <select name="component" class="nutrition_names">
-                                        <option value="含量" {{if $list.names=='含量'}}selected="selected"{{/if}}>含量</option>
+                                        <option value="" {{if $list.names=='含量'}}selected="selected"{{/if}}>请选择含量</option>
                                         <option value="每100ml" {{if $list.names=='每100ml'}}selected="selected"{{/if}}>每100ml</option>
                                         <option value="每100g" {{if $list.names=='每100g'}}selected="selected"{{/if}}>每100g</option>
                                         <option value="每一枚" {{if $list.names=='每一枚'}}selected="selected"{{/if}}>每一枚</option>

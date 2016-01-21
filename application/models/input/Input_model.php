@@ -71,10 +71,13 @@ class Input_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/input/{$data['inputId']}?token={$token}";
         $return=$this->curl($url,'','get');
         $return=json_decode($return,true);
+       // var_dump($return);
         $gtin['gtin']=$return['gtin'];
         $gtin['token']=$token;
         $goods=$this->goods_model->getGoodsByGtin($gtin);
-        $return['goodsName']=$goods['gName'];
+        if(  $return['goodsName']!=""){
+            $return['goodsName']=$goods['gName'];
+        }
         $return['catName']=$goods['catgrory1'];
         //根据catId获取分类名称
         $cat=$this->product_model->getCatgroryList();
