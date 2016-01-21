@@ -167,5 +167,21 @@ class Statistics_model extends MY_Model {
         //print_r($list['data']);exit;
         return $list;
     }
+    
+    
+    function getInputCheck($data){
+        $data['token']=urldecode($this->user_info['token']);
+        $url=$this->more_api_url."/lingmall/stat/inputreview";
+        $return=$this->curl($url,$data,'get');
+        $list= json_decode($return,true);
+        foreach ($list['data'] as $k=>$v){
+            $user_p['upUserId']=$v['userId'];
+            $u=$this->user_model->getInfo($user_p);
+            $u=json_decode($u,true);
+            $list['data'][$k]['userName']=$u['userName'];
+            $list['data'][$k]['groupName']=$u['groupName'];
+        }
+        return $list;
+    }
 }
 ?>

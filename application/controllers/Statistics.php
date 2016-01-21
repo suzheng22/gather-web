@@ -281,15 +281,29 @@ class Statistics extends My_Controller {
     }
     
     
+    function inputCheck(){
+        $page_url=$this->root_path.'statistics/inputCheck?';
+        $group_list= $this->user_model->getGroupListByRole(11);
+        $this->ci_smarty->assign('group_list',$group_list['list']);
+        
+        $arr=$this->input($page_url);
+        $list=$this->Statistics_model->getInputCheck($arr);
+        $showpage= parent::page($page_url,10,$list['count']);
+        $this->ci_smarty->assign('glist',$list['data']);
+        $this->ci_smarty->assign('pages',$showpage['show']);
+        $this->ci_smarty->display('statistics/record_check_count.tpl');
+    }
+    
     function input($page_url){
 
-        $arr['is_ext']='no';
+        $arr['is_ext']='0';
         
         if($this->input->get('gtin')!=""){
             $arr['gtin']=$this->input->get('gtin');
             $this->ci_smarty->assign('gtin',$arr['gtin']);
             $page_url.="gtin=".$arr['gtin'];
         }
+        
         
         if($this->input->get('gName')!=""){
             $arr['gName']=$this->input->get('gName');
@@ -317,13 +331,13 @@ class Statistics extends My_Controller {
         
         if($this->input->get('groupId')!=""||$this->input->get('userName')!=""){
             $user['groupId']=$this->input->get('groupId');
-            $user['username']=$this->input->get('userName');
+            $user['userName']=$this->input->get('userName');
             $str=$this->user_model->getUserIdsByFiled($user);
             $user_id_list=json_decode($str,true);
             $arr['userIds']=serialize($user_id_list);
         
             $this->ci_smarty->assign('groupId',$user['groupId']);
-            $this->ci_smarty->assign('username',$user['username']);
+            $this->ci_smarty->assign('userName',$user['userName']);
             $page_url.="groupId=".$user['groupId']."&userName=".$user['username'];
         }
         else{
