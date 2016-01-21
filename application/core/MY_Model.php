@@ -8,6 +8,12 @@ class MY_Model extends CI_Model
          $this->user_api_url=USERAPI;
 	     //线上$this->user_api_url="http://121.40.241.156:8000";
 	     $this->tmore_api_url=CONTROL;
+	     
+	     $this->StatusArray=array('shootStatus'=>array('无法拍摄','未拍摄','已拍摄','拍摄已上传','拍摄已驳回','已审核通过'),
+	         'deportType'=>array(1=>'导入入库',2=>'驳回入库',3=>'新包装入库',4=>'新增图入库',5=>'组合图入库',6=>'非导入入库',7=>'取消'),
+	         'retouchStatus'=>array("未领取", "已领取", "已下载", "已反馈", "反馈驳回", "已修图", "已上传", "已审核通过", "已审核驳回","反馈通过"),
+	         'status'=>array("待录入","录入中","已录入","录入审核通过","录入驳回","拍摄反馈","拍摄反馈通过","拍摄反馈驳回")
+	     );
         if($this->user_info['userId']=="58"){
             $this->more_api_url="http://139.196.36.81:8008/";
         }else{
@@ -49,6 +55,10 @@ class MY_Model extends CI_Model
             return $return;
         }
 
+    }
+    
+    function getStatusName($fild,$id){
+        return $this->StatusArray[$fild][$id];
     }
 }
 ?>

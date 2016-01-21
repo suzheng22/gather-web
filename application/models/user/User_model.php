@@ -72,7 +72,7 @@ class User_model extends MY_Model {
     }
     
     function getInfo($data){
-        $token=$data['token'];
+        $token=$this->user_info['token'];
         $url=$this->user_api_url."/user/info?token=".$token;
         $return=$this->curl($url,$data);
         return $return;
@@ -114,7 +114,8 @@ class User_model extends MY_Model {
     }
     
     function getUserIdsByFiled($data){
-        $token=$data['token'];
+
+        $token=$this->user_info['token'];
         $url=$this->user_api_url."/user/getUserIdsByFiled?token=".$token;
         $return=$this->curl($url,$data);
         return $return;

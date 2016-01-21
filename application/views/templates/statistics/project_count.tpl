@@ -6,7 +6,6 @@
 {{include file='public/css.tpl'}}
 </head>
 <body>
-
 {{include file='public/top.tpl'}}
 <div id="warp_box">
      <div class="main">
@@ -15,8 +14,14 @@
         	<div class="rose_box cc_box">
             	<h3>项目统计</h3>
                 <div class="rose_top main_rignt_top clearfix">
+				<form action="{{$root_path}}statistics/projectList">
                   <div class="cc_top_one last_show"><label>项目名称:</label>
-                          <input type="text" value=""/>
+                          <select name="pId" class="select3">
+						  	<option value="">请选择</option>
+							{{foreach from=$project_list item=list}}
+								<option value="{{$list.pId}}">{{$list.pName}}</option>
+							{{/foreach}}
+						  </select>
                       </div>
 
                         	<div class="clearfix"></div>
@@ -25,12 +30,13 @@
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                         <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
+					</form>
                    	<div class="clearfix"></div>
                 	<div class="tab_box">
                     <table>
                       <tr>
 
-                        <th>序号</th>
+
                         <th>项目名称</th>
                         <th>入库总商品数</th>
                         <th>已拍摄上传总数</th>
@@ -43,44 +49,27 @@
 
 
                       </tr>
+					  {{foreach from = $plist item=list}}
                       <tr>
-                        <td>1</td>
-
-                        <td>6556</td>
-                        <td>545</td>
-                        <td>3233</td>
-                        <td>2323</td>
-                        <td>12212</td>
-                        <td>12</td>
-                        <td>2000</td>
-                        <td>100</td>
+                        <td>{{$list.pName}}</td>
+                        <td>{{$list.depotCount}}</td>
+                        <td>{{$list.shootUploadCount}}</td>
+                        <td>{{$list.shootPassCount}}</td>
+                        <td>{{$list.retouchUploadCount}}</td>
+                        <td>{{$list.retouchPassCount}}</td>
+                        <td>{{$list.inputUploadCount}}</td>
+                        <td>{{$list.inputPassCount}}</td>
                         <td>
                         	<a href="javascript:;">导出详情</a>
                         </td>
                       </tr>
-
+						{{/foreach}}
                       </tr>
 
 
                     </table>
                 </div>
-                	<div class="page_nav" id="page_nav">
-                	<a href="javascript:;" class="pageNum">上一页</a>
-                    <a href="javascript:;" class="pageNum">1</a>
-                    <a href="javascript:;" class="pageNum">2</a>
-                    <a href="javascript:;" class="pageNum">3</a>
-                    <a href="javascript:;" class="pageNum">4</a>
-                    <a href="javascript:;" class="pageNum">5</a>
-                    <a href="javascript:;" class="pageNum">6</a>
-                    <a href="javascript:;" class="pageNum">7</a>
-                    <a href="javascript:;" class="pageNum">8</a>
-                    <a href="javascript:;" class="pageNum">9</a>
-                    <a href="javascript:;" class="pageNum">下一页</a>
-                    <span>共<em>100</em>页,</span>
-                    <span>共<em>66</em>条记录,</span>
-                    <span>跳转到第<input type="text"/>页</span>
-                    <a href="javascript:;" class="pageNum">确定</a>
-                </div>
+                	{{$pages}}
                 </div>
             </div>
         </div>

@@ -60,6 +60,9 @@ class PublicFuc_model extends MY_Model {
     function u(){
         echo 123;
     }
-
+    
+    function getStatusList($fild){
+        return $this->StatusArray[$fild];
+    }
 
 }
