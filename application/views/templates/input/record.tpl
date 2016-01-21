@@ -15,6 +15,11 @@
 
 </style>
 </head>
+{{if $p_info.inputId==""}}
+<div style="width:300px;height:100px;margin: 0 auto;margin-top: 100px;color:red;text-align: cente;font-size: 20px;">暂无录入</div>
+
+{{else}}
+
 <body ><!--style="overflow-y:hidden"-->
 
 
@@ -573,4 +578,5 @@
 {{include file='./record_js.tpl'}}
 
 </body>
+{{/if}}
 </html>
