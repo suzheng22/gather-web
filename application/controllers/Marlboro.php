@@ -6,7 +6,7 @@ class Marlboro extends My_Controller {
         parent::__construct();
         $this->load->model('ps/marlboro_model');
         $this->load->model('user/user_model');
-        $this->load->model('publicFuc/publicFuc_model','publicFuc');
+        $this->load->model('publicFuc/PublicFuc_model','publicFuc');
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
     }
