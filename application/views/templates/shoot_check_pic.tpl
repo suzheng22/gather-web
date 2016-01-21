@@ -16,7 +16,7 @@
 	<ul class="clearfix" id="nav_info">
             <li class="black clearfix"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
             <li class="black clearfix"><em>商品名称:</em><span title="{{$p_info.gName}}">{{$p_info.gName}}</span></li>
-            <li class="black clearfix"><em>商品类型:</em><span>{{$p_info.name}}</span></li>
+            <li class="black clearfix"><em>商品分类:</em><span>{{$p_info.name}}</span></li>
         <!-- 拍摄类型 -->
             <li class="black clearfix"><em>拍摄类型:</em><span>{{if $p_info.shootType ==1}}正常拍摄{{else}}驳回拍摄{{/if}}</span></li>
         <!-- 项目 -->
@@ -44,7 +44,6 @@
             {{/if}}
         </div>
     </ul>
-
 	<div class="left shoot_left" style="width:1200px; margin:0 auto;">
             <div class="pageContent ps_check_pic" >
                 <div class="wrapper">
@@ -59,6 +58,7 @@
                         <div class="pic_box clearfix">
                             <div class="pic_box_left">
                                 <p>主图</p>
+
                             </div>
                             <div style="float:left" class="v_show">
                                 <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
@@ -67,10 +67,8 @@
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
                                            {{foreach from=$plist.1 item =list name=name}}
-
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
-										{{/foreach}}
-                                            
+                                                <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" /></li>
+										    {{/foreach}}
                                          </ul>
                                     </div>
                                 </div>
@@ -165,7 +163,7 @@
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.gName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品分类:</label><span class="zhmm">{{$p_info.catName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(3)">确认</a>
             </div>
@@ -180,8 +178,8 @@
         <div class="login_main">
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm gtin1">{{$p_info.gtin}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.proName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm typeName1">{{$p_info.typeName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.gName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品分类:</label><span class="zhmm typeName1">{{$p_info.catName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memos"></textarea></div>
                 <a href="javascript:;"  class="confirm_btn" onclick="add_miss_figure(2)">确认</a>
             </div>
