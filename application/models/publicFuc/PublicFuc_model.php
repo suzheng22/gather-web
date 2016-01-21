@@ -23,7 +23,7 @@ class PublicFuc_model extends MY_Model {
             $vals=array_values($val);
             for($i=0;$i<$len;$i++){
                 if($i==$len-1){
-                    $data.=$this->i($val[$keys[$i]])."\n";
+                    $data.=$this->i($val[$keys[$i]])."\n"; 
                 }else{
                     $data.=$this->i($val[$keys[$i]].',');
                 }

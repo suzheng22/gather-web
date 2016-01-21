@@ -72,7 +72,7 @@
             <dd><a href="{{$root_path}}statistics/shootList" title="拍摄统计">拍摄统计</a></dd>
             <dd><a href="{{$root_path}}statistics/shootCheckList" title="拍摄审核统计">拍摄审核统计</a></dd>
             <dd><a href="{{$root_path}}statistics/inputList" title="录入统计">录入统计</a></dd>
-            <dd><a href="record_check_count.html" title="录入审核统计">录入审核统计</a></dd>
+            <dd><a href="{{$root_path}}statistics/inputCheck" title="录入审核统计">录入审核统计</a></dd>
             <dd><a href="{{$root_path}}statistics/psList" title="修图统计">修图统计</a></dd>
             <dd><a href="{{$root_path}}statistics/psCheckList" title="修图审核统计">修图审核统计</a></dd>
             <dd><a href="{{$root_path}}statistics/shootBack" title="拍摄驳回统计">拍摄驳回统计</a></dd>
