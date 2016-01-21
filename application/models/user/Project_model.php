@@ -48,8 +48,9 @@ class Project_model extends MY_Model {
     }
     //根据条件获取项目用户
     function getProjectUserByField($data){
+        unset($data['upUserId']);
         $token=$data['token'];
-        $url=$this->user_api_url."/user/getProjectUserByFiled?token=".$token;
+        $url=$this->user_api_url."/user/getProjectUserByFiled";
         $data['token']=urldecode($data['token']);
         $return =$this->curl($url,$data,'get');
         $data['token']=urlencode($data['token']);
@@ -73,9 +74,9 @@ class Project_model extends MY_Model {
                     $role=json_decode($return,true);
                     $roles=$role['list'];
                     //遍历
-                    foreach($roles as $key=>$val){
-                            if($roleId==$val['roleId']){
-                                $datas[$i]['roleName']=$val['roleName'];
+                    foreach($roles as $key1=>$val1){
+                            if($roleId==$val1['roleId']){
+                                $datas[$i]['roleName']=$val1['roleName'];
                             }
                     }
                 }else if($key==='creatUserId'){
@@ -104,13 +105,23 @@ class Project_model extends MY_Model {
         if($data['page']==""){
             $data['page']=1;
         }
+
         $url=$this->user_api_url."/user/getProjectByFiled?";
+
+        unset($data['userId']);
+        $url=$this->user_api_url."/user/getProjectByFiled?";
+        $data['token']=urldecode($data['token']);
+
         $return =$this->curl($url,$data,'get');
         $datas=json_decode($return,true);
-        $total=$data['count'];
+        $total=$datas['count'];
         $datas=$datas['data'];
         $count=count($datas);
-        $s=0;
+        if($data['page']==1){
+            $s=0;
+        }else{
+            $s=($data['page']-1)*10;
+        }
         for($i=0;$i<$count;$i++){
           if($datas[$i]['pId']==$datas[$i+1]['pId']){
               unset($datas[$i]);
@@ -132,9 +143,9 @@ class Project_model extends MY_Model {
                     $role=json_decode($return,true);
                     $roles=$role['list'];
                     //遍历
-                    foreach($roles as $key=>$val){
-                        if($roleId==$val['roleId']){
-                            $datas[$i]['roleName']=$val['roleName'];
+                    foreach($roles as $key1=>$val1){
+                        if($roleId==$val1['roleId']){
+                            $datas[$i]['roleName']=$val1['roleName'];
                         }
                     }
                 }else if($key==='creatUserId'){
@@ -153,10 +164,8 @@ class Project_model extends MY_Model {
                 }
             }
         }
-        //   var_dump($datas);
-        $data_return['total']= $count;
+        $data_return['total']= $total;
         $data_return['data']=$datas;
-        //    var_dump($data_return);
         return $data_return;
     }
     //改变项目状态

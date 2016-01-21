@@ -26,7 +26,7 @@
         <div class="clearfix"></div>
         <p class="back_why_info">
             <!-- {{if $p_info.status==3}}-->
-            最新驳回原因:<span>{{$p_info.memo}}</span>上次驳回原因:<span>{{$p_info.memo}}</span>
+            最新驳回原因:<span>{{$p_info.memo}}</span>
             <!--  {{/if}}-->
         </p>
 
@@ -144,7 +144,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.4 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$this->pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>

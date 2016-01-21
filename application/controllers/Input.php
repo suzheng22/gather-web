@@ -53,14 +53,24 @@ class Input extends My_Controller {
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
+       // var_dump($inputInfo['nutritionInfo']);
         $this->ci_smarty->assign('p_info',$inputInfo);
+        if($inputInfo['status']==1)
+            $this->ci_smarty->display('input/record.tpl');
+        else
         $this->ci_smarty->display('input/info.tpl');
     }
     //录入领取
-    function inputAdd(){
+    function inputAdd($verify){
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputSend($data);
+       // var_dump($inputInfo['extFiled']);
+        //进行验证
+        if($verify=="verify"){
+            echo $inputInfo['status'];
+            exit;
+        }
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
@@ -103,6 +113,7 @@ class Input extends My_Controller {
     function inputList(){
         //商品分类
         $type_list=$this->product->getCatgroryList();
+
         $this->ci_smarty->assign('type_list',$type_list['data']);
         $page_url=$this->root_path."input/inputList?";
         /*处理表单数据*/
@@ -126,11 +137,14 @@ class Input extends My_Controller {
         $this->ci_smarty->display('input/inputList.tpl');
     }
     //录入审核
-    function inputAudit(){
+    function inputAudit($verify){
         $data['token']=$this->user_info['token'];
         //根据orderId获取相关信息
         $inputInfo=$this->input_model->getInputAudit($data);
-       // var_dump($inputInfo);
+        if($verify=="verify"){
+            echo $inputInfo['inputId'];
+            exit;
+        }
         $inputInfo['p_status']=2;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);

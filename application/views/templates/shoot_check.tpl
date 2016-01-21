@@ -16,7 +16,7 @@
         	<div class="rose_box cc_box">
             	<h3>拍摄审核</h3>	
                 <div class="rose_top main_rignt_top clearfix">
-                	<form action="{{$root_path}}marlboro/shoot" method="get">
+                	<form action="{{$root_path}}marlboro/shootCheck" method="get">
                          <!--项目*-->
                          <div class="cc_top_one last_show">
                              <label>项目:</label>

@@ -1,3 +1,5 @@
+{{if $p_info.inputId==""}}无录入审核{{else}}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -20,8 +22,8 @@
 <div class="j-top-warp">
     <ul class="clearfix" id="nav_info">
         <li class="black"><em>商品条形码:</em><span >{{$p_info.gtin}}</span></li>
-        <li class="black"><em>可录入商品总数:</em><span>{{$p_info.orderGoodsToday}}</span></li>
-        <li class="black"><em>今录入商品总数:</em><span>{{$p_info.inputGoodsCount}}</span></li>
+        <li class="black"><em>可录入商品总数:</em><span>{{if $p_info.orderGoodsToday}}{{$p_info.orderGoodsToday}}{{else}}0{{/if}}</span></li>
+        <li class="black"><em>今录入商品总数:</em><span>{{if $p_info.inputGoodsCount}}{{$p_info.inputGoodsCount}}{{else}}0{{/if}}</span></li>
     </ul>
     {{if $p_info.status==4}}
     <ul>
@@ -132,7 +134,7 @@
                                   </span>
                                 {{else}}
                                     {{foreach from=$list key=k item=v}}
-                                        <span>{{$v.0}}:{{$v.1}}<span>
+                                        <span>{{$v}}<span>
                                     {{/foreach}}
                                 {{/if}}
                         </P>
@@ -179,7 +181,9 @@
             <div style="display:none;" class="cf">
                 {{foreach from=$p_info.nutritionInfo key=key item=list}}
                 <div class="dic_info">
+                    {{if $list.proName!="" and $list.proName!="undefined"}}
                     <h3 class="clearfix">产品名称:{{$list.proName}}</h3>
+                    {{/if}}
                     <h4 class="clearfix">
                         <span>成分名称</span>
                         <span>{{$list.names}}:</span>
@@ -204,9 +208,9 @@
         </div>
     </div>
     {{if $p_info.status==4 && $p_info.p_status==1}}
-    <div class="zz_conforim"><a href="{{$root_path}}input/inputChange?inputId={{$p_info.inputId}}&gtin={{$p_info.gtin}}&packet={{$p_info.packet}}&batchNo={{$p_info.batchNo}}" onclick="checkw(1)">编辑</a></div>
+    <div class="zz_conforim"><a href="{{$root_path}}input/inputChange?inputId={{$p_info.inputId}}&gtin={{$p_info.gtin}}&packet={{$p_info.packet}}&batchNo={{$p_info.batchNo}}" onclick="checkw(1)" id="record_confirm">编辑</a></div>
     {{else if  $p_info.p_status==2}}
-    <div class="zz_conforim"><a href="javascript:;" onclick="check(2)">通过</a><a href="javascript:;" id="record_reject">驳回</a></div>
+    <div class="zz_conforim"><a href="javascript:;" onclick="check(2)" id="record_confirm">通过</a><a href="javascript:;"  id="record_confirms">驳回</a></div>
     {{/if}}
     <div class="newuser_pop" id="ps_newuser_pop">
         <div class="tit clearfix"><h4>{{$p_info.gtin}}条形码-审核</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
@@ -272,7 +276,7 @@
             }
 
             $("#ps_newuser_pop").pop({
-                oMain:"#record_reject",         //触发弹出层的元素。为空时直接弹出
+                oMain:"#record_confirms",         //触发弹出层的元素。为空时直接弹出
                 sEvent:"click",             //触发事件
                 oClose:"#ps_newuser_pop .close", //关闭按钮
                 bIframe:false,              //是否有iframe
@@ -297,7 +301,6 @@
         //通过事件
         //驳回
         function check(status){
-            alert(status)
             var data="";
             if(status==3){
                 var memo=$("#memo").val();
@@ -335,12 +338,11 @@
             $.ajax({
                 url:'{{$root_path}}input/inputPass',
                 data:data,
-                dataType:"text",
+                dataType:"json",
                 type:'post',
                 success:function(e){
-                    alert(e);
-                    console.log(e);
                     alert(e.msg);
+                    window.location.reload();
                     if(e.msg){
 
                     }
@@ -350,3 +352,4 @@
     </script>
 </body>
 </html>
+{{/if}}

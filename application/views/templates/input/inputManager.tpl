@@ -57,7 +57,7 @@
 
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                            <a href="{{$root_path}}input/inputAdd" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
+                            <a href="javascript:void(0);" onclick="inputAdd()" class="query"><i class="icon iconfont">&#xf0220;</i>信息新增录入</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
@@ -88,7 +88,7 @@
                                 <!-- 新增字段 -->
                                 <td>{{$list.pName}}</td>
                                 <td>包装{{$list.packet}}</td>
-                                <td>{{$list.inputType}}</td>
+                                <td>{{if $list.inputType==1}}正常录入{{else}}驳回录入{{/if}}</td>
                                 <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
                                 <td>{{if $list.status==1}}录入中{{else if $list.status==2}}已录入
                                     {{else if $list.status==3}}录入审核通过{{else if $list.status==4}}录入驳回
@@ -164,6 +164,22 @@
         $("#datetimepicker_end").val("");
         $(".cc_top_one ,.select1").val("");
         $(".uew-select-text").html('全部');
+    }
+    function inputAdd(){
+        var newTab=window.open('about:blank');
+        $.ajax({
+            url:'{{$root_path}}input/inputAdd/verify',
+            dataType:'text',
+            success:function(e){
+                if(e!=""){
+
+                    newTab.location.href='{{$root_path}}input/inputAdd';
+                }else{
+                    newTab.close();
+                    alert("无录入条码可审核")
+                }
+            }
+        })
     }
 </script>
 </body>

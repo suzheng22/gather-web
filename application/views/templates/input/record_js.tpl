@@ -57,19 +57,19 @@
         var a=  $(".base_info select").size();
         var n=0;
         for(var i=0;i<a;i++){
-            var proName1= $(".base_info select:eq("+i+")").val()
+            var proName1= $(".base_info select:eq("+i+")").val();
             if(proName1==proName){
                 n++
             }
         }
-        if(n>1){
+        if(n>1 && proName!="==请选择=="){
             alert("已存在不能选择,请重选");
             $(e).val("");
         }
         //去检验其他原料配料
     }
     //厂商的保存
-    function save_business(){
+    function save_business(f){
         //获取几个厂商
         var a=$(" .business_add").size();
         //添加删除的厂商的ID
@@ -99,15 +99,25 @@
             dataType:'json',
             type:'POST',
             success:function(e){
+               if(e==null){
+                   alert("厂商保存失败");
+                   return false;
+               }
                 //将对应的shopId添加到对应的
                 var len_shopId=$(".shopId").size();
                 for(var i=0; i<len_shopId;i++){
                     var value_shopId=$(".shopId:eq("+i+")");
-                    if(value_shopId.val()==""){
+                    if(value_shopId.val()=="" && e!="null"){
                         value_shopId.val(e.shopIds);
                     }
                 }
-                alert(e.msg);
+                if(f==3){
+                    if(e.msg!="保存成功"){
+                        alert("厂商保存失败")
+                    }
+                }else{
+                    alert(e.msg);
+                }
             }
         });
     }
@@ -116,7 +126,11 @@
         var base_info =$("#"+e);
         var base_temp ='<P class="clearfix">'+
                 '<label>'+f+'</label>'+
-                '<select class="fieldName"><option>==请选择==</option><option value="1223B">1223B</option><option value="e323c">e323c</option></select>'+
+                '<select class="fieldName" onclick="check_proName(this)"><option>==请选择==</option>' +
+                {{foreach from =$p_info.groupGoodsNames item=name}}
+                '<option value="{{$name}}">{{$name}}</option>'+
+                {{/foreach}}
+                '</select>'+
                 '<textarea class="fieldName"></textarea>'+
                 '<em class="base_info_del base_info_del'+e+'" onclick="del_base(this)">删除</em>'+
                 '</p>'
@@ -135,7 +149,7 @@
     function save_product(f){
         var a = $("#multiple_sku p").size();
         var v = "";
-        if(f==2) {
+        if(!$("#multiple_sku").is(":hidden")) {
             for (var i = 0; i < a; i++) {
                 if (i == a - 1) {
                     v += $("#multiple_sku input:eq(" + i + ")").val();
@@ -156,6 +170,7 @@
                     }
                 }else{
                     alert(e.msg);
+                    window.location.reload();
                 }
 
             }
@@ -186,34 +201,43 @@
             //循环遍历每个ID的P
             val +=",\""+id+"\":[";
             for(var i=0;i<len_base2;i++){
-                var val1="";
+                var val1="\"";
                 //获取每个P下的fieldName的个数
                 var len1=$(".base_info #"+id+" p:eq("+i+") .fieldName").size();
                 for(var j=0;j<len1;j++){
                     //获取每个P下的fieldName下的值
                     var name1=$(".base_info #"+id+" p:eq("+i+") .fieldName:eq("+j+")").val();
                     if(j==len1-1){
-                        val1 +="\""+j+"\":\""+name1+"\"";
+                        val1 +=""+name1+"\"";
                     }else{
-                        val1 +="\""+j+"\":\""+name1+"\",";
+                        val1 +=""+name1+"：";
                     }
                 }
                 if(i==len_base2-1){
-                    val+="\""+ i+"\":["+val1+"]";
+                    val+="\""+i+"\":"+val1+"";
                 }else{
-                    val+="\""+ i+"\":["+val1+"],";
+                    val+="\""+i+"\":"+val1+",";
                 }
             }
-            val+="]"
+            val+="]";
         }
         val+="]";
+        console.log(val);
+     // return false;
+        goodsName=$("#goodsName").val();
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:val,filed:2,inputId:inputId,goodsName:goodsName},
             dataType:'json',
             type:'POST',
             success:function(e){
-                alert(e.msg);
+                if(f==3){
+                    if(e.msg!="保存成功"){
+                        alert("分类提交失败")
+                    }
+                }else{
+                    alert(e.msg);
+                }
             }
         });
     }
@@ -266,7 +290,7 @@
     //营养成分的保存
     function save_nutrient(f){
         /*先获取几个营养成分*/
-        var nutrition_l=$("#nutrition_inform .nutrition_child").size();
+        var nutrition_l=$('.nutrition_child').size();
         var num1="[";
         for(var j=0;j<nutrition_l;j++) {
             var a = $(".nutrition_child:eq(" + j + ") p").size();
@@ -276,6 +300,10 @@
             var c=$(".nutrition_child:eq(" + j + ")  .nutrition_names").val();
             if(b!=""){
                 var p_val = "\"proName\":\""+b+"\",\"names\":\""+c+"\",";
+            }
+            if(b==""||c==""||b=="==请选择=="){
+                alert("营养成分参数不能为空");
+                return false;
             }
             //获取所有某一个营养分类的值p标签的值
             for (var i = 0; i < a; i++) {
@@ -287,6 +315,11 @@
                     var v="";
                 }
                 for (var h = 1; h < p_l; h++) {
+                    var  nutrition_value=$(".nutrition_child:eq(" + j + ") p:eq(" + i + ") .nutrition_value:eq(" + h + ")").val();
+                    if(nutrition_value==""||nutrition_value=="undefined"){
+                        alert("营养成分参数不能为空");
+                        return false;
+                    }
                     if (h == p_l - 1) {
                         if(h==1){
                             v="shuzi";
@@ -295,7 +328,7 @@
                         }else if(h==3){
                             v="value";
                         }
-                        val +="\""+ v + "\":\"" + $(".nutrition_child:eq(" + j + ") p:eq(" + i + ") .nutrition_value:eq(" + h + ")").val() + "\"";
+                        val +="\""+ v + "\":\"" + nutrition_value + "\"";
                     } else {
                         if(h==1){
                             v="shuzi";
@@ -304,7 +337,7 @@
                         }else if(h==3){
                             v="value";
                         }
-                        val += "\"" + v + "\":\"" + $(".nutrition_child:eq(" + j + ") p:eq(" + i + ") .nutrition_value:eq(" + h + ")").val() + "\",";
+                        val += "\"" + v + "\":\"" + nutrition_value + "\",";
                     }
                 }
                 val+="]";
@@ -322,6 +355,8 @@
                 num1 += "\"" + j + "\":[" + p_val + "],";
             }
         }
+      //  console.log(num1);
+      //  return false;
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:num1,filed:4,inputId:inputId},
@@ -343,9 +378,31 @@
     }
     //选择营养成分参数时
     function nutritionUnitEn(e){
-        var size=$(".nutritionUnitEn").size()-1;
-        var c= $(".nutritionUnitEn:eq("+size+") option:selected").attr("class");
-        $(".nutritionUnitEns:eq("+size+")").html(c);
+        //获取当前几个营养成分；
+      var size=  $(".nutrition_child").size();
+        for(var j=0;j<size;j++){
+        var $nutritionUnitEn=$(".nutrition_child:eq("+j+") .nutritionUnitEn");
+        //当前选中
+        var index=0;
+        index=$nutritionUnitEn.index(e);
+        //首先需要验证当前选中的Id
+        var id=$(e).val();
+        //判断当前选中的ID，是否已存在
+        var size=$nutritionUnitEn.size();
+        for(var i=0;i<size;i++ ){
+            if(index!=i && index!="-1"){
+                //获取其它Id值
+                var nutritionId=$nutritionUnitEn.eq(i).val();
+                if(id==nutritionId){
+                    alert("该参数已存在");
+                    $(e).val("==请选择==")
+                }
+            }
+        }
+        var c= $(".nutrition_child:eq("+i+") .nutritionUnitEn:eq("+index+") option:selected").attr("class");
+        $(".nutrition_child:eq("+i+") .nutritionUnitEns").eq(index).html(c);
+        $(".nutrition_child:eq("+i+") .nutrition_info").eq(index).val(c);
+        }
     }
     $(function(){
         //预加载
@@ -405,6 +462,7 @@
                     '<div class="nutrition_child">'+
                     '  <h3 class="clearfix"><span>产品名称:</span>'+
                     '<select class="nutrition_name" nutrition_value>'+
+                            '<option>==请选择==</option>'+
                     {{foreach from =$p_info.groupGoodsNames item=name}}
                     '<option value="{{$name}}">{{$name}}</option>'+
                     {{/foreach}}
@@ -476,9 +534,22 @@
             //掉营养成分保存接口
             save_nutrient(1)
         });
+        $(".nutrition_inform .nutrition_inform_del").each(function(){
+            $(this).click(function(){
+                $(this).parent().remove();
+            });
+        })
         //营养成分增加参数
         $(".add_param").click(function(){
             var ul = $(".nutrition_child");
+            //判断当前显示的营养成分
+            var size =ul.size();
+            for(var i=0;i<size;i++){
+                var j=$(".nutrition_child:eq("+i+")");
+                if(!j.is(":hidden")){
+                    ul=j;
+                }
+            }
             var temp =  '<p class="clearfix add_field p1">'+
                     '<select style="margin-left:2px; margin-right:10px;" class="nutrition_value nutritionUnitEn" onchange="nutritionUnitEn(this)">' +
                     '<option>==请选择==</option>' +
@@ -489,7 +560,8 @@
                     {{/foreach}}
                     '</select>'+
                     '<input type="text" class="nutrition_value"/>'+
-                    '<label class="nutritionUnitEns">c</label>'+
+                    '<label class="nutritionUnitEns">单位</label>'+
+                    '<input type="hidden" class="nutrition_info nutrition_value"/>'+
                     '<input type="text" class="nutrition_value"/>'+
                     '<label>%</label>'+
                     '<em class="nutrition_inform_del" style="display:block;cursor:pointer">删除</em>'+
@@ -517,7 +589,7 @@
                     '<p class="clearfix">'+
                     '<label>厂商类别：</label>'+
                     '<select id="inputId" class="business">'+
-                    '<option value="">===请选择===</option>'+
+                    '<option value="">==请选择==</option>'+
                     '<option value="委托商">1：委托商</option>'+
                     '<option value="生产商">2：生产商</option>'+
                     '<option value="制造商">3：制造商</option>'+
@@ -666,11 +738,18 @@
         //点击选项卡
         //选项卡
         $(".choice_count h3 a").click(function(){
-            //alert("aa");
+           
             var index = 0;
             $(this).addClass("selected").siblings().removeClass("selected");
             var index=$(".choice_count h3 a").index(this);
             $(".right_mid ul,.right_mid .cf").eq(index).show().stop(true, true).siblings().hide();
+           
+           //获取索引高度，超出500PX，出现滚动条
+            var hh=$(".right_mid .cf").eq(index).height();
+            if(hh>420)
+            {
+            $(".right_mid .cf").css({"overflow-y":"scroll","overflow-x":"hidden","height":"420px"});
+            }
         });
         //厂商选项卡
         $("#bus_info a").click(function(){

@@ -41,9 +41,9 @@
                                 <dl class="select">
                                     <select name="status" class="select3">
                                         <option value="">全部</option>
-                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>录入已提交</option>
-                                        <option value="3" {{if $status==3}}selected="selected"{{/if}}>录入审核通过</option>
-                                        <option value="4" {{if $status==4}}selected="selected"{{/if}}>录入驳回</option>
+                                        <option value="1" {{if $status==1}}selected="selected"{{/if}}>录入审核中</option>
+                                        <option value="2" {{if $status==2}}selected="selected"{{/if}}>录入审核通过</option>
+                                        <option value="3" {{if $status==3}}selected="selected"{{/if}}>录入驳回</option>
 
                                     </select>
                                 </dl>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                            <a href="{{$root_path}}input/inputAudit" class="query" target="_blank"><i class="icon iconfont">&#xf0220;</i>录入审核</a>
+                            <a href="javascript:void(0);" class="query"  onclick="inputAdd()"><i class="icon iconfont">&#xf0220;</i>录入审核</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
@@ -84,6 +84,7 @@
                                 <td>{{$list.createTime|date_format:"Y-m-d H:i:s"}}</td>
                                 <td>{{if $list.status==2}}已录入
                                     {{else if $list.status==3}}录入审核通过{{else if $list.status==4}}录入驳回
+                                    {{else}}审核未领取
                                     {{/if}}
                                 </td>
                                 <td><a href="{{$root_path}}input/index?inputId={{$list.inputId}}&gtin={{$list.gtin}}&packet={{$list.packet}}&batchNo={{$list.batchNo}}" target="_blank">详细</a></td>
@@ -155,6 +156,22 @@
         $("#datetimepicker_end").val("");
         $(".cc_top_one ,.select1").val("");
         $(".uew-select-text").html('全部');
+    }
+    function inputAdd(){
+        var newTab=window.open('about:blank');
+        $.ajax({
+            url:'{{$root_path}}input/inputAudit/verify',
+            dataType:'text',
+            success:function(e){
+              if(e!=""){
+
+                 newTab.location.href='{{$root_path}}input/inputAudit';
+              }else{
+                  newTab.close();
+                  alert("无录入条码可审核")
+              }
+            }
+        })
     }
 </script>
 </body>

@@ -11,10 +11,11 @@
         #nav_info li span{width:150px;}
         #nav_info li em{width:140px;}
         .right_mid .cf p select{width:120px;}
+        .v_show{ padding-left:0px;}
 
 </style>
 </head>
-<body>
+<body ><!--style="overflow-y:hidden"-->
 
 
 <div class="j-top">
@@ -25,9 +26,9 @@
         </div>
         <ul class="clearfix" id="nav_info">
             <li class="black"><em>商品条形码:</em><span >{{$p_info.gtin}}</span></li>
-            <li class="black"><em>可录入商品总数:</em><span>{{$p_info.inputGoodsCount}}</span></li>
-            <li class="black"><em>今录入商品总数:</em><span>{{$p_info.inputGoodsCountToday}}</span></li>
-            <li class="black"><em>今录入字数:</em><span>{{$p_info.inputCountToday}}</span></li>
+            <li class="black"><em>可录入商品总数:</em><span>{{if $p_info.inputGoodsCount==""}}0{{else}}{{$p_info.inputGoodsCount}}{{/if}}</span></li>
+            <li class="black"><em>今录入商品总数:</em><span>{{if $p_info.inputGoodsCountToday==""}}0{{else}}{{$p_info.inputGoodsCountToday}}{{/if}}</span></li>
+            <li class="black"><em>今录入字数:</em><span>{{if $p_info.inputCountToday==""}}0{{else}}{{$p_info.inputCountToday}}{{/if}}</span></li>
         </ul>
     </div>
 </div>
@@ -85,7 +86,7 @@
     		</div>
 		</div>
   	</div><!--left-->	
-  	<div class="right">
+  	<div class="right" id="right">
   		<div class="choice_count">
         	<h3>
             <a href="javascript:;" class="selected">分类</a>
@@ -150,7 +151,7 @@
                         {{if $list.isNums==1 && $list.inputType==1}}
                             <p class="clearfix p" >
                                 <label>{{$list.fieldName}}：</label>
-                                <input type="text" name="fieldName" class="fieldName" value="{{$p_info.baseInfo.{{$list.field}}}}"/>
+                                <input type="text" name="fieldName" class="fieldName" value="{{if $list.fieldName=="产品名称" and $p_info.baseInfo.{{$list.field}}==""}}{{$p_info.goodsName}}{{else}}{{$p_info.baseInfo.{{$list.field}}}}{{/if}}"/>
                                 <input type="hidden" value="{{$list.field}}" class="hidden">
                             </p>
                         {{else if $list.isNums==1 && $list.inputType==2}}
@@ -166,41 +167,53 @@
                                 <!-- 基本信息存在时start -->
                                 {{if $p_info.baseInfo.{{$list.field}} !=""}}
                                 {{foreach from=$p_info.baseInfo.{{$list.field}} key=keys item=value}}
+                                <!--将$value解析 start-->
+                                <!-- 将第一个-->
+                                {{$v="$value"|strpos:"："}}
+                                {{$value1=$value|substr:0:$v}}
+                                {{$value2=$value|substr:($v+3):718}}
+                                <!--将$value解析 end--->
+                                <!--判断是否存在数组 -->
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
                                     <select data-name="{{$list.field}}" class="fieldName" onchange="check_proName(this)">
-                                        <option>====请选择====</option>
+                                        <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames key=key item=name}}
-                                        <option value="{{$name}}" {{if $name==$value.0}}selected="selected"{{/if}}>{{$name}}</option>
+                                        <option value="{{$name}}" {{if $name==$value1}}selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}
                                         </select>
-                                    <textarea name="fieldName" class="fieldName">{{$value.1}}</textarea>
+                                    <textarea name="fieldName" class="fieldName"> {{$value2}}</textarea>
+
                                     <input type="hidden" value="{{$list.field}}" class="hidden">
                                     {{if $keys!=0}}
                                     <em class="base_info_del base_info_del{{$list.field}}" onclick="del_base(this)">删除</em>
                                     {{/if}}
                                  </p>
                                 {{/foreach}}
+
                                 {{else}}
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
                                     <select data-name="{{$list.field}}" class="fieldName" onchange="check_proName(this)">
-                                        <option>====请选择====</option>
+                                        <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames key=key item=name}}
-                                        <option value="{{$name}}" {{if $name==$value.0}}selected="selected"{{/if}}>{{$name}}</option>
+                                        <option value="{{$name}}" {{if $name==$value1}}selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}
                                     </select>
-                                    <textarea name="fieldName" class="fieldName">{{$value.1}}</textarea>
+                                    <textarea name="fieldName" class="fieldName">{{$value2}}</textarea>
                                     <input type="hidden" value="{{$list.field}}" class="hidden">
                                 </p>
                                 {{/if}}
                                 <!-- 基本信息存在时end-->
                                 {{else}}
                                 {{if $p_info.baseInfo.{{$list.field}} !=""}}
-                                {{foreach from=$p_info.baseInfo.{{$list.field}} item=value}}
+                                {{foreach from=$p_info.baseInfo.{{$list.field}} key=keyss  item=value}}
                                 <p class="clearfix">
                                     <label>{{$list.fieldName}}：</label>
-                                    <textarea name="fieldName" class="fieldName">{{$value.1}}</textarea>
+                                    <textarea name="fieldName" class="fieldName">{{$value}}</textarea>
+                                    {{if $keyss!=0}}
+                                    <em class="base_info_del base_info_del{{$list.field}}" onclick="del_base(this)">删除</em>
+                                    {{/if}}
                                     <input type="hidden" value="{{$list.field}}" class="hidden">
                                 </p>
                                 {{/foreach}}
@@ -212,9 +225,11 @@
                                 </p>
                                 {{/if}}
                                 {{/if}}
+                                {{if $p_info.isGroup==2}}
                                 <div class="save_box"  id="save_{{$list.field}}">
                                     <a href="javascript:;" onclick="add_base('{{$list.field}}','{{$list.fieldName}}')">增加</a>
                                 </div>
+                                {{/if}}
                             </div>
                         {{/if}}
                     <!--多产品 -->
@@ -236,7 +251,7 @@
                          </h3>
                      </div>
                      <div class="business_choice">
-                     {{if ($p_info.shop.0)!=""}}
+                     {{if ($p_info.shop)|count!="0"}}
                      {{foreach from=$p_info.shop key=key item=list}}
                      <div class="business_add" {{if $key==0}} {{else}} style="display:none" {{/if}}>
                          <input type="hidden" class="business shopId" value="{{$list.shopId}}">
@@ -244,7 +259,7 @@
                                 <p class="clearfix">
                                     <label>厂商类别：</label>
                                     <select  class="business">
-                                        <option value="">===请选择===</option>
+                                        <option value="">==请选择==</option>
                                         <option value="委托商" {{if $list.shopType=="委托商"}}selected="selected"{{/if}}>1：委托商</option>
                                         <option value="生产商" {{if $list.shopType=="生产商"}}selected="selected"{{/if}}>2：生产商</option>
                                         <option value="制造商" {{if $list.shopType=="制造商"}}selected="selected"{{/if}}>3：制造商</option>
@@ -290,13 +305,13 @@
                        </div>
                      {{/foreach}}
                      {{else}}
-                     <div class="business_add" {{if $key==0}} {{else}} style="display:none" {{/if}}>
+                     <div class="business_add" >
                          <input type="hidden" class="business shopId" value="{{$list.shopId}}">
                          <input type="hidden" class="business inputIds" value="{{$p_info.inputId}}">
                          <p class="clearfix">
                              <label>厂商类别：</label>
                              <select id="inputId" class="business">
-                                 <option value="">===请选择===</option>
+                                 <option value="">==请选择==</option>
                                  <option value="委托商">1：委托商</option>
                                  <option value="生产商">2：生产商</option>
                                  <option value="制造商">3：制造商</option>
@@ -363,16 +378,23 @@
                     {{else  if $list.isNums==2 && $list.inputType==2}}
                     <p class="clearfix">
                         <label>{{$list.fieldName}}：</label>
+                        {{if $p_info.isGroup==2}}
                         <select class="fieldName">
-                            <option>====请选择====</option>
+                            <option>==请选择==</option>
+                            {{foreach from =$p_info.groupGoodsNames key=key item=name}}
+                            <option value="{{$name}}" {{if $name==$value1}}selected="selected"{{/if}}>{{$name}}</option>
+                            {{/foreach}}
                         </select>
+                        {{/if}}
                         <input type="text" class="fieldName"/>
                         <textarea class="fieldName">{{$p_info.extInfo.{{$list.field}}}}</textarea>
                         <input type="hidden" value="{{$list.field}}" class="hidden">
                     </p>
+                    {{if $p_info.isGroup==2}}
                     <div class="save_box">
                         <a href="javascript:;" id="bese_info_add">增加</a>
                     </div>
+                    {{/if}}
                     {{/if}}
                     {{/foreach}}
                 </div>
@@ -434,18 +456,19 @@
                         </div>
                         <div class="nutrition">
                             {{foreach from=$p_info.nutritionInfo key=k item=list}}
+
                         <div class="nutrition_child" {{if $k!=0}}style="display:none"{{/if}}>
                             {{if $p_info.isGroup==2}}
                             <h3 class="clearfix"><span>产品名称:</span>
                                 <select class="nutrition_name">
-                                        <option>请选择</option>
+                                        <option>==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames item=name}}
                                         <option value="{{$name}}" {{if $name==$list.proName}} selected="selected"{{/if}}>{{$name}}</option>
                                         {{/foreach}}
                                     </select>
                             </h3>
                             {{/if}}
-                            <h4 class="clearfix">
+                            <h3 class="clearfix">
                                     <span>成分名称</span>
                                     <select name="component" class="nutrition_names">
                                         <option value="含量" {{if $list.names=='含量'}}selected="selected"{{/if}}>含量</option>
@@ -454,21 +477,53 @@
                                         <option value="每一枚" {{if $list.names=='每一枚'}}selected="selected"{{/if}}>每一枚</option>
                                     </select>
                                     <span>NVR%</span>
-                            </h4>
+                            </h3>
                            {{foreach from=$list key=key item=value}}
                             {{if $key>1}}
-
                             <P class="clearfix p">
-                                <input type="hidden" class="nutrition_value" value="{{$key}}">
-                                <span>{{foreach from=$p_info.nutritionFiled.data key=keys item=lists}}
-                                    {{if $lists.nutritionId==$key}}{{$lists.nutritionName}}{{$value.nutritionName}}{{/if}}
-                                    {{/foreach}}:</span>
+                                {{foreach from=$p_info.nutritionFiled.data key=keys item=lists}}
+                                    {{if $lists.nutritionId==$key and $lists.isDefault==1}}
+                                <input type="hidden" class="nutrition_value" value="{{$key}}"><span>{{$lists.nutritionName}}{{$value.nutritionName}}:</span>
+                                {{else if $lists.nutritionId==$key and $lists.isDefault!=1}}
+                                 <select style="margin-left:2px; margin-right:10px;" class="nutrition_value nutritionUnitEn" onchange="nutritionUnitEn(this)">
+                                     <option>==请选择==</option>
+                                     {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                     {{if $lists1.isDefault!=1}}
+                                 <option value="{{$lists1.nutritionId}}" class="{{$lists1.nutritionUnitEn}}" {{if  $lists1.nutritionId==$key}}selected="selected"{{/if}}>{{$lists1.nutritionName}}--{{$lists1.nutritionUnitEn}}</option>
+                                     {{/if}}
+                                     {{/foreach}}
+                                 </select>
+                                    {{/if}}
+                                {{/foreach}}
                                 <input type="text"   class="nutrition_value" value="{{$value.shuzi}}"/>
-                                <input type="hidden"   class="nutrition_value" value="{{$value.danwei}}"/>
+                                <!--判断是否是默认参数单位显示-->
+                                {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key}}
+                                <label class="nutritionUnitEns">
+                                    {{$value.danwei}}
+                                </label>
+                                {{else if $lists1.isDefault==1 and $lists1.nutritionId==$key}}
                                 <label>
                                     {{$value.danwei}}
                                 </label>
+                                {{/if}}
+                                {{/foreach}}
+                                <!---->
+                                <!--判断是否是默认参数单位隐形显示-->
+                                {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key}}
+                                <input type="hidden"   class="nutrition_value nutrition_info" value="{{$value.danwei}}"/>
+                                {{else if $lists1.isDefault==1 and $lists1.nutritionId==$key}}
+                                <input type="hidden"   class="nutrition_value" value="{{$value.danwei}}"/>
+                                {{/if}}
+                                {{/foreach}}
+                                <!---->
                                 <input type="text"   class="nutrition_value" value="{{$value.value}}"/><label>%</label>
+                                {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
+                                {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key}}
+                                <em class="nutrition_inform_del" style="display:block;cursor:pointer">删除</em>
+                                {{/if}}
+                                {{/foreach}}
                             </P>
                             {{/if}}
                             {{/foreach}}
@@ -476,16 +531,18 @@
                             {{/foreach}}
                         </div>
                         {{/if}}
+                        <div class="save_box ">
+                            <a href="javascript:;" id="" class="add_nutrient">添加营养成分</a> <a href="javascript:;" id="" class="add_param">添加参数</a> <a href="javascript:;" onclick="save_nutrient()">保存</a>
+                        </div>
+
                     </div>
-                <div class="save_box">
-                  <a href="javascript:;" id="" class="add_nutrient">添加营养成分</a> <a href="javascript:;" id="" class="add_param">添加参数</a> <a href="javascript:;" onclick="save_nutrient()">保存</a>
-                </div>
+
                 </div>
                 <!--<div style="margin:10px 2px;"><a href="javascript:;" id="add_nutrient">增加营养成分</a></div>-->
             </div>
   		</div>
-        <div class="zz_conforim"><a href="javascript:;" id="record_confirm">提交</a></div>
-        <div class="zz_conforim"><a href="javascript:;" id="record_confirms">反馈</a></div>
+        <div class="zz_conforim"><a href="javascript:;" id="record_confirm">提交</a><a href="javascript:;" id="record_confirms">反馈</a></div>
+      
 	</div> 
 </div>
 <div class="newuser_pop" id="ps_newuser_pop">
@@ -513,19 +570,7 @@
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
-{{include file='public/record.tpl'}}
-<script type="text/javascript">
-   $(function(){
+{{include file='./record_js.tpl'}}
 
-        //添加滚动条
-        var hh= $(".record_info_warp .right").height();
-       if(hh>700)
-       {
-        $(".right").css({"overflow-y":"scroll"})
-       }
-
-    });
-
-</script>
 </body>
 </html>

@@ -171,7 +171,7 @@
         <div class="login_main">
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><input type="text" id="gtin1" class="zhmm" readonly="readonly"></div>
-                <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="gName1" class="zhmm" readonly="readonly"></div>
+                <div class="clearfix one"><label for="user_name">商品名称:</label><input type="text" id="gName1" class="zhmm"></div>
                 <div class="clearfix one"><label for="user_name">商品类型:</label><input type="text" id="goodsCatgrory1" class="zhmm" readonly="readonly"></div>
                 <div class="clearfix one">
                     <label for="user_name">一级分类:</label>
@@ -185,7 +185,6 @@
                             </select>
                         </dl>
                     </div>
-
                 </div>
                 <div class="clearfix one">
                     <label for="user_name">二级分类:</label>
@@ -354,6 +353,9 @@
         var catgrory2=$(".catgrorys2").val();
         var catgrory3=$(".catgrorys3").val();
         var gName=$("#gName1").val();
+        if(gName==""){
+            alert("商品名称不能为空");
+        }
         var id=localStorage.getItem('id');
         var data={catgrory1:catgrory1,catgrory2:catgrory2,catgrory3:catgrory3,gName:gName,id:id};
         $.ajax({

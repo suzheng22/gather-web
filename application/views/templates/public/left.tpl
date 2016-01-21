@@ -26,7 +26,7 @@
 		<div class="slimScrollDiv leftsidebar_box">
         <dl class="user_manager system_log">
             <dt><i class="icon iconfont">&#xf0226;</i>系统管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-            <dd><a href="first_index.html" title="首页管理">首页管理</a></dd>
+            <!-- <dd><a href="first_index.html" title="首页管理">首页管理</a></dd> -->
             <dd><a href="{{$root_path}}user/index" title="用户管理">用户管理</a></dd>
             <dd><a href="{{$root_path}}role/index" title="角色管理">角色管理</a></dd>
             <dd><a href="{{$root_path}}user/userGroupList" title="用户组管理">用户组管理</a></dd>
@@ -36,7 +36,7 @@
          <dl class="business_base_info system_log">
              <dt><i class="icon iconfont">&#xf00a9;</i>商品信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
              <dd><a href="up_good_list.html" title="导入商品清单">导入商品清单</a></dd>
-             <dd><a href="good_list_manager.html" title="商品管理">商品管理</a></dd>
+             <!-- <dd><a href="{{$root_path}}" title="商品管理">商品管理</a></dd> -->
              <dd><a href="{{$root_path}}goods/goodsClassify" title="商品分类">商品分类</a></dd>
         </dl>
         <dl class="menu_shoot_manager system_log">
@@ -49,7 +49,7 @@
          </dl>
          <dl class="menu_base_info system_log">
              <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-             <dd><a href="{{$root_path}}" title="商品管理">商品管理</a></dd>
+             
              <dd><a href="{{$root_path}}information/baseInfoManager" title="基本信息管理">基本信息管理</a></dd>
              <dd><a href="{{$root_path}}information/nutrientInfo" title="营养成风">营养成分</a></dd>
          </dl>
@@ -60,7 +60,7 @@
 
          <dl class="check_manager system_log">
             <dt><i class="icon iconfont">&#xf01d8;</i>审核管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-            <dd><a href="{{$root_path}}marlboro/shoot" title="拍摄审核">拍摄审核</a></dd>
+            <dd><a href="{{$root_path}}marlboro/shootCheck" title="拍摄审核">拍摄审核</a></dd>
             <dd><a href="{{$root_path}}retouch/psCheckList" title="修图审核">修图审核</a></dd>
             <dd><a href="{{$root_path}}input/inputList" title="录入审核">录入审核</a></dd>
            
