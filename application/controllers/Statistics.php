@@ -102,7 +102,6 @@ class Statistics extends My_Controller {
         $type_list=$this->product->getCatgroryList();
         $this->ci_smarty->assign('type_list',$type_list['data']);
        $arr=$this->input($page_url);
-        
         $list=$this->Statistics_model->getGoodsList($arr);
         $showpage= parent::page($page_url,10,$list['count']);
         
@@ -311,10 +310,10 @@ class Statistics extends My_Controller {
             $page_url.="gName=".$arr['gName'];
         }
         
-        if($this->input->get('catgroy1')!=""){
-            $arr['catgroy1']=$this->input->get('catgroy1');
-            $this->ci_smarty->assign('catgroy1',$arr['catgroy1']);
-            $page_url.="catgroy1=".$arr['catgroy1'];
+        if($this->input->get('catgrory1')!=""){
+            $arr['catgrory1']=$this->input->get('catgrory1');
+            $this->ci_smarty->assign('catgrory1',$arr['catgrory1']);
+            $page_url.="catgrory1=".$arr['catgrory1'];
         }
         
         if($this->input->get('shootStatus')!=""){
@@ -365,7 +364,12 @@ class Statistics extends My_Controller {
             $arr['page']=1;
         }
         
-        $arr['pageUrl']=$page_url;
+        foreach ($arr as $k=>$v){
+            if($k!='page'&&$k!='is_ext')
+            $p[$k]=$v;    
+        }
+        $this->ci_smarty->assign('p',urlencode(json_encode($p)));
+
         
         return $arr;
 
@@ -373,4 +377,202 @@ class Statistics extends My_Controller {
     
     
     
+    function extShoot(){
+        $p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->shootList($arr);
+        $str = "用户名,用户组,拍摄总数,审核通过数,待上传数,待审核数,审核驳回数,抽查通过率,拍摄通过照片数,拍摄总照片数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $userName = iconv('utf-8','gb2312',$v['userName']); //中文转码
+            $groupName = iconv('utf-8','gb2312',$v['groupName']);
+            $shootCount = $v['shootCount'];
+            $shootPassCount = $v['shootPassCount'];
+            $rUploadCount = $v['rUploadCount'];
+            $rReviewCount = $v['rReviewCount'];
+            $reviewNoPassCount = $v['reviewNoPassCount'];
+            $passRate = $v['passRate'];
+            $shootPassPicCount = $v['shootPassPicCount'];
+            $shootPicCount = $v['shootPicCount'];
+            $str .= $userName.",".$groupName.",".$shootCount.",".$shootPassCount.",".$rUploadCount.",".$rReviewCount.",".$reviewNoPassCount.",".$passRate.",".$shootPassPicCount.",".$shootPicCount."\n";
+        }
+        $filename = date('Ymd').'拍摄统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+    }
+    
+    function extShootCheck(){
+        $p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->shootCheckList($arr);
+        $str = "用户名,用户组,审核拍摄的商品数,拍摄通过的商品数,拍摄驳回的商品数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $userName = iconv('utf-8','gb2312',$v['userName']); //中文转码
+            $groupName = iconv('utf-8','gb2312',$v['groupName']);
+            $reviewCount = $v['reviewCount'];
+            $reviewPassCount = $v['reviewPassCount'];
+            $reviewNoPassCount = $v['reviewNoPassCount'];
+            $str .= $userName.",".$groupName.",".$reviewCount.",".$reviewPassCount.",".$reviewPassCount."\n";
+        }
+        $filename = date('Ymd').'拍摄审核统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+    }
+    
+    function extGoods(){
+        $p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->getGoodsList($arr);
+        $str = "商品条形码,商品名称,商品分类,包装数,拍摄次数,修图次数,录入次数,录入字数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $gName = iconv('utf-8','gb2312',$v['gName']); //中文转码
+            $catgroryName = iconv('utf-8','gb2312',$v['catgroryName']);
+            $gtin = $v['gtin'];
+            $packetCount = $v['packetCount'];
+            $shootCount = $v['shootCount'];
+            $retouchCount = $v['retouchCount'];
+            $inputCount = $v['inputCount'];
+            $wordCount = $v['wordCount'];
+            $str .= $gtin.",".$gName.",".$catgroryName.",".$packetCount.",".$shootCount.",".$retouchCount.",".$inputCount.",".$wordCount."\n";
+        }
+        $filename = date('Ymd').'商品统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+    }
+    
+    function extPs(){
+        $p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->getPsList($arr);
+        $str = "用户名,用户组,修图总数,审核通过数,待上传数,待审核数,审核驳回数,抽查通过率,审核通过照片数,修图照片数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $userName = iconv('utf-8','gb2312',$v['userName']); //中文转码
+            $groupName = iconv('utf-8','gb2312',$v['groupName']);
+            $retouchCount = $v['retouchCount'];
+            $retouchPassCount = $v['retouchPassCount'];
+            $rUploadCount = $v['rUploadCount'];
+            $rReviewCount = $v['rReviewCount'];
+            $reviewNoPassCount = $v['reviewNoPassCount'];
+            $passRate = $v['passRate'];
+            $retouchPassPicCount = $v['retouchPassPicCount'];
+            $retouchPicCount = $v['retouchPicCount'];
+            $str .= $userName.",".$groupName.",".$retouchCount.",".$retouchPassCount.",".$rUploadCount.",".$rReviewCount.",".$reviewNoPassCount.",".$passRate.",".$retouchPassPicCount.",".$retouchPicCount."\n";
+        }
+        $filename = date('Ymd').'修图统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+    }
+    
+    function extProject() {
+		$p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->getProjectList($arr);
+        $str = "项目名称,入库总商品数,已拍摄上传总数,已拍摄审核通过总数,已修图上传总数,已修图审核通过总数,已录入提交总数,已录入审核总数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $pName = iconv('utf-8','gb2312',$v['pName']); //中文转码
+            $depotCount = $v['depotCount'];
+            $shootUploadCount = $v['shootUploadCount'];
+            $shootPassCount = $v['shootPassCount'];
+            $retouchUploadCount = $v['retouchUploadCount'];
+            $retouchPassCount = $v['retouchPassCount'];
+            $inputUploadCount = $v['inputUploadCount'];
+            $inputPassCount = $v['inputPassCount'];
+            $str .= $pName.",".$depotCount.",".$shootUploadCount.",".$shootPassCount.",".$retouchUploadCount.",".$retouchPassCount.",".$inputUploadCount.",".$inputPassCount."\n";
+        }
+        $filename = date('Ymd').'项目统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+    }
+    
+    function extInput(){
+        $p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->getInputList($arr);
+        $str = "用户名,用户组,录入总数,录入字数,审核通过数,审核通过字数,待审核数,审核驳回数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $userName = iconv('utf-8','gb2312',$v['userName']); //中文转码
+            $groupName = iconv('utf-8','gb2312',$v['groupName']);
+            $inputCount = $v['inputCount'];
+            $wordCount = $v['wordCount'];
+            $inputPassCount = $v['inputPassCount'];
+            $wordPassCount = $v['wordPassCount'];
+            $rReviewCount = $v['rReviewCount'];
+            $reviewNoPassCount = $v['reviewNoPassCount'];
+            $str .= $userName.",".$groupName.",".$inputCount.",".$wordCount.",".$inputPassCount.",".$wordPassCount.",".$rReviewCount.",".$reviewNoPassCount."\n";
+        }
+        $filename = date('Ymd').'录入统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+    }
+    
+    function extInputCheck() {
+        $p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->getInputCheck($arr);
+        $str = "用户名,用户组,审核的商品数,审核通过次数,已驳回次数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $userName = iconv('utf-8','gb2312',$v['userName']); //中文转码
+            $groupName = iconv('utf-8','gb2312',$v['groupName']);
+            $reviewCount = $v['reviewCount'];
+            $reviewPassCount = $v['reviewPassCount'];
+            $reviewNoPassCount = $v['reviewNoPassCount'];
+            $str .= $userName.",".$groupName.",".$reviewCount.",".$reviewPassCount.",".$reviewPassCount."\n";
+        }
+        $filename = date('Ymd').'录入审核统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+    }
+    
+    function extShootBack(){
+		$p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->getShootBackList($arr);
+        $str = "商品条形码,商品名称,商品分类,驳回原因,驳回时间\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $gName = iconv('utf-8','gb2312',$v['gName']); //中文转码
+            $cargroryName = iconv('utf-8','gb2312',$v['cargroryName']);
+			$memo=iconv('utf-8','gb2312',$v['memo']);
+            $gtin = $v['gtin'];
+            $creatTime = $v['creatTime'];
+            $str .= $gtin.",".$gName.",".$cargroryName.",".$memo.",".$creatTime."\n";
+        }
+        $filename = date('Ymd').'拍摄驳回统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+	}
+    
+	function extpsCheck(){
+		 $p=$this->input->get('p');
+        $arr=json_decode($p,true);
+        $arr['is_ext']=1;
+        $list=$this->Statistics_model->getPsCheckList($arr);
+        $str = "用户名,用户组,审核的商品数,通过的商品数,已驳回次数\n";
+        $str = iconv('utf-8','gb2312',$str);
+        foreach ($list['data'] as $k=>$v){
+            $userName = iconv('utf-8','gb2312',$v['userName']); //中文转码
+            $groupName = iconv('utf-8','gb2312',$v['groupName']);
+            $reviewCount = $v['reviewCount'];
+            $reviewPassCount = $v['reviewPassCount'];
+            $reviewNoPassCount = $v['reviewNoPassCount'];
+            $str .= $userName.",".$groupName.",".$reviewCount.",".$reviewPassCount.",".$reviewPassCount."\n";
+        }
+        $filename = date('Ymd').'修图审核统计.csv'; //设置文件名
+        $this->export_csv($filename,$str); //导出
+        exit;
+	}
 }

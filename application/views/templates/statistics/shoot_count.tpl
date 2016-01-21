@@ -48,9 +48,9 @@
                         </div>
                         	<div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
-                    	  <a href="record.html" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
+                    	  <a href="{{$root_path}}statistics/extShoot?p={{$p}}" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
-                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <a href="#"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
                    	<div class="clearfix"></div>
 					</form>
@@ -73,7 +73,7 @@
 					  {{foreach from=$slist item=list}}
                       <tr>
                         <td>{{$list.userName}}</td>
-                        <td>{{$list.roleName}}</td>
+                        <td>{{$list.groupName}}</td>
                         <td>{{$list.shootCount}}</td>
                         <td>{{$list.shootPassCount}}</td>
                         <td>{{$list.rUploadCount}}</td>

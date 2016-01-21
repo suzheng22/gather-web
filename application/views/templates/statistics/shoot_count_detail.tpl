@@ -39,10 +39,10 @@
                         <div class="cc_top_one last_show"><label>商品分类:</label>
                           <div class="choice_count choice_box vocation">
                               <dl class="select">
-                                  <select class="select3" name="catgroy1">
+                                  <select class="select3" name="catgrory1">
                                     <option value="">全部</option>
 									{{foreach from =$type_list item=list}}
-                                      <option value="{{$list.id}}" {{if $catgroy1==$list.id}} selected="selected"{{/if}}>{{$list.name}}</option>
+                                      <option value="{{$list.id}}" {{if $catgrory1==$list.id}} selected="selected"{{/if}}>{{$list.name}}</option>
 									  {{/foreach}}
                                  </select>
                               </dl>

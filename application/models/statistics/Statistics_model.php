@@ -13,7 +13,7 @@ class Statistics_model extends MY_Model {
     
     //获取修图统计
     function getPsList($data) {
-        $data['token']=$this->user_info['token'];
+        $data['token']=urldecode($this->user_info['token']);
         $url=$this->more_api_url."/lingmall/stat/retouch";
         $return=$this->curl($url,$data,'get');
         $list=json_decode($return,true);
@@ -29,7 +29,7 @@ class Statistics_model extends MY_Model {
     
     
     function getPsDetail($data){
-        $data['token']=$this->user_info['token'];
+        $data['token']=urldecode($this->user_info['token']);
         $url=$this->more_api_url."/lingmall/stat/retouchdetail";
         $return=$this->curl($url,$data,'get');
          $list=json_decode($return,true);
@@ -44,7 +44,7 @@ class Statistics_model extends MY_Model {
     }
     
     function getPsCheckList($data){
-        $data['token']=$this->user_info['token'];
+        $data['token']=urldecode($this->user_info['token']);
         $url=$this->more_api_url."/lingmall/stat/retouchreview";
         $return=$this->curl($url,$data,'get');
 
@@ -90,7 +90,7 @@ class Statistics_model extends MY_Model {
             $u=$this->user_model->getInfo($user_p);
             $u=json_decode($u,true);
             $list['data'][$k]['userName']=$u['userName'];
-            $list['data'][$k]['roleName']=$u['roleName'];
+            $list['data'][$k]['groupName']=$u['groupName'];
         }
         return $list;
     }
