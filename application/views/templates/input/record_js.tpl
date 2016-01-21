@@ -723,7 +723,10 @@
             //保存扩充信息
             save_extendInfo(3);
             //保存营养成分
-            save_nutrient(3);
+           var a= save_nutrient(3);
+            if(a==false){
+                return false;
+            }
             $.ajax({
                 url:'{{$root_path}}input/saveType',
                 data:{inputCount:len,inputId:inputId,filed:5},

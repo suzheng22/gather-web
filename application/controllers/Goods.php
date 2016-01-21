@@ -91,4 +91,9 @@ class Goods extends My_Controller {
         $url= "http://7xny7g.com2.z0.glb.qiniucdn.com/{$return[1][0]['key']}-thumbnail500";
         echo $url;
     }
+
+    //商品管理列表
+    function goodsManager(){
+        $this->ci_smarty->display("goods/goodsManager.tpl");
+    }
 }
