@@ -25,8 +25,8 @@
 <div class="j-top-warp">
     <ul class="clearfix" id="nav_info">
         <li class="black"><em>商品条形码:</em><span >{{$p_info.gtin}}</span></li>
-        <li class="black"><em>可录入商品总数:</em><span>{{if $p_info.inputGoodsCountToday}}{{$p_info.inputGoodsCountToday}}{{else}}0{{/if}}</span></li>
-        <li class="black"><em>今录入商品总数:</em><span>{{if $p_info.inputGoodsCount}}{{$p_info.inputGoodsCount}}{{else}}0{{/if}}</span></li>
+        <li class="black"><em>可录入商品总数:</em><span>{{if $p_info.inputGoodsCount}}{{$p_info.inputGoodsCount}}{{else}}0{{/if}}</span></li>
+        <li class="black"><em>今录入商品总数:</em><span>{{if $p_info.inputGoodsCountToday}}{{$p_info.inputGoodsCountToday}}{{else}}0{{/if}}</span></li>
     </ul>
     {{if $p_info.status==4}}
     <ul>
