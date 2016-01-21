@@ -154,7 +154,7 @@
         $(".proName,.gtin").val("");
         $("#datetimepicker_start").val("");
         $("#datetimepicker_end").val("");
-        $(".cc_top_one ,.select1").val("");
+        $(".cc_top_one ,.select1,.select3").val("");
         $(".uew-select-text").html('全部');
     }
     function inputAdd(){
