@@ -203,6 +203,15 @@ class Input_model extends MY_Model {
         $return=json_decode($return,true);
         return $return;
     }
+    //根据orderid获取详细信息
+    function getOrderInfo($data){
+        $url=$this->more_api_url."/lingmall/input/audit/{$data['orderId']}?token={$this->user_info['token']}";
+        $return=$this->curl($url,'','get');
+        $return=json_decode($return,true);
+        $return['orderId']=$data['orderId'];
+       // var_dump($return);
+        return $return;
+    }
 
 }
 ?>
