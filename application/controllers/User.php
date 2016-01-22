@@ -122,7 +122,7 @@ class User extends My_Controller {
         
         //用户组列表页
         function userGroupList(){
-            $page_url=$this->root_path.'user/userGroupList/?';
+            $page_url=$this->root_path.'user/userGroupList?';
             $data['groupName']=$this->input->get('groupName');
             $data['roleId']=$this->input->get('roleId');
             $data['page']=$this->input->get('page');
@@ -134,7 +134,7 @@ class User extends My_Controller {
             if($data['roleId']!=''){
                 $page_url.='roleId='.$data['roleId']."&";
                 $this->ci_smarty->assign('roleId',$data['roleId']);
-            } 
+            }
             $data['userId']=$this->user_info['userId'];
             $data['token']=$this->user_info['token'];
             

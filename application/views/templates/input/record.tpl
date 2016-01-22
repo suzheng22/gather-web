@@ -412,7 +412,7 @@
             	<div style="border-bottom:1px solid #ccc; height:100%; padding:10px 0px 0px 0px;" class="zz_nutrient">
                 	<div class="nutrition_inform" id="nutrition_inform">
                         <!-- 判断营养成分是否保存-->
-                        {{if $p_info.nutritionInfo==""}}
+                        {{if $p_info.nutritionInfo=="" && $p_info.nutritionFiled.data!=""}}
                         <div class="nutrition_choice">
                             <h3 class="clearfix bus_info_01" id="bus_info_01"><a href="javascript:;" class="selected">营养成分</a></h3>
                         </div>
@@ -436,6 +436,7 @@
                                     </select>
                                     <span>NVR%</span>
                             </h4>
+
                             {{foreach from=$p_info.nutritionFiled.data item=list}}
                             {{if $list['isDefault']==1}}
                             <P class="clearfix p">
@@ -451,7 +452,7 @@
                         </div>
                         </div>
                         <!-- 营养成分有保存记录的时候-->
-                        {{else}}
+                        {{else if  $p_info.nutritionInfo!="" && $p_info.nutritionFiled.data!=""}}
                         <div class="nutrition_choice">
                                 <h3 class="clearfix bus_info_01" id="bus_info_01">
                                     {{foreach from=$p_info.nutritionInfo key=key item=list}}
@@ -536,10 +537,11 @@
                             {{/foreach}}
                         </div>
                         {{/if}}
+                        {{if $p_info.nutritionFiled.data!=""}}
                         <div class="save_box ">
                             <a href="javascript:;" id="" class="add_nutrient">添加营养成分</a> <a href="javascript:;" id="" class="add_param">添加参数</a> <a href="javascript:;" onclick="save_nutrient()">保存</a>
                         </div>
-
+                        {{/if}}
                     </div>
 
                 </div>
