@@ -176,7 +176,7 @@
                     newTab.location.href='{{$root_path}}input/inputAdd';
                 }else{
                     newTab.close();
-                    alert("无录入条码可审核")
+                    alert("无录入条码可新增")
                 }
             }
         })
