@@ -59,7 +59,7 @@ class User extends My_Controller {
             $data['roleId']=$this->input->get('roleId');
             $data['groupId']=$this->input->get('groupId');
             $data['status']=$this->input->get('status');
-            $data['currentPage']=$this->input->get('currentPage');
+            $data['page']=$this->input->get('page');
             $data['pageSize']=10;
             $page_url=$this->root_path.'user/index/?';
             if($data['userName']!=''){
@@ -82,11 +82,12 @@ class User extends My_Controller {
                 $page_url.='status='.$data['status']."&";
                 $this->ci_smarty->assign('status',$data['status']);
             }
-            if($data['currentPage']==''){
+            if($data['page']==''){
                 $data['currentPage']=1;
+            }else{
+                $data['currentPage']=$data['page'];
             }
 
-            
             $data['userId']=$this->user_info['userId'];
             $data['token']=$this->user_info['token'];
            $no_master['userId']=$this->user_info['userId'];
@@ -103,7 +104,7 @@ class User extends My_Controller {
               $str=$this->user_model->getUserList($data);
               $user_list=json_decode($str,true);
               
-              //print_r($user_list);exit;
+              //var_dump($user_list);exit;
               $this->ci_smarty->assign('userList',$user_list['list']);
               $showpage= parent::page($page_url,$data['pageSize'],$user_list['nums']);
 
@@ -124,7 +125,7 @@ class User extends My_Controller {
             $page_url=$this->root_path.'user/userGroupList/?';
             $data['groupName']=$this->input->get('groupName');
             $data['roleId']=$this->input->get('roleId');
-            $data['currentPage']=$this->input->get('currentPage');
+            $data['page']=$this->input->get('page');
             $data['pageSize']=10;
             if($data['groupName']!=''){
                 $page_url.='groupName='.$data['groupName']."&";
@@ -133,7 +134,7 @@ class User extends My_Controller {
             if($data['roleId']!=''){
                 $page_url.='roleId='.$data['roleId']."&";
                 $this->ci_smarty->assign('roleId',$data['roleId']);
-            }
+            } 
             $data['userId']=$this->user_info['userId'];
             $data['token']=$this->user_info['token'];
             

@@ -170,7 +170,13 @@
     </div>
 </div>
 <script  type="text/javascript">
-$(function(){	
+$(function(){
+	$("#submits").on("click",function(){
+		var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
+		$("#form").attr("action",action);
+		$("#form").submit();
+	});
+
 	var url = window.location;
 	$('.user_manager dd a').filter(function (){
         return this.href == url || url.href.indexOf(this.href) == 0;

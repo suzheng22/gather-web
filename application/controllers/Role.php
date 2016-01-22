@@ -15,7 +15,7 @@ class Role extends My_Controller {
         public function index(){
        
             $data['roleName']=$this->input->get('roleName');
-            $data['currentPage']=$this->input->get('currentPage');
+            $data['page']=$this->input->get('page');
             $data['pageSize']=10;
             $data['userId']=$this->user_info['userId'];
             $data['token']=$this->user_info['token'];
@@ -23,6 +23,11 @@ class Role extends My_Controller {
             if($data['roleName']!=''){
                 $page_url.='roleName='.$data['roleName']."&";
                 $this->ci_smarty->assign('trueName',$data['roleName']);
+            }
+            if($data['page']==''){
+                $data['currentPage']=1;
+            }else{
+                $data['currentPage']=$data['page'];
             }
             $str=$this->role_model->getRoleList($data);
             $role_list=json_decode($str,true);
