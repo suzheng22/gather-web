@@ -108,18 +108,13 @@ $(function(){
         $("#form").attr("action",action);
         $("#form").submit();
     });
-  //左侧菜单显示
-    var url = window.location;
-    $('.menu_shoot_manager dd a').filter(function (){
-        return this.href == url || url.href.indexOf(this.href) == 0;
-    }).parents('dd').addClass('active').siblings().removeClass('active');
-    $(".leftsidebar_box .menu_shoot_manager dd").show();
+
 
     $('#datetimepicker_start,#datetimepicker_end').datetimepicker({
        format:'Y-m-d',
     formatDate:'Y-m-d',
     timepicker:false,
-    lang:'ch',//中文化
+    lang:'ch'
     });
 
     

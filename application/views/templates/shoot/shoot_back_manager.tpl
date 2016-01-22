@@ -160,7 +160,7 @@ $(function(){
     format:'Y-m-d',
     formatDate:'Y-m-d',
     timepicker:false,
-    lang:'ch',//中文化
+    lang:'ch'
     });
 
 });
