@@ -254,7 +254,7 @@ class Statistics extends My_Controller {
     }
     
     function inputDetail($inputUserId){
-        $page_url=$this->root_path.'statistics/shootDetail/'.$inputUserId.'?';
+        $page_url=$this->root_path.'statistics/inputDetail/'.$inputUserId.'?';
         $statusList=$this->PublicFuc_model->getStatusList('status');
         $this->ci_smarty->assign('statusList',$statusList);
         
