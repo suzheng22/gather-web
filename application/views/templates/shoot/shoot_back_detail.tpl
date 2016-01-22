@@ -43,12 +43,6 @@
                             </dl>
                         </div>
                     </div>
-                     <div class="cc_top_one" style="width:50%">
-                            <label>驳回时间:</label>
-                         <input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/>
-                         <label style="width:20px;">-</label>
-                         <input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/>
-                        </div>
                     <div class="cc_top_one last_show"><label>状态:</label>
                         <div class="choice_count choice_box vocation">
                             <dl class="select">
@@ -60,6 +54,13 @@
                             </dl>
                         </div>
                     </div>
+                     <div class="cc_top_one" style="width:50%">
+                            <label>驳回时间:</label>
+                         <input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/>
+                         <label style="width:20px;">-</label>
+                         <input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/>
+                        </div>
+                    
                       <div class="clearfix"></div> 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                     	<a href="{{$root_path}}shoot/shootBackDetail?is_ext=1" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>

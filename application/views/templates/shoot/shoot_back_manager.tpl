@@ -43,12 +43,6 @@
                             </dl>
                         </div>
                     </div>
-                     <div class="cc_top_one" style="width:50%">
-                            <label>反馈时间:</label>
-                         <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
-                         <label style="width:20px;">-</label>
-                         <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
-                     </div>
                     <div class="cc_top_one last_show"><label>状态:</label>
                         <div class="choice_count choice_box vocation">
                             <dl class="select">
@@ -62,16 +56,23 @@
                         </div>
                     </div>
                         <div class="cc_top_one last_show"><label>反馈路径:</label>
-                            <div class="choice_count choice_box vocation">            	 			
+                            <div class="choice_count choice_box vocation">                          
                                 <dl class="select">
                                     <select class="select3" name="feedPath">
-                                   		<option value="">全部</option>
+                                        <option value="">全部</option>
                                         <option value="1" {{if $feedPath==1}}selected="selected"{{/if}}>修图反馈</option>
                                         <option value="2" {{if $feedPath==2}}selected="selected"{{/if}}>录入反馈</option>
                                    </select>
                                 </dl>
                             </div>
                         </div>
+                     <div class="cc_top_one" style="width:50%">
+                            <label>反馈时间:</label>
+                         <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
+                         <label style="width:20px;">-</label>
+                         <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
+                     </div>
+                    
                       <div class="clearfix"></div> 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                         <a href="{{$root_path}}marlboro/shootBackManager?is_ext=1"><span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="button" value="导出"></span></a>
