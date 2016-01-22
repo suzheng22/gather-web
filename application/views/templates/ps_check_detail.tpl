@@ -128,9 +128,6 @@
      </div><!--main end-->  
 </div>
 {{include file='public/js.tpl'}}
-<!--时间控件-->
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 
 $(function(){
@@ -141,30 +138,7 @@ $(function(){
 		$("#form").submit();
 	});
 	
-	//select 表单美化
-	$(".select3").uedSelect({
-		width : 100
-	});
 	
-	//菜单高亮显示和地址栏比对
-	var url = window.location;
-    $('.system_log dd a').filter(function (){
-        return this.href == url || url.href.indexOf(this.href) == 0;
-    })
-    .parents('dd').addClass('active').siblings().removeClass('active');
-	$(".leftsidebar_box .check_manager dd").show();
-	
-});
-$('#datetimepicker_start,#datetimepicker_end').datetimepicker({
-	onGenerate:function( ct ){
-		$(this).find('.xdsoft_date')
-				.toggleClass('xdsoft_disabled');
-	},
-	format:'Y-m-d',
-	formatDate:'Y-m-d',
-	minDate:'-1970-01-2',
-	maxDate:'+1970-01-2',
-	timepicker:false
 });
 function shoot_pass(){
 	var num=0;
