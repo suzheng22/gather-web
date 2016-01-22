@@ -163,7 +163,7 @@
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.gName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品分类:</label><span class="zhmm">{{$p_info.catName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品分类:</label><span class="zhmm">{{$p_info.name}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(3)">确认</a>
             </div>
@@ -179,7 +179,7 @@
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm gtin1">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.gName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品分类:</label><span class="zhmm typeName1">{{$p_info.catName}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品分类:</label><span class="zhmm typeName1">{{$p_info.name}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memos"></textarea></div>
                 <a href="javascript:;"  class="confirm_btn" onclick="add_miss_figure(2)">确认</a>
             </div>
