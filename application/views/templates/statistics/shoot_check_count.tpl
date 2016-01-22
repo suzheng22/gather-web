@@ -35,12 +35,10 @@
 							</dl>
 	            	 	</div>
                      </div>
-                     <div class="cc_top_one">
-                            <label>审核开始时间:</label>
+                     <div class="cc_top_one" style="width:50%;">
+                            <label>审核时间:</label>
                             <input type="text" id="datetimepicker_start" name="startTime" value="{{$startTime}}"/>
-                        </div>
-                        <div class="cc_top_one">
-                            <label>审核结束时间:</label>
+                            <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" name="endTime" value="{{$endTime}}"/>
                        </div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
