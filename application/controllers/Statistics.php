@@ -23,7 +23,7 @@ class Statistics extends My_Controller {
         $project_list=$this->Project_model->getProjectList();
         $this->ci_smarty->assign('project_list',$project_list['data']);
         
-        $arr=$this->input($page_url);
+        $arr=$this->input($page_url,6);
        /* if($this->input->get('is_ext')){
             $data['is_ext']='yes';
             $list=$this->Statistics_model->getPsList($data);
@@ -63,7 +63,7 @@ class Statistics extends My_Controller {
         $statusList=$this->PublicFuc_model->getStatusList('retouchStatus');
         $this->ci_smarty->assign('statusList',$statusList);
         
-        $arr=$this->input($page_url);
+        $arr=$this->input($page_url,6);
         $arr['userId']=$psUserId;
         $user_p['upUserId']=$psUserId;
         $u=$this->user_model->getInfo($user_p);
@@ -116,7 +116,7 @@ class Statistics extends My_Controller {
         $page_url=$this->root_path.'statistics/psCheckList/?';
         $group_list= $this->user_model->getGroupListByRole(4);
         $this->ci_smarty->assign('group_list',$group_list['list']);
-        $data=$this->input($page_url);
+        $data=$this->input($page_url,7);
 
         /*
         if($this->input->get('is_ext')){
@@ -157,7 +157,7 @@ class Statistics extends My_Controller {
         $group_list= $this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         
-        $arr=$this->input($page_url);
+        $arr=$this->input($page_url,3);
         
         $list=$this->Statistics_model->shootList($arr);
         
@@ -201,7 +201,7 @@ class Statistics extends My_Controller {
         
         $this->ci_smarty->assign('shootUserId',$shootUserId);
         
-        $arr=$this->input($page_url);
+        $arr=$this->input($page_url,3);
         $arr['userId']=$shootUserId;
         $user_p['upUserId']=$shootUserId;
         $u=$this->user_model->getInfo($user_p);
@@ -221,7 +221,7 @@ class Statistics extends My_Controller {
         $group_list= $this->user_model->getGroupListByRole(3);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         
-        $arr=$this->input($page_url);
+        $arr=$this->input($page_url,12);
         
         $list=$this->Statistics_model->shootCheckList($arr);
        
@@ -243,7 +243,7 @@ class Statistics extends My_Controller {
         $this->ci_smarty->assign('project_list',$project_list['data']);
         
         
-        $arr=$this->input($page_url);
+        $arr=$this->input($page_url,2);
         $list=$this->Statistics_model->getInputList($arr);
         $showpage= parent::page($page_url,10,$list['count']);
         $this->ci_smarty->assign('glist',$list['data']);
@@ -265,7 +265,7 @@ class Statistics extends My_Controller {
         $this->ci_smarty->assign('type_list',$type_list['data']);
         
         
-        $arr=$this->input($page_url);
+        $arr=$this->input($page_url,2);
         $arr['userId']=$inputUserId;
         $user_p['upUserId']=$inputUserId;
         $u=$this->user_model->getInfo($user_p);
@@ -294,7 +294,7 @@ class Statistics extends My_Controller {
         $this->ci_smarty->display('statistics/record_check_count.tpl');
     }
     
-    function input($page_url){
+    function input($page_url,$roleId=''){
 
         $arr['is_ext']='0';
         
@@ -332,6 +332,9 @@ class Statistics extends My_Controller {
         if($this->input->get('groupId')!=""||$this->input->get('userName')!=""){
             $user['groupId']=$this->input->get('groupId');
             $user['userName']=$this->input->get('userName');
+            if($roleId!=''){
+                $user['roleId']=$roleId;
+            }
             $str=$this->user_model->getUserIdsByFiled($user);
             $user_id_list=json_decode($str,true);
             $arr['userIds']=serialize($user_id_list);
@@ -341,7 +344,10 @@ class Statistics extends My_Controller {
             $page_url.="groupId=".$user['groupId']."&userName=".$user['username'];
         }
         else{
-            $str=$this->user_model->getUserIdsByFiled();
+            if($roleId!=''){
+                $user['roleId']=$roleId;
+            }
+            $str=$this->user_model->getUserIdsByFiled($user);
             $user_id_list=json_decode($str,true);
             $arr['userIds']=serialize($user_id_list);
         }
