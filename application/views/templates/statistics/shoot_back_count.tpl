@@ -36,6 +36,7 @@
                             <label style="width:20px;">-</label>
                             <input type="text" id="datetimepicker_end" value="{{$endTime}}" name="endTime"/>
                      </div>
+                      <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                     	<a href="{{$root_path}}statistics/extShootBack" class="query"><i class="icon iconfont">&#xf00ab;</i>导出</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>

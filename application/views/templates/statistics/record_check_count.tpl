@@ -31,6 +31,7 @@
                      <div class="cc_top_one" style="width:50%;">
                          <label>审核时间:</label>
                          <input type="text" class="datetimepicker" name="startTime" value="{{$startTime}}"/>
+                         <label style="width:20px;">-</label>
                          <input type="text" class="datetimepicker" name="endTime" value="{{$endTime}}"/>
                      </div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
