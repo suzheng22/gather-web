@@ -75,7 +75,7 @@ class Input_model extends MY_Model {
         $gtin['gtin']=$return['gtin'];
         $gtin['token']=$token;
         $goods=$this->goods_model->getGoodsByGtin($gtin);
-        if(  $return['goodsName']!=""){
+        if(  $return['goodsName']==""){
             $return['goodsName']=$goods['gName'];
         }
         $return['catName']=$goods['catgrory1'];
