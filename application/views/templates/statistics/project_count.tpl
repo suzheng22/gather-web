@@ -16,15 +16,18 @@
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}statistics/projectList">
                   <div class="cc_top_one last_show"><label>项目名称:</label>
-                          <select name="pId" class="select3">
-						  	<option value="">请选择</option>
-							{{foreach from=$project_list item=list}}
-								<option value="{{$list.pId}}">{{$list.pName}}</option>
-							{{/foreach}}
-						  </select>
-                      </div>
-
-                        	<div class="clearfix"></div>
+                        <div class="choice_count choice_box vocation">
+                            <dl class="select">
+                                <select name="pId" class="select3">
+                                <option value="">请选择</option>
+                                {{foreach from=$project_list item=list}}
+                                    <option value="{{$list.pId}}">{{$list.pName}}</option>
+                                {{/foreach}}
+                              </select>
+                            </dl>
+                        </div>
+                    </div
+                    <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                     	  <a href="{{$root_path}}statistics/extProject?p={{$p}}" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
