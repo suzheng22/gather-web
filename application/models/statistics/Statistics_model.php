@@ -190,7 +190,7 @@ class Statistics_model extends MY_Model {
         $url=$this->more_api_url."/lingmall/stat/projectdetail";
         $return=$this->curl($url,$data,'get');
         $list= json_decode($return,true);
-        print_r($list);exit;
+        return $list;
     }
 }
 ?>
