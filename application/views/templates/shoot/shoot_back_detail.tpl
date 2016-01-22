@@ -139,9 +139,6 @@
     </div>
 </div>
 {{include file='public/js.tpl'}}
-<!--时间控件-->
-<link rel="stylesheet" type="text/css" href="{{$resource_url}}js/time/jquery.datetimepicker.css"/>
-<script type="text/javascript" src="{{$resource_url}}js/time/jquery.datetimepicker.js"></script>
 <script type="text/javascript">
 $(function(){
     //分页表单提交
@@ -150,15 +147,6 @@ $(function(){
         $("#form").attr("action",action);
         $("#form").submit();
     });
-   
-    $('#datetimepicker_start,#datetimepicker_end').datetimepicker({
-    	
-    format:'Y-m-d',
-    formatDate:'Y-m-d',
-    timepicker:false,
-    lang:'ch'
-    });
-});
 function btn_empty(){
     $(".proName,.gtin").val("");
     $("#datetimepicker_start").val("");

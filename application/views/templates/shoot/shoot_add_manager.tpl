@@ -263,12 +263,6 @@ $(function(){
                 }
     });
 });
-$('#datetimepicker_start,#datetimepicker_end').datetimepicker({
-   format:'Y-m-d',
-    formatDate:'Y-m-d',
-    timepicker:false,
-    lang:'ch',//中文化
-});
 function get_gtin_detail(){
     $(".show_msg").html('');
     var $gtin=$("#gtin_1");
