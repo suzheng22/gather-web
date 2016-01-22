@@ -11,7 +11,7 @@
         #nav_info li span{width:150px;}
         #nav_info li em{width:140px;}
         .right_mid .cf p select{width:120px;}
-        .v_show{ padding-left:0px;}
+        .pic_box{ margin-left:-46px;}
 
 </style>
 </head>
@@ -105,8 +105,8 @@
         	<!--分类-->
         	<div class="cf">
                 <div class="cf_Category clearfix">
-                    <span><label for="sku_cf_01">单品</label><input type="radio" id="sku_cf_01" name="sku_cf_01"  {{if $p_info.isGroup==1}}checked="checked"{{/if}}></span>
-                    <span><label for="sku_cf_02">组合包装</label><input type="radio"  {{if $p_info.isGroup==2}} checked="checked" {{/if}}/ id="sku_cf_02" name="sku_cf_01"></span>
+                    <span style="width:100px"><label for="sku_cf_01">单品</label><input type="radio" id="sku_cf_01" name="sku_cf_01"  {{if $p_info.isGroup==1}}checked="checked"{{/if}}></span>
+                    <span style="width:100px"><label for="sku_cf_02">组合包装</label><input type="radio"  {{if $p_info.isGroup==2}} checked="checked" {{/if}}/ id="sku_cf_02" name="sku_cf_01"></span>
                 </div>
                 {{if $p_info.isGroup==2}}
                 <div  id="multiple_sku">
