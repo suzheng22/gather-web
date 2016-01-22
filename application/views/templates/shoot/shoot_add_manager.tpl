@@ -41,23 +41,24 @@
                             </dl>
                         </div>
                     </div>
-                    <div class="cc_top_one" style="width:50%">
-                          <label>新增时间:</label>
-                         <input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/>
-                         <label style="width:20px;">-</label>
-                         <input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/>
-                        </div>
                     <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box vocation">
                                 <dl class="select">
                                     <select name="status" class="select3">
-                                   		<option value="">全部</option>
+                                        <option value="">全部</option>
                                         <option value="1" {{if $status==1}}selected="selected"{{/if}}>未处理</option>
                                         <option value="2" {{if $status==2}}selected="selected"{{/if}}>已处理</option>
                                    </select>
                                 </dl>
                             </div>
                         </div>
+                    <div class="cc_top_one" style="width:50%">
+                          <label>新增时间:</label>
+                         <input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/>
+                         <label style="width:20px;">-</label>
+                         <input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/>
+                        </div>
+                    
                     <div class="clearfix"></div> 
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                     	<a href="{{$root_path}}shoot/shootAddManager?is_ext=1" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
@@ -193,13 +194,7 @@ $(function(){
         });
     };
     $("#gtin_1").on("postpaste", get_gtin_detail).pasteEvents();
-	//左侧菜单显示
-    var url = window.location;
-    $('.menu_shoot_manager dd a').filter(function (){
-        return this.href == url || url.href.indexOf(this.href) == 0;
-    }).parents('dd').addClass('active').siblings().removeClass('active');
-    $(".leftsidebar_box .menu_shoot_manager dd").show();
-	
+
 	//用户列表
      $("#newuser_pop").pop({
         oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
@@ -269,15 +264,10 @@ $(function(){
     });
 });
 $('#datetimepicker_start,#datetimepicker_end').datetimepicker({
-    onGenerate:function( ct ){
-        $(this).find('.xdsoft_date')
-                .toggleClass('xdsoft_disabled');
-    },
-    format:'Y-m-d',
+   format:'Y-m-d',
     formatDate:'Y-m-d',
-    minDate:'-1970-01-2',
-    maxDate:'+1970-01-2',
-    timepicker:false
+    timepicker:false,
+    lang:'ch',//中文化
 });
 function get_gtin_detail(){
     $(".show_msg").html('');

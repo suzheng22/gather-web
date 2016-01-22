@@ -154,22 +154,13 @@ $(function(){
         $("#form").attr("action",action);
         $("#form").submit();
     });
-	//左侧菜单显示
-    var url = window.location;
-    $('.menu_shoot_manager dd a').filter(function (){
-        return this.href == url || url.href.indexOf(this.href) == 0;
-    }).parents('dd').addClass('active').siblings().removeClass('active');
-    $(".leftsidebar_box .menu_shoot_manager dd").show();
+
     $('#datetimepicker_start,#datetimepicker_end').datetimepicker({
-        onGenerate:function( ct ){
-            $(this).find('.xdsoft_date')
-                    .toggleClass('xdsoft_disabled');
-        },
-        format:'Y-m-d',
-        formatDate:'Y-m-d',
-        minDate:'-1970-01-2',
-        maxDate:'+1970-01-2',
-        timepicker:false
+        
+    format:'Y-m-d',
+    formatDate:'Y-m-d',
+    timepicker:false,
+    lang:'ch',//中文化
     });
 
 });
