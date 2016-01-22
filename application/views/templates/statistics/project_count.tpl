@@ -60,7 +60,7 @@
                         <td>{{$list.inputUploadCount}}</td>
                         <td>{{$list.inputPassCount}}</td>
                         <td>
-                        	<a href="javascript:;">导出详情</a>
+                        	<a href="{{$root_path}}statistics/extProjectDetail/{{$list.pId}}">导出详情</a>
                         </td>
                       </tr>
 						{{/foreach}}

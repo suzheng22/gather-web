@@ -89,6 +89,7 @@ class Statistics extends My_Controller {
         
         
         $list=$this->Statistics_model->getProjectList($arr);
+        //print_r($list);exit;
         $showpage= parent::page($page_url,10,$list['count']);
         $this->ci_smarty->assign('plist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
@@ -574,5 +575,41 @@ class Statistics extends My_Controller {
         $filename = date('Ymd').'修图审核统计.csv'; //设置文件名
         $this->export_csv($filename,$str); //导出
         exit;
+	}
+	
+	function extProjectDetail($pId){
+	    $list=$this->Statistics_model->getProjectDetail($pId);
+	    $str = "条码,条码名称,包装,是否拍照,是否修图,是否录入\n";
+	    $str = iconv('utf-8','gb2312',$str);
+	    foreach ($list as $k=>$v){
+	        $gtin = $v['gtin'];
+	        $gName = iconv('utf-8','gb2312',$v['gName']);
+	        $packet = $v['packet'];
+	        if($v['shoot']>0){
+	           $shoot = 'Y';
+	        }
+	        else{
+	            $shoot = 'N';
+	        }
+	        
+	        if($v['retouch']>0){
+	            $retouch = 'Y';
+	        }
+	        else{
+	            $retouch = 'N';
+	        }
+	        
+	        if($v['input']>0){
+	            $input = 'Y';
+	        }
+	        else{
+	            $input = 'N';
+	        }
+	        
+	        $str .= $gtin.",".$gName.",".$packet.",".$shoot.",".$retouch.",".$input."\n";
+	    }
+	    $filename = date('Ymd').'项目详细统计.csv'; //设置文件名
+	    $this->export_csv($filename,$str); //导出
+	    exit;
 	}
 }
