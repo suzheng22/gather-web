@@ -11,7 +11,7 @@
         #nav_info li span{width:150px;}
         #nav_info li em{width:140px;}
         .right_mid .cf p select{width:120px;}
-        .v_show{ padding-left:0px;}
+        .pic_box{ margin-left:-46px;}
 
 </style>
 </head>
