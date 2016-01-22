@@ -94,7 +94,7 @@ class Project_model extends MY_Model {
         if($data['page']==""){
             $data['page']=1;
         }
-        $url=$this->user_api_url."/user/getProjectByfiters?";
+        $url=$this->user_api_url."/user/getProjectByfiters";
         unset($data['userId']);
         $return =$this->curl($url,$data,'get');
         $datas=json_decode($return,true);

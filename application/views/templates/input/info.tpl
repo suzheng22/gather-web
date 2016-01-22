@@ -25,8 +25,13 @@
 <div class="j-top-warp">
     <ul class="clearfix" id="nav_info">
         <li class="black"><em>商品条形码:</em><span >{{$p_info.gtin}}</span></li>
+        {{if $p_info.orderId==""}}
         <li class="black"><em>可录入商品总数:</em><span>{{if $p_info.inputGoodsCount}}{{$p_info.inputGoodsCount}}{{else}}0{{/if}}</span></li>
         <li class="black"><em>今录入商品总数:</em><span>{{if $p_info.inputGoodsCountToday}}{{$p_info.inputGoodsCountToday}}{{else}}0{{/if}}</span></li>
+        {{else}}
+        <li class="black"><em>可审核商品总数:</em><span>{{if $p_info.inputGoodsCount}}{{$p_info.inputGoodsCount}}{{else}}0{{/if}}</span></li>
+        <li class="black"><em>今审核商品总数:</em><span>{{if $p_info.orderGoodsToday}}{{$p_info.orderGoodsToday}}{{else}}0{{/if}}</span></li>
+        {{/if}}
     </ul>
     {{if $p_info.status==4}}
     <ul>
@@ -345,9 +350,10 @@
                 type:'post',
                 success:function(e){
                     alert(e.msg);
-                    window.location.reload();
-                    if(e.msg){
-
+                    if(confirm("是否进入下一个审核")){
+                        window.location.replace("{{$root_path}}input/inputAudit") ;
+                    }else{
+                        $(".zz_conforim").hide();
                     }
                 }
             })
