@@ -77,7 +77,7 @@ class Project_model extends MY_Model {
                     $user=$this->getUserInfo($data);
                     $datas[$i]['createName']=$user['trueName'];
                 }
-                else if($key==='upUserId'){
+                else if($key==='updateUserId'){
                     $data['upUserId']=$val;
                     $user=$this->getUserInfo($data);
                     $datas[$i]['updateName']=$user['trueName'];
