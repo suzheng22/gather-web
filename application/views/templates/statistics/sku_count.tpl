@@ -15,8 +15,8 @@
             	<h3>单品统计</h3>
 				<form action="{{$root_path}}statistics/goodsList">
                 <div class="rose_top main_rignt_top clearfix">
-                	<div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin"  value="{{$gtin}}"/></div>
-                    <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}"/></div>
+                	<div class="cc_top_one"><label>商品条形码:</label><input type="text" name="gtin"  value="{{$gtin}}" class="shop_barcode"/></div>
+                    <div class="cc_top_one"><label>商品名称:</label><input type="text" name="gName" value="{{$gName}}"class="shop_name"/></div>
                     <div class="cc_top_one last_show"><label>商品分类:</label>
                             <div class="choice_count choice_box vocation">            	 			
                                 <dl class="select">
@@ -33,7 +33,7 @@
                     <div class="cc_top_two" style="margin-left:12px; display:inline;">
                     	<a href="{{$root_path}}statistics/extGoods?p={{$p}}" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询" /></span>
-                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <a href="javascript:;" onclick="btn_emptys()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
                    	<div class="clearfix"></div>
@@ -95,12 +95,6 @@
 {{include file='public/js.tpl'}}
 <script type="text/javascript">
 $(function(){
-	
-	//select 表单美化
-	$(".select3").uedSelect({
-		width : 100
-	});
-	
 	//用户列表
      $("#newuser_pop").pop({
         oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
@@ -114,6 +108,14 @@ $(function(){
             
         }
     });
+    //清空
+    function btn_empty(){
+        $(".shop_barcode").val("");
+        $(".cc_top_one select").val("");
+
+        $(".cc_top_one select,.select3").val("");
+        $(".uew-select-text").html('全部');
+    }
 });	
 </script>	
 
