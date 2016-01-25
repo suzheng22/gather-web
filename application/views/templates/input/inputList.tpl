@@ -30,12 +30,6 @@
                                 </dl>
                             </div>
                         </div>
-                        <div class="cc_top_one" style="width:50%">
-                            <label>审核时间:</label>
-                            <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
-                            <label style="width:20px;">-</label>
-                            <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
-                        </div>
                         <div class="cc_top_one last_show"><label>状态:</label>
                             <div class="choice_count choice_box vocation">
                                 <dl class="select">
@@ -49,6 +43,13 @@
                                 </dl>
                             </div>
                         </div>
+                        <div class="cc_top_one" style="width:50%">
+                            <label>审核时间:</label>
+                            <input type="text" id="datetimepicker_start" name="sTime" value="{{$sTime}}"/>
+                            <label style="width:20px;">-</label>
+                            <input type="text" id="datetimepicker_end" name="eTime" value="{{$eTime}}"/>
+                        </div>
+                        
                         <div class="clearfix"></div>
                         <div class="cc_top_two" style="margin-left:12px; display:inline;">
                             <a href="javascript:void(0);" class="query"  onclick="inputAdd()"><i class="icon iconfont">&#xf0220;</i>录入审核</a>

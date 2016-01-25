@@ -74,7 +74,7 @@
                                 </dl>
                             </div>
                         </div>
-							<div class="cc_top_one" style="width:40%"><label>上传开始时间:</label>
+							<div class="cc_top_one" style="width:40%"><label>上传时间:</label>
 								<input type="text" id="datetimepicker_start" name="s_time" value="{{$s_time}}"/> <label style="width:20px;">-</label>
 								<input type="text" id="datetimepicker_end" name="e_time" value="{{$e_time}}"/></div>
 							<div class="clearfix"></div>
