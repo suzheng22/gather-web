@@ -19,8 +19,7 @@ class MY_Model extends CI_Model
         }else{
             $this->more_api_url=MOREAPI;
         }
-
-         $this->pic_path=PICPATH;
+        $this->image_url=IMGURL;
     }
     
     function curl($url,$data,$m='post'){

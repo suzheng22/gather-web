@@ -89,3 +89,4 @@ define('MOREAPI', 'http://192.168.1.241:8005');
 define('CONTROL', 'http://apics.greensea.com.cn/api.php');
 define('RESOURCE', 'http://192.168.1.241:8004/collect_web/');
 define('ROOTPATH', 'http://'.$_SERVER['HTTP_HOST'].'/');
+define("IMGURL","http://139.196.36.81:8400");

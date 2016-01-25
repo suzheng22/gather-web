@@ -12,7 +12,6 @@ class MY_Controller extends CI_Controller
         $this->load->library('LvlangMemcache');
         $this->load->library('PHPExcel');
         $this->load->library('PHPExcel/IOFactory');
-        $this->pic_path=PICPATH;
         $c=$this->uri->segment(1, 0);
         $m=$this->uri->segment(2, 0);
         $acction=$c.'/'.$m;
@@ -29,7 +28,7 @@ class MY_Controller extends CI_Controller
         }
 
         $this->root_path=ROOTPATH;
-
+        $this->image_url=IMGURL;
         $resource_url=RESOURCE;
         $this->ci_smarty->assign('pic_path','http://7xny7g.com2.z0.glb.qiniucdn.com/');
         $this->ci_smarty->assign('root_path', $this->root_path);
