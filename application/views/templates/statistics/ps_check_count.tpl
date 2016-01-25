@@ -15,17 +15,10 @@
             	<h3>修图审核统计</h3>
                 <div class="rose_top main_rignt_top clearfix">
 				<form action="{{$root_path}}statistics/psCheckList">
-                    <div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" value="{{$userName}}"/></div>
+                    <div class="cc_top_one"><label>用户名:</label><input type="text" name="userName" value="{{$userName}}" class="user_name" /></div>
                     <div class="cc_top_one last_show"><label>用户组:</label>
                     	<div class="choice_count choice_box">
 							<dl class="select">
-									<!--<dt>全部</dt>
-									<dd>
-										<ul>
-											<li><a href="#">001</a></li>
-											<li><a href="#">002</a></li>
-										</ul>
-									</dd>-->
                                    <select class="select3" name="groupId">
                                    		<option value="">全部</option>
                                        {{foreach from=$group_list item=list}}
@@ -44,7 +37,7 @@
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
                     	<a href="javascript:;" class="query"><i class="icon iconfont">&#xf0220;</i>导出</a>
                         <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
-                        <a href="javascript:;"><i class="iconfont">&#xf014a;</i>清空</a>
+                        <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                     </div>
 					</form>
                    	<div class="clearfix"></div>
@@ -91,6 +84,12 @@ $(function(){
         }
     });
 });
+function btn_empty() {
+      $(".user_name").val("");
+      $("#datetimepicker_start").val("");
+      $("#datetimepicker_end").val("");
+      $(".uew-select-text").html('全部');
+  }
 </script>
 
 </body>
