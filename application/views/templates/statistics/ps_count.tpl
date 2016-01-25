@@ -43,9 +43,9 @@
                     <div class="clearfix"></div>
                      <div class="cc_top_one" style="width:50%;">
                          <label>提交时间:</label>
-                         <input type="text" class="datetimepicker" value="{{$startTime}}" name="startTime"/>
+                         <input type="text" class="datetimepicker" id="datetimepicker_start" value="{{$startTime}}" name="startTime"/>
                          <label style="width:20px;">-</label>
-                         <input type="text" class="datetimepicker" value="{{$endTime}}" name="endTime"/>
+                         <input type="text" class="datetimepicker" id="datetimepicker_end" value="{{$endTime}}" name="endTime"/>
                      </div>
                      <div class="clearfix"></div>
                     <div class="cc_top_two" style="margin-left:14px; display:inline;">
