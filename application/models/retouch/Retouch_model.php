@@ -87,20 +87,20 @@ class Retouch_model extends MY_Model
     /*获取修图*/
     function getAllImage($data){
         //先获取token
-        $url_token="http://139.196.36.81:8600/lingmall/service/token?type=2&bucket=test";
+        $url_token="http://139.196.36.81:8400/lingmall/service/token?type=2&bucket=test";
         $token=$this->curl($url_token,'','get');
         $token=json_decode($token,true);
-        $url="http://139.196.36.81:8600/lingmall/pictures?token={$token['token']}&xType=2&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}";
+        $url="http://139.196.36.81:8400/lingmall/pictures?token={$token['token']}&xType=2&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;
     }
     //原图，png
     function getAllImages($data){
-        $url_token="http://139.196.36.81:8600/lingmall/service/token?type=2&bucket=test";
+        $url_token="http://139.196.36.81:8400/lingmall/service/token?type=2&bucket=test";
         $token=$this->curl($url_token,'','get');
         $token=json_decode($token,true);
-        $url="http://139.196.36.81:8600/lingmall/pictures?token={$token['token']}&xType={$data['id']}&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}";
+        $url="http://139.196.36.81:8400/lingmall/pictures?token={$token['token']}&xType={$data['id']}&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;

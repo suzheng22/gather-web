@@ -70,6 +70,7 @@ class Input_model extends MY_Model {
         $token=$this->user_info['token'];
         $url=$this->more_api_url."/lingmall/input/{$data['inputId']}?token={$token}";
         $return=$this->curl($url,'','get');
+
         $return=json_decode($return,true);
        // var_dump($return);
         $gtin['gtin']=$return['gtin'];
@@ -98,11 +99,11 @@ class Input_model extends MY_Model {
     }
     //获取录入图片的接口
     function getAllImage($data){
-        $url_token="http://139.196.36.81:8600/lingmall/service/token?type=2&bucket=test";
+        $url_token="http://139.196.36.81:8400/lingmall/service/token?type=2&bucket=test";
         $token=$this->curl($url_token,'','get');
         $token=json_decode($token,true);
         $xPack=$data['packet'];
-        $url="http://139.196.36.81:8600/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xPack=$xPack";
+        $url="http://139.196.36.81:8400/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xPack=$xPack";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;
@@ -174,6 +175,7 @@ class Input_model extends MY_Model {
         $token=$this->user_info['token'];
         $url=$this->more_api_url."/lingmall/input/sendAudit?token={$token}";
         $return=$this->curl($url,$data,'post');
+
         //根据inputId获取录入信息
         $return=json_decode($return,true);
         $input['inputId']=$return['inputId'];
@@ -209,7 +211,6 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,'','get');
         $return=json_decode($return,true);
         $return['orderId']=$data['orderId'];
-       // var_dump($return);
         return $return;
     }
 
