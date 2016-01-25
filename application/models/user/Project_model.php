@@ -53,7 +53,6 @@ class Project_model extends MY_Model {
         $data['token']=urldecode($data['token']);
         $return =$this->curl($url,$data,'get');
         $datas=json_decode($return,true);
-        var_dump($datas);
         $total=$datas['count'];
         $datas=$datas['data'];
         $count=count($datas);
