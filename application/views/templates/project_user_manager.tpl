@@ -87,7 +87,7 @@
                             <td>{{$list.creatTime|date_format:"Y-m-d H:i:s"}}</td>
                             <td>{{$list.createName}}
                                 </td>
-                            <td>{{$list.updateTime|date_format:"Y-m-d H:i:s"}}</td>
+                            <td>{{if $list.updateTime!="0"}}{{$list.updateTime|date_format:"Y-m-d H:i:s"}}{{/if}}</td>
                             <td>{{$list.updateName}}</td>
                             <td>
                                 <a href="javascript:;" onclick="update_status({{$list.pId}},{{$list.userStatus}},{{$list.userId}})" class="status_{{$list.pId}}">{{if $list.userStatus==1}}冻结{{else}}解冻{{/if}}</a>

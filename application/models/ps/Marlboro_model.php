@@ -94,8 +94,9 @@ class Marlboro_model extends MY_Model {
         $token=json_decode($token,true);
         $xBatch=$data['batchNo'];
         $xPack=$data['packet'];
-        $url=$this->image_url."lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xBatch=$xBatch&xPack=$xPack";
+        $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xBatch=$xBatch&xPack=$xPack";
         $return=$this->curl($url,'','get');
+        var_dump($return);
         $list=json_decode($return,true);
         return $list;
     }

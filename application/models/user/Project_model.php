@@ -53,6 +53,7 @@ class Project_model extends MY_Model {
         $data['token']=urldecode($data['token']);
         $return =$this->curl($url,$data,'get');
         $datas=json_decode($return,true);
+        var_dump($datas);
         $total=$datas['count'];
         $datas=$datas['data'];
         $count=count($datas);
@@ -77,7 +78,7 @@ class Project_model extends MY_Model {
                     $user=$this->getUserInfo($data);
                     $datas[$i]['createName']=$user['trueName'];
                 }
-                else if($key==='upUserId'){
+                else if($key==='updateUserId'){
                     $data['upUserId']=$val;
                     $user=$this->getUserInfo($data);
                     $datas[$i]['updateName']=$user['trueName'];
