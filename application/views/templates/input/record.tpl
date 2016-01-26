@@ -553,7 +553,7 @@
 	</div> 
 </div>
 <div class="newuser_pop" id="ps_newuser_pop">
-    <div class="tit clearfix"><h4>{{$p_info.gtin}}条形码-审核</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="tit clearfix"><h4>{{$p_info.gtin}}条形码-反馈</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
     <div class="content">
         <div class="login_main">
             <div class="login_form">

@@ -29,7 +29,7 @@
         <li class="black"><em>可录入商品总数:</em><span>{{if $p_info.inputGoodsCount}}{{$p_info.inputGoodsCount}}{{else}}0{{/if}}</span></li>
         <li class="black"><em>今录入商品总数:</em><span>{{if $p_info.inputGoodsCountToday}}{{$p_info.inputGoodsCountToday}}{{else}}0{{/if}}</span></li>
         {{else}}
-        <li class="black"><em>可审核商品总数:</em><span>{{if $p_info.inputGoodsCount}}{{$p_info.inputGoodsCount}}{{else}}0{{/if}}</span></li>
+        <li class="black"><em>可审核商品总数:</em><span>{{if $p_info.orderGoodsCount}}{{$p_info.orderGoodsCount}}{{else}}0{{/if}}</span></li>
         <li class="black"><em>今审核商品总数:</em><span>{{if $p_info.orderGoodsToday}}{{$p_info.orderGoodsToday}}{{else}}0{{/if}}</span></li>
         {{/if}}
     </ul>

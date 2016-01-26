@@ -36,9 +36,9 @@ class User_model extends MY_Model {
     }
     
     function getGroupList($data){
-        $token=$data['token'];
-        $url=$this->user_api_url."/user/getUserGroupList?token=".$token;
-        $return=$this->curl($url,$data);
+       $data['token']=urldecode($data['token']);
+        $url=$this->user_api_url."/user/getUserGroupList";
+        $return=$this->curl($url,$data,'get');
         return $return;
     }
     
