@@ -228,7 +228,7 @@ $(function(){
                         dataType:'json',
                         type:'POST',
                         success:function(data){
-                            //alert(data);
+                            console.log(data.pId1);
                             localStorage.setItem("id",id);
                             $("#gtin_2").val(data['gtin']);
                             $("#proName_2").val(data['gName']);
@@ -305,7 +305,9 @@ function get_gtin_detail(){
                         option1+="<option value=\'"+pId+"\'>"+pName+"</option>";
                     }
                 }
+
                 $("#project_1").html(option1);
+
                 $("#pack_1").html( option);
             }
         }
