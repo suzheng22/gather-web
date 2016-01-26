@@ -72,7 +72,7 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,'','get');
 
         $return=json_decode($return,true);
-       // var_dump($return);
+      //  var_dump($return);
         $gtin['gtin']=$return['gtin'];
         $gtin['token']=$token;
         $goods=$this->goods_model->getGoodsByGtin($gtin);
@@ -103,7 +103,7 @@ class Input_model extends MY_Model {
         $token=$this->curl($url_token,'','get');
         $token=json_decode($token,true);
         $xPack=$data['packet'];
-        $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xPack=$xPack";
+        $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xPack=$xPack&xProject={$data['pId']}";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;
@@ -211,6 +211,7 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,'','get');
         $return=json_decode($return,true);
         $return['orderId']=$data['orderId'];
+        var_dump($return['orderGoodsCount']);
         return $return;
     }
 

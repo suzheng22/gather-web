@@ -94,7 +94,8 @@ class Marlboro_model extends MY_Model {
         $token=json_decode($token,true);
         $xBatch=$data['batchNo'];
         $xPack=$data['packet'];
-        $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xBatch=$xBatch&xPack=$xPack";
+        $xProject=$data['pId'];
+        $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xBatch={$xBatch}&xPack={$xPack}&xProject={$xProject}";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;
@@ -217,6 +218,7 @@ class Marlboro_model extends MY_Model {
         $data1=json_decode($data1,true);
         $data1['packet1']=$datas['packet'];
         $data1['pId1']=$datas['pId'];
+        //获取项目名称
         $data1['memo']=$datas['memo'];
         $data1['gName']=$returns['data']['gName'];
         return $data1;
@@ -240,7 +242,7 @@ class Marlboro_model extends MY_Model {
         for($i=0;$i<$total;$i++){
             foreach( $datas[$i] as $key=>$val){
                 $datas[$i]['lId']=($i+1);
-                if($key==='userId'||$key==='retouchId'){
+                if($key==='userId' && $val!=""||$key==='retouchId' && $val!=""){
                     $data['upUserId']=$val;
                     $url=$this->user_api_url."/user/info?token=".$token;
                     $return=$this->curl($url,$data);
@@ -265,6 +267,7 @@ class Marlboro_model extends MY_Model {
                 }
             }
         }
+
         $shootBack['total']=$count;
         $shootBack['data']=$datas;
         return $shootBack;

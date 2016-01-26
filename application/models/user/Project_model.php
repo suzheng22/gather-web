@@ -48,7 +48,7 @@ class Project_model extends MY_Model {
     }
     //根据条件获取项目用户
     function getProjectUserByField($data){
-        unset($data['upUserId']);
+        unset($data['userId']);
         $url=$this->user_api_url."/user/getProjectUserByFiled";
         $data['token']=urldecode($data['token']);
         $return =$this->curl($url,$data,'get');
