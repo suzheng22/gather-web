@@ -41,17 +41,17 @@ class Input extends My_Controller {
     function index($p_status){
         $data=$this->input->get();
         $data['token']=$this->user_info['token'];
-        $list=$this->input_model->getAllImage($data);
-        //获取图片
-        $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
         //根据orderId获取相关信息
         if($data['orderId']!=""){
             $inputInfo=$this->input_model->getOrderInfo($data);
         }else{
             $inputInfo=$this->input_model->getInputInfo($data);
         }
-        //var_dump($inputInfo);
+        $data['pId']=$inputInfo['pId'];
+        $list=$this->input_model->getAllImage($data);
+        //获取图片
+        $this->ci_smarty->assign('plist',$list);
+        $this->ci_smarty->assign('picList',$list[3]);
         $inputInfo['p_status']=$p_status;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
@@ -81,6 +81,8 @@ class Input extends My_Controller {
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
         $data['gtin']=$inputInfo['gtin'];
         $data['packet']=$inputInfo['packet'];
+        $data['pId']=$inputInfo['pId'];
+
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
@@ -156,6 +158,7 @@ class Input extends My_Controller {
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
         $data['gtin']=$inputInfo['gtin'];
         $data['packet']=$inputInfo['packet'];
+        $data['pId']=$inputInfo['inputId'];
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
@@ -164,7 +167,7 @@ class Input extends My_Controller {
     }
     //录入反馈
     function feed(){
-        $data['feedBackInfo']=$this->input->post("feedbackInfo");
+        $data['feedbackInfo']=$this->input->post("feedbackInfo");
         $data['inputId']=$this->input->post('inputId');
         $return=$this->input_model->feed($data);
         echo json_encode($return);
@@ -179,14 +182,13 @@ class Input extends My_Controller {
     function inputChange(){
         $data=$this->input->get();
         $data['token']=$this->user_info['token'];
-        //   $data['inputId']=$data['inputId'];
+        //根据orderId获取相关信息
+        $inputInfo=$this->input_model->getInputInfo($data);
+        $data['pId']=$inputInfo['pId'];
         $list=$this->input_model->getAllImage($data);
-        //  var_dump($list);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('picList',$list[3]);
-        //根据orderId获取相关信息
-        $inputInfo=$this->input_model->getInputInfo($data);
         // var_dump($inputInfo);
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
@@ -196,14 +198,6 @@ class Input extends My_Controller {
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->display('input/record.tpl');
     }
-  function sac(){
-      $a='[["a0":["b0":["c0":"含量"],"b1":["c0":"weq","c1":"ewqe"],"b2":["c0":"eqwe","c1":"eqwe"],"b3":["c0":"eqwe","c1":"weqe"],"b4":["c0":"eqwe","c1":"eqwe"],"b5":["c0":"qwee","c1":"ewqe"]]]';
-      $a=str_replace("[","{",$a);
-      $a=str_replace("]","}",$a);
-      echo $a;
-      $a='[{"a0":{"b0":{"c0":"含量"},"b1":{"c0":"weq","c1":"ewqe"},"b2":{"c0":"eqwe","c1":"eqwe"},"b3":{"c0":"eqwe","c1":"weqe"},"b4":{"c0":"eqwe","c1":"eqwe"},"b5":{"c0":"qwee","c1":"ewqe"}}},{"a1":{"b0":{"c0":"含量"},"b1":{"c0":"weq","c1":"ewqe"},"b2":{"c0":"eqwe","c1":"eqwe"},"b3":{"c0":"eqwe","c1":"weqe"},"b4":{"c0":"eqwe","c1":"eqwe"},"b5":{"c0":"qwee","c1":"ewqe"}}}]';
-      var_dump(json_decode($a,true));
 
-  }
 
 }

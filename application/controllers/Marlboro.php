@@ -16,9 +16,10 @@ class Marlboro extends My_Controller {
         $arr=$this->input->get();
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
-        //获取图片
-        $list=$this->marlboro_model->getAllImage($arr);
         $product_info=$this->marlboro_model->getMarlboroInfo($arr);
+        //获取图片
+        $arr['pId']=$product_info['pId'];
+        $list=$this->marlboro_model->getAllImage($arr);
         $product_info['userId']=$this->user_info['userId'];
         $product_info['token']=$this->user_info['token'];
 

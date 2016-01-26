@@ -100,6 +100,7 @@ class Retouch extends My_Controller
         $product_info=$this->retouch->getRetouchPic($arr);
         //png图
         $arr['batchNo']=$product_info['retouchId'];
+        $arr['pId']=$product_info['pId'];
         $arr['id']=3;
         $list3=$this->retouch->getAllImages($arr);
         //获取修图图片

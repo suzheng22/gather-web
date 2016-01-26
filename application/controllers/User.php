@@ -135,6 +135,11 @@ class User extends My_Controller {
                 $page_url.='roleId='.$data['roleId']."&";
                 $this->ci_smarty->assign('roleId',$data['roleId']);
             }
+            if($data['page']==""){
+               $data['currentPage'] =1;
+            }else{
+                $data['currentPage'] =$data['page'];
+            }
             $data['userId']=$this->user_info['userId'];
             $data['token']=$this->user_info['token'];
             
