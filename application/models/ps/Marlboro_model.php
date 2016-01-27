@@ -292,6 +292,12 @@ class Marlboro_model extends MY_Model {
         $returns=$this->curl($urls,$gtin);
         $datas=json_decode($returns,true);
         $list['gName']=$datas['data']['gName'];
+        $catId=$datas['data']['catgrory1'];
+        if($catId!=""){
+            $re=$this->goods_model->getInfo($catId);
+            $list['catName']=$re['name'];
+        }
+        //将商品分类的分类
         $list=array_merge($lis,$list);
         return $list;
     }

@@ -12,11 +12,11 @@
 <!--------------------------- 拍摄详情------------------------------------>
 
 <div class="record_info_warp" style="margin-top:0px;">
-    <h2>{{$p_info.gtin}}-拍摄详情</h2>
+    <h2>{{$p_info.gtin}}-反馈详情</h2>
     <ul class="clearfix" id="nav_info">
         <li class="black"><em>条形码:</em><span>{{$p_info.gtin}}</span></li>
         <li class="black"><em>商品名称:</em><span>{{$p_info.gName}}</span></li>
-        <li class="black"><em>商品类型:</em><span>{{$p_info.goodsCatgrory}}</span></li>
+        <li class="black"><em>商品分类:</em><span>{{$p_info.catName}}</span></li>
         <!-- 拍摄类型 -->
         <li class="black"><em>反馈路径:</em><span>{{if $p_info.feedPath ==1}}修图反馈{{else}}录入反馈{{/if}}</span></li>
         <!-- 项目 -->
@@ -165,7 +165,7 @@
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm">{{$p_info.gName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.goodsCatgrory}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm">{{$p_info.catName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memo"></textarea></div>
                 <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="check(2)">确认</a>
             </div>
@@ -181,7 +181,7 @@
             <div class="login_form">
                 <div class="clearfix one"><label for="user_name">商品条形码:</label><span class="zhmm gtin1">{{$p_info.gtin}}</span></div>
                 <div class="clearfix one"><label for="user_name">商品名称:</label><span class="zhmm proName1">{{$p_info.gName}}</span></div>
-                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm typeName1">{{$p_info.goodsCatgrory}}</span></div>
+                <div class="clearfix one"><label for="user_name">商品类型:</label><span class="zhmm typeName1">{{$p_info.catName}}</span></div>
                 <div class="clearfix one"><label for="user_name">备注:</label><textarea id="memos"></textarea></div>
                 <a href="javascript:;"  class="confirm_btn" onclick="add_miss_figure(2)">确认</a>
             </div>
@@ -197,19 +197,13 @@
 <script type="text/javascript" src="{{$resource_url}}js/rotate/jquery.iviewer.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/popup/popup.js"></script>
 <script type="text/javascript" src="{{$resource_url}}js/record.js"></script>
-<script type="text/javascript" src="{{$resource_url}}js/defined.js"></script>
+
 <!--dom预加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.fadeloader.js"></script>
 <!--图片延时加载-->
 <script type="text/javascript" src="{{$resource_url}}js/lazyload/jquery.lazyload.js"></script>
 <script type="text/javascript">
     $(function(){
-//分页表单提交
-        $("#submits").on("click",function(){
-            var action=$("#form").attr("action")+"&page="+$("input[name='page']").val();
-            $("#form").attr("action",action);
-            $("#form").submit();
-        });
         //预加载
         $('body').fadeloader({
             mode: 'class',
@@ -271,8 +265,11 @@
         //  return false;
         $.post("{{$root_path}}marlboro/shootBackPass",data,
                 function(data){
-                    alert(data);
-
+                 if(status==1){
+                     alert("审核通过成功");
+                 }else{
+                     alert("驳回");
+                 }
                 },"text");
     }
     function add_miss_figure(){
@@ -289,11 +286,11 @@
             dataType:'json',
             data:data,
             success:function(e){
-                if(e['msgCode]']!="2000"){
+                    if(e['msgCode]']!="2000"){
                     var data={"orderId":{{$p_info.fId}},"status":2,};
                     $.post("{{$root_path}}marlboro/shootBackPass",data,
                             function(data){
-                                alert(e);
+                                //alert(e);
                                 alert("审核通过成功");
                             },"text");
                 }else{

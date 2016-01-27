@@ -221,11 +221,13 @@ class Marlboro extends My_Controller {
         $this->load->model('sdk/product_model','product');
         $this->load->model('user/project_model','project');
         $arr=$this->input->get();
+
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
+        $product_info=$this->marlboro_model->getFeedInfo($arr);
+        $arr['pId']=$product_info['pId'];
         //获取图片
         $list=$this->marlboro_model->getAllImage($arr);
-        $product_info=$this->marlboro_model->getFeedInfo($arr);
         $product_info['userId']=$this->user_info['userId'];
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
