@@ -127,7 +127,6 @@ class Retouch extends My_Controller
                 }
             }
         }
-        var_dump($list2);
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
