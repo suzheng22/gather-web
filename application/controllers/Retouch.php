@@ -101,7 +101,7 @@ class Retouch extends My_Controller
         $arr['pId']=$product_info['pId'];
         //原图
         $list2=$this->retouch->getAllImages($arr);
-        $arr['id']=3;
+        $arr['id']=2;
         $list3=$this->retouch->getAllImages($arr);
         //获取修图图片
         $list=$this->retouch->getAllImage($arr);
@@ -127,6 +127,7 @@ class Retouch extends My_Controller
                 }
             }
         }
+        //var_dump($list2);
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
