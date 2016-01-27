@@ -95,12 +95,12 @@ class Retouch extends My_Controller
         $arr['userId']=$this->user_info['userId'];
         $arr['token']=$this->user_info['token'];
         $arr['id']=1;
-        //原图
-        $list2=$this->retouch->getAllImages($arr);
         $product_info=$this->retouch->getRetouchPic($arr);
         //png图
         $arr['batchNo']=$product_info['retouchId'];
         $arr['pId']=$product_info['pId'];
+        //原图
+        $list2=$this->retouch->getAllImages($arr);
         $arr['id']=3;
         $list3=$this->retouch->getAllImages($arr);
         //获取修图图片
@@ -109,7 +109,7 @@ class Retouch extends My_Controller
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
                     foreach($list[$key] as $k1=>$v1){
-                        if($v['xTag']==$v1['xTag']){
+                        if($v['xSequence']==$v1['xSequence']){
                             $list2[$key][$k]['key1']=$list[$key][$k1]['key'];
                         }
 
@@ -119,14 +119,12 @@ class Retouch extends My_Controller
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
                 foreach($list3[$key] as $k1=>$v1){
-                    if($v['xTag']==$v1['xTag']){
+                    if($v['xSequence']==$v1['xSequence']){
                         $list2[$key][$k]['key2']=$list3[$key][$k1]['key'];
                     }
                 }
             }
         }
-
-      //  var_dump($list2);
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
