@@ -148,7 +148,7 @@
                  newTab.location.href='{{$root_path}}input/inputAudit';
               }else{
                   newTab.close();
-                  alert("无录入条码可审核")
+                  alert("无审核可领取")
               }
             }
         })
