@@ -421,6 +421,7 @@
                             {{if $p_info.isGroup==2}}
                             <h3 class="clearfix"><span>产品名称:</span>
                                 <select class="nutrition_name nutrition_value">
+                                    <option value="">==请选择==</option>
                                         {{foreach from =$p_info.groupGoodsNames key=key item=name}}
                                         <option value="{{$name}}" {{if $name==$list}}{{/if}}>{{$name}}</option>
                                         {{/foreach}}

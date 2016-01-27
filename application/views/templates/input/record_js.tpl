@@ -296,12 +296,15 @@
         for(var j=0;j<nutrition_l;j++) {
             var a = $(".nutrition_child:eq(" + j + ") p").size();
             //产品名称
-            var b=$(".nutrition_child:eq(" + j + ")  .nutrition_name").val();
+            var nutrition_name=$(".nutrition_child:eq(" + j + ")  .nutrition_name");
+            var b=nutrition_name.val();
+            var b_re=nutrition_name.attr("class");
             //成分名称
             var c=$(".nutrition_child:eq(" + j + ")  .nutrition_names").val();
             if(b!=""){
                 var p_val = "\"proName\":\""+b+"\",\"names\":\""+c+"\",";
             }
+
             if(b==""||c==""||b=="==请选择=="){
                 if(c==""){
                     alert("请选择含量");
@@ -310,6 +313,7 @@
                 }
                 return false;
             }
+
             //获取所有某一个营养分类的值p标签的值
             for (var i = 0; i < a; i++) {
                 //获取每个P里面的值
@@ -321,10 +325,45 @@
                 }
                 for (var h = 1; h < p_l; h++) {
                     var  nutrition_value=$(".nutrition_child:eq(" + j + ") p:eq(" + i + ") .nutrition_value:eq(" + h + ")").val();
-                    if(nutrition_value==""||nutrition_value=="undefined"){
-                        alert("营养成分参数不能为空");
-                        return false;
+                    if(b_re=="nutrition_name"){
+                        //判断是否选择成分名称
+                        if(c!=""){
+                            if(b==""){
+                                alert("请选择产品名称");
+                                return false;
+                            }
+                            if(nutrition_value==""||nutrition_value=="undefined"){
+                                alert("营养成分参数不能为空");
+                                return false;
+                            }
+
+                        }else if(c==""){
+                            if(b!=""){
+                                alert("请选择成分名称");
+                                return false;
+                            }
+                            if(nutrition_value==""||nutrition_value=="undefined"){
+                                alert("营养成分参数不能为空");
+                                return false;
+                            }
+                        }
+                    }else{
+                        //判断是否选择成分名称
+                        if(c!=""){
+                            //判断参数是否为空
+                            if(nutrition_value==""||nutrition_value=="undefined"){
+                                alert("营养成分参数不能为空");
+                                return false;
+                            }
+                        }
+                        if(nutrition_value!=""||nutrition_value!="undefined"){
+                            if(c==""){
+                                alert("请选择成分名称");
+                                return false;
+                            }
+                        }
                     }
+
                     if (h == p_l - 1) {
                         if(h==1){
                             v="shuzi";
@@ -388,13 +427,12 @@
         for(var j=0;j<size;j++){
         var $nutritionUnitEn=$(".nutrition_child:eq("+j+") .nutritionUnitEn");
         //当前选中
-        var index=0;
-        index=$nutritionUnitEn.index(e);
+        var  index=$nutritionUnitEn.index(e);
         //首先需要验证当前选中的Id
-        var id=$(e).val();
+        var id=$(e).val()
         //判断当前选中的ID，是否已存在
-        var size=$nutritionUnitEn.size();
-        for(var i=0;i<size;i++ ){
+        var sizes=$nutritionUnitEn.size();
+        for(var i=0;i<sizes;i++ ){
             if(index!=i && index!="-1"){
                 //获取其它Id值
                 var nutritionId=$nutritionUnitEn.eq(i).val();
@@ -404,9 +442,11 @@
                 }
             }
         }
-        var c= $(".nutrition_child:eq("+i+") .nutritionUnitEn:eq("+index+") option:selected").attr("class");
-        $(".nutrition_child:eq("+i+") .nutritionUnitEns").eq(index).html(c);
-        $(".nutrition_child:eq("+i+") .nutrition_info").eq(index).val(c);
+        var c= $(".nutrition_child:eq("+j+") .nutritionUnitEn:eq("+index+") option:selected").attr("class");
+            if(c!="undefined"){
+                $(".nutrition_child:eq("+j+") .nutritionUnitEns").eq(index).html(c);
+                $(".nutrition_child:eq("+j+") .nutrition_info").eq(index).val(c);
+            }
         }
     }
     $(function(){
@@ -567,7 +607,7 @@
                     {{/foreach}}
                     '</select>'+
                     '<input type="text" class="nutrition_value"/>'+
-                    '<label class="nutritionUnitEns">单位</label>'+
+                    '<label class="nutritionUnitEns"></label>'+
                     '<input type="hidden" class="nutrition_info nutrition_value"/>'+
                     '<input type="text" class="nutrition_value"/>'+
                     '<label>%</label>'+
