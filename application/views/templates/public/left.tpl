@@ -25,7 +25,7 @@
 	<div class="aside_menu">
 		<div class="slimScrollDiv leftsidebar_box">
         <dl class="user_manager system_log">
-            <dt><i class="icon iconfont">&#xf0226;</i>系统管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+            <dt><i class="icon iconfont">&#xf021b;</i>系统管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
             <!-- <dd><a href="first_index.html" title="首页管理">首页管理</a></dd> -->
             <dd><a href="{{$root_path}}user/index" title="用户管理">用户管理</a></dd>
             <dd><a href="{{$root_path}}role/index" title="角色管理">角色管理</a></dd>
@@ -48,7 +48,7 @@
             <dd><a href="{{$root_path}}marlboro/shootBackManager" title="拍摄反馈管理">拍摄反馈管理</a></dd>
          </dl>
          <dl class="menu_base_info system_log">
-             <dt><i class="icon iconfont">&#xf01d8;</i>基本信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+             <dt><i class="icon iconfont">&#xf016c;</i>基本信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
              
              <dd><a href="{{$root_path}}information/baseInfoManager" title="基本信息管理">基本信息管理</a></dd>
              <dd><a href="{{$root_path}}information/nutrientInfo" title="营养成风">营养成分</a></dd>
@@ -66,7 +66,7 @@
            
         </dl>
         <dl class="counts system_log">
-            <dt><i class="icon iconfont">&#xf0226;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
+            <dt><i class="icon iconfont">&#xf0141;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
             <dd><a href="{{$root_path}}statistics/goodsList" title="商品统计">商品统计</a></dd>
             <dd><a href="{{$root_path}}statistics/projectList" title="商品统计">项目统计</a></dd>
             <dd><a href="{{$root_path}}statistics/shootList" title="拍摄统计">拍摄统计</a></dd>
