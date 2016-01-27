@@ -119,7 +119,6 @@ class Retouch extends My_Controller
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
                 foreach($list3[$key] as $k1=>$v1){
-                    var_dump($v1);
                     if($v['xSequence']==$v1['xSequence']){
                         $list2[$key][$k]['key2']=$list3[$key][$k1]['key'];
                     }
