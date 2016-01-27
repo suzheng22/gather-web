@@ -43,7 +43,7 @@
              <dt><i class="icon iconfont">&#xf0178;</i>拍摄管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
              <dd><a href="{{$root_path}}shoot/noShoot" title="无法拍摄">无法拍摄</a></dd>
              <dd><a href="{{$root_path}}shoot/noMeasure" title="无法测量">无法测量</a></dd>
-             <dd><a href="{{$root_path}}shoot/shootAddManager" title="拍摄审核">拍摄新增管理</a></dd>
+             <dd><a href="{{$root_path}}shoot/shootAddManager" title="拍摄新增管理">拍摄新增管理</a></dd>
              <dd><a href="{{$root_path}}shoot/shootBackDetail" title="拍摄驳回管理">拍摄驳回管理</a></dd>
             <dd><a href="{{$root_path}}marlboro/shootBackManager" title="拍摄反馈管理">拍摄反馈管理</a></dd>
          </dl>
@@ -68,7 +68,7 @@
         <dl class="counts system_log">
             <dt><i class="icon iconfont">&#xf0141;</i>统计管理<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
             <dd><a href="{{$root_path}}statistics/goodsList" title="商品统计">商品统计</a></dd>
-            <dd><a href="{{$root_path}}statistics/projectList" title="商品统计">项目统计</a></dd>
+            <dd><a href="{{$root_path}}statistics/projectList" title="项目统计">项目统计</a></dd>
             <dd><a href="{{$root_path}}statistics/shootList" title="拍摄统计">拍摄统计</a></dd>
             <dd><a href="{{$root_path}}statistics/shootCheckList" title="拍摄审核统计">拍摄审核统计</a></dd>
             <dd><a href="{{$root_path}}statistics/inputList" title="录入统计">录入统计</a></dd>
