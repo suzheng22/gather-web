@@ -116,6 +116,8 @@ class Retouch extends My_Controller
                     }
             }
         }
+
+        if(!empty($list3))
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
                 foreach($list3[$key] as $k1=>$v1){
@@ -125,6 +127,7 @@ class Retouch extends My_Controller
                 }
             }
         }
+        var_dump($list2);
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
