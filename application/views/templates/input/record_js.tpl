@@ -305,14 +305,6 @@
                 var p_val = "\"proName\":\""+b+"\",\"names\":\""+c+"\",";
             }
 
-            if(b==""||c==""||b=="==请选择=="){
-                if(c==""){
-                    alert("请选择含量");
-                }else{
-                    alert("请选择产品名称");
-                }
-                return false;
-            }
 
             //获取所有某一个营养分类的值p标签的值
             for (var i = 0; i < a; i++) {
@@ -325,42 +317,45 @@
                 }
                 for (var h = 1; h < p_l; h++) {
                     var  nutrition_value=$(".nutrition_child:eq(" + j + ") p:eq(" + i + ") .nutrition_value:eq(" + h + ")").val();
-                    if(b_re=="nutrition_name"){
-                        //判断是否选择成分名称
-                        if(c!=""){
-                            if(b==""){
-                                alert("请选择产品名称");
-                                return false;
+                    if(h!=2) {
+                        nutrition_value = $(".nutrition_child:eq(" + j + ") p:eq(" + i + ") .nutrition_value:eq(" + h + ")").val();
+                        if (b_re == "nutrition_name") {
+                            //判断是否选择成分名称
+                            if (c != "") {
+                                if (b == "") {
+                                    alert("请选择产品名称");
+                                    return false;
+                                }
+                                if (nutrition_value == "") {
+                                    alert("营养成分参数不能为空");
+                                    return false;
+                                }
+
+                            } else if (c == "") {
+                                if (b != "") {
+                                    alert("请选择含量");
+                                    return false;
+                                }
+                                if (nutrition_value == "") {
+                                    alert("营养成分参数不能为空");
+                                    return false;
+                                }
                             }
-                            if(nutrition_value==""||nutrition_value=="undefined"){
-                                alert("营养成分参数不能为空");
-                                return false;
+                        } else {
+                            //判断是否选择成分名称
+                            if (c != "") {
+                                //判断参数是否为空
+                                if (nutrition_value == "") {
+                                    alert("营养成分参数不能为空");
+                                    return false;
+                                }
+                            }else {
+                                if (nutrition_value != "" ) {
+                                    alert("请选择含量");
+                                    return false;
+                                }
                             }
 
-                        }else if(c==""){
-                            if(b!=""){
-                                alert("请选择成分名称");
-                                return false;
-                            }
-                            if(nutrition_value==""||nutrition_value=="undefined"){
-                                alert("营养成分参数不能为空");
-                                return false;
-                            }
-                        }
-                    }else{
-                        //判断是否选择成分名称
-                        if(c!=""){
-                            //判断参数是否为空
-                            if(nutrition_value==""||nutrition_value=="undefined"){
-                                alert("营养成分参数不能为空");
-                                return false;
-                            }
-                        }
-                        if(nutrition_value!=""||nutrition_value!="undefined"){
-                            if(c==""){
-                                alert("请选择成分名称");
-                                return false;
-                            }
                         }
                     }
 

@@ -117,6 +117,8 @@ class Input_model extends MY_Model {
         $arr['inputCount']=$data['inputCount'];
         if($arr['filed']==2){
             $arr['goodsName']=$data['goodsName'];
+            $arr['gtin']=$data['gtin'];
+            $arr['proType']=$data['proType'];
         }
         $url=$this->more_api_url."/lingmall/input/{$inputId}?token={$token}";
         $data=json_encode($arr);
