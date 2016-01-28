@@ -88,7 +88,7 @@
                                 <td>{{$list.catgrorys3}}</td>
                                 <td>
                                     <a href="javascript:;" class="pic_img" id="{{$list.gtin}}">图</a>
-                                    <a href="javascript:;" class="updata" id="{{$list.id}}">修改</a>
+                                    <a href="javascript:;" class="updata" id="{{$list.id}}" data-name="{{$list.gtin}}">修改</a>
                                 </td>
                             </tr>
                             {{/foreach}}
@@ -253,6 +253,8 @@
             bShadeClose:false,          //是否点遮罩关闭
             fnAdditional:function(e){
                   var id= e.id;
+                var gtin= $(e).attr("data-name");
+                console.log(gtin);
                 $.ajax({
                     url:'{{$root_path}}goods/getCatgroryInfo',
                     data:{id:id},
@@ -260,6 +262,7 @@
                     dataType:'json',
                     success:function(f){
                         localStorage.setItem('id',id);
+                        localStorage.setItem('gtin',gtin);
                         $("#gtin1").val(f.gtin);
                         $('#gName1').val(f.gName);
                         $("#goodsCatgrory1").val(f.goodsCatgrory);
@@ -357,7 +360,8 @@
             alert("商品名称不能为空");
         }
         var id=localStorage.getItem('id');
-        var data={catgrory1:catgrory1,catgrory2:catgrory2,catgrory3:catgrory3,gName:gName,id:id};
+        var gtin=localStorage.getItem('gtin');
+        var data={catgrory1:catgrory1,catgrory2:catgrory2,catgrory3:catgrory3,gName:gName,id:id,gtin:gtin};
         $.ajax({
             url:'{{$root_path}}goods/updateGoodsInfo',
             data:data,
@@ -365,6 +369,7 @@
             dataType:'json',
             success:function(e){
                 localStorage.removeItem('id');
+                localStorage.removeItem('gtin');
                     alert(e.msg);
                 window.location.reload();
             }

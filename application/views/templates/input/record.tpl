@@ -446,10 +446,10 @@
                             <P class="clearfix p">
                                 <input type="hidden" class="nutrition_value" value="{{$list.nutritionId}}">
                                 <span>{{$list.nutritionName}}:</span>
-                                <input type="text"   class="nutrition_value"/>
+                                <input type="text"   class="nutrition_value nutrition_verify"/>
                                 <input type="hidden"   class="nutrition_value" value="{{$list.nutritionUnitEn}}"/>
                                 <label>{{$list.nutritionUnitEn}}</label>
-                                <input type="text"   class="nutrition_value"/><label>%</label>
+                                <input type="text"   class="nutrition_value nutrition_verify"/><label>%</label>
                             </P>
                             {{/if}}
                             {{/foreach}}
@@ -495,8 +495,8 @@
                                     {{if $lists.nutritionId==$key and $lists.isDefault==1 and $lists.status==1}}
                                 <input type="hidden" class="nutrition_value" value="{{$key}}"><span>{{$lists.nutritionName}}{{$value.nutritionName}}:</span>
                                 {{else if $lists.nutritionId==$key and $lists.isDefault!=1}}
-                                 <select style="margin-left:2px; margin-right:10px;" class="nutrition_value nutritionUnitEn" onchange="nutritionUnitEn(this)">
-                                     <option>==请选择==</option>
+                                 <select style="margin-left:2px; margin-right:10px;" class="nutrition_value nutritionUnitEn nutrition_verify" onchange="nutritionUnitEn(this)">
+                                     <option value="">==请选择==</option>
                                      {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
                                      {{if $lists1.isDefault!=1 and $lists1.status==1}}
                                  <option value="{{$lists1.nutritionId}}" class="{{$lists1.nutritionUnitEn}}" {{if  $lists1.nutritionId==$key}}selected="selected"{{/if}}>{{$lists1.nutritionName}}--{{$lists1.nutritionUnitEn}}</option>
@@ -505,7 +505,7 @@
                                  </select>
                                     {{/if}}
                                 {{/foreach}}
-                                <input type="text"   class="nutrition_value" value="{{$value.shuzi}}"/>
+                                <input type="text"   class="nutrition_value nutrition_verify" value="{{$value.shuzi}}"/>
                                 <!--判断是否是默认参数单位显示-->
                                 {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
                                 {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key and $lists1.status==1}}
@@ -528,7 +528,7 @@
                                 {{/if}}
                                 {{/foreach}}
                                 <!---->
-                                <input type="text"   class="nutrition_value" value="{{$value.value}}"/><label>%</label>
+                                <input type="text"   class="nutrition_value nutrition_verify" value="{{$value.value}}"/><label>%</label>
                                 {{foreach from=$p_info.nutritionFiled.data key=keys1 item=lists1}}
                                 {{if $lists1.isDefault!=1 and $lists1.nutritionId==$key and $lists1.status==1}}
                                 <em class="nutrition_inform_del" style="display:block;cursor:pointer">删除</em>

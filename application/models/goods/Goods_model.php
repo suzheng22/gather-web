@@ -63,6 +63,7 @@ class Goods_model extends   MY_Model{
         $arr['catgrory2']=$data['catgrory2'];
         $arr['catgrory3']=$data['catgrory3'];
         $arr['gName']=$data['gName'];
+        $arr['gtin']=$data['gtin'];
         $data=json_encode($arr);
         $url=$this->more_api_url."/lingmall/catgrory/catgroryGtin/{$id}?token=".$token;
         $return=$this->curl($url,$data,'put');
