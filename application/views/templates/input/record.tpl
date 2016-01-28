@@ -156,7 +156,10 @@
                         {{if $list.isNums==1 && $list.inputType==1}}
                             <p class="clearfix p" >
                                 <label>{{$list.fieldName}}：</label>
-                                <input type="text" name="fieldName" class="fieldName" {{if $list.fieldName=="产品名称"}}id="goodsName"{{/if}} value="{{if $list.fieldName=="产品名称" and $p_info.baseInfo.{{$list.field}}==""}}{{$p_info.goodsName}}{{else}}{{$p_info.baseInfo.{{$list.field}}}}{{/if}}"/>
+                                <input type="text" name="fieldName" class="fieldName"
+                                       {{if $list.fieldName=="产品名称"}}id="goodsName" {{else if $list.fieldName=="产品类型"}} id="proType" {{/if}}
+
+                                       value="{{if $list.fieldName=="产品名称" and $p_info.baseInfo.{{$list.field}}==""}}{{$p_info.goodsName}}{{else}}{{$p_info.baseInfo.{{$list.field}}}}{{/if}}"/>
                                 <input type="hidden" value="{{$list.field}}" class="hidden">
                             </p>
                         {{else if $list.isNums==1 && $list.inputType==2}}

@@ -222,13 +222,13 @@
             val+="]";
         }
         val+="]";
-        console.log(val);
-     // return false;
+
         goodsName=$("#goodsName").val();
-        console.log(goodsName);
+        var proType= $("#proType").val();
+
         $.ajax({
             url:'{{$root_path}}input/saveType',
-            data:{info:val,filed:2,inputId:inputId,goodsName:goodsName},
+            data:{info:val,filed:2,inputId:inputId,goodsName:goodsName,gtin:{{$p_info.gtin}},proType:proType},
             dataType:'json',
             type:'POST',
             success:function(e){
@@ -442,7 +442,8 @@
                 }
             }
         }
-        var c= $(".nutrition_child:eq("+j+") .nutritionUnitEn:eq("+index+") option:selected").attr("class");
+        var c= $(".nutrition_child:eq("+j+") .nutritionUnitEn:eq("+index+") option:" +
+                "").attr("class");
             if(c!="undefined"){
                 $(".nutrition_child:eq("+j+") .nutritionUnitEns").eq(index).html(c);
                 $(".nutrition_child:eq("+j+") .nutrition_info").eq(index).val(c);
