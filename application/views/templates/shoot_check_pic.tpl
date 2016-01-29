@@ -8,7 +8,7 @@
 
 </head>
 <body>
-
+{{include file='public/top.tpl'}}
 <!--------------------------- 拍摄详情------------------------------------> 
 
 <div class="record_info_warp" style="margin-top:0px;">

@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{{$resource_url}}style/jquery.iviewer.css"/>
 </head>
 <body>
+{{include file='public/top.tpl'}}
 <!--------------------------- 修图详情------------------------------------> 
 <div class="record_info_warp" style="margin-top:0px;">
 	<h2>{{$p_info.gtin}}条形码-修图详情
