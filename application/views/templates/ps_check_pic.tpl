@@ -64,7 +64,7 @@
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
                                             {{foreach from=$plists.1 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
                                             {{/foreach}}
                                         </ul>
                                     </div>
@@ -83,7 +83,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.1 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key2}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key2}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -103,7 +103,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.2 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -123,7 +123,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.3 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -144,7 +144,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.4 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -165,7 +165,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.5 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$pic_path}}{{$list.key}}-thumbnail50" mm="{{$pic_path}}{{$list.key}}" mmc="{{$pic_path}}{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -232,13 +232,13 @@
         //原图
         var iv2 = $(" #ps_right #viewer2").iviewer(
                 {
-                    src: "{{$pic_path}}{{$plistsis.0.key}}"
+                    src: "{{$plistsis[0]['domain']}}/{{$plistsis.0.key}}"
                     //?imageView/1/w/500/h/500
                 });
         //修图
         var iv2 = $(".left_pc_check #viewer1").iviewer(
                 {
-                    src: "{{$pic_path}}{{$picList.0.key}}"
+                    src: "{{$plistsis[0]['domain']}}/{{$picList.0.key}}"
                     //?imageView/1/w/500/h/500
                 });
 		//驳回

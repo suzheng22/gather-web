@@ -8,7 +8,11 @@ class MY_Model extends CI_Model
          $this->user_api_url=USERAPI;
 	     //线上$this->user_api_url="http://121.40.241.156:8000";
 	     $this->tmore_api_url=CONTROL;
-	     
+	     if(IMGURL=="http://139.196.36.81:8610"){
+             $this->bucket="lingmao";
+         }else{
+             $this->bucket="test";
+         }
 	     $this->StatusArray=array('shootStatus'=>array('无法拍摄','未拍摄','已拍摄','拍摄已上传','拍摄已驳回','已审核通过'),
 	         'deportType'=>array(1=>'导入入库',2=>'驳回入库',3=>'新包装入库',4=>'新增图入库',5=>'组合图入库',6=>'非导入入库',7=>'取消'),
 	         'retouchStatus'=>array("未领取", "已领取", "已下载", "已反馈", "反馈驳回", "已修图", "已上传", "已审核通过", "已审核驳回","反馈通过"),

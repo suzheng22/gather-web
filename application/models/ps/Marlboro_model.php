@@ -89,7 +89,7 @@ class Marlboro_model extends MY_Model {
     }
     //获取所有图片
     function getAllImage($data){
-        $url_token=$this->image_url."/lingmall/service/token?type=2&bucket=test";
+        $url_token=$this->image_url."/lingmall/service/token?type=2&bucket={$this->bucket}";
         $token=$this->curl($url_token,'','get');
         $token=json_decode($token,true);
         $xBatch=$data['batchNo'];

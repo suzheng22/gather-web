@@ -107,7 +107,11 @@ class Goods_model extends   MY_Model{
     }
     //获取图片
     function getAllImage($data){
-        $url=$this->image_url."/lingmall/pictures?token=7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE&xBarcode={$data['gtin']}&xType=1";
+        //获取token
+        $url_token=$this->image_url."/lingmall/service/token?type=2&bucket={$this->bucket}";
+        $token=$this->curl($url_token,'','get');
+        $token=json_decode($token,true);
+        $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
         return $list;
