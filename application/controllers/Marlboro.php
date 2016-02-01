@@ -53,13 +53,10 @@ class Marlboro extends My_Controller {
         $arr=$this->getPage($get,$page);
         $arr['token']=$this->user_info['token'];
         //根据用户名和用户组确定userId
-       // if($arr['userName']!=""||$arr['groupId']!=""){
-            $str=$this->user->getUserIdsByFiled($arr);
-            if($str){
-                $user_id_list=json_decode($str,true);
-                $arr['photoIds']=serialize($user_id_list);
-            };
-      //  }
+        $str=$this->user->getUserIdsByFiled($arr);
+        if($str){
+            $arr['photoIds']=$str;
+        };
         //增加参数
         $list=$this->marlboro_model->getMarlboroList1($arr);
         $showpage= parent::page($page_url,10,$list['total']);

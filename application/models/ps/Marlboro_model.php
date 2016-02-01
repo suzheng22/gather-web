@@ -11,18 +11,12 @@ class Marlboro_model extends MY_Model {
     }
     //获取获取拍摄详情列表
     function getMarlboroList1($data){
-
-        $token=$data['token'];
+        $data['token']=urldecode($data['token']);
         $photoIds= $data['photoIds'];
-        if($data['userName']==""&&$data['groupId']==""){
-            $data['photoIds']="";
-        }if($data['photoIds']=="N;"){
-            $data['photoIds']=5;
-        }
-
-        $url=$this->more_api_url.'/shoot/MarlboroList?token='.$token;
-        $return=$this->curl($url,$data);
-        $list=json_decode($return,true);
+        $url=$this->more_api_url.'/shoot/MarlboroList';
+       //echo $url;
+        $return=$this->curl($url,$data,'get');
+;        $list=json_decode($return,true);
         //根据获取得到的userID获取数据
         $data['ids']=$photoIds;
         //根据每个用户的ID去查找项目的数据
