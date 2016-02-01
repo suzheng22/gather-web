@@ -150,12 +150,12 @@
             url:'{{$root_path}}input/inputAdd/verify',
             dataType:'text',
             success:function(e){
-                if(e!=""){
-
-                    newTab.location.href='{{$root_path}}input/inputAdd';
-                }else{
+                //alert(e);
+                if(e==""){
                     newTab.close();
                     alert("无录入条码可新增")
+                }else{
+                    newTab.location.href='{{$root_path}}input/inputAdd';
                 }
             }
         })
