@@ -19,32 +19,27 @@ class Marlboro_model extends MY_Model {
         }if($data['photoIds']=="N;"){
             $data['photoIds']=5;
         }
+
         $url=$this->more_api_url.'/shoot/MarlboroList?token='.$token;
         $return=$this->curl($url,$data);
         $list=json_decode($return,true);
         //根据获取得到的userID获取数据
         $data['ids']=$photoIds;
-        $user_list=array();
-        if($data['ids']!="N;"){
-            $url=$this->user_api_url."/user/getUserInfoByIds?token=".$token;
-            $return=$this->curl($url,$data);
-            $user_list=json_decode($return,true);
-        }
         //根据每个用户的ID去查找项目的数据
         $count=$list['count'];
         $list=$list['data'];
         $num=0;
         foreach ($list as $k => $v){
-            foreach ($user_list as $k1=>$v1){
-                if($v['photoId']==$v1['userId']){
+            $user['upUserId']=$v['photoId'];
+            $url=$this->user_api_url."/user/info?token={$this->user_info['token']}";
+            $return=$this->curl($url,$user);
+            $v1=json_decode($return,true);
                     $num++;
                     $list[$k]['num']=$num;
                     $list[$k]['userName']=$v1['userName'];
                     $list[$k]['groupName']=$v1['groupName'];
                     $list[$k]['passCount']=round(($list[$k]['MarlboroCount']/$list[$k]['chouchatotalCount']),4);
                     $list[$k]['passCount']=mb_substr($list[$k]['passCount'],0,6);
-                }
-            }
         }
         $return_list['data']=$list;
         $return_list['total']=$count;
