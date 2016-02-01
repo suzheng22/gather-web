@@ -174,10 +174,10 @@ class Project_model extends MY_Model {
     }
     //根据PID获取项目名称；
     function getPNameByPId($data){
-        $p['token']=urldecode($this->user_info['token']);
+        $project['token']=urldecode($this->user_info['token']);
         $project['pId']=$data['pId'];
-        $url=$this->user_api_url."/user/getProjectByFiled?".http_build_query($p);
-        $return =$this->curl($url,$project);
+        $url=$this->user_api_url."/user/getProjectByfiters";
+        $return =$this->curl($url,$project,'get');
         $projects=json_decode($return,true);
         return $projects['data'][0]['pName'];
     }
