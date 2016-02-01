@@ -20,7 +20,7 @@
     if(is){
         var iv2 = $("#viewer").iviewer(
                 {
-                    src: "{{$picList[0]['domain']}}{{$picList.0.key}}"
+                    src: "{{$picList[0]['domain']}}/{{$picList.0.key}}"
                 });
     }
     function check(){

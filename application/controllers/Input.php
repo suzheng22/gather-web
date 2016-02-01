@@ -72,7 +72,7 @@ class Input extends My_Controller {
        // var_dump($inputInfo['extFiled']);
         //进行验证
         if($verify=="verify"){
-            echo $inputInfo['status'];
+            echo $inputInfo['gtin'];
             exit;
         }
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);

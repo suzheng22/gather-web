@@ -53,6 +53,11 @@ class Marlboro extends My_Controller {
         $arr=$this->getPage($get,$page);
         $arr['token']=$this->user_info['token'];
         //根据用户名和用户组确定userId
+        if($arr['groupId']==""&& $arr['userName']==""){
+            $arr['roleId']=3;
+        }
+        //$arrs['roleId']=3;
+        //$strs=$this->user->getUserIdsByFiled($arrs);
         $str=$this->user->getUserIdsByFiled($arr);
         if($str){
             $arr['photoIds']=$str;

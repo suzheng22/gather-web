@@ -21,7 +21,7 @@ class Retouch extends My_Controller
         $data['token']=$this->user_info['token'];
         $project_list=$this->project->getProjectList($data);
         $this->ci_smarty->assign('project_list',$project_list['data']);
-        $group_list= $this->user->getGroupListByRole(4);
+        $group_list= $this->user->getGroupListByRole(6);
         $this->ci_smarty->assign('group_list',$group_list['list']);
         $page_url=$this->root_path."Retouch/psCheckList?";
         $page=$this->input->get('page');
@@ -30,17 +30,19 @@ class Retouch extends My_Controller
         unset($get['page']);
         $page_url=$this->publicFuc->getUrl($page_url,$get);
         $arr=$this->getPage($get,$page);
-        //$data['userId']=$this->user_info['userId'];
         if($arr['groupId']!=""||$arr['username']!=""){
             $user['groupId']=$arr['groupId'];
             $user['username']=$arr['username'];
             $user['token']=$data['token'];
             $str=$this->user->getUserIdsByFiled($user);
-            $user_id_list=json_decode($str,true);
-            $arr['userIds']=serialize($user_id_list);
+            $arr['userIds']=$str;
+        }else{
+            $user['roleId']=6;
+            $str=$this->user->getUserIdsByFiled($user);
+            $arr['userIds']=$str;
         }
-       // $data['userId']=$this->user_info['userId'];
         $list=$this->retouch->getMarlboroList($arr);
+       // var_dump($list);
         $showpage= parent::page($page_url,10,$list['total']);
         $this->ci_smarty->assign('glist',$list['data']);
         $this->ci_smarty->assign('pages',$showpage['show']);
