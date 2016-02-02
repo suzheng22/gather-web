@@ -266,12 +266,13 @@ function check(status){
 		$.post("{{$root_path}}marlboro/shootPass",data,
 		  	function(data){
 				if(data){
-                    window.location.reload();
 					if(status==2){
 					   alert('审核成功');
+                        window.location.reload();
 					}
 					else if(status==3){
 						alert('驳回成功');
+                        window.location.reload();
 					}
 
                    // alert(123);
