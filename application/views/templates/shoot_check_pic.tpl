@@ -34,7 +34,7 @@
 
         <div class="ps_top_menu">
             {{if $p_info.status==1}}
-            <a href="" class="pass" onclick="check(2)"><i class="iconfont">&#xf01b1;</i>通过</a>
+            <a href="javascript:;" class="pass" onclick="check(2)"><i class="iconfont">&#xf01b1;</i>通过</a>
             <a href="javascript:;" id="shoot_new_user" class="back" ><i class="iconfont">&#xf0223;</i>驳回</a>
             <a href="javascript:;" id="shoot_pass_less_btn" class="back"><i class="iconfont">&#xf0223;</i>通过缺图</a>
             {{else}}
