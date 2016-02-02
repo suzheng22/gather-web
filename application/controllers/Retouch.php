@@ -98,12 +98,13 @@ class Retouch extends My_Controller
         $arr['token']=$this->user_info['token'];
         $arr['id']=1;
         $product_info=$this->retouch->getRetouchPic($arr);
-        //png图
+
         $arr['batchNo']=$product_info['retouchId'];
         $arr['pId']=$product_info['pId'];
         //原图
         $list2=$this->retouch->getAllImages($arr);
-        $arr['id']=2;
+        //png图
+        $arr['id']=3;
         $list3=$this->retouch->getAllImages($arr);
         //获取修图图片
         $list=$this->retouch->getAllImage($arr);
