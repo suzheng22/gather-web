@@ -82,7 +82,6 @@ class Input extends My_Controller {
         $data['gtin']=$inputInfo['gtin'];
         $data['packet']=$inputInfo['packet'];
         $data['pId']=$inputInfo['pId'];
-
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
@@ -158,7 +157,7 @@ class Input extends My_Controller {
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
         $data['gtin']=$inputInfo['gtin'];
         $data['packet']=$inputInfo['packet'];
-        $data['pId']=$inputInfo['inputId'];
+        $data['pId']=$inputInfo['pId'];
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
