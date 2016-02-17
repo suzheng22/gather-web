@@ -108,9 +108,7 @@ class Goods_model extends   MY_Model{
     //获取图片
     function getAllImage($data){
         //获取token
-        $url_token=$this->image_url."/lingmall/service/token?type=2&bucket={$this->bucket}";
-        $token=$this->curl($url_token,'','get');
-        $token=json_decode($token,true);
+        $token['token']=$this->bucket;
         $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);

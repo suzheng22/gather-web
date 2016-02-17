@@ -99,9 +99,7 @@ class Input_model extends MY_Model {
     }
     //获取录入图片的接口
     function getAllImage($data){
-        $url_token=$this->image_url."/lingmall/service/token?type=2&bucket={$this->bucket}";
-        $token=$this->curl($url_token,'','get');
-        $token=json_decode($token,true);
+        $token['token']=$this->bucket;
         $xPack=$data['packet'];
         $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xBarcode={$data['gtin']}&xType=1&xPack=$xPack&xProject={$data['pId']}";
         $return=$this->curl($url,'','get');

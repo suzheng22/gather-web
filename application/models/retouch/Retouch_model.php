@@ -88,9 +88,7 @@ class Retouch_model extends MY_Model
     /*获取修图*/
     function getAllImage($data){
         //先获取token
-        $url_token=$this->image_url."/lingmall/service/token?type=2&bucket=".$this->bucket;
-        $token=$this->curl($url_token,'','get');
-        $token=json_decode($token,true);
+        $token['token']=$this->bucket;
         $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xType=2&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}&xProject={$data['pId']}";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);
@@ -98,9 +96,7 @@ class Retouch_model extends MY_Model
     }
     //原图，png
     function getAllImages($data){
-        $url_token=$this->image_url."/lingmall/service/token?type=2&bucket=".$this->bucket;
-        $token=$this->curl($url_token,'','get');
-        $token=json_decode($token,true);
+        $token['token']=$this->bucket;
         $url=$this->image_url."/lingmall/pictures?token={$token['token']}&xType={$data['id']}&xBarcode={$data['gtin']}&xBatch={$data['batchNo']}&xPack={$data['packet']}&xProject={$data['pId']}";
         $return=$this->curl($url,'','get');
         $list=json_decode($return,true);

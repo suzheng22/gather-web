@@ -9,9 +9,9 @@ class MY_Model extends CI_Model
 	     //线上$this->user_api_url="http://121.40.241.156:8000";
 	     $this->tmore_api_url=CONTROL;
 	     if(IMGURL=="http://139.196.36.81:8610"){
-             $this->bucket="lingmao";
+             $this->bucket="_0qSMe1n3iDd-X6mJI3D9KkX_igyN2MIv8KlXmWcVOTGEhFmPyjQw8TXONWxEAn8";
          }else{
-             $this->bucket="test";
+             $this->bucket="7jsD03yg64t1kPuOANJxBI1dMpzfvUgkaBr9y11Ybg1M9X3N-54ptlhgaJjXDeqE";
          }
 	     $this->StatusArray=array('shootStatus'=>array('无法拍摄','未拍摄','已拍摄','拍摄已上传','拍摄已驳回','已审核通过'),
 	         'deportType'=>array(1=>'导入入库',2=>'驳回入库',3=>'新包装入库',4=>'新增图入库',5=>'组合图入库',6=>'非导入入库',7=>'取消'),
