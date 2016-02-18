@@ -18,7 +18,7 @@
                 <div class="rose_top main_rignt_top clearfix">
                 	
                         <div class="cc_top_one"><label>拍摄人:</label><span>{{$u_info.trueName}}</span> <input type="hidden" id="rId" value="{{$u_info.userId}}" /></div>
-                        <div class="cc_top_one"><label>抽查通过率:</label><span>{{$total*100}}%</span></div>
+                        <div class="cc_top_one"><label>抽查通过率:</label><span>{{($total*100)|substr:"0":"5"}}%</span></div>
                         <div class="cc_top_one"><label>待审核商品数:</label><span>{{$no}}</span></div>
                         <div class="clearfix"></div>
 						<form action="{{$root_path}}marlboro/shootDetail/{{$u_info.userId}}/{{$total}}/{{$no}}/{{$auto}}" id="myform">
