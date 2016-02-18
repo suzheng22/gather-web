@@ -34,7 +34,6 @@ class Marlboro_model extends MY_Model {
                     $list[$k]['groupName']=$v1['groupName'];
                     $list[$k]['passCount']=round(($list[$k]['MarlboroCount']/$list[$k]['chouchatotalCount']),4);
                     $list[$k]['passCount']=mb_substr($list[$k]['passCount'],0,6);
-                   var_dump($list[$k]['passCount']);
         }
         $return_list['data']=$list;
         $return_list['total']=$count;
