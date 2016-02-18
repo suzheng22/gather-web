@@ -34,12 +34,15 @@ class User extends My_Controller {
                 if($user['userId']==58){
                     header("Location: ".site_url('shoot/shootAddManager'));
                 }else{
-                    header("Location: ".site_url('user/index'));
+                    header("Location: ".site_url('user/loginIndex'));
                 }
 
             }
             
         }
+    public function loginIndex(){
+        $this->ci_smarty->display('index.tpl');
+    }
          
         //登出
         function logout(){
