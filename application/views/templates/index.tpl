@@ -7,8 +7,15 @@
 </head>
 <body>
 {{include file='public/top.tpl'}}
-    <div class="main">
+    <div class="main" style="text-align: center">
     {{include file='public/left.tpl'}}
+
+        <div style="display: block;font-size: 24px;text-align: center;margin-top:10%">
+            欢迎你
+        </div>
+
+
+
     </div>
 {{include file='public/js.tpl'}}
 </body>
