@@ -369,6 +369,7 @@ class Curl {
 			curl_close($this->session);
 			$response = $this->response;
 			$this->set_defaults();
+			$this->debug();
 			return $response;
 		}
 	}
