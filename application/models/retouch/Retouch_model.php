@@ -14,14 +14,13 @@ class Retouch_model extends MY_Model
          $arr['userIds']=$data['userIds'];
          $arr['page']=$data['page'];
          $data['token']=urldecode($this->user_info['token']);
-
-
          $url=$this->more_api_url."/lingmall/audit/list";
          $return=$this->curl($url,$arr,'get');
          $list=json_decode($return,true);
          $count=$list['count'];
          $list=$list['data'];
          $data['token']=urlencode($data['token']);
+         var_dump($arr);
          foreach($list as $k=>$v){
              $data['upUserId']=$v['retouchUserId'];
              $url=$this->user_api_url."/user/info?token=".$data['token'];
