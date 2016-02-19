@@ -19,7 +19,7 @@ class MY_Model extends CI_Model
 	         'status'=>array("待录入","录入中","已录入","录入审核通过","录入驳回","拍摄反馈","拍摄反馈通过","拍摄反馈驳回")
 	     );
         if($this->user_info['userId']=="58"){
-            $this->more_api_url="http://139.196.36.81:8008/";
+            $this->more_api_url="http://139.196.36.81:8005/";
         }else{
             $this->more_api_url=MOREAPI;
         }
