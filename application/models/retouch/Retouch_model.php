@@ -10,7 +10,6 @@ class Retouch_model extends MY_Model
     /*获取修图列表*/
      function getMarlboroList($data){
          $arr['token']=urldecode($this->user_info['token']) ;
-         echo $arr['token'];
          $arr['pId']=$data['pId'];
          $arr['userIds']=$data['userIds'];
          $arr['page']=$data['page'];
@@ -23,6 +22,7 @@ class Retouch_model extends MY_Model
          $count=$list['count'];
          $list=$list['data'];
          $data['token']=urlencode($data['token']);
+         echo $data['token'];
          foreach($list as $k=>$v){
              $data['upUserId']=$v['retouchUserId'];
              $url=$this->user_api_url."/user/info?token=".$data['token'];
