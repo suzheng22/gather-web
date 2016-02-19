@@ -15,6 +15,7 @@ class Retouch_model extends MY_Model
          $arr['page']=$data['page'];
          $data['token']=urldecode($this->user_info['token']);
          $url=$this->more_api_url."/lingmall/audit/list";
+         echo $url;
          $return=$this->curl($url,$arr,'get');
          $list=json_decode($return,true);
          $count=$list['count'];
