@@ -10,11 +10,13 @@ class Retouch_model extends MY_Model
     /*获取修图列表*/
      function getMarlboroList($data){
          $arr['token']=urldecode($this->user_info['token']) ;
+         echo $arr['token'];
          $arr['pId']=$data['pId'];
          $arr['userIds']=$data['userIds'];
          $arr['page']=$data['page'];
          $data['token']=urldecode($this->user_info['token']);
-         echo $data['token'];
+
+
          $url=$this->more_api_url."/lingmall/audit/list";
          $return=$this->curl($url,$arr,'get');
          $list=json_decode($return,true);
