@@ -135,7 +135,7 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,$data,'put');
         return json_decode($return);
     }
-    //录入审核列别奥
+    //录入审核l列表
     function getAuditList($data){
         $data['token']=urldecode($data['token']);
         $url=$this->more_api_url."/lingmall/input/auditList";
