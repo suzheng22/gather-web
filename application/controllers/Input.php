@@ -51,7 +51,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
+        $this->ci_smarty->assign('picList',$list[1]);
         $inputInfo['p_status']=$p_status;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
