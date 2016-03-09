@@ -85,7 +85,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
+        $this->ci_smarty->assign('picList',$list[1]);
         $this->ci_smarty->display('input/record.tpl');
     }
     //分类保存
@@ -161,7 +161,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
+        $this->ci_smarty->assign('picList',$list[1]);
         $this->ci_smarty->display('input/info.tpl');
     }
     //录入反馈
@@ -187,7 +187,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
+        $this->ci_smarty->assign('picList',$list[1]);
         // var_dump($inputInfo);
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
