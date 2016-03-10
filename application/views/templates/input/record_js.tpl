@@ -778,8 +778,7 @@
                 type:'POST',
                 dataType:'json',
                 success:function(e){
-                    console.log(e.msg);
-                 //   alert(e.msg);
+                    alert(e.msg);
                     window.location.reload();
                 }
             })
