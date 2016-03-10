@@ -225,16 +225,22 @@
 
         goodsName=$("#goodsName").val();
         var proType= $("#proType").val();
-
+        if(proType==undefined){
+            proType="";
+        }
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:val,filed:2,inputId:inputId,goodsName:goodsName,gtin:{{$p_info.gtin}},proType:proType},
             dataType:'json',
             type:'POST',
             success:function(e){
+                console.log(e);return false;
+                console.log({info:val,filed:2,inputId:inputId,goodsName:goodsName,gtin:{{$p_info.gtin}},proType:proType});
                 if(f==3){
+                    console.log(e.msg);
                     if(e.msg!="保存成功"){
-                        alert("分类提交失败")
+                        alert("基本信息保存失败");
+                        return false;
                     }
                 }else{
                     alert(e.msg);
@@ -279,7 +285,8 @@
             success:function(e){
                 if(f==3){
                     if(e.msg!="保存成功"){
-                        alert("分类提交失败")
+                        alert("扩充信息保存失败")
+                        return false;
                     }
                 }else{
                     alert(e.msg);
@@ -406,7 +413,7 @@
                     alert("营养成分删除成功");
                 }else if(f==3){
                     if(e.msg!="保存成功"){
-                        alert("分类提交失败")
+                        alert("营养成分保存失败")
                     }
                 }
                 else{
@@ -765,9 +772,11 @@
             save_business(3);
             //保存扩充信息
             save_extendInfo(3);
+
             //保存营养成分
            var a= save_nutrient(3);
             if(a==false){
+                alert("保存失败");
                 return false;
             }
             $.ajax({
@@ -776,11 +785,12 @@
                 type:'POST',
                 dataType:'json',
                 success:function(e){
-                    alert(e.msg);
-                    window.location.reload();
+                    console.log(e.msg);
+                 //   alert(e.msg);
+                 //   window.location.reload();
                 }
             })
-        })
+        });
         //点击选项卡
         //选项卡
         $(".choice_count h3 a").click(function(){

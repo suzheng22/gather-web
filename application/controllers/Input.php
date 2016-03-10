@@ -59,10 +59,14 @@ class Input extends My_Controller {
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
        // var_dump($inputInfo['nutritionInfo']);
         $this->ci_smarty->assign('p_info',$inputInfo);
-        if($inputInfo['status']==1)
+        if($inputInfo['status']==1){
             $this->ci_smarty->display('input/record.tpl');
-        else
-        $this->ci_smarty->display('input/info.tpl');
+        }
+        else{
+
+            $this->ci_smarty->display('input/info.tpl');
+        }
+
     }
     //录入领取
     function inputAdd($verify){
@@ -100,6 +104,7 @@ class Input extends My_Controller {
             $data['info']=str_replace("[","{",$data['info']);
             $data['info']=str_replace("]","}",$data['info']);
             $data['info']=json_decode($data['info'],true);
+            //echo json_encode($data['info']);exit;
         }else if($data['filed']==5){
             $data['info']=array();
         }
@@ -195,7 +200,12 @@ class Input extends My_Controller {
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
         //var_dump($inputInfo['nutritionFiled']);
         $this->ci_smarty->assign('p_info',$inputInfo);
-        $this->ci_smarty->display('input/record.tpl');
+        if($inputInfo['status']==4){
+            $this->ci_smarty->display('input/record.tpl');
+        }else{
+            $this->ci_smarty->display('input/info.tpl');
+        }
+
     }
 
 
