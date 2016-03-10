@@ -745,7 +745,6 @@
         });
         //最后的提交
         $("#record_confirm").on("click",function(){
-            alert(123);return false;
             var input_size=$("input").size();
             var select_size=$("select").size();
             var input_len=0;
