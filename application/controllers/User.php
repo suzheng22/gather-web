@@ -57,6 +57,7 @@ class User extends My_Controller {
         }
         //用户首页列表页
         public function index(){
+            echo $this->user_info['token'];
             $data['userName']=$this->input->get('userName');
             $data['trueName']=$this->input->get('trueName');
             $data['roleId']=$this->input->get('roleId');

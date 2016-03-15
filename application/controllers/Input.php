@@ -200,7 +200,7 @@ class Input extends My_Controller {
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
         //var_dump($inputInfo['nutritionFiled']);
         $this->ci_smarty->assign('p_info',$inputInfo);
-        if($inputInfo['status']==4){
+        if($inputInfo['status']!=3){
             $this->ci_smarty->display('input/record.tpl');
         }else{
             $this->ci_smarty->display('input/info.tpl');

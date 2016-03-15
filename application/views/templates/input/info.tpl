@@ -238,7 +238,7 @@
 
         </div>
     </div>
-    {{if $p_info.status==4 && $p_info.p_status==1}}
+    {{if $p_info.status!=3}}
     <div class="zz_conforim"><a href="{{$root_path}}input/inputChange?inputId={{$p_info.inputId}}&gtin={{$p_info.gtin}}&packet={{$p_info.packet}}&batchNo={{$p_info.batchNo}}" onclick="checkw(1)" id="record_confirm">编辑</a></div>
     {{else if  $p_info.p_status==2}}
     <div class="zz_conforim"><a href="javascript:;" onclick="check(2)" id="record_confirm">通过</a><a href="javascript:;"  id="record_confirms">驳回</a></div>

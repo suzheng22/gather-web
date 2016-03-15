@@ -254,7 +254,6 @@
             fnAdditional:function(e){
                   var id= e.id;
                 var gtin= $(e).attr("data-name");
-                console.log(gtin);
                 $.ajax({
                     url:'{{$root_path}}goods/getCatgroryInfo',
                     data:{id:id},
