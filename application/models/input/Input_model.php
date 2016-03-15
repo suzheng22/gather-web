@@ -211,7 +211,6 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,'','get');
         $return=json_decode($return,true);
         $return['orderId']=$data['orderId'];
-        var_dump($return['orderGoodsCount']);
         return $return;
     }
 

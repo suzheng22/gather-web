@@ -193,7 +193,6 @@ class Input extends My_Controller {
         //获取图片
         $this->ci_smarty->assign('plist',$list);
         $this->ci_smarty->assign('picList',$list[1]);
-        // var_dump($inputInfo);
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
