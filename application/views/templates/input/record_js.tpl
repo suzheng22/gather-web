@@ -745,17 +745,19 @@
         });
         //最后的提交
         $("#record_confirm").on("click",function(){
-            var input_size=$("input").size();
+            var input_size=$('input[type="text"]').size();
             var select_size=$("select").size();
             var input_len=0;
             var select_len=0;
             for(var i=0;i<input_size;i++){
-                input_len+=$("input:eq("+i+")").val().length;
+                input_len+=$('input[type="text"]:eq('+i+')').val().length;
             }
             for(var i=0;i<select_size;i++){
                 select_len+=$("input:eq("+i+")").val().length;
             }
-            var len=input_len+select_len;
+            var len=input_len;
+            //console.log(len);
+            //  return false;
             //进行保存验证
             // 所有的项目重新进行保存
             //1保存分类
