@@ -768,7 +768,7 @@
             }
             var len=input_len;
           //  console.log(len);
-              return false;
+          //    return false;
             //进行保存验证
             // 所有的项目重新进行保存
             //1保存分类
