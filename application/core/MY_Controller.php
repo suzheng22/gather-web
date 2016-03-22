@@ -254,12 +254,13 @@ class MY_Controller extends CI_Controller
         for($i=0;$i<$count;$i++){
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($i, 1, $fields[$i]);
         }
-        for($i=0;$i<count($query);$i++){
 
-            for($j=0;$j<count($query[$i]);$j++){
-            //    echo ($j);
-                $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($i, $j, $query[$i][$j]);
+        for($i=2;$i<count($query)+2;$i++){
+            for($j=1;$j<count($query[$i])+1;$j++){
+         //       echo ($j);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($j, $i, $query[$i][$j]);
             }
+           // echo "<br>";
         }
 //        foreach($query as $key1=>$data)
 //        {
