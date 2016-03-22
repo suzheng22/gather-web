@@ -213,6 +213,11 @@ class Input_model extends MY_Model {
         $return['orderId']=$data['orderId'];
         return $return;
     }
+    function export(){
+        $url="http://121.40.241.156:8005/input/export"."?token={$this->user_info['token']}";
+        $data=$this->curl($url,'','post');
+        return json_decode($data,true);
+    }
 
 }
 ?>

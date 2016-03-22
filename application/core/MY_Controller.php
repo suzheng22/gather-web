@@ -241,5 +241,50 @@ class MY_Controller extends CI_Controller
         unset($img,$url);
         return array('file_name'=>$filename,'save_path'=>$save_dir.$filename,'error'=>0);
     }
+    function excel($query,$fields,$fileName){
+        $objPHPExcel=new PHPExcel();
+        /*设置文本对齐方式*/
+        $objPHPExcel->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+
+        $objActSheet = $objPHPExcel->getActiveSheet();
+      //  $col = 0;
+      //  $letter = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N');
+        $count=count($fields);
+        for($i=0;$i<$count;$i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($i, 1, $fields[$i]);
+        }
+        for($i=0;$i<count($query);$i++){
+
+            for($j=0;$j<count($query[$i]);$j++){
+            //    echo ($j);
+                $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($i, $j, $query[$i][$j]);
+            }
+        }
+//        foreach($query as $key1=>$data)
+//        {
+//    //        $col = 0;
+//
+//
+////            foreach ($data as $key=>$field)
+////            {
+////                //设置成文本格式
+////
+////
+////               // $objPHPExcel->getActiveSheet()->getRowDimension($row)->setRowHeight($height);
+////              //  $objActSheet->getColumnDimension($letter[$col])->setWidth($weight);
+////                $col++;
+////            }
+//         //   echo $col.',';
+//            $row++;
+//        }
+        $objPHPExcel->setActiveSheetIndex(0);
+        $objWriter = IOFactory::createWriter($objPHPExcel, 'Excel5');
+        //发送标题强制用户下载文件
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename='.$fileName.date('Ymd').'.xls');
+        header('Cache-Control: max-age=0');
+        $objWriter->save('php://output');
+    }
     
 }
