@@ -85,6 +85,7 @@
              <!--录入审核-->
              {{if $userInfo.roleId=="5" || $userInfo.roleId=="11" || $userInfo.roleId=="1"}}
             <dd><a href="{{$root_path}}input/inputList" title="录入审核">录入审核</a></dd>
+             <dd><a href="{{$root_path}}input/export" title="录入审核导出">录入审核导出</a></dd>
            {{/if}}
         </dl>
             {{/if}}

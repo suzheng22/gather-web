@@ -246,39 +246,28 @@ class MY_Controller extends CI_Controller
         /*设置文本对齐方式*/
         $objPHPExcel->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $objPHPExcel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-
         $objActSheet = $objPHPExcel->getActiveSheet();
       //  $col = 0;
-      //  $letter = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N');
+        $letter = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N');
         $count=count($fields);
         for($i=0;$i<$count;$i++){
             $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($i, 1, $fields[$i]);
         }
-
         for($i=2;$i<count($query)+2;$i++){
-            for($j=1;$j<count($query[$i])+1;$j++){
+            for($j=0;$j<count($query[$i]);$j++){
          //       echo ($j);
-                $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($j, $i, $query[$i][$j]);
+                 $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($j, $i, $query[$i][$j]);
+                 $objPHPExcel->getActiveSheet()->getRowDimension($i)->setRowHeight(20);
+                if($j==4){
+                    $objActSheet->getColumnDimension($letter[$j])->setWidth(40);
+                }
+                elseif($j==9||$j==1){
+                    $objActSheet->getColumnDimension($letter[$j])->setWidth(18);
+                }else{
+                    $objActSheet->getColumnDimension($letter[$j])->setWidth(12);
+                }
             }
-           // echo "<br>";
         }
-//        foreach($query as $key1=>$data)
-//        {
-//    //        $col = 0;
-//
-//
-////            foreach ($data as $key=>$field)
-////            {
-////                //设置成文本格式
-////
-////
-////               // $objPHPExcel->getActiveSheet()->getRowDimension($row)->setRowHeight($height);
-////              //  $objActSheet->getColumnDimension($letter[$col])->setWidth($weight);
-////                $col++;
-////            }
-//         //   echo $col.',';
-//            $row++;
-//        }
         $objPHPExcel->setActiveSheetIndex(0);
         $objWriter = IOFactory::createWriter($objPHPExcel, 'Excel5');
         //发送标题强制用户下载文件
