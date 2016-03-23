@@ -258,13 +258,13 @@ class MY_Controller extends CI_Controller
          //       echo ($j);
                  $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($j, $i, $query[$i][$j]);
                  $objPHPExcel->getActiveSheet()->getRowDimension($i)->setRowHeight(20);
-                if($j==4){
+                if($j==3){
                     $objActSheet->getColumnDimension($letter[$j])->setWidth(40);
                 }
-                elseif($j==9||$j==1){
+                elseif($j==8||$j==1){
                     $objActSheet->getColumnDimension($letter[$j])->setWidth(18);
                 }else{
-                    $objActSheet->getColumnDimension($letter[$j])->setWidth(12);
+                    $objActSheet->getColumnDimension($letter[$j])->setWidth(14);
                 }
             }
         }
