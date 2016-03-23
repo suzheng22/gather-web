@@ -209,7 +209,7 @@ class Input extends My_Controller {
     //导出
     function export(){
         $data=$this->input_model->export();
-        $field=array("inputId",'gtin','catId','catName','goodsName','brand','content','norm','model','field');
+        $field=array("inputId",'gtin','catName','goodsName','brand','content','norm','model','field');
         $this->excel($data,$field,"录入审核导出");
     }
 
