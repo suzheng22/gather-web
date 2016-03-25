@@ -218,6 +218,14 @@ class Input_model extends MY_Model {
         $data=$this->curl($url,'','post');
         return json_decode($data,true);
     }
+    function import($data){
+        //var_dump($data);
+        $url="http://127.0.0.1:8003/input/import"."?token={$this->user_info['token']}";
+        $return=$this->curl($url,$data,'post');
+        return $return;
+      //  var_dump($return);
+      //  return json_decode($return,true);
+    }
 
 }
 ?>

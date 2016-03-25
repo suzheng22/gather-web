@@ -276,5 +276,12 @@ class MY_Controller extends CI_Controller
         header('Cache-Control: max-age=0');
         $objWriter->save('php://output');
     }
+    //读取excel
+    function readExcel($inputFileName){
+        $objPHPExcel = IOFactory::load($inputFileName);
+        //得到当前活动表格，调用toArray方法，得到表格的二维数组
+        $sheetData =$objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        return $sheetData;
+    }
     
 }

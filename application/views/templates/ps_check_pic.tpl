@@ -241,7 +241,13 @@
             var url="{{$more_api}}/lingmall/retouch/getKey?token={{$token}}&key1={{$plistsis.0.key}}";
 
             $.get(url,'',function(e){
-                var  h="{{$plistsis[0]['domain']}}"+"/"+e.key2;
+                //alert(e);return false;
+                if(e!=null){
+                    var  h="{{$picList[0]['domain']}}"+"/"+e.key2;
+                }else{
+                    var  h="{{$picList[0]['domain']}}"+"/{{$picList.0.key}}";
+                }
+
                         var iv2 = $(".left_pc_check #viewer1").iviewer(
                 {
                     src: h

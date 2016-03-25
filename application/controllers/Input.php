@@ -212,6 +212,44 @@ class Input extends My_Controller {
         $field=array("inputId",'条形码','商品分类','商品名称','品牌','含量','规格','型号','field');
         $this->excel($data,$field,"录入审核导出");
     }
+    //导入
+    function import(){
+        $file=$_FILES['uploadFile'];
+       // var_dump($file);
+        $path=$file['tmp_name'];
+        //使用excel处理数据
+        if($path!=""){
+            $data=$this->readExcel($path);
+            unset($data[1]);
+            $count=count($data);
+            $return=array();
+            for($i=0;$i<$count;$i++){
+                foreach($data[$i+2] as $key=>$value){
+                    $return[$i]['inputId']=$data[$i+2]['A'];
+                    $return[$i]['baseInfo'][0]=$data[$i+2]['E'];
+                    $return[$i]['baseInfo'][1]=$data[$i+2]['F'];
+                    $return[$i]['baseInfo'][2]=$data[$i+2]['G'];
+                    $return[$i]['baseInfo'][3]=$data[$i+2]['H'];
+                    $return[$i]['baseInfo'][4]=$data[$i+2]['I'];
+                    $return[$i]['field']=$data[$i+2]['J'];
+                    if($return['field']!=""){
+                        $field_array=explode(',',$return['field']);
+                        $size=sizeof($field_array);
+                        for($j=0;$j<$size;$j++){
+                            $return[$i]['baseInfo_d'][$field_array[$j]]= $return[$i]['baseInfo'][$j];
+                        }
+                    }
+                }
+            }
+            //   echo $count;exit;
+            //转为导入的数据
+            $return= json_encode($return);
+           // echo $return;
+            $msg=$this->input_model->import($return);
+            echo json_encode($msg);
+        }
+
+    }
 
 
 }
