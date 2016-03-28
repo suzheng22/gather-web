@@ -226,12 +226,12 @@ class Input extends My_Controller {
             for($i=0;$i<$count;$i++){
                 foreach($data[$i+2] as $key=>$value){
                     $return[$i]['inputId']=$data[$i+2]['A'];
-                    $return[$i]['baseInfo'][0]=$data[$i+2]['E'];
-                    $return[$i]['baseInfo'][1]=$data[$i+2]['F'];
-                    $return[$i]['baseInfo'][2]=$data[$i+2]['G'];
-                    $return[$i]['baseInfo'][3]=$data[$i+2]['H'];
-                    $return[$i]['baseInfo'][4]=$data[$i+2]['I'];
-                    $return[$i]['field']=$data[$i+2]['J'];
+                    $return[$i]['baseInfo'][0]=$data[$i+2]['D'];
+                    $return[$i]['baseInfo'][1]=$data[$i+2]['E'];
+                    $return[$i]['baseInfo'][2]=$data[$i+2]['F'];
+                    $return[$i]['baseInfo'][3]=$data[$i+2]['G'];
+                    $return[$i]['baseInfo'][4]=$data[$i+2]['H'];
+                    $return[$i]['field']=$data[$i+2]['I'];
                     if($return['field']!=""){
                         $field_array=explode(',',$return['field']);
                         $size=sizeof($field_array);
@@ -239,7 +239,18 @@ class Input extends My_Controller {
                             $return[$i]['baseInfo_d'][$field_array[$j]]= $return[$i]['baseInfo'][$j];
                         }
                     }
+                    //$return[$i]['inputId']
+                    //统计字数
+                    $counts=0;
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['D']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['E']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['F']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['G']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['H']));
+                    $return[$i]['inputCount']=$counts;
+
                 }
+
             }
             //   echo $count;exit;
             //转为导入的数据

@@ -220,7 +220,7 @@ class Input_model extends MY_Model {
     }
     function import($data){
         //var_dump($data);
-        $url="http://127.0.0.1:8003/input/import"."?token={$this->user_info['token']}";
+        $url="http://121.40.241.156:8005/input/import"."?token={$this->user_info['token']}";
         $return=$this->curl($url,$data,'post');
         return $return;
       //  var_dump($return);

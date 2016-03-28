@@ -55,7 +55,7 @@
                             <a href="javascript:void(0);" class="query"  onclick="inputAdd()"><i class="icon iconfont">&#xf0220;</i>录入审核</a>
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
 
-                            <span class="query" id="import"><i class="icon iconfont">&#xf00a8;</i><input type="button" value="录入审核导入"></span>
+                            <span class="query" id="import"><input type="button" value="录入审核导入"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
                     </form>
@@ -428,13 +428,13 @@
                     dataType        : 'text', //服务器返回的格式
                     success     : function(data,status) //相当于java中try语句块的用法
                     {
-                        alert(data);
-                        $('#__content__').html(data);
+                        alert("共导入"+data+"条");
+                      //  $('#__content__').html(data);
                     },
                     error : function(data, status, e) //相当于java中catch语句块的用法
                     {
                       //  alert(status);
-                        $('#__content__').html('添加失败');
+                      //  $('#__content__').html('添加失败');
                     }
                 }
         );
