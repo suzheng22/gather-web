@@ -38,7 +38,7 @@
             {{if $userInfo.roleId=="1"}}
          <dl class="business_base_info system_log">
              <dt><i class="icon iconfont">&#xf00a9;</i>商品信息<img src="{{$resource_url}}images/left/select_xl01.png"></dt>
-             <dd><a href="up_good_list.html" title="导入商品清单">导入商品清单</a></dd>
+             <dd><a href="{{$root_path}}goods/goodsInput" title="导入商品清单">导入商品清单</a></dd>
              <dd><a href="{{$root_path}}goods/goodsManager" title="商品管理">商品管理</a></dd>
              <dd><a href="{{$root_path}}goods/goodsClassify" title="商品分类">商品分类</a></dd>
         </dl>
@@ -85,6 +85,7 @@
              <!--录入审核-->
              {{if $userInfo.roleId=="5" || $userInfo.roleId=="11" || $userInfo.roleId=="1"}}
             <dd><a href="{{$root_path}}input/inputList" title="录入审核">录入审核</a></dd>
+             <dd><a href="{{$root_path}}input/export" title="录入审核导出">录入审核导出</a></dd>
            {{/if}}
         </dl>
             {{/if}}

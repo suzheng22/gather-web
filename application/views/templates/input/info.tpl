@@ -61,6 +61,25 @@
                 <div class="show_a_01">
                     <div class="pic_box clearfix">
                         <div class="pic_box_left">
+                            <p>主图</p>
+                        </div>
+                        <div style="float:left" class="v_show">
+                            <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                            <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                            <div class="v_content">
+                                <div  class="v_content_list">
+                                    <ul class="con-FangDa-ImgList">
+                                        {{foreach from=$plist.1 item =list name=name}}
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" /></li>
+                                        {{/foreach}}
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pic_box clearfix">
+                        <div class="pic_box_left">
                             <p>标签图</p>
                         </div>
                         <div style="float:left" class="v_show">
@@ -108,7 +127,11 @@
                 <a href="javascript:;" >基本信息</a>
                 <a href="javascript:;">厂商信息</a>
                 <a href="javascript:;">扩充信息</a>
-                <a href="javascript:;" class="last">营养成分</a>
+
+                <a href="javascript:;" class="last">
+                   营养成分
+                </a>
+
             </h3>
         </div>
         <div class="right_mid">
@@ -217,7 +240,7 @@
     </div>
     {{if $p_info.status==4 && $p_info.p_status==1}}
     <div class="zz_conforim"><a href="{{$root_path}}input/inputChange?inputId={{$p_info.inputId}}&gtin={{$p_info.gtin}}&packet={{$p_info.packet}}&batchNo={{$p_info.batchNo}}" onclick="checkw(1)" id="record_confirm">编辑</a></div>
-    {{else if  $p_info.p_status==2}}
+    {{else if $p_info.p_status==2}}
     <div class="zz_conforim"><a href="javascript:;" onclick="check(2)" id="record_confirm">通过</a><a href="javascript:;"  id="record_confirms">驳回</a></div>
     {{/if}}
     <div class="newuser_pop" id="ps_newuser_pop">

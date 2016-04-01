@@ -51,7 +51,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
+        $this->ci_smarty->assign('picList',$list[1]);
         $inputInfo['p_status']=$p_status;
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
@@ -59,10 +59,14 @@ class Input extends My_Controller {
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
        // var_dump($inputInfo['nutritionInfo']);
         $this->ci_smarty->assign('p_info',$inputInfo);
-        if($inputInfo['status']==1)
+        if($inputInfo['status']==1){
             $this->ci_smarty->display('input/record.tpl');
-        else
-        $this->ci_smarty->display('input/info.tpl');
+        }
+        else{
+
+            $this->ci_smarty->display('input/info.tpl');
+        }
+
     }
     //录入领取
     function inputAdd($verify){
@@ -85,7 +89,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
+        $this->ci_smarty->assign('picList',$list[1]);
         $this->ci_smarty->display('input/record.tpl');
     }
     //分类保存
@@ -100,6 +104,7 @@ class Input extends My_Controller {
             $data['info']=str_replace("[","{",$data['info']);
             $data['info']=str_replace("]","}",$data['info']);
             $data['info']=json_decode($data['info'],true);
+            //echo json_encode($data['info']);exit;
         }else if($data['filed']==5){
             $data['info']=array();
         }
@@ -161,7 +166,7 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         $this->ci_smarty->assign('p_info',$inputInfo);
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
+        $this->ci_smarty->assign('picList',$list[1]);
         $this->ci_smarty->display('input/info.tpl');
     }
     //录入反馈
@@ -187,15 +192,74 @@ class Input extends My_Controller {
         $list=$this->input_model->getAllImage($data);
         //获取图片
         $this->ci_smarty->assign('plist',$list);
-        $this->ci_smarty->assign('picList',$list[3]);
-        // var_dump($inputInfo);
+        $this->ci_smarty->assign('picList',$list[1]);
         $inputInfo['groupGoodsNames']=json_decode($inputInfo['groupGoodsNames'],true);
         $inputInfo['nutritionInfo']=json_decode($inputInfo['nutritionInfo'],true);
         $inputInfo['baseInfo']=json_decode($inputInfo['baseInfo'],true);
         $inputInfo['extInfo']=json_decode($inputInfo['extInfo'],true);
         //var_dump($inputInfo['nutritionFiled']);
         $this->ci_smarty->assign('p_info',$inputInfo);
-        $this->ci_smarty->display('input/record.tpl');
+        if($inputInfo['status']!=3){
+            $this->ci_smarty->display('input/record.tpl');
+        }else{
+            $this->ci_smarty->display('input/info.tpl');
+        }
+
+    }
+    //导出
+    function export(){
+        $data=$this->input_model->export();
+        $field=array("inputId",'条形码','商品分类','商品名称','品牌','含量','规格','型号','field');
+        $this->excel($data,$field,"录入审核导出");
+    }
+    //导入
+    function import(){
+        $file=$_FILES['uploadFile'];
+       // var_dump($file);
+        $path=$file['tmp_name'];
+        //使用excel处理数据
+        if($path!=""){
+            $data=$this->readExcel($path);
+            unset($data[1]);
+            $count=count($data);
+            $return=array();
+            for($i=0;$i<$count;$i++){
+                foreach($data[$i+2] as $key=>$value){
+                    $return[$i]['inputId']=$data[$i+2]['A'];
+                    $return[$i]['baseInfo'][0]=$data[$i+2]['D'];
+                    $return[$i]['baseInfo'][1]=$data[$i+2]['E'];
+                    $return[$i]['baseInfo'][2]=$data[$i+2]['F'];
+                    $return[$i]['baseInfo'][3]=$data[$i+2]['G'];
+                    $return[$i]['baseInfo'][4]=$data[$i+2]['H'];
+                    $return[$i]['field']=$data[$i+2]['I'];
+                    if($return['field']!=""){
+                        $field_array=explode(',',$return['field']);
+                        $size=sizeof($field_array);
+                        for($j=0;$j<$size;$j++){
+                            $return[$i]['baseInfo_d'][$field_array[$j]]= $return[$i]['baseInfo'][$j];
+                        }
+                    }
+                    //$return[$i]['inputId']
+                    //统计字数
+                    $counts=0;
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['D']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['E']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['F']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['G']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['H']));
+                    $return[$i]['inputCount']=$counts;
+
+                }
+
+            }
+            //   echo $count;exit;
+            //转为导入的数据
+            $return= json_encode($return);
+           // echo $return;
+            $msg=$this->input_model->import($return);
+            echo json_encode($msg);
+        }
+
     }
 
 

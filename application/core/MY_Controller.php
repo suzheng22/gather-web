@@ -241,5 +241,47 @@ class MY_Controller extends CI_Controller
         unset($img,$url);
         return array('file_name'=>$filename,'save_path'=>$save_dir.$filename,'error'=>0);
     }
+    function excel($query,$fields,$fileName){
+        $objPHPExcel=new PHPExcel();
+        /*设置文本对齐方式*/
+        $objPHPExcel->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $objPHPExcel->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objActSheet = $objPHPExcel->getActiveSheet();
+      //  $col = 0;
+        $letter = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N');
+        $count=count($fields);
+        for($i=0;$i<$count;$i++){
+            $objPHPExcel->getActiveSheet()->setCellValueByColumnAndRow($i, 1, $fields[$i]);
+        }
+        for($i=2;$i<count($query)+2;$i++){
+            for($j=0;$j<count($query[$i]);$j++){
+         //       echo ($j);
+                 $objPHPExcel->getActiveSheet()->setCellValueExplicitByColumnAndRow($j, $i, $query[$i][$j]);
+                 $objPHPExcel->getActiveSheet()->getRowDimension($i)->setRowHeight(20);
+                if($j==3){
+                    $objActSheet->getColumnDimension($letter[$j])->setWidth(40);
+                }
+                elseif($j==8||$j==1){
+                    $objActSheet->getColumnDimension($letter[$j])->setWidth(18);
+                }else{
+                    $objActSheet->getColumnDimension($letter[$j])->setWidth(14);
+                }
+            }
+        }
+        $objPHPExcel->setActiveSheetIndex(0);
+        $objWriter = IOFactory::createWriter($objPHPExcel, 'Excel5');
+        //发送标题强制用户下载文件
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename='.$fileName.date('Ymd').'.xls');
+        header('Cache-Control: max-age=0');
+        $objWriter->save('php://output');
+    }
+    //读取excel
+    function readExcel($inputFileName){
+        $objPHPExcel = IOFactory::load($inputFileName);
+        //得到当前活动表格，调用toArray方法，得到表格的二维数组
+        $sheetData =$objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        return $sheetData;
+    }
     
 }

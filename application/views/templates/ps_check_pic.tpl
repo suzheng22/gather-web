@@ -65,7 +65,7 @@
                                     <div  class="v_content_list">
                                         <ul class="con-FangDa-ImgList">
                                             {{foreach from=$plists.1 item =list name=name}}
-                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
+                                            <li {{if $smarty.foreach.name.first}}class="active"{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}" mma="{{$list.key}}" mmh="{{$list.domain}}"/></li>
                                             {{/foreach}}
                                         </ul>
                                     </div>
@@ -84,7 +84,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.1 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key2}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key2}}" mma="{{$list.key}}" mmh="{{$list.domain}}" mmd="2"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -104,7 +104,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.2 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}" mma="{{$list.key}}" mmh="{{$list.domain}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -124,7 +124,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.3 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}" mma="{{$list.key}}" mmh="{{$list.domain}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -145,7 +145,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.4 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}" mma="{{$list.key}}" mmh="{{$list.domain}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -166,7 +166,7 @@
                                 <div  class="v_content_list">
                                     <ul class="con-FangDa-ImgList">
                                         {{foreach from=$plists.5 item =list name=name}}
-                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}"/></li>
+                                        <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" mmc="{{$list.domain}}/{{$list.key1}}" mma="{{$list.key}}" mmh="{{$list.domain}}"/></li>
                                         {{/foreach}}
                                      </ul>
                                 </div>
@@ -237,11 +237,29 @@
                     //?imageView/1/w/500/h/500
                 });
         //修图
-        var iv2 = $(".left_pc_check #viewer1").iviewer(
+        function src(){
+            var url="{{$more_api}}/lingmall/retouch/getKey?token={{$token}}&key1={{$plistsis.0.key}}";
+
+            $.get(url,'',function(e){
+                //alert(e);return false;
+                if(e!=null){
+                    var  h="{{$picList[0]['domain']}}"+"/"+e.key2;
+                }else{
+                    var  h="{{$picList[0]['domain']}}"+"/{{$picList.0.key}}";
+                }
+
+                        var iv2 = $(".left_pc_check #viewer1").iviewer(
                 {
-                    src: "{{$plistsis[0]['domain']}}/{{$picList.0.key}}"
-                    //?imageView/1/w/500/h/500
+                    src: h
                 });
+            },'json')
+        }
+        //第一次查看的修图
+        src();
+
+
+
+
 		//驳回
 		 $("#ps_newuser_pop").pop({
 			oMain:"#new_user",         //触发弹出层的元素。为空时直接弹出
@@ -254,8 +272,40 @@
 			fnAdditional:function(e){
 
 			}
-		}); 
-		
+		});
+        //点击图片
+
+        $(".con-FangDa-ImgList").on("click","img",function(){
+            var smallSrc = $(this).attr('mm');  //1
+            $(".left .ps_FullScreen").attr('src',smallSrc); //录入
+            $("#ps_right .ps_FullScreen").attr('src',smallSrc);//修图审核原图
+            var mmc=($(this).attr("mma"));
+            var mmh=$(this).attr("mmh");
+            var mc=$(this).attr("mmc");
+            var type=$(this).attr("mmd");
+            var token="{{$token}}";
+            var url="{{$more_api}}/lingmall/retouch/getKey?token={{$token}}&key1="+mmc;
+            $.get(url,'',function(e){
+                var h="";
+                if(type!=2){
+                    if(e!=null)
+                        h=(mmh+"/"+e.key2);
+
+                }else{
+                    if(e!=null)
+                        h=(mmh+"/"+e.key3);
+                }
+                if(h==""){
+                    $("#left .ps_FullScreen").attr('src',mc);// 修图审核修图
+                }else{
+                    $("#left .ps_FullScreen").attr('src',h);// 修图审核修图
+                }
+
+            },'json');
+            $(".con-FangDa-ImgList li").removeClass("active");
+            $(this).parent().addClass('active');//选中当前小图片加红色框线
+        });
+
 		//动画展开收起
 		$(".ps_check_pic").css({"height":"500px","margin-bottom":"50px"});
 		$("#cc_flex").click(function(){

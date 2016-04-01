@@ -225,7 +225,7 @@
 
         goodsName=$("#goodsName").val();
         var proType= $("#proType").val();
-
+      //  console.log(val);return false;
         $.ajax({
             url:'{{$root_path}}input/saveType',
             data:{info:val,filed:2,inputId:inputId,goodsName:goodsName,gtin:{{$p_info.gtin}},proType:proType},
@@ -234,7 +234,7 @@
             success:function(e){
                 if(f==3){
                     if(e.msg!="保存成功"){
-                        alert("分类提交失败")
+                        alert("基本信息提交失败");
                     }
                 }else{
                     alert(e.msg);
@@ -280,6 +280,7 @@
                 if(f==3){
                     if(e.msg!="保存成功"){
                         alert("分类提交失败")
+                        return false;
                     }
                 }else{
                     alert(e.msg);
@@ -742,19 +743,32 @@
                 }
             })
         });
+        //获取字符串长度
+        function getStrLength(str) {
+            var cArr = str.match(/[^\x00-\xff]/ig);
+            return str.length + (cArr == null ? 0 : cArr.length);
+        }
         //最后的提交
         $("#record_confirm").on("click",function(){
-            var input_size=$("input").size();
+            var input_size=$('input[type="text"]').size();
             var select_size=$("select").size();
             var input_len=0;
             var select_len=0;
             for(var i=0;i<input_size;i++){
-                input_len+=$("input:eq("+i+")").val().length;
+                var content=$('input[type="text"]:eq('+i+')').val();
+                //将空格去掉
+                content=content.replace(/\s+/g,"");
+                //中文字符算两个
+             //   content = content.match(/[^\x00-\xff]/ig);
+                input_len+=getStrLength(content);
+              //  console.log(input_len);
             }
             for(var i=0;i<select_size;i++){
                 select_len+=$("input:eq("+i+")").val().length;
             }
-            var len=input_len+select_len;
+            var len=input_len;
+          //  console.log(len);
+          //    return false;
             //进行保存验证
             // 所有的项目重新进行保存
             //1保存分类
@@ -768,6 +782,7 @@
             //保存营养成分
            var a= save_nutrient(3);
             if(a==false){
+                alert("保存失败");
                 return false;
             }
             $.ajax({

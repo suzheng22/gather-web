@@ -108,6 +108,7 @@ class Retouch extends My_Controller
         $list3=$this->retouch->getAllImages($arr);
         //获取修图图片
         $list=$this->retouch->getAllImage($arr);
+
         //整合图片资源
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
@@ -128,9 +129,13 @@ class Retouch extends My_Controller
                 }
             }
         }
+     //var_dump($list3);
+
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
         $arr['catgrory']=$product_info['type'];
+        $this->ci_smarty->assign("token",$this->user_info['token']);
+        $this->ci_smarty->assign("more_api",MOREAPI);
         $this->ci_smarty->assign('p_info',$product_info);
         $this->ci_smarty->assign('plists',$list2);
         $this->ci_smarty->assign('plistsis',$list2[1]);

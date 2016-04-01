@@ -135,7 +135,7 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,$data,'put');
         return json_decode($return);
     }
-    //录入审核列别奥
+    //录入审核l列表
     function getAuditList($data){
         $data['token']=urldecode($data['token']);
         $url=$this->more_api_url."/lingmall/input/auditList";
@@ -211,8 +211,20 @@ class Input_model extends MY_Model {
         $return=$this->curl($url,'','get');
         $return=json_decode($return,true);
         $return['orderId']=$data['orderId'];
-        var_dump($return['orderGoodsCount']);
         return $return;
+    }
+    function export(){
+        $url="http://121.40.241.156:8005/input/export"."?token={$this->user_info['token']}";
+        $data=$this->curl($url,'','post');
+        return json_decode($data,true);
+    }
+    function import($data){
+        //var_dump($data);
+        $url="http://121.40.241.156:8005/input/import"."?token={$this->user_info['token']}";
+        $return=$this->curl($url,$data,'post');
+        return $return;
+      //  var_dump($return);
+      //  return json_decode($return,true);
     }
 
 }

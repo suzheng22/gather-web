@@ -50,6 +50,24 @@
     		<div class="popup_box" style="margin-top:10px;">
             <!--正常显示层-->
                  <div class="show_a_01">
+                     <div class="pic_box clearfix">
+                         <div class="pic_box_left">
+                             <p>主图</p>
+                         </div>
+                         <div style="float:left" class="v_show">
+                             <span class="prev"><i class="icon iconfont">&#x3465;</i></span>
+                             <span class="next"><i class="icon iconfont">&#x3464;</i></span>
+                             <div class="v_content">
+                                 <div  class="v_content_list">
+                                     <ul class="con-FangDa-ImgList">
+                                         {{foreach from=$plist.1 item =list name=name}}
+                                         <li {{if $smarty.foreach.name.first}}class=""{{/if}}><img src="{{$list.domain}}/{{$list.key}}-thumbnail50" mm="{{$list.domain}}/{{$list.key}}" /></li>
+                                         {{/foreach}}
+                                     </ul>
+                                 </div>
+                             </div>
+                         </div>
+                     </div><!---->
                 <div class="pic_box clearfix">
                     <div class="pic_box_left">
                         <p>标签图</p>
