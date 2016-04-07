@@ -84,9 +84,9 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-define('USERAPI', 'http://121.40.241.156:8000');
-define('MOREAPI', 'http://121.40.241.156:8005');
+define('USERAPI', 'http://139.196.36.81:8000');
+define('MOREAPI', 'http://139.196.36.81:8005');
 define('CONTROL', 'http://apics.greensea.com.cn/api.php');
 define('RESOURCE', 'http://192.168.1.241:8004/collect_web/');
 define('ROOTPATH', 'http://'.$_SERVER['HTTP_HOST'].'/');
-define("IMGURL","http://139.196.36.81:8610");
+define("IMGURL","http://139.196.36.81:8400");

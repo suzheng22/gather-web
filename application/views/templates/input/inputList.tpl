@@ -56,6 +56,7 @@
                             <span class="query"><i class="icon iconfont">&#xf00a8;</i><input type="submit" value="查询"></span>
 
                             <span class="query" id="import"><input type="button" value="录入审核导入"></span>
+                            <span class="query" id="importHuaRun"><input type="button" value="华润录入导入"></span>
                             <a href="javascript:;" onclick="btn_empty()"><i class="iconfont">&#xf014a;</i>清空</a>
                         </div>
                     </form>
@@ -125,8 +126,25 @@
         </div>
     </div>
 </div>
+<div class="newuser_pop" id="huaRUn_import_pop">
+    <div class="tit clearfix"><h4>录入审核导入</h4><a class="no_text close" href="javascript:;" title="关闭">关闭</a></div>
+    <div class="content">
+        <div class="login_main">
+            <form id="personForms" method="post" enctype="multipart/form-data">
+                <div class="login_form">
+
+                    <div class="clearfix one"><label for="user_name">录入审核导入:</label><input type="file" name="uploadFiles" style="height:100%" id="uploadFiles"></div>
+
+                    <a href="javascript:;" id="confirm_btn" class="confirm_btn" onclick="huaRunUpload('personForms','fileinput')">确认</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 {{include file='public/js.tpl'}}
+//jquery扩展
 <script  type="text/javascript">
     jQuery.extend({
         handleError: function (s, xhr, status, e) {
@@ -394,6 +412,18 @@
 
             }
         });
+        $("#huaRUn_import_pop").pop({
+            oMain:"#importHuaRun",         //触发弹出层的元素。为空时直接弹出
+            sEvent:"click",             //触发事件
+            oClose:"#huaRUn_import_pop .close", //关闭按钮
+            bIframe:false,              //是否有iframe
+            iSrc:"",                    //iframe地址
+            bShade:true,                //是否有遮罩
+            bShadeClose:false,          //是否点遮罩关闭
+            fnAdditional:function(){
+
+            }
+        });
     });
     //清空
     function btn_empty(){
@@ -440,21 +470,27 @@
         );
 
     }
-//    function ajaxFileUpload() {
-//        $.ajaxFileUpload({
-//            url: 'photo/upload',//需要链接到服务器地址
-//            secureuri:false,
-//            fileElementId: 'fileToUpload',//文件选择框的id属性
-//            dataType:'json',//服务器返回的格式，可以是json
-//            success: function (data){
-//                if (data['result'] == 1) {
-//
-//                }
-//            },
-//            error: function(data){
-//            }
-//        });
-//    }
+    function huaRunUpload(frm,upload) {
+        var f = $("#" + frm);
+        $.ajaxFileUpload({
+                    url             : "{{$root_path}}input/huaRunImport", //需要链接到服务器地址
+                    secureuri       : false,
+                    fileElementId   : 'uploadFiles', //文件选择框的id属性
+                    dataType        : 'text', //服务器返回的格式
+                    success     : function(data,status) //相当于java中try语句块的用法
+                    {
+                        alert("共导入"+data+"条");
+                        //  $('#__content__').html(data);
+                    },
+                    error : function(data, status, e) //相当于java中catch语句块的用法
+                    {
+                        //  alert(status);
+                        //  $('#__content__').html('添加失败');
+                    }
+                }
+        );
+
+    }
 </script>
 </body>
 </html>

@@ -255,8 +255,63 @@ class Input extends My_Controller {
             //   echo $count;exit;
             //转为导入的数据
             $return= json_encode($return);
-           // echo $return;
             $msg=$this->input_model->import($return);
+            echo json_encode($msg);
+        }
+
+    }
+    //华润导入数据
+    //导入
+    function huaRunimport(){
+      //  var_dump($_FILES);
+        $file=$_FILES['uploadFiles'];
+       // var_dump($file);exit;
+        // var_dump($file);
+        $path=$file['tmp_name'];
+        //使用excel处理数据
+        if($path!=""){
+            $data=$this->readExcel($path);
+            unset($data[1]);
+            $count=count($data);
+        //    echo $count;exit;
+            $return=array();
+            for($i=0;$i<$count;$i++){
+                foreach($data[$i+2] as $key=>$value){
+                    $return[$i]['gtin']=$data[$i+2]['A'];
+                    $return[$i]['topCatId']=substr($data[$i+2]['B'],0,2);
+                    $return[$i]['goodsName']=$data[$i+2]['C'];
+                    $return[$i]['baseInfo'][0]=$data[$i+2]['C'];
+                    $return[$i]['baseInfo'][1]=$data[$i+2]['D'];
+                    $return[$i]['baseInfo'][2]=$data[$i+2]['E'];
+                    $return[$i]['baseInfo'][3]=$data[$i+2]['F'];
+                    if($data[$i+2]['G']!=""||$data[$i+2]['G']!=null)
+                        $return[$i]['baseInfo'][4]=$data[$i+2]['G'];
+                    $return[$i]['field']=$data[$i+2]['I'];
+                    if($return['field']!=""){
+                        $field_array=explode(',',$return['field']);
+                        $size=sizeof($field_array);
+                        for($j=0;$j<$size;$j++){
+                            $return[$i]['baseInfo_d'][$field_array[$j]]= $return[$i]['baseInfo'][$j];
+                        }
+                    }
+                    //$return[$i]['inputId']
+                    //统计字数
+                    $counts=0;
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['D']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['E']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['F']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['G']));
+                    $counts+=mb_strwidth(str_replace(" ","",$data[$i+2]['H']));
+                    $return[$i]['inputCount']=$counts;
+
+                }
+
+            }
+            //   echo $count;exit;
+            //转为导入的数据
+            $return= json_encode($return);
+          //  echo $return ;exit;
+            $msg=$this->input_model->huaRunimport($return);
             echo json_encode($msg);
         }
 

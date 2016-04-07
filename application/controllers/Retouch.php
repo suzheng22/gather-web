@@ -98,15 +98,18 @@ class Retouch extends My_Controller
         $arr['token']=$this->user_info['token'];
         $arr['id']=1;
         $product_info=$this->retouch->getRetouchPic($arr);
+       // var_dump($product_info);
 
-        $arr['batchNo']=$product_info['retouchId'];
+        $arr['batchNo']=$product_info['batchNo'];
         $arr['pId']=$product_info['pId'];
         //原图
+        //获取原图批次
         $list2=$this->retouch->getAllImages($arr);
         //png图
         $arr['id']=3;
         $list3=$this->retouch->getAllImages($arr);
         //获取修图图片
+        $arr['batchNo']=$product_info['retouchId'];
         $list=$this->retouch->getAllImage($arr);
 
         //整合图片资源
@@ -129,7 +132,7 @@ class Retouch extends My_Controller
                 }
             }
         }
-     //var_dump($list3);
+
 
         $product_info['token']=$this->user_info['token'];
         $arr['proName']=$product_info['proName'];
