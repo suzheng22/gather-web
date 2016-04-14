@@ -111,7 +111,6 @@ class Retouch extends My_Controller
         //获取修图图片
         $arr['batchNo']=$product_info['retouchId'];
         $list=$this->retouch->getAllImage($arr);
-
         //整合图片资源
         foreach($list2 as $key=>$val){
             foreach($val as $k=>$v){
